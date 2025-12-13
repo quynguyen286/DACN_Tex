@@ -1,0 +1,59 @@
+\newpage
+\section{Phân tích yêu cầu}
+\subsection{Mục đích}
+\subsection{Phương pháp thu thập yêu cầu}
+\subsection{Kết quả thu thập yêu cầu}
+
+\subsection{Yêu cầu chức năng}
+Dựa trên phân tích hiện trạng và mô hình nghiệp vụ, các yêu cầu chức năng của hệ thống được chia thành các nhóm sau:
+
+\subsubsection*{Nhóm 1: Tổng quan (Dashboard Overview)}
+\begin{description}
+    \item[FR-03] Hệ thống phải hiển thị \textbf{thông số tổng quan} ngay khi đăng nhập, bao gồm: Tổng số người dùng, Số nông trại đang hoạt động (Active Farms), Số thiết bị đang kết nối (Connected Devices) và Thời gian hoạt động của hệ thống (System Uptime).
+    \item[FR-04] Hệ thống phải trực quan hóa dữ liệu hoạt động hàng tuần (Weekly Activity) dưới dạng \textbf{biểu đồ cột hoặc đường}, cho phép Admin so sánh nhanh số lượng người dùng mới, thiết bị mới và bài viết mới.
+    \item[FR-05] Hệ thống phải hiển thị danh sách \textbf{Cảnh báo hệ thống (System Alerts)} gần nhất (ví dụ: Nhiệt độ cao, Lịch bảo trì) ngay trên màn hình chính để Admin xử lý kịp thời.
+    \item[FR-06] Hệ thống phải cung cấp các nút \textbf{Thao tác nhanh (Quick Actions)} cho phép Admin tạo nhanh Người dùng mới, Nông trại mới hoặc Thêm thiết bị mới chỉ với 1 thao tác.
+\end{description}
+
+\subsubsection*{Nhóm 2: Quản lý Nông trại và Người dùng}
+\begin{description}
+    \item[FR-07 (Quản lý Nông trại)] Hệ thống phải cho phép Admin thực hiện đầy đủ các chức năng (CRUD): Tạo mới, Xem chi tiết, Cập nhật thông tin và Xóa (hoặc vô hiệu hóa) một nông trại khỏi hệ thống.
+    \item[FR-08 (Quản lý Người dùng)] Hệ thống phải cho phép quản lý danh sách người dùng (Thương lái/Chủ vườn), bao gồm việc cấp phát tài khoản và phân quyền truy cập (Role-based Access Control) vào từng nông trại cụ thể.
+    \item[FR-09 (Gán thiết bị)] Hệ thống phải cho phép Admin thực hiện thao tác \textbf{gán (assign)} một hoặc nhiều thiết bị IoT cụ thể vào một nông trại đã định.
+\end{description}
+
+\subsubsection*{Nhóm 3: Quản lý và Giám sát Thiết bị}
+\begin{description}
+    \item[FR-01 (Phát hiện lỗi)] Hệ thống phải có khả năng \textbf{tự động giám sát} dòng dữ liệu thời gian thực từ các cảm biến và phát hiện các trạng thái bất thường (ví dụ: mất kết nối quá 5 phút, giá trị vượt ngưỡng an toàn, hoặc dữ liệu bị "đóng băng").
+    \item[FR-02 (Cảnh báo)] Hệ thống phải \textbf{gửi cảnh báo tức thì} đến người quản trị (thông qua giao diện Dashboard, Email hoặc thông báo đẩy) ngay khi một lỗi cảm biến được xác nhận.
+    \item[FR-10 (Đăng ký thiết bị)] Hệ thống phải cho phép đăng ký thiết bị ESP32 mới vào hệ thống thông qua mã định danh duy nhất (Device ID/MAC Address).
+    \item[FR-11 (Giám sát trạng thái)] Hệ thống phải hiển thị trạng thái kết nối thời gian thực (Online/Offline) của từng thiết bị. Nếu thiết bị mất kết nối quá thời gian quy định (ví dụ: 5 phút), hệ thống phải tự động cập nhật trạng thái sang Offline.
+    \item[FR-12 (Điều khiển từ xa)] Hệ thống phải cho phép người dùng gửi lệnh điều khiển (Bật/Tắt) xuống các thiết bị chấp hành (Actuators) thông qua giao diện Web.
+\end{description}
+
+\subsection{Yêu cầu phi chức năng}
+
+\begin{description}
+    \item[NFR-01: Hiệu năng và Khả năng chịu tải] \hfill \\
+    \begin{itemize}
+        \item \textbf{Môi trường triển khai:} Hệ thống phải hoạt động ổn định trên hạ tầng thử nghiệm bao gồm 01 thiết bị phần cứng thực (ESP32) kết hợp với mạng lưới thiết bị mô phỏng (Simulated Devices).
+        \item \textbf{Khả năng chịu tải đồng thời:} Hệ thống phải duy trì kết nối và xử lý dữ liệu ổn định từ \textbf{50 thiết bị mô phỏng} gửi dữ liệu liên tục (tần suất 5 giây/bản tin) thông qua giao thức MQTT.
+        \item \textbf{Độ trễ xử lý (Latency):} 
+            \begin{itemize}
+                \item Đối với thiết bị thực: Độ trễ hiển thị dữ liệu lên Dashboard \textbf{dưới 5 giây} (trong điều kiện mạng tiêu chuẩn).
+                \item Đối với thiết bị mô phỏng: Đảm bảo không xảy ra hiện tượng mất gói tin (packet loss) tại Message Broker khi tải đạt đỉnh.
+            \end{itemize}
+        \item \textbf{Thời gian phản hồi Web:} Các thao tác truy xuất dữ liệu lịch sử hoặc tải danh sách thiết bị trên Web Admin phải hoàn tất trong vòng \textbf{dưới 2 giây}.
+    \end{itemize}
+
+    \item[NFR-02: Khả năng mở rộng] \hfill \\
+    Hệ thống phải hỗ trợ việc thêm mới thiết bị hoặc nông trại mà không cần tắt server để bảo trì (Zero-downtime scaling). Kiến trúc Microservices cho phép mở rộng độc lập module \texttt{IoT Data Processor}.
+
+    \item[NFR-03: Độ tin cậy và Tính sẵn sàng] \hfill \\
+    Hệ thống phải đảm bảo thời gian hoạt động (Uptime) đạt \textbf{99\%}. Cơ chế \textbf{Auto-reconnect} phải hoạt động hiệu quả để Dashboard và Thiết bị tự động kết nối lại ngay khi đường truyền internet được khôi phục.
+
+    \item[NFR-04: Bảo mật] \hfill \\
+    Dữ liệu truyền từ thiết bị về Server phải được mã hóa hoặc xác thực quyền truy cập. Mật khẩu người dùng phải được băm (hashing) trước khi lưu vào cơ sở dữ liệu.
+\end{description}
+% \input{section/4_viet}
+% \input{section/4_quy}

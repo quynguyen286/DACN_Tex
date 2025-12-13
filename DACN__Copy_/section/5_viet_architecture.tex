@@ -1,0 +1,51 @@
+\subsection{Thiết kế Kiến trúc Hệ thống}
+
+Kiến trúc hệ thống được thiết kế theo mô hình Phân lớp (Layered Architecture) kết hợp với hướng dịch vụ (Service-oriented). Việc phân chia này giúp tách biệt các mối quan tâm (Separation of Concerns), dễ dàng bảo trì và mở rộng độc lập từng thành phần.
+
+Sơ đồ dưới đây minh họa các tầng logic và luồng dữ liệu trong hệ thống:
+
+\begin{figure}[H]
+    \centering
+    % Đổi tên file ảnh kiến trúc của bạn vào đây
+    \includegraphics[width=0.75\textwidth]{img/architecture.png}
+    \caption{Sơ đồ Kiến trúc Phân lớp của Hệ thống}
+    \label{fig:system_architecture}
+\end{figure}
+
+Hệ thống được tổ chức thành 5 tầng chính và 1 module bảo mật xuyên suốt:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Presentation Layer (Tầng Giao diện):}
+    Là điểm tiếp xúc với người dùng cuối (System Admin). Tầng này gửi các yêu cầu HTTP đến hệ thống thông qua giao diện Web Admin để thực hiện các tác vụ quản lý.
+
+    \item \textbf{Integration Layer (Tầng Tích hợp):}
+    Đóng vai trò là cổng vào duy nhất (Entry Point) và điều phối luồng dữ liệu, bao gồm 2 thành phần:
+    \begin{itemize}
+        \item \textit{API Gateway:} Tiếp nhận và định tuyến các yêu cầu RESTful từ Web Admin xuống các dịch vụ nghiệp vụ tương ứng.
+        \item \textit{RabbitMQ Message Queue:} Đóng vai trò Broker trung gian, tiếp nhận hàng loạt dữ liệu bất đồng bộ từ các thiết bị IoT (Sensors/ESP32), giúp giảm tải cho hệ thống xử lý chính (Decoupling).
+    \end{itemize}
+
+    \item \textbf{Business Layer (Tầng Nghiệp vụ):}
+    Nơi chứa toàn bộ logic xử lý của hệ thống:
+    \begin{itemize}
+        \item \textit{User \& Farm Management:} Xử lý các logic về quản lý người dùng, nông trại, và cấu hình thiết bị.
+        \item \textit{IoT Data Processor:} Service chuyên biệt (Worker) để tiêu thụ dữ liệu từ RabbitMQ, xử lý tính toán, cảnh báo và chuẩn hóa dữ liệu trước khi lưu trữ.
+    \end{itemize}
+
+    \item \textbf{Persistence Layer (Tầng Truy xuất Dữ liệu):}
+    Cung cấp lớp trừu tượng hóa (Abstraction) để giao tiếp với cơ sở dữ liệu (Data Access Component), giúp tách biệt logic nghiệp vụ khỏi các câu lệnh truy vấn SQL cụ thể.
+
+    \item \textbf{Database Layer (Tầng Dữ liệu):}
+    Sử dụng chiến lược lưu trữ đa mô hình (Polyglot Persistence):
+    \begin{itemize}
+        \item \textit{PostgreSQL:} Lưu trữ dữ liệu quan hệ có cấu trúc (Users, Farms, Devices).
+        \item \textit{TimescaleDB:} Cơ sở dữ liệu chuyên dụng cho Time-series để lưu trữ hàng triệu bản ghi nhật ký cảm biến (Telemetries) với hiệu năng cao.
+        \item \textit{AWS S3:} Lưu trữ các file tĩnh (hình ảnh cây trồng, log files).
+    \end{itemize}
+
+    \item \textbf{Physical Layer (Tầng Vật lý):}
+    Bao gồm các thiết bị phần cứng (ESP32, Sensors, Actuators) thu thập dữ liệu môi trường và thực thi các lệnh điều khiển từ server.
+\end{itemize}
+
+\paragraph{Module Bảo mật (Cross-cutting Concern):}
+Thành phần \textit{Account Control Privileges} bao quát từ tầng Integration xuống tầng Business, đảm bảo mọi yêu cầu đi qua API Gateway đều được xác thực (Authentication) và phân quyền (Authorization) chặt chẽ trước khi được xử lý.

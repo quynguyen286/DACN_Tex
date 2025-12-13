@@ -1,0 +1,167 @@
+\subsection{Các mô hình phân tích UML}
+\subsubsection{Use case: Monitor System Analytics}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/analytics.png}
+    \caption{Sơ đồ luồng quản lý và tạo báo cáo}
+\end{figure}
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3} % Tăng khoảng cách dòng cho dễ đọc
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-01: Monitor System Analytics \\
+        \hline
+        \textbf{Tên usecase} & Giám sát Phân tích Hệ thống \\
+        \hline
+        \textbf{Mô tả} & Admin theo dõi tổng quan các chỉ số hoạt động, xếp hạng hiệu suất nông trại và thống kê thiết bị trên Dashboard. \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Tài khoản Admin đã đăng nhập và có quyền truy cập module Analytics. \\
+        \hline
+        \textbf{Hậu điều kiện} & Dữ liệu thống kê được hiển thị đầy đủ và cập nhật mới nhất. \\
+        \hline
+        \textbf{Trigger} & Admin nhấn chọn menu ``Analytics \& Insights'' trên thanh điều hướng. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin truy cập màn hình Analytics.
+            \item Hệ thống kiểm tra quyền xem của Admin.
+            \item Hệ thống tải dữ liệu tổng hợp từ cơ sở dữ liệu.
+            \item Hệ thống hiển thị Dashboard Metrics (doanh thu, sản lượng, nhiệt độ trung bình).
+            \item Hệ thống hiển thị Farm Performance Rankings (xếp hạng hiệu suất).
+            \item Hệ thống hiển thị Device Statistics (biểu đồ trạng thái Online/Offline).
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-01 (Data Latency):} Dữ liệu hiển thị trên Dashboard phải được cập nhật gần thời gian thực (Real-time), độ trễ tối đa không quá 30 giây.
+            \item \textbf{BR-02 (Default View):} Mặc định hiển thị dữ liệu tổng hợp của toàn hệ thống trong 7 ngày gần nhất.
+            \item \textbf{BR-03 (Access Control):} Chỉ tài khoản Admin có quyền ``Manage'' mới hiển thị nút cấu hình ``Configure Alert Thresholds''.
+            \item \textbf{BR-04 (Ranking Logic):} Xếp hạng nông trại dựa trên chỉ số KPI tổng hợp (tỷ lệ sản lượng / mức tiêu thụ năng lượng).
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-01 (Filter):} Tại bước 4-6, Admin chọn bộ lọc thời gian hoặc khu vực \textrightarrow{} Hệ thống truy vấn lại và cập nhật hiển thị.
+            \item \textbf{E-02 (Export):} Admin bấm ``Export'' \textrightarrow{} Hệ thống kiểm tra định dạng file (PDF/CSV) và tiến hành tải xuống.
+            \item \textbf{E-03 (Alert Config):} Admin thay đổi ngưỡng cảnh báo \textrightarrow{} Hệ thống lưu quy tắc mới vào cơ sở dữ liệu và áp dụng ngay lập tức.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsubsection{Use case: Troubleshoot System}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.95\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{img/troubleshoot.png}
+        \caption{Sơ đồ xử lý sự cố và theo dõi tình trạng hệ thống}
+    \end{subfigure}
+\end{figure}
+\noindent Hình mô tả lần lượt quá trình kiểm tra dịch vụ, khắc phục từ xa, và cách truy xuất log, xem lịch sử cảnh báo để đối soát.
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-02: Troubleshoot System \\
+        \hline
+        \textbf{Tên usecase} & Kiểm tra và xử lý sự cố \\
+        \hline
+        \textbf{Mô tả} & Quy trình xem tình trạng sức khỏe hệ thống, đọc log chi tiết và gửi lệnh khắc phục sự cố từ xa. \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Hệ thống phát hiện sự cố (Alert) hoặc Admin thực hiện kiểm tra định kỳ. \\
+        \hline
+        \textbf{Hậu điều kiện} & Nguyên nhân lỗi được xác định hoặc lệnh sửa chữa đã được gửi đi. \\
+        \hline
+        \textbf{Trigger} & Admin nhận được thông báo lỗi hoặc truy cập menu ``Troubleshoot''. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin truy cập trang Troubleshoot.
+            \item Hệ thống hiển thị đèn trạng thái (Health Indicators) của Server, API và Mạng.
+            \item Hệ thống truy xuất và hiển thị danh sách 50 dòng System Logs gần nhất.
+            \item Admin phân tích các chỉ số màu đỏ (Lỗi) và nội dung log để xác định nguyên nhân.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-05 (Health Coding):} Trạng thái hệ thống phải được mã hóa màu: Xanh (Ổn định), Vàng (Cảnh báo tải >80\%), Đỏ (Lỗi/Ngừng hoạt động).
+            \item \textbf{BR-06 (Log Privacy):} Các thông tin nhạy cảm trong log (như Password, API Key) phải được che dấu (masking) bằng ký tự `******' trước khi hiển thị.
+            \item \textbf{BR-07 (Action Permission):} Chỉ tài khoản Super Admin mới có quyền thực thi các lệnh tác động hệ thống như ``Restart Service''.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-01 (Perform Diagnostics):} Admin chọn thiết bị lỗi \textrightarrow{} chọn hành động (Ping/Restart Service/Telemetry) \textrightarrow{} Hệ thống thực thi lệnh và trả về kết quả (Success/Timeout).
+            \item \textbf{E-02 (Export Logs):} Admin bấm ``Export Logs'' \textrightarrow{} Hệ thống tổng hợp log lỗi thành file CSV/JSON và kích hoạt tải xuống.
+            \item \textbf{E-03 (Filter Logs):} Admin lọc theo mức độ ``Error'' \textrightarrow{} Hệ thống ẩn các log thông thường, chỉ hiện log lỗi.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsubsection{Use case: Manage Reports}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/reports.png}
+    \caption{Sơ đồ luồng quản lý và tạo báo cáo}
+\end{figure}
+\noindent Hình thể hiện quy trình xem danh sách báo cáo, tạo mới, lập lịch hoặc tạo báo cáo tùy chỉnh và cập nhật lại danh sách.
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-03: Manage Reports \\
+        \hline
+        \textbf{Tên usecase} & Quản lý và tạo báo cáo \\
+        \hline
+        \textbf{Mô tả} & Admin xem danh sách báo cáo đã lưu, tạo báo cáo mới tức thì hoặc lập lịch gửi báo cáo tự động. \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Admin đã đăng nhập thành công. \\
+        \hline
+        \textbf{Hậu điều kiện} & Danh sách báo cáo được cập nhật; file báo cáo được tạo ra. \\
+        \hline
+        \textbf{Trigger} & Admin truy cập trang ``Reports''. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin mở trang Reports.
+            \item Hệ thống truy vấn cơ sở dữ liệu báo cáo.
+            \item Hệ thống hiển thị danh sách Recent Reports (bao gồm: Tên, Ngày tạo, Người tạo, Loại báo cáo).
+            \item Admin xem thông tin hoặc tải về các báo cáo cũ.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-08 (Retention Policy):} Báo cáo chỉ được lưu trữ trực tuyến trong 90 ngày. Sau thời gian này, dữ liệu sẽ được chuyển sang lưu trữ lạnh (Archive).
+            \item \textbf{BR-09 (File Format):} Hệ thống phải hỗ trợ xuất báo cáo ra hai định dạng: PDF (để in ấn/trình ký) và Excel/CSV (để phân tích số liệu).
+            \item \textbf{BR-10 (Schedule Limit):} Mỗi tài khoản Admin chỉ được thiết lập tối đa 5 lịch báo cáo tự động để đảm bảo hiệu năng hệ thống.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-01 (Generate):} Admin bấm ``Generate New'' \textrightarrow{} Hệ thống thu thập dữ liệu hiện tại và tạo file báo cáo ngay lập tức.
+            \item \textbf{E-02 (Schedule):} Admin bấm ``Schedule'' \textrightarrow{} Hệ thống hiển thị form chọn tần suất (hàng ngày/tuần) \textrightarrow{} Lưu lịch chạy tự động (Cron job).
+            \item \textbf{E-03 (Custom Report):} Admin chọn các trường dữ liệu tùy chỉnh \textrightarrow{} Bấm ``Create'' \textrightarrow{} Hệ thống tạo báo cáo theo mẫu riêng.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}

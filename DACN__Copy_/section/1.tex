@@ -1,0 +1,65 @@
+% \section{Giới thiệu}
+% \subsection{Bối cảnh và bài toán}
+% Trong xu thế nông nghiệp hiện đại, mô hình "Nông trại thông minh" (Smart Farm) đang trở thành tiêu chuẩn để đảm bảo năng suất và chất lượng nông sản thông qua việc ứng dụng công nghệ IoT và AI \cite{smart_farm_trend}. % [MỚI] Dẫn chứng xu hướng Smart Farm
+
+% Tuy nhiên, thị trường hiện nay đang hình thành một nhóm đối tượng quản lý mới: các thương lái hoặc nhà đầu tư sở hữu nhiều nông trại (hoặc thuê lại để kinh doanh) nhưng không có chuyên môn sâu về công nghệ thông tin.
+
+% Mô hình kinh doanh của họ thường bao gồm việc quản lý chuỗi các nông trại phân tán hoặc cho khách hàng thuê ngắn hạn để trải nghiệm và canh tác. Từ thực tế này, bài toán đặt ra bao gồm:
+
+% \begin{itemize}
+%     \item \textbf{Sự phân mảnh thiết bị:} Các nông trại này thường tích hợp thiết bị IoT từ nhiều nhà cung cấp khác nhau, dẫn đến việc thiếu đồng bộ về giao thức và khó khăn trong quản lý tập trung \cite{iot_fragmentation}. % [MỚI] Dẫn chứng về vấn đề interoperability (tính tương tác)
+%     \item \textbf{Rào cản kỹ thuật:} Người dùng (thương lái) gặp khó khăn khi phải thao tác trên nhiều ứng dụng rời rạc hoặc tự mình xử lý các sự cố kỹ thuật phức tạp.
+%     \item \textbf{Yêu cầu về minh bạch chất lượng:} Khi kinh doanh dịch vụ, họ cần một công cụ tin cậy để chứng minh chất lượng môi trường canh tác (nhiệt độ, độ ẩm ổn định) cho khách hàng.
+% \end{itemize}
+
+% \subsection{Tính cấp thiết của đề tài}
+% Đề tài trở nên cấp thiết xuất phát từ nhu cầu thực tế của việc vận hành chuỗi nông trại quy mô thương mại và xu hướng chuyển đổi số mạnh mẽ tại Việt Nam:
+
+% \begin{itemize}
+%     \item \textbf{Xu hướng tất yếu của chuyển đổi số:} Theo thống kê, tốc độ tăng trưởng GDP ngành nông nghiệp trong nửa đầu năm 2024 đạt 3.38\%, mức cao nhất trong 5 năm qua, nhờ vào việc đẩy mạnh ứng dụng công nghệ cao \cite{chinhphu2024}. Tuy nhiên, phần lớn các giải pháp hiện tại vẫn còn rời rạc, chưa tạo thành hệ sinh thái thống nhất.
+    
+%     \item \textbf{Nhu cầu quản lý tập trung (All-in-one):} Một trong những thách thức lớn nhất của nông nghiệp công nghệ cao hiện nay là sự thiếu liên kết chuỗi giá trị và sự manh mún trong quản lý \cite{vietnamreport2024}. Đối với các mô hình canh tác phân tán, việc thiếu một nền tảng quản lý hợp nhất dẫn đến lãng phí nguồn lực giám sát. Chủ đầu tư cần một giao diện duy nhất để quản lý hàng loạt nông trại.
+    
+%     \item \textbf{Độ tin cậy của dữ liệu cảm biến:} Các nghiên cứu gần đây chỉ ra rằng cảm biến IoT trong môi trường nông nghiệp khắc nghiệt thường xuyên gặp lỗi trôi số liệu (drift) hoặc mất kết nối. Nếu không phát hiện sớm bằng các thuật toán thông minh (Data-driven), dữ liệu sai lệch sẽ dẫn đến các quyết định sai lầm \cite{ieee2025}.
+% \end{itemize}
+
+% \subsection{Tình hình nghiên cứu và các giải pháp hiện có}
+% Hiện nay trên thị trường tồn tại hai nhóm giải pháp chính:
+% \begin{itemize}
+%     \item \textbf{Giải pháp trọn gói từ các hãng lớn (Israel, Nhật Bản):} Có độ ổn định cao nhưng chi phí rất đắt đỏ, hệ sinh thái đóng (không cho phép tích hợp thiết bị hãng khác), khó phù hợp với quy mô vừa và nhỏ tại Việt Nam \cite{agritech_comparison}. % [MỚI] Dẫn chứng so sánh chi phí
+%     \item \textbf{Giải pháp lắp ráp nhỏ lẻ (DIY):} Giá thành rẻ nhưng thiếu tính năng quản lý tập trung, giao diện sơ sài và đặc biệt là thiếu cơ chế cảnh báo lỗi thông minh.
+% \end{itemize}
+
+% \textbf{Khoảng trống nghiên cứu:} Chưa có nhiều giải pháp tập trung vào việc chuẩn hóa thiết bị đa nguồn kết hợp với thuật toán phát hiện lỗi cảm biến dành riêng cho phân khúc người dùng không chuyên kỹ thuật.
+
+% \subsection{Mục tiêu và câu hỏi nghiên cứu}
+% \textbf{Mục tiêu tổng quát:}
+% Nghiên cứu và phát triển hệ thống quản lý tập trung và nhận diện lỗi cho các thiết bị IoT, hướng tới việc cung cấp giải pháp vận hành đơn giản, tin cậy cho các mô hình nông trại thông minh đa thiết bị.
+
+% \textbf{Mục tiêu cụ thể:}
+% \begin{itemize}
+%     \item Xây dựng kiến trúc hệ thống thống nhất có khả năng tích hợp thiết bị từ nhiều nguồn khác nhau.
+%     \item Phát triển module Sensor Fault Detection ứng dụng thuật toán để tự động phát hiện các bất thường (mất kết nối, dữ liệu sai lệch, trôi cảm biến).
+%     \item Thiết kế giao diện người dùng (Dashboard) trực quan, thân thiện với đối tượng thương lái/chủ vườn, hỗ trợ giám sát đa nông trại và cảnh báo thời gian thực.
+% \end{itemize}
+
+% \textbf{Câu hỏi nghiên cứu:}
+% \begin{itemize}
+%     \item Làm thế nào để xây dựng một cơ chế định danh và quản lý thống nhất cho các thiết bị IoT đa dạng về giao thức?
+%     \item Thuật toán nào là tối ưu để phát hiện lỗi cảm biến trong môi trường dữ liệu thời gian thực với độ trễ thấp?
+%     \item Làm thế nào để thiết kế trải nghiệm người dùng tối giản hóa các thao tác kỹ thuật phức tạp?
+% \end{itemize}
+
+% \subsection{Phạm vi và giới hạn của đề tài}
+% \textbf{Phạm vi:}
+% \begin{itemize}
+%     \item \textit{Đối tượng nghiên cứu:} Các thiết bị IoT cảm biến môi trường phổ biến và các thiết bị chấp hành cơ bản trong mô hình nhà kính.
+%     \item \textit{Nền tảng công nghệ:} Hệ thống quản lý tập trung trên nền tảng Web (Web-based platform), sử dụng Cơ sở dữ liệu chuỗi thời gian (Time-series Database) tối ưu cho lưu trữ dữ liệu lớn IoT, và các giao thức truyền thông điệp nhẹ (Lightweight messaging protocols).
+%     \item \textit{Triển khai:} Thử nghiệm trên mô hình nông trại mẫu (Pilot testing) với dữ liệu mô phỏng và thực tế.
+% \end{itemize}
+
+% \textbf{Giới hạn:}
+% \begin{itemize}
+%     \item Hệ thống tập trung vào việc phát hiện lỗi phần cứng/cảm biến dựa trên phân tích dữ liệu, chưa bao gồm việc chẩn đoán sâu bệnh cây trồng bằng hình ảnh (Computer Vision).
+%     \item Các thuật toán phát hiện lỗi sẽ được kiểm nghiệm trên một số loại cảm biến đặc thù, có thể cần tinh chỉnh lại khi áp dụng cho các loại cảm biến công nghiệp mới lạ.
+% \end{itemize}

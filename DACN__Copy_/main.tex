@@ -1,0 +1,337 @@
+\documentclass[a4paper]{article}
+\usepackage{vntex}
+\usepackage[utf8]{vietnam}
+\usepackage[english,vietnam]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{parskip} %mới thêm vào
+%\usepackage[utf8]{inputenc}
+%\usepackage[francais]{babel}
+\usepackage{a4wide,amssymb,epsfig,latexsym,array,hhline,fancyhdr}
+\usepackage[normalem]{ulem}
+%\usepackage{soul}
+\usepackage{enumitem}
+\usepackage[makeroom]{cancel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol,longtable,amscd}
+\usepackage{diagbox}%Make diagonal lines in tables
+\usepackage{booktabs}
+\usepackage{alltt}
+\usepackage[framemethod=tikz]{mdframed}% For highlighting paragraph backgrounds
+\usepackage{caption,subcaption}
+\usepackage{float}
+\usepackage{lastpage}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{color}
+\usepackage{graphicx}							% Standard graphics package
+\usepackage{array}
+\usepackage{tabularx, caption}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{graphics}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{epsfig}
+\usepackage{tikz}
+
+\usepackage{listingsutf8}
+\usepackage[utf8]{vietnam} % Gói này giúp hỗ trợ tiếng Việt có dấu
+\usepackage{todonotes}
+\setlength{\parindent}{0pt} % Loại bỏ thụt đầu dòng
+\newcommand{\gachdau}{\hspace*{1.15cm}\ignorespaces} % Tạo gạch đầu dòng
+
+\usetikzlibrary{arrows,snakes,backgrounds}
+\usepackage[unicode]{hyperref}
+\hypersetup{urlcolor=blue,linkcolor=black,citecolor=black,colorlinks=true} 
+%\usepackage{pstcol} 								% PSTricks with the standard color package
+
+%https://tex.stackexchange.com/questions/516029/media9-is-becoming-obsolete-dec-2020-any-alternatives-for-embedding-video-audio/516102#516102 
+\usepackage[bigfiles]{pdfbase}
+\ExplSyntaxOn
+\NewDocumentCommand\embedvideo{smm}{
+  \group_begin:
+  \leavevmode
+  \tl_if_exist:cTF{file_\file_mdfive_hash:n{#3}}{
+    \tl_set_eq:Nc\video{file_\file_mdfive_hash:n{#3}}
+  }{
+    \IfFileExists{#3}{}{\GenericError{}{File~`#3'~not~found}{}{}}
+    \pbs_pdfobj:nnn{}{fstream}{{}{#3}}
+    \pbs_pdfobj:nnn{}{dict}{
+      /Type/Filespec/F~(#3)/UF~(#3)
+      /EF~<</F~\pbs_pdflastobj:>>
+    }
+    \tl_set:Nx\video{\pbs_pdflastobj:}
+    \tl_gset_eq:cN{file_\file_mdfive_hash:n{#3}}\video
+  }
+  %
+  \pbs_pdfobj:nnn{}{dict}{
+    /Type/RichMediaInstance/Subtype/Video
+    /Asset~\video
+    /Params~<</FlashVars (
+      source=#3&
+      skin=SkinOverAllNoFullNoCaption.swf&
+      skinAutoHide=true&
+      skinBackgroundColor=0x5F5F5F&
+      skinBackgroundAlpha=0.75
+    )>>
+  }
+  %
+  \pbs_pdfobj:nnn{}{dict}{
+    /Type/RichMediaConfiguration/Subtype/Video
+    /Instances~[\pbs_pdflastobj:]
+  }
+  %
+  \pbs_pdfobj:nnn{}{dict}{
+    /Type/RichMediaContent
+    /Assets~<<
+      /Names~[(#3)~\video]
+    >>
+    /Configurations~[\pbs_pdflastobj:]
+  }
+  \tl_set:Nx\rmcontent{\pbs_pdflastobj:}
+  %
+  \pbs_pdfobj:nnn{}{dict}{
+    /Activation~<<
+      /Condition/\IfBooleanTF{#1}{PV}{XA}
+      /Presentation~<</Style/Embedded>>
+    >>
+    /Deactivation~<</Condition/PI>>
+  }
+  %
+  \hbox_set:Nn\l_tmpa_box{#2}
+  \tl_set:Nx\l_box_wd_tl{\dim_use:N\box_wd:N\l_tmpa_box}
+  \tl_set:Nx\l_box_ht_tl{\dim_use:N\box_ht:N\l_tmpa_box}
+  \tl_set:Nx\l_box_dp_tl{\dim_use:N\box_dp:N\l_tmpa_box}
+  \pbs_pdfxform:nnnnn{1}{1}{}{}{\l_tmpa_box}
+  %
+  \pbs_pdfannot:nnnn{\l_box_wd_tl}{\l_box_ht_tl}{\l_box_dp_tl}{
+    /Subtype/RichMedia
+    /BS~<</W~0/S/S>>
+    /Contents~(embedded~video~file:#3)
+    /NM~(rma:#3)
+    /AP~<</N~\pbs_pdflastxform:>>
+    /RichMediaSettings~\pbs_pdflastobj:
+    /RichMediaContent~\rmcontent
+  }
+  \phantom{#2}
+  \group_end:
+}
+\ExplSyntaxOff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+\usepackage[normalem]{ulem}
+
+
+\def\thesislayout{	% A4: 210 × 297
+	\geometry{
+		a4paper,
+		total={160mm,240mm},  % fix over page
+		left=30mm,
+		top=30mm,
+	}
+}
+\thesislayout
+
+%\usepackage{fancyhdr}
+\setlength{\headheight}{40pt}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[L]{
+ \begin{tabular}{rl}
+    \begin{picture}(25,15)(0,0)
+    \put(0,-8){\includegraphics[width=8mm, height=8mm]{img/hcmut.png}}
+    %\put(0,-8){\epsfig{width=10mm,figure=hcmut.eps}}
+   \end{picture}&
+	%\includegraphics[width=8mm, height=8mm]{hcmut.png} & %
+	\begin{tabular}{l}
+		\textbf{\bf \ttfamily Trường Đại Học Bách khoa TP.Hồ Chí Minh}\\
+		\textbf{\bf \ttfamily Khoa Khoa học \& Kỹ thuật Máy tính}
+	\end{tabular} 	
+ \end{tabular}
+}
+\fancyhead[R]{
+	\begin{tabular}{l}
+		\tiny \bf \\
+		\tiny \bf 
+	\end{tabular}  }
+\fancyfoot{} % clear all footer fields
+\fancyfoot[L]{\scriptsize \ttfamily Đồ án liên ngành (CO4041 - CO4029)}
+\fancyfoot[R]{\scriptsize \ttfamily Trang {\thepage}/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+
+%%%
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\makeatletter
+\newcounter {subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection .\@alph\c@subsubsubsection}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+\newcommand*{\subsubsubsectionmark}[1]{}
+\makeatother
+
+\everymath{\color{black}}%make in-line maths symbols blue to read/check easily
+
+\sloppy
+\captionsetup[figure]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=-9pt}
+%space remove between caption, figure, and text
+\captionsetup[table]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=7pt}
+%space remove between caption, table, and text
+
+%\floatplacement{figure}{H}%forced here float placement automatically for figures
+%\floatplacement{table}{H}%forced here float placement automatically for table
+%the following settings (11 lines) are to remove white space before or after the figures and tables
+%\setcounter{topnumber}{2}
+%\setcounter{bottomnumber}{2}
+%\setcounter{totalnumber}{4}
+%\renewcommand{\topfraction}{0.85}
+%\renewcommand{\bottomfraction}{0.85}
+%\renewcommand{\textfraction}{0.15}
+%\renewcommand{\floatpagefraction}{0.8}
+%\renewcommand{\textfraction}{0.1}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{5pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+
+\thesislayout
+
+\begin{document}
+
+\begin{titlepage}
+
+\begin{center}
+\large{
+ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH \\
+TRƯỜNG ĐẠI HỌC BÁCH KHOA \\
+KHOA KHOA HỌC \& KỸ THUẬT MÁY TÍNH 
+}
+\end{center}
+\vspace{1.3cm}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=8cm]{img/hcmut.png}
+\end{center}
+\end{figure}
+\vspace{0.8cm}
+
+\begin{center}
+\begin{tabular}{c}
+{\textbf{{\Large Đồ án liên ngành (CO4041 - CO4029)}}}\\
+~~\\
+\hline
+\\
+\multicolumn{1}{l}{\textbf{{\large BÁO CÁO DỰ ÁN:}}}\\
+\\
+\textbf{{\LARGE HỆ THỐNG QUẢN LÝ NÔNG TRẠI THÔNG MINH}} \\
+\\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{table}[h]
+\begin{tabular}{rrrl}
+\hspace{2.5cm}
+& \large{GVHD:} & \large{Hoàng Lê Hải Thanh} \\
+& & \large{Trần Nguyễn Minh Duy} \\
+& \large{Sinh viên:} & \large{Lê Hoàng Việt} & \large{2252903}\\
+& & \large{Chế Minh Đức} & \large{}\\
+& & \large{Nguyễn Phú Quý} & \large{2212871}\\
+\vspace{2em}
+\end{tabular}
+\end{table}
+\vspace{1em}
+
+
+\begin{center}
+{\footnotesize TP. Hồ Chí Minh, Tháng 12/2025}
+\end{center}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+\addcontentsline{toc}{section}{Danh sách hình vẽ}
+\listoffigures
+\addcontentsline{toc}{section}{Danh sách bảng}
+\listoftables
+\newpage
+
+% Member list
+\section*{Danh sách phân chia công việc}
+\addcontentsline{toc}{section}{Danh sách phân chia công việc}
+\begin{center}
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|l|c|}
+\hline
+\textbf{STT} & \textbf{Họ tên} & \textbf{MSSV} & \textbf{Vai trò} & \textbf{Distribution}\\
+\hline 
+%%%%%Student 1%%%%%%%%%%
+\multirow{2}{*}{1} & \multirow{2}{*}{Lê Hoàng Việt} & \multirow{2}{*}{2252903} & Task1 & \multirow{2}{*}{100\%} \\
+ &  &  & Task2 &  \\
+ \hline
+%%%%%Student 2%%%%%%%%%%%
+\multirow{2}{*}{2} & \multirow{2}{*}{Chế Minh Đức} & \multirow{2}{*}{2210783} & Task1 & \multirow{2}{*}{100\%} \\
+ &  &  & Task2 &  \\
+ \hline
+%%%%%Student 3%%%%%%%%%%%
+\multirow{2}{*}{3} & \multirow{2}{*}{Nguyễn Phú Quý} & \multirow{2}{*}{2212871} & Task1  & \multirow{2}{*}{100\%} \\
+ &  &  & Task2 &  \\
+ \hline
+\end{tabular}
+\caption{\label{table1}Bảng phân chia công việc}
+\end{table}
+\end{center}
+\newpage
+
+\input{section/1}
+\input{section/2}
+\input{section/3}
+\input{section/4}
+\input{section/5}
+\input{section/6}
+\input{section/7}
+\input{section/Pref}
+\input{section/PL}
+
+\end{document}
