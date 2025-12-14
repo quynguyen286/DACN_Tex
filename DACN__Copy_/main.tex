@@ -1,7 +1,6 @@
 \documentclass[a4paper]{article}
 \usepackage{vntex}
-\usepackage[utf8]{vietnam}
-\usepackage[english,vietnam]{babel}
+\usepackage[english,vietnamese]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{parskip} %mới thêm vào
 %\usepackage[utf8]{inputenc}
@@ -36,7 +35,7 @@
 \usepackage{tikz}
 
 \usepackage{listingsutf8}
-\usepackage[utf8]{vietnam} % Gói này giúp hỗ trợ tiếng Việt có dấu
+\setlength{\marginparwidth}{2cm} % Ensure todonotes fits in margin
 \usepackage{todonotes}
 \setlength{\parindent}{0pt} % Loại bỏ thụt đầu dòng
 \newcommand{\gachdau}{\hspace*{1.15cm}\ignorespaces} % Tạo gạch đầu dòng
@@ -333,5 +332,11 @@ KHOA KHOA HỌC \& KỸ THUẬT MÁY TÍNH
 \input{section/7}
 \input{section/Pref}
 \input{section/PL}
+
+\newpage
+\addcontentsline{toc}{section}{Tài liệu tham khảo}
+\nocite{*}% include all entries from references.bib even if not cited
+\bibliographystyle{ieeetr}
+\bibliography{section/references}
 
 \end{document}
