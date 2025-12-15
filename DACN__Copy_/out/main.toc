@@ -1,0 +1,84 @@
+\babel@toc {vietnamese}{}\relax 
+\contentsline {section}{Danh sách hình vẽ}{3}{section*.3}%
+\contentsline {section}{Danh sách bảng}{3}{section*.4}%
+\contentsline {section}{Danh sách phân chia công việc}{4}{section*.6}%
+\contentsline {section}{\numberline {1}Giới thiệu}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Bối cảnh và bài toán}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Tính cấp thiết của đề tài}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Tình hình nghiên cứu và các giải pháp hiện có}{5}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Mục tiêu và câu hỏi nghiên cứu}{5}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Phạm vi và giới hạn của đề tài}{6}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Cơ sở lý thuyết}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Kiến trúc hệ thống IoT}{6}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Mô hình kiến trúc phân lớp (Layered Architecture)}{6}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Tầng Xử lý nghiệp vụ với NestJS}{7}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}Hệ quản trị Cơ sở dữ liệu quan hệ (PostgreSQL)}{7}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Tuân thủ chuẩn ACID và Độ tin cậy cao}{7}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Hỗ trợ dữ liệu bán cấu trúc (JSONB)}{7}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Khả năng mở rộng (Extensibility)}{7}{subsubsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.3}Cơ sở dữ liệu chuỗi thời gian (Time - series Database)}{7}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Kiến trúc Hypertables}{8}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Khả năng nén và quản lý vòng đời dữ liệu}{8}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Tính thống nhất trong hệ sinh thái (SQL Compatibility)}{8}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}Công nghệ phần cứng/vi điều khiển}{8}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Vi điều khiển ESP32}{8}{subsubsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.5}Công nghệ cảm biến/ngoại vi}{8}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Giao thức I2C (Inter-Integrated Circuit)}{8}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Giao thức DVPI (Digital Video Port Interface)}{9}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}GPIO (General Purpose Input/Output)}{9}{subsubsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.4}ADC (Analog-to-Digital Converter)}{9}{subsubsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.6}Công nghệ hạ tầng mạng}{9}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Giao thức WiFi (IEEE 802.11)}{9}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}Giao thức MQTT}{9}{subsubsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.3}Giao thức HTTP}{10}{subsubsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.7}Công nghệ phần mềm/Firmware}{10}{subsection.2.7}%
+\contentsline {subsubsection}{\numberline {2.7.1}Hệ điều hành FreeRTOS}{10}{subsubsection.2.7.1}%
+\contentsline {subsubsection}{\numberline {2.7.2}Định dạng dữ liệu JSON}{10}{subsubsection.2.7.2}%
+\contentsline {subsubsection}{\numberline {2.7.3}Giao thức UART}{10}{subsubsection.2.7.3}%
+\contentsline {subsection}{\numberline {2.8}Thuật toán RFE (Robust Feature Extractor)}{10}{subsection.2.8}%
+\contentsline {section}{\numberline {3}Khảo sát các giải pháp đã có}{12}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Khảo sát các ứng dụng, sản phẫm hoặc hệ thống liên quan}{12}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Khảo sát các mô hình, thuật toán, phương pháp}{12}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Bảng tổng hợp và phân tích khoảng trống}{12}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Phân tích yêu cầu}{13}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Mục đích}{13}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Phương pháp thu thập yêu cầu}{13}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Kết quả thu thập yêu cầu}{13}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Yêu cầu chức năng}{13}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Yêu cầu phi chức năng}{14}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Use case: Monitor Farm}{14}{subsubsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.6}Các mô hình phân tích UML}{20}{subsection.4.6}%
+\contentsline {subsubsection}{\numberline {4.6.1}Use case: Monitor System Analytics}{20}{subsubsection.4.6.1}%
+\contentsline {subsubsection}{\numberline {4.6.2}Use case: Troubleshoot System}{22}{subsubsection.4.6.2}%
+\contentsline {subsubsection}{\numberline {4.6.3}Use case: Manage Reports}{24}{subsubsection.4.6.3}%
+\contentsline {section}{\numberline {5}Giải pháp đề xuất}{26}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Mục tiêu của giải pháp}{26}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Thiết kế kiến trúc (Mức khái niệm)}{26}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Thiết kế Cơ sở dữ liệu}{26}{subsubsection.5.2.1}%
+\contentsline {paragraph}{\numberline {5.2.1.1}Phân hệ Quản lý Nông trại:}{26}{paragraph.5.2.1.1}%
+\contentsline {paragraph}{\numberline {5.2.1.2}Phân hệ IoT và Thu thập dữ liệu:}{27}{paragraph.5.2.1.2}%
+\contentsline {paragraph}{\numberline {5.2.1.3}Phân hệ Người dùng và Phân quyền:}{27}{paragraph.5.2.1.3}%
+\contentsline {subsection}{\numberline {5.3}Thiết kế Kiến trúc Hệ thống}{27}{subsection.5.3}%
+\contentsline {paragraph}{\numberline {5.3.0.1}Module Bảo mật (Cross-cutting Concern):}{28}{paragraph.5.3.0.1}%
+\contentsline {subsection}{\numberline {5.4}Đề xuất hiện thực và lựa chọn công nghệ}{28}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Quản lý lược đồ dữ liệu cảm biến từ xa}{28}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Đề xuất cải tiến cho thuật toán RFE}{30}{subsubsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.5}Thiết kế các thành phần chính}{32}{subsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.5.1}Quy trình Giám sát Dashboard (Analytics Flow):}{32}{subsubsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.2}Quy trình Xử lý sự cố (Troubleshoot Flow):}{33}{subsubsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.3}Firmware}{34}{subsubsection.5.5.3}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.a}Activity Diagram}{34}{subsubsubsection.5.5.3.1}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.b}Communication Diagram}{35}{subsubsubsection.5.5.3.2}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.c}Component Diagram}{35}{subsubsubsection.5.5.3.3}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.d}Sequence Diagram}{36}{subsubsubsection.5.5.3.4}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.e}Timing Diagram}{37}{subsubsubsection.5.5.3.5}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.f}State Machine Diagram}{38}{subsubsubsection.5.5.3.6}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.g}Deployment Diagram}{39}{subsubsubsection.5.5.3.7}%
+\contentsline {subsection}{\numberline {5.6}Cách đánh giá giải pháp}{39}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Kế hoạch thực hiện}{40}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Mục tiêu theo từng giai đoạn}{40}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Lịch trình và mốc thời gian}{40}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Rủi ro và phương án giảm thiểu}{40}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Kết luận}{41}{section.7}%
+\contentsline {section}{\numberline {8}Phụ lục}{42}{section.8}%
+\contentsline {section}{Tài liệu tham khảo}{43}{section.8}%

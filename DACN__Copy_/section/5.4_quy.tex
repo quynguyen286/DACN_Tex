@@ -94,4 +94,74 @@
     \end{itemize}
 \end{itemize}
 
-\subsubsection{RFE cải tiến}
+\subsubsection{Đề xuất cải tiến cho thuật toán RFE}
+\begin{itemize}
+    \item \textbf{Cốt lõi thuật toán RFE:}
+    \begin{itemize}
+        \item Phương pháp RFE trong bài báo chủ yếu tập trung vào dữ liệu của của một cảm biến đơn lẻ và tránh đặc trưng dựa trên tương quan để giảm chi phí tính toán.
+        \item Tuy nhiên, trong một nhà kính, các cảm biến không hoạt động độc lập. Nhiệt độ ở mọi điểm phải tương quan với nhau.
+    \end{itemize}
+    \item \textbf{Đề xuất cải tiến:} Đặc trưng tương quan không gian.
+    \begin{itemize}
+        \item Nếu một cảm biến báo nhiệt độ 50 độ C trong khi 10 cảm biến xung quanh nó báo 25 độ C thì cảm biến đó chắc chắn bị lỗi.
+        \item Ý tưởng: \texttt{$\Delta$valueER = value\_A - avr(all\_other\_sensors\_value)} (So một cảm biến với giá trị trung bình của tất cả các cảm biến).
+        \item Khó khăn: khó để phát hiện ngưỡng nào quyết định cảm biến bị lỗi hay cảm biến bình thường
+    \end{itemize}
+    \item \textbf{Khả năng tích hợp vào dự án:}
+    \begin{itemize}
+        \item RFE nguyên bản:
+        \begin{itemize}
+            \item Ưu điểm:
+            \begin{itemize}
+                \item Hiệu quả tính toán rất cao: Thuật toán được thiết kế cho các hệ thống IoT năng lượng thấp. Các phép toán rất nhanh 
+                và nhẹ. Hoàn toàn phù hợp để chạy trên một gateway tại nhà kính mà không cần phần cứng mạnh.
+                \item Phát hiện lỗi cục bộ tốt: RFE rất phù hợp trong việc phát hiện các lỗi truyền thống của một cảm biến khi nó hoạt 
+                động sai so với chính nó như:
+                \begin{enumerate}
+                    \item Giá trị bị kẹt (Stuck): Cảm biến luôn báo 25 độ C. RFE sẽ phát hiện ra vì đặc trưng tốc độ thay đổi và độ biến động sẽ bằng 0.
+                    \item Lỗi đột biến (Spike): Giá trị nhảy vọt bất thường. RFE sẽ phát hiện qua tốc độ thay đổi.
+                    \item Lỗi trôi (Drift): Giá trị từ từ sai lệch. RFE sẽ phát hiện qua các đặc trưng "xu hướng" (EWMA).
+                \end{enumerate}
+            \end{itemize}
+            \item Nhược điểm:
+            \begin{itemize}
+                \item RFE nguyên bản chủ động tránh các đặc trưng dựa trên tương quan để giảm chi phí. 
+                Do đó, nó không thể trả lời câu hỏi: "Cảm biến này đang báo giá trị có hợp lý so với các cảm biến xung quanh nó không?".
+                \item Nếu một cảm biến nhiệt độ bị lỗi và báo giá trị 20°C (một giá trị hợp lệ) một cách ổn định, trong khi cả nhà kính 
+                đang là 35°C, RFE nguyên bản sẽ không phát hiện được lỗi này. Nó chỉ thấy một tín hiệu ổn định và cho là "bình thường".
+            \end{itemize}
+            \item Kết luận:
+            \begin{itemize}
+                \item Khả năng tích hợp cao.
+                \item Hiệu quả về tài nguyên.
+                \item Giải quyết phần lớn các lỗi phần cứng cơ bản của từng cảm biến riêng lẻ.
+            \end{itemize}
+        \end{itemize}
+        \item RFE cải tiến với đặc trưng tương quan không gian:
+        \begin{itemize}
+            \item Ưu điểm: 
+            \begin{itemize}
+                \item Khắc phục điểm yếu lớn nhất: Bằng cách thêm đặc trưng "Tương quan không gian" (Delta = Giá trị cảm biến - Trung bình 
+                của mạng lưới), hệ thống giờ đây đã có "nhận thức về bối cảnh". Nó có thể phát hiện "lỗi logic" (cảm biến báo 20°C trong 
+                khi cả nhà kính là 35°C).
+                \item Tăng độ chính xác: Việc bổ sung bối cảnh không gian cung cấp cho mô hình một bức tranh hoàn chỉnh hơn. Điều này sẽ 
+                làm tăng đáng kể độ chính xác phát hiện lỗi.
+                \item Phù hợp với nông nghiệp: Môi trường nhà kính có tính tương quan cao. Phiên bản cải tiến khai thác được cả hai yếu 
+                tố này.
+            \end{itemize}
+            \item Nhược điểm:
+            \begin{itemize}
+                \item Tăng chi phí tính toán: Để tính đặc trưng "tương quan không gian", hệ thống phải thu thập dữ liệu từ nhiều cảm 
+                biến rồi mới thực hiện phép tính. Điều này nặng hơn một chút so với RFE gốc.
+                \item Độ phức tạp của luồng dữ liệu tăng lên: Cần một bước gom dữ liệu trước khi chạy kỹ thuật đặc trưng, thay vì xử 
+                lý song song từng cảm biến.
+            \end{itemize}
+            \item Kết luận:
+            \begin{itemize}
+                \item Khả năng tích hợp cao.
+                \item Tăng nhẹ về chi phí tính toán.
+                \item Độ chính xác và khả năng phát hiện lỗi logic vượt trội.
+            \end{itemize}
+        \end{itemize}
+    \end{itemize} 
+\end{itemize}
