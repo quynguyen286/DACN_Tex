@@ -1,0 +1,86 @@
+\begin{thebibliography}{10}
+
+\bibitem{smart_farm_trend}
+A.~D. Boursianis {\em et~al.}, ``Smart farming: Internet of things
+  technologies, challenges and future directions,'' {\em Sensors}, vol.~22,
+  no.~10, p.~3735, 2022.
+
+\bibitem{iot_fragmentation}
+M.~Noura, M.~Atiquzzaman, and M.~Gaedke, ``Interoperability in iot: Challenges
+  and solutions,'' in {\em Proceedings of the International Conference on IoT},
+  pp.~1--6, Springer, 2019.
+
+\bibitem{chinhphu2024}
+{Báo Chính Phủ}, ``Thủ tướng: Ngành nông nghiệp phải tăng
+  tốc, bứt phá, xuất khẩu 70 tỷ usd trong năm 2025,'' {\em Cổng
+  Thông tin điện tử Chính phủ}, 2024.
+
+\bibitem{vietnamreport2024}
+{Vietnam Report}, ``Báo cáo tăng trưởng và 6 thách thức của nông
+  nghiệp công nghệ cao việt nam,'' 2024.
+
+\bibitem{ieee2025}
+J.~Smith and T.~Nguyen, ``Intelligent fault detection in iot-based wsns for
+  precision agriculture using machine learning,'' {\em IEEE Internet of Things
+  Journal}, vol.~12, no.~4, pp.~1023--1035, 2025.
+
+\bibitem{agritech_comparison}
+P.~Stapleton {\em et~al.}, ``A review of low-cost precision agriculture:
+  sensors, monitoring and communication systems,'' {\em Journal of Agricultural
+  Science}, vol.~12, no.~3, pp.~55--70, 2023.
+
+\bibitem{iot_arch_2015}
+A.~Al-Fuqaha, M.~Guizani, M.~Mohammadi, M.~Aledhari, and M.~Ayyash, ``Internet
+  of things: A survey on enabling technologies, protocols, and applications,''
+  {\em IEEE Communications Surveys \& Tutorials}, vol.~17, no.~4,
+  pp.~2347--2376, 2015.
+
+\bibitem{nestjs_docs}
+{NestJS Team}, {\em NestJS Documentation: Introduction and Fundamentals}, 2024.
+
+\bibitem{typescript_lang}
+{Microsoft}, {\em TypeScript: Typed JavaScript at Any Scale}, 2024.
+
+\bibitem{postgres_docs}
+{The PostgreSQL Global Development Group}, {\em PostgreSQL 16.0 Documentation},
+  2024.
+
+\bibitem{tsdb_importance}
+A.~Bader {\em et~al.}, ``Time series databases: New ways to store and access
+  data,'' {\em Proceedings of the VLDB Endowment}, 2017.
+
+\bibitem{timescaledb_docs}
+{Timescale Inc.}, {\em TimescaleDB Documentation: Hypertables and Chunking},
+  2024.
+\newblock Truy cập: 13/12/2025.
+
+\bibitem{ESP32_docs}
+{Espressif Systems}, {\em ESP32 Series Datasheet}, 2024.
+
+\bibitem{I2C_spec}
+N.~Semiconductors, {\em I2C Bus Specification and User Manual}, 2021.
+
+\bibitem{Camera_DVPI_spec}
+I.~OmniVision~Technologies, {\em OV2640 Camera Module Datasheet}, 2020.
+
+\bibitem{GPIO_spec}
+E.~Systems, {\em ESP32 Technical Reference Manual}, 2016.
+
+\bibitem{mqtt_spec}
+{OASIS Open}, {\em MQTT Version 5.0 Committee Specification}, 2019.
+
+\bibitem{http_rfc}
+R.~Fielding {\em et~al.}, ``Hypertext transfer protocol (http/1.1): Message
+  syntax and routing,'' 2014.
+
+\bibitem{rtos}
+FreeRTOS, {\em FreeRTOS Scheduler and Scheduling Policies}, 2022.
+
+\bibitem{json_spec}
+E.~International, {\em The JSON Data Interchange Syntax (ECMA-404)}, 2017.
+
+\bibitem{RFE_spec}
+T.~N.~M. Duy, {\em Improving Feature Extraction for Sensor Fault Detection in
+  Low-Power IoT Systems}, 2025.
+
+\end{thebibliography}

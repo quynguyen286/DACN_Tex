@@ -1,0 +1,112 @@
+\subsection{Công nghệ phần cứng/vi điều khiển}
+\subsubsection{Vi điều khiển ESP32}
+ESP32 là dòng vi điều khiển (SoC - System on Chip) hiệu năng cao, giá thành thấp được phát triển bởi Espressif Systems, tích hợp sẵn kết nối Wi-Fi 2.4 GHz và Bluetooth chế độ 
+kép (Dual-mode Bluetooth). Được xây dựng dựa trên kiến trúc vi xử lý Xtensa® Dual-Core 32-bit LX6, ESP32 sở hữu khả năng xử lý vượt trội với xung nhịp có thể đạt tới 240 MHz và 
+hiệu suất tính toán lên đến 600 DMIPS. So với thế hệ tiền nhiệm ESP8266, ESP32 không chỉ vượt trội về tốc độ xử lý mà còn được nâng cấp mạnh mẽ về số lượng chân giao tiếp (GPIO), 
+dung lượng bộ nhớ (520 KB SRAM) và các ngoại vi tích hợp như cảm biến chạm (Touch Sensor), cảm biến Hall và bộ điều khiển CAN. Với sự hỗ trợ mạnh mẽ của hệ điều hành thời gian 
+thực FreeRTOS ngay từ tầng phần cứng, ESP32 trở thành nền tảng lý tưởng cho các ứng dụng IoT phức tạp đòi hỏi khả năng đa nhiệm (Multitasking) và xử lý dữ liệu thời gian thực.\cite{ESP32_docs}
+
+\subsection{Công nghệ cảm biến/ngoại vi}
+\subsubsection{Giao thức I2C (Inter-Integrated Circuit)}
+I2C (Inter-Integrated Circuit) là một giao thức truyền thông nối tiếp đồng bộ, bán song công (Half - duplex) được phát triển bởi Philips Semiconductor (nay là NXP), đóng vai trò 
+là chuẩn giao tiếp tầm ngắn phổ biến nhất trong các thiết kế vi mạch tích hợp. Đặc trưng của I2C là kiến trúc Multi-Master/Multi-Slave, cho phép kết nối nhiều thiết bị ngoại vi 
+(Cảm biến, EEPROM, RTC) với vi điều khiển chỉ thông qua hai đường dây tín hiệu duy nhất: SDA (Serial Data) để truyền tải dữ liệu hai chiều và SCL (Serial Clock) để đồng bộ hóa 
+xung nhịp. Nhờ cơ chế định địa chỉ mềm (Addressing) thay vì sử dụng các chân chọn chip (Chip Select) vật lý như giao thức SPI, I2C giúp tối thiểu hóa số lượng chân GPIO cần 
+thiết và giảm độ phức tạp của mạch in, trở thành giải pháp lý tưởng cho các ứng dụng đo lường và giám sát trong các hệ thống IoT.\cite{I2C_spec}
+
+\subsubsection{Giao thức DVPI (Digital Video Port Interface)}
+DVPI (Digital Video Port Interface) là một giao diện truyền thông song song (Parallel Interface) tiêu chuẩn được sử dụng rộng rãi để kết nối các cảm biến hình ảnh 
+CMOS (như OV2640) với vi điều khiển hoặc bộ xử lý trung tâm. Khác với các giao thức truyền nối tiếp như SPI hay I2C vốn bị giới hạn về băng thông, DVP sử dụng một bus dữ liệu 
+rộng (thường là 8bit hoặc 10bit) để truyền tải toàn bộ một byte dữ liệu điểm ảnh (pixel) trong mỗi chu kỳ xung nhịp. Cơ chế vận hành của DVP dựa vào sự đồng bộ hóa chính xác 
+giữa ba tín hiệu điều khiển cốt lõi: PCLK (Pixel Clock) xác định tốc độ lấy mẫu từng điểm ảnh, VSYNC (Vertical Sync) báo hiệu thời điểm bắt đầu một khung hình mới, và HREF/HSYNC 
+(Horizontal Reference) xác định dữ liệu hợp lệ của từng dòng quét ngang. Nhờ kiến trúc này, DVP cung cấp băng thông đủ lớn để truyền tải dữ liệu hình ảnh thời gian thực với độ 
+trễ thấp, làm nền tảng cho các ứng dụng thị giác máy tính trên thiết bị nhúng.\cite{Camera_DVPI_spec}
+
+\subsubsection{GPIO (General Purpose Input/Output)}
+GPIO (General Purpose Input/Output) là các chân tín hiệu số đa năng trên vi điều khiển, đóng vai trò là giao diện vật lý tương tác trực tiếp với các mạch điện tử bên ngoài. 
+Không bị giới hạn bởi một chức năng cố định, trạng thái của chân GPIO có thể được lập trình viên cấu hình linh hoạt ở hai chế độ: Output (Đầu ra) để điều khiển mức logic điện 
+áp (High/Low) nhằm kích hoạt các cơ cấu chấp hành, hoặc Input (Đầu vào) để đọc trạng thái logic (0/1) từ các công tắc hay cảm biến số. Trên nền tảng ESP32, kiến trúc GPIO Matrix 
+cho phép ánh xạ linh hoạt các tín hiệu ngoại vi tới các chân vật lý khác nhau, giúp tối ưu hóa quá trình thiết kế mạch in (PCB) và định tuyến tín hiệu.\cite{GPIO_spec}
+
+\subsubsection{ADC (Analog-to-Digital Converter)} 
+ADC (Analog-to-Digital Converter) là thành phần ngoại vi thiết yếu giúp vi điều khiển (vốn chỉ hoạt động với các tín hiệu số rời rạc) có thể 'hiểu' được các đại lượng vật lý 
+biến thiên liên tục trong môi trường thực như nhiệt độ, ánh sáng hay độ ẩm. Nguyên lý hoạt động của ADC dựa trên quá trình Lấy mẫu (Sampling) và Lượng tử hóa (Quantization): 
+nó đo điện áp đầu vào tại các khoảng thời gian rời rạc và chuyển đổi giá trị điện áp đó thành một chuỗi số nhị phân tương ứng với độ phân giải của bộ chuyển đổi.\cite{GPIO_spec}
+
+\subsection{Công nghệ hạ tầng mạng}
+\subsubsection{Giao thức WiFi (IEEE 802.11)}
+WiFi (Wireless Fidelity) là một họ các giao thức mạng không dây cục bộ (WLAN) dựa trên bộ tiêu chuẩn IEEE 802.11, cho phép các thiết bị điện tử trao đổi dữ liệu qua sóng vô 
+tuyến tốc độ cao. Trong các ứng dụng IoT, WiFi đóng vai trò là lớp truyền dẫn (Transport Layer) mạnh mẽ, cung cấp khả năng kết nối trực tiếp vào hạ tầng Internet thông qua các 
+thiết bị định tuyến (Router/Access Point) mà không cần Gateway chuyển đổi giao thức phức tạp. ESP32 hỗ trợ chuẩn 802.11 b/g/n hoạt động trên băng tần 2.4 GHz, cung cấp sự cân 
+bằng tối ưu giữa phạm vi phủ sóng (xuyên vật cản tốt hơn 5GHz) và tốc độ truyền tải dữ liệu, đáp ứng tốt các yêu cầu từ gửi gói tin điều khiển nhỏ đến truyền tải hình ảnh dung 
+lượng lớn.\cite{ESP32_docs}
+
+\subsubsection{Giao thức MQTT}
+MQTT (Message Queuing Telemetry Transport) là một giao thức truyền thông điệp theo mô hình Xuất bản - Đăng ký (Publish - Subscribe) cực kỳ nhẹ, hoạt động trên nền tảng TCP/IP. 
+Được thiết kế chuyên biệt cho các môi trường có băng thông thấp, độ trễ cao hoặc mạng không ổn định, MQTT đã trở thành tiêu chuẩn vàng trong các hệ thống Internet vạn vật (IoT). 
+Khác với mô hình Request - Response truyền thống của HTTP, kiến trúc MQTT tách biệt hoàn toàn giữa thiết bị gửi (Publisher) và thiết bị nhận (Subscriber) thông qua một thành phần 
+trung gian gọi là Broker. Broker đóng vai trò như một 'bưu điện số', chịu trách nhiệm lọc, định tuyến và phân phối các gói tin dựa trên các chủ đề (Topics) phân cấp. Nhờ cơ chế 
+đóng gói tiêu đề (header) tối giản chỉ 2 byte và khả năng duy trì kết nối liên tục (Keep - alive), MQTT giúp tối ưu hóa năng lượng tiêu thụ cho các thiết bị nhúng như ESP32, đồng 
+thời đảm bảo độ tin cậy cao trong việc truyền tải dữ liệu cảm biến và lệnh điều khiển thời gian thực.\cite{mqtt_spec}
+
+\subsubsection{Giao thức HTTP}
+HTTP (Hypertext Transfer Protocol) là giao thức truyền tải siêu văn bản hoạt động ở Lớp Ứng dụng (Application Layer) của mô hình OSI, đóng vai trò là nền tảng cốt lõi của việc 
+trao đổi dữ liệu trên World Wide Web. HTTP vận hành dựa trên mô hình Client - Server theo cơ chế Request - Response (Yêu cầu - Phản hồi): Client (trong trường hợp này là ESP32) gửi 
+một yêu cầu HTTP đến Server, và Server sẽ trả về một mã trạng thái kèm theo dữ liệu tương ứng. Đặc điểm nổi bật của HTTP là tính 'phi trạng thái' (Stateless), nghĩa là mỗi cặp 
+yêu cầu - phản hồi là độc lập và Server không lưu giữ thông tin về Client giữa các lần kết nối (trừ khi sử dụng các cơ chế bổ sung như Cookies hay Token). Trong các hệ thống IoT 
+hiện đại, HTTP thường được triển khai dưới dạng kiến trúc RESTful API, cho phép các thiết bị nhúng tương tác với cơ sở dữ liệu và dịch vụ đám mây thông qua các phương thức chuẩn 
+hóa như GET, POST, PUT và DELETE.\cite{http_rfc}
+
+\subsection{Công nghệ phần mềm/Firmware}
+\subsubsection{Hệ điều hành FreeRTOS}
+FreeRTOS (Real-Time Operating System) là một nhân hệ điều hành thời gian thực mã nguồn mở, được thiết kế chuyên biệt cho các vi điều khiển nhúng để quản lý tài nguyên phần cứng 
+và lập lịch tác vụ. Khác với các hệ điều hành đa dụng (như Windows hay Linux) tập trung vào trải nghiệm người dùng, mục tiêu tối thượng của FreeRTOS là tính xác định 
+(Determinism) và độ trễ thấp, đảm bảo các tác vụ quan trọng phải được thực thi trong một khoảng thời gian quy định nghiêm ngặt. Trên nền tảng ESP32, FreeRTOS được tích hợp sâu 
+vào bộ công cụ phát triển (ESP-IDF/Arduino Core), cung cấp cơ chế lập lịch ưu tiên (Preemptive Scheduling) cho phép phân tách một chương trình lớn thành các tiểu trình độc lập 
+gọi là Tác vụ (Tasks). Mỗi tác vụ sở hữu ngăn xếp (Stack) và mức độ ưu tiên riêng biệt, giúp hệ thống vận hành đa nhiệm (Multitasking) mượt mà ngay cả trên các thiết bị giới hạn 
+về tài nguyên.\cite{rtos}
+
+\subsubsection{Định dạng dữ liệu JSON}
+JSON (JavaScript Object Notation) là một chuẩn định dạng trao đổi dữ liệu văn bản mở (Open Standard), gọn nhẹ và độc lập với ngôn ngữ lập trình, được sử dụng rộng rãi để lưu 
+trữ và truyền tải dữ liệu có cấu trúc. Mặc dù có nguồn gốc từ cú pháp đối tượng của JavaScript, JSON hiện nay được hỗ trợ bởi hầu hết các ngôn ngữ lập trình hiện đại (C/C++, 
+Python, Java, Dart...). Cấu trúc của JSON được xây dựng dựa trên hai cấu trúc dữ liệu phổ quát: tập hợp các cặp 'tên : giá trị' (Key-Value pairs) tạo thành một Đối tượng 
+(Object), và danh sách các giá trị có thứ tự tạo thành một Mảng (Array). Trong các hệ thống IoT, JSON đóng vai trò là 'ngôn ngữ chung' (Lingua Franca), cho phép Firmware nhúng 
+(viết bằng C++) đóng gói dữ liệu cảm biến thành chuỗi văn bản tiêu chuẩn trước khi truyền qua giao thức MQTT hoặc HTTP tới máy chủ.\cite{json_spec}
+
+\subsubsection{Giao thức UART}
+UART (Universal Asynchronous Receiver-Transmitter) là giao thức truyền thông nối tiếp không đồng bộ, đóng vai trò là chuẩn giao tiếp cơ bản nhất giữa máy tính và các hệ thống 
+nhúng. Khác với I2C hay SPI vốn hoạt động dựa trên tín hiệu xung nhịp (Clock) đồng bộ, UART truyền tải dữ liệu theo cơ chế bất đồng bộ (Asynchronous). Điều này nghĩa là bên 
+gửi (Transmitter - TX) và bên nhận (Receiver - RX) không chia sẻ chung một đường dây Clock, mà thay vào đó, chúng phải thống nhất trước với nhau về tốc độ truyền tải, gọi là 
+Baud Rate (tốc độ Baud). Dữ liệu được đóng gói thành các khung (Frame) bao gồm bit bắt đầu (Start bit), các bit dữ liệu (Data bits), bit kiểm tra chẵn lẻ tùy chọn (Parity bit) 
+và bit kết thúc (Stop bit). Trên ESP32, UART không chỉ là giao diện lập trình nạp firmware mà còn là kênh giao tiếp quan trọng để xuất nhật ký hoạt động (System Logs) phục vụ 
+quá trình giám sát và gỡ lỗi.\cite{GPIO_spec}
+
+\subsection{Thuật toán RFE (Robust Feature Extractor)}
+
+Trong kỷ nguyên Công nghiệp 4.0, Internet vạn vật (IoT) đóng vai trò trụ cột với các ứng dụng trải rộng từ sản xuất thông minh đến các hệ thống bay không người lái 
+nhằm thu thập dữ liệu thời gian thực. Tuy nhiên, do thường xuyên phải vận hành trong các môi trường khắc nghiệt chịu ảnh hưởng bởi nhiệt độ, độ ẩm hay nhiễu điện từ, 
+dữ liệu cảm biến dễ gặp phải các sai lệch nghiêm trọng như giá trị bất thường, trôi tín hiệu hoặc bị kẹt giá trị. Các giải pháp hiện hữu vẫn tồn tại nhiều rào cản đáng kể: 
+trong khi học máy cổ điển gặp khó khăn với các mẫu lỗi phức tạp và phương pháp dựa trên tương quan tỏ ra kém hiệu quả trong môi trường động, thì học sâu (Deep Learning) – 
+dù mạnh mẽ – lại đòi hỏi chi phí huấn luyện lớn, thiếu tính minh bạch (hộp đen) và dễ bỏ sót các lỗi hiếm gặp. Bối cảnh này đặt ra yêu cầu cấp thiết về một thuật toán phát 
+hiện lỗi mới có khả năng lấp đầy 'khoảng trống' hiện tại: vừa đảm bảo hiệu suất cao và khả năng diễn giải, vừa tối ưu hóa tài nguyên tính toán để phù hợp với đặc thù năng 
+lượng thấp của các thiết bị IoT.\cite{RFE_spec}
+
+Thay vì tập trung phát triển các mô hình phân loại phức tạp, nghiên cứu đề xuất phương pháp luận Robust Feature Extractor (RFE), một cách tiếp cận ưu tiên việc xử lý dữ liệu 
+đầu vào thông minh nhằm biến đổi chuỗi thời gian thô thành không gian đặc trưng đa chiều giàu thông tin. RFE tích hợp các nhóm đặc trưng chiến lược bao gồm: tín hiệu gốc và 
+tốc độ thay đổi để nắm bắt động lực học tức thời; bộ nhớ tạm thời (temporal memory) thông qua các giá trị trễ để cung cấp ngữ cảnh ngắn hạn; và xu hướng được làm mịn bằng 
+phương pháp EWMA. Điểm đột phá của RFE nằm ở việc áp dụng thống kê trượt trên tốc độ thay đổi nhằm định lượng mức độ biến động (volatility) của tín hiệu, kết hợp với thống kê 
+cục bộ đa quy mô để phân tích hành vi dữ liệu trên nhiều cửa sổ trượt khác nhau. Đặc biệt, thiết kế của RFE chủ động loại bỏ các đặc trưng dựa trên tương quan, một chiến lược 
+then chốt giúp giảm thiểu chi phí tính toán và ngăn chặn hiện tượng quá khớp (overfitting), đảm bảo tính hiệu quả khi triển khai trên các thiết bị IoT.
+
+Quá trình thực nghiệm được tiến hành trên bộ dữ liệu SeDa thu thập từ cảm biến DHT11 nhằm đánh giá toàn diện hiệu năng của phương pháp Robust Feature Extractor (RFE) thông qua 
+việc đối sánh với ba kỹ thuật cơ sở là Autoencoder (AE), Stationary Wavelet Transform (SWT) và TsAssure trên 7 mô hình học máy tiêu chuẩn (như Random Forest, SVM, XGBoost...). 
+Kết quả định lượng cho thấy bộ đặc trưng RFE mang lại sự vượt trội tuyệt đối về mọi chỉ số hiệu năng, duy trì độ chính xác ổn định ở mức cao từ 90,7\% đến 92,9\%, áp đảo hoàn toàn 
+so với sự thiếu ổn định của các phương pháp đối chứng như TsAssure (chỉ đạt 85 - 88\%) hay Autoencoder (79 - 82\%). Không chỉ tối ưu về độ chính xác, RFE còn chứng minh ưu thế vượt 
+bậc về hiệu quả tính toán với thời gian trích xuất đặc trưng chỉ 2,05 giây — nhanh gấp 5 lần so với Autoencoder (10,97 giây) và tiệm cận tốc độ của TsAssure—qua đó khẳng định 
+tính khả thi cao khi triển khai cho các ứng dụng phát hiện lỗi thời gian thực trên các thiết bị IoT giới hạn tài nguyên.
+
+Nghiên cứu nhấn mạnh vai trò tiên quyết của kỹ thuật trích xuất đặc trưng (feature engineering), khẳng định rằng việc khai thác sâu động lực thời gian và biến động cục bộ mang 
+lại hiệu suất vượt trội so với các mô hình 'hộp đen' phức tạp như Autoencoder. Phương pháp RFE được xác định là giải pháp tối ưu đạt được sự cân bằng lý tưởng giữa độ chính xác 
+cao và chi phí tính toán thấp, chứng minh tính khả thi vượt trội khi triển khai trên các hệ thống IoT giới hạn tài nguyên năng lượng. Trên cơ sở đó, các hướng phát triển tương 
+lai được đề xuất tập trung vào việc tinh giản số lượng đặc trưng nhằm giảm thiểu độ trễ dự đoán, đồng thời mở rộng phạm vi kiểm thử phương pháp trên đa dạng các loại cảm biến 
+và kịch bản lỗi thực tế khác nhau.
