@@ -54,37 +54,39 @@
 \contentsline {section}{\numberline {5}Giải pháp đề xuất}{26}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Mục tiêu của giải pháp}{26}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Thiết kế kiến trúc (Mức khái niệm)}{26}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Thiết kế Cơ sở dữ liệu}{26}{subsubsection.5.2.1}%
-\contentsline {paragraph}{\numberline {5.2.1.1}Phân hệ Quản lý Nông trại:}{26}{paragraph.5.2.1.1}%
-\contentsline {paragraph}{\numberline {5.2.1.2}Phân hệ IoT và Thu thập dữ liệu:}{27}{paragraph.5.2.1.2}%
-\contentsline {paragraph}{\numberline {5.2.1.3}Phân hệ Người dùng và Phân quyền:}{27}{paragraph.5.2.1.3}%
-\contentsline {subsection}{\numberline {5.3}Thiết kế Kiến trúc Hệ thống}{27}{subsection.5.3}%
-\contentsline {paragraph}{\numberline {5.3.0.1}Module Bảo mật (Cross-cutting Concern):}{28}{paragraph.5.3.0.1}%
-\contentsline {subsection}{\numberline {5.4}Đề xuất hiện thực và lựa chọn công nghệ}{28}{subsection.5.4}%
-\contentsline {subsubsection}{\numberline {5.4.1}Quản lý lược đồ dữ liệu cảm biến từ xa}{28}{subsubsection.5.4.1}%
-\contentsline {subsubsection}{\numberline {5.4.2}Đề xuất cải tiến cho thuật toán RFE}{30}{subsubsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.5}Thiết kế các thành phần chính}{32}{subsection.5.5}%
-\contentsline {subsubsection}{\numberline {5.5.1}Quy trình Giám sát Dashboard (Analytics Flow):}{32}{subsubsection.5.5.1}%
-\contentsline {subsubsection}{\numberline {5.5.2}Quy trình Xử lý sự cố (Troubleshoot Flow):}{33}{subsubsection.5.5.2}%
-\contentsline {subsubsection}{\numberline {5.5.3}Firmware}{34}{subsubsection.5.5.3}%
-\contentsline {subsubsubsection}{\numberline {5.5.3.a}Activity Diagram}{34}{subsubsubsection.5.5.3.1}%
-\contentsline {subsubsubsection}{\numberline {5.5.3.b}Communication Diagram}{35}{subsubsubsection.5.5.3.2}%
-\contentsline {subsubsubsection}{\numberline {5.5.3.c}Component Diagram}{35}{subsubsubsection.5.5.3.3}%
-\contentsline {subsubsubsection}{\numberline {5.5.3.d}Sequence Diagram}{36}{subsubsubsection.5.5.3.4}%
-\contentsline {subsubsubsection}{\numberline {5.5.3.e}Timing Diagram}{37}{subsubsubsection.5.5.3.5}%
-\contentsline {subsubsubsection}{\numberline {5.5.3.f}State Machine Diagram}{38}{subsubsubsection.5.5.3.6}%
-\contentsline {subsubsubsection}{\numberline {5.5.3.g}Deployment Diagram}{39}{subsubsubsection.5.5.3.7}%
-\contentsline {subsection}{\numberline {5.6}Cách đánh giá giải pháp}{39}{subsection.5.6}%
-\contentsline {section}{\numberline {6}Kế hoạch thực hiện}{40}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Mục tiêu theo từng giai đoạn}{40}{subsection.6.1}%
-\contentsline {subsubsubsection}{\numberline {6.1.0.a}Firmware}{40}{subsubsubsection.6.1.0.1}%
-\contentsline {subsubsubsection}{\numberline {6.1.0.b}Software}{40}{subsubsubsection.6.1.0.2}%
-\contentsline {subsection}{\numberline {6.2}Lịch trình và mốc thời gian}{41}{subsection.6.2}%
-\contentsline {subsubsubsection}{\numberline {6.2.0.a}Firmware}{41}{subsubsubsection.6.2.0.1}%
-\contentsline {subsubsubsection}{\numberline {6.2.0.b}Software}{42}{subsubsubsection.6.2.0.2}%
-\contentsline {subsection}{\numberline {6.3}Rủi ro và phương án giảm thiểu}{43}{subsection.6.3}%
-\contentsline {subsubsubsection}{\numberline {6.3.0.a}Firmware}{43}{subsubsubsection.6.3.0.1}%
-\contentsline {subsubsubsection}{\numberline {6.3.0.b}Software}{43}{subsubsubsection.6.3.0.2}%
-\contentsline {section}{\numberline {7}Kết luận}{44}{section.7}%
-\contentsline {section}{\numberline {8}Phụ lục}{45}{section.8}%
-\contentsline {section}{Tài liệu tham khảo}{46}{section.8}%
+\contentsline {subsubsection}{\numberline {5.2.1}Quy trình quản lý Farm:}{26}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Quy trình quản lý thiết bị:}{27}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Thiết kế Cơ sở dữ liệu}{28}{subsubsection.5.2.3}%
+\contentsline {paragraph}{\numberline {5.2.3.1}Phân hệ Quản lý Nông trại:}{28}{paragraph.5.2.3.1}%
+\contentsline {paragraph}{\numberline {5.2.3.2}Phân hệ IoT và Thu thập dữ liệu:}{28}{paragraph.5.2.3.2}%
+\contentsline {paragraph}{\numberline {5.2.3.3}Phân hệ Người dùng và Phân quyền:}{29}{paragraph.5.2.3.3}%
+\contentsline {subsection}{\numberline {5.3}Thiết kế Kiến trúc Hệ thống}{29}{subsection.5.3}%
+\contentsline {paragraph}{\numberline {5.3.0.1}Module Bảo mật (Cross-cutting Concern):}{30}{paragraph.5.3.0.1}%
+\contentsline {subsection}{\numberline {5.4}Đề xuất hiện thực và lựa chọn công nghệ}{30}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Quản lý lược đồ dữ liệu cảm biến từ xa}{30}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Đề xuất cải tiến cho thuật toán RFE}{32}{subsubsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.5}Thiết kế các thành phần chính}{34}{subsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.5.1}Quy trình Giám sát Dashboard (Analytics Flow):}{34}{subsubsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.2}Quy trình Xử lý sự cố (Troubleshoot Flow):}{35}{subsubsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.3}Firmware}{36}{subsubsection.5.5.3}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.a}Activity Diagram}{36}{subsubsubsection.5.5.3.1}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.b}Communication Diagram}{37}{subsubsubsection.5.5.3.2}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.c}Component Diagram}{37}{subsubsubsection.5.5.3.3}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.d}Sequence Diagram}{38}{subsubsubsection.5.5.3.4}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.e}Timing Diagram}{39}{subsubsubsection.5.5.3.5}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.f}State Machine Diagram}{40}{subsubsubsection.5.5.3.6}%
+\contentsline {subsubsubsection}{\numberline {5.5.3.g}Deployment Diagram}{41}{subsubsubsection.5.5.3.7}%
+\contentsline {subsection}{\numberline {5.6}Cách đánh giá giải pháp}{41}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Kế hoạch thực hiện}{42}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Mục tiêu theo từng giai đoạn}{42}{subsection.6.1}%
+\contentsline {subsubsubsection}{\numberline {6.1.0.a}Firmware}{42}{subsubsubsection.6.1.0.1}%
+\contentsline {subsubsubsection}{\numberline {6.1.0.b}Software}{42}{subsubsubsection.6.1.0.2}%
+\contentsline {subsection}{\numberline {6.2}Lịch trình và mốc thời gian}{43}{subsection.6.2}%
+\contentsline {subsubsubsection}{\numberline {6.2.0.a}Firmware}{43}{subsubsubsection.6.2.0.1}%
+\contentsline {subsubsubsection}{\numberline {6.2.0.b}Software}{44}{subsubsubsection.6.2.0.2}%
+\contentsline {subsection}{\numberline {6.3}Rủi ro và phương án giảm thiểu}{45}{subsection.6.3}%
+\contentsline {subsubsubsection}{\numberline {6.3.0.a}Firmware}{45}{subsubsubsection.6.3.0.1}%
+\contentsline {subsubsubsection}{\numberline {6.3.0.b}Software}{45}{subsubsubsection.6.3.0.2}%
+\contentsline {section}{\numberline {7}Kết luận}{46}{section.7}%
+\contentsline {section}{\numberline {8}Phụ lục}{47}{section.8}%
+\contentsline {section}{Tài liệu tham khảo}{48}{section.8}%
