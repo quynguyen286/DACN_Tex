@@ -1,0 +1,97 @@
+\subsubsection{Quản lý lược đồ dữ liệu cảm biến từ xa}
+\begin{itemize}
+    \item \textbf{Mục tiêu:} đảm bảo rằng mọi dữ liệu (telemetry) gửi từ hàng ngàn cảm biến về máy chủ đều:
+    \begin{itemize}
+        \item \textbf{Thống nhất (Consistent):} Dữ liệu luôn tuân theo một định dạng chuẩn.
+        \item \textbf{Chất lượng (Valid):} Dữ liệu không bị sai, thiếu hoặc lỗi định dạng.
+        \item \textbf{Dễ dàng mở rộng (Extensible):} Dễ dàng thêm cảm biến mới hoặc phiên bản firmware mới mà không làm sập hệ thống.
+        \item \textbf{Dễ bảo trì (Maintainable):} Khi schema thay đổi (ví dụ: thêm cảm biến đo độ pH), máy chủ biết cách xử lý phiên bản cũ và mới.
+    \end{itemize}
+    \item \textbf{Đề xuất cấu trúc:} Sử dụng định dạng JSON vì tính linh hoạt và dễ tiếp cận. Cấu trúc được chia thành 3 schema chính:
+    \begin{itemize}
+        \item \textbf{Schema chung \textit{(device\_base):}} Tất cả các gói tin \textit{(packet)} đều phải chứa các thông tin cơ bản này để định tuyến và nhận diện.
+        \begin{itemize}
+            \item \texttt{device\_id(String):} Mã định danh thiết bị.
+            \item \texttt{timestamp(int64):} Thời gian gửi dữ liệu.
+            \item \texttt{schema\_id(String):} Tên của schema mà gói tin này đang sử dụng.   
+            \item \texttt{schema\_version(String):} Phiên bản của schema.
+        \end{itemize}
+        \item \textbf{Schema 1 (env\_data):} Dữ liệu môi trường.
+            \begin{verbatim}
+                {
+                    "device_id": "env-sensor-zone-a-01",
+                    "timestamp": 1678886400000,
+                    "schema_id": "env_data",
+                    "schema_version": "v1.1",
+                    "data": {
+                        "temperature_celsius": 28.5,
+                        "humidity_percent": 75.2
+                    }
+                }
+            \end{verbatim}
+        \item \textbf{Schema 2 (camera\_data):} Dữ liệu hình ảnh từ camera.
+            \begin{verbatim}
+                {
+                    "device_id": "cam-zone-a-01",
+                    "timestamp": 1678887000000,
+                    "schema_id": "camera_event",
+                    "schema_version": "v1.0",
+                    "data": {
+                        "image_url": "https://storage.server.com/images/12345.jpg",
+                        "file_size": 51200
+                    }
+                }
+            \end{verbatim}
+        \item \textbf{Schema 3 (device\_health):} Dữ liệu tình trạng thiết bị.
+            \begin{verbatim}
+                {
+                    "device_id": "cam-zone-a-01",
+                    "timestamp": 1678886500000,
+                    "schema_id": "device_health",
+                    "schema_version": "v1.0",
+                    "data": {
+                        "status": "online",       // "online", "offline", "error"
+                        "battery_percent": 85.0,  // If battery-powered
+                        "uptime_seconds": 3600,
+                        "error_code": 0           // 0 = OK, optional error codes
+                    }
+                }
+            \end{verbatim}
+    \end{itemize}
+    \item \textbf{Đề xuất hệ thống quản lý:} Cách máy chủ biết \texttt{env\_data v1.0} và \texttt{v1.1} khác gì nhau:
+    \begin{itemize}
+        \item \textbf{Kho lưu trữ Schema (Schema Registry):}
+        \begin{itemize}
+            \item Là một cơ sở dữ liệu (hoặc một Git repository) chứa các tệp tin định nghĩa schema.
+            \item Sẽ có các tệp như là \texttt{“env\_data\_v1.0.json”, “env\_data\_v1.1.json”, “camera\_event\_v1.0.json”,...}.
+            \item Ưu điểm: Cả team phát triển thiết bị (firmware) và team phát triển phần mềm (software) đều nhìn vào đây để làm việc.
+        \end{itemize}
+        \item \textbf{Quản lý Phiên bản (Versioning):} Sử dụng Semantic Versioning (vMAJOR.MINOR.PATCH).
+        \begin{itemize}
+            \item PATCH (v1.0.1): Sửa lỗi nhỏ, không ảnh hưởng cấu trúc.
+            \item MINOR (v1.1.0): Thêm trường dữ liệu mới, vẫn tương thích ngược.
+            \item MAJOR (v2.0.0): Thay đổi lớn, không tương thích ngược.
+        \end{itemize}
+        \item \textbf{Xác thực Schema (Schema Validation)}
+        \begin{itemize}
+            \item Dữ liệu từ cảm biến gửi đến (ví dụ: qua MQTT Broker).
+            \item Một dịch vụ "Ingestor" (bộ tiếp nhận) sẽ đọc gói tin.
+            \item Nó thấy \texttt{schema\_id}: \texttt{"env\_data"} và \texttt{schema\_version: "v1.1"}.
+            \item Nó lập tức tra cứu trong Schema Registry để lấy tệp định nghĩa \texttt{env\_data\_v1.1.json}.	
+            \item Nó dùng tệp định nghĩa này để xác thực (validate) gói tin nhận được.
+            \begin{itemize}
+                \item Nếu hợp lệ: Đẩy dữ liệu vào database (ví dụ: TimeScaleDB, InfluxDB).
+                \item Nếu không hợp lệ: Gói tin bị loại bỏ và gửi cảnh báo (ví dụ: "Thiết bị 'env-sensor-zone-a-01' đang gửi dữ liệu rác!").
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Ưu điểm của đề xuất này:}
+    \begin{itemize}
+        \item \textbf{Ngăn chặn dữ liệu rác:} Hệ thống tự động loại bỏ dữ liệu sai định dạng ngay từ đầu vào.
+        \item \textbf{Gỡ lỗi dễ dàng:} Biết chính xác thiết bị nào đang gửi sai phiên bản schema.
+        \item \textbf{Dễ dàng mở rộng:} Khi muốn thêm cảm biến độ ẩm đất (v1.1), các thiết bị v1.0 cũ vẫn hoạt động bình thường song song với các thiết bị v1.1 mới.
+        \item \textbf{Tính độc lập:} Xử lý camera (dữ liệu nặng) riêng biệt với telemetry (dữ liệu nhẹ) giúp hệ thống nhanh và ổn định.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{RFE cải tiến}
