@@ -1,0 +1,117 @@
+
+\subsubsubsection{Firmware}
+\begin{table}[h!]
+\centering
+\caption{Bảng phân tích rủi ro và phương án giảm thiểu}
+\label{tab:rui_ro}
+\renewcommand{\arraystretch}{1.3} % Giãn dòng
+\small % Giảm cỡ chữ xuống một chút để bảng gọn hơn
+
+% Chỉnh lại độ rộng cột cho vừa khít khổ giấy A4
+\begin{tabular}{|c|>{\raggedright\arraybackslash}p{4.5cm}|c|>{\raggedright\arraybackslash}p{7cm}|}
+\hline
+\centering\textbf{STT} & \centering\textbf{Rủi ro (Risk)} & \textbf{Mức độ} & \centering\textbf{Phương án giảm thiểu} \tabularnewline
+\hline
+
+1 & 
+\textbf{Hỏng hóc phần cứng:} \newline Cháy ESP32 hoặc Camera do đấu sai nguồn/ngắn mạch. & 
+\centering Cao & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Mua dự phòng 01 bộ linh kiện.
+    \item Kiểm tra kỹ mạch bằng VOM trước khi cấp nguồn.
+\end{itemize} \\
+\hline
+
+2 & 
+\textbf{Tràn bộ nhớ (Stack Overflow):} \newline Do xử lý ảnh JPEG lớn trên FreeRTOS. & 
+\centering Cao & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Sử dụng hàm: \newline \texttt{uxTaskGetStackHighWaterMark} để giám sát RAM.
+    \item Cân nhắc sử dụng ESP32 có PSRAM.
+\end{itemize} \\
+\hline
+
+3 & 
+\textbf{Nhiễu tín hiệu:} \newline Camera bị sọc hoặc cảm biến đất báo giá trị ảo. & 
+\centering Trung bình & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Sử dụng tụ lọc nguồn 100uF và 100nF.
+    \item Đi dây tín hiệu ngắn gọn, tách biệt với dây động cơ.
+\end{itemize} \\
+\hline
+
+4 & 
+\textbf{Độ trễ truyền ảnh cao:} \newline Video bị giật, lag khi mạng WiFi yếu. & 
+\centering Trung bình & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Giảm độ phân giải ảnh (VGA/QVGA) khi mạng kém.
+    \item Tách luồng gửi ảnh sang Core 0 độc lập.
+\end{itemize} \\
+\hline
+
+5 & 
+\textbf{Chậm tiến độ:} \newline Do vướng mắc thuật toán phức tạp. & 
+\centering Thấp & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Ưu tiên xử lý phần Camera trước (phần khó nhất).
+    \item Tham khảo cộng đồng Open Source ESP32.
+\end{itemize} \\
+\hline
+
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+\subsubsubsection{Software}
+\begin{table}[h!]
+\centering
+\caption{Phân tích rủi ro phần mềm và phương án xử lý}
+\label{tab:rui_ro_sw}
+\renewcommand{\arraystretch}{1.3} 
+
+\begin{tabular}{|c|p{4.5cm}|c|p{6.5cm}|}
+\hline
+\textbf{STT} & \centering\textbf{Rủi ro (Risk)} & \textbf{Mức độ} & \centering\textbf{Phương án giảm thiểu} \tabularnewline
+\hline
+
+1 & 
+\textbf{Nghẽn cổ chai Database:} \newline Khi hàng trăm thiết bị gửi dữ liệu cùng lúc, việc Insert từng dòng gây chậm. & 
+Cao & 
+- Sử dụng kỹ thuật Batch Insert (gom 100-500 bản ghi/lần). \newline
+- Tận dụng kiến trúc Hypertables của TimescaleDB. \\
+\hline
+
+2 & 
+\textbf{Mất dữ liệu tại Broker:} \newline RabbitMQ bị đầy hàng đợi (Queue overflow) nếu Backend xử lý chậm. & 
+Trung bình & 
+- Cấu hình cơ chế Message Acknowledgment (chỉ xóa khi đã xử lý). \newline
+- Tăng số lượng Worker (Consumer) trong NestJS. \\
+\hline
+
+3 & 
+\textbf{Dữ liệu rác (Invalid Schema):} \newline Thiết bị gửi sai định dạng JSON làm lỗi parser. & 
+Cao & 
+- Triển khai lớp Schema Validation (DTO) chặt chẽ tại đầu vào. \newline
+- Ghi log gói tin lỗi ra bảng riêng để debug. \\
+\hline
+
+4 & 
+\textbf{Truy vấn Dashboard chậm:} \newline Load biểu đồ lịch sử 1 năm mất quá nhiều thời gian ($>$5s). & 
+Trung bình & 
+- Sử dụng Materialized Views để tính sẵn giá trị trung bình theo giờ. \newline
+- Cache kết quả truy vấn vào Redis. \\
+\hline
+
+5 & 
+\textbf{Lỗ hổng bảo mật API:} \newline Người dùng truy cập vào dữ liệu nông trại của người khác. & 
+Cao & 
+- Áp dụng chặt chẽ Guards và Interceptors. \newline
+- Kiểm tra quyền sở hữu (Ownership check) trong mọi API. \\
+\hline
+
+\end{tabular}
+\end{table}

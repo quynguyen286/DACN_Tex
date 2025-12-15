@@ -1,0 +1,50 @@
+\subsubsubsection{Firmware}
+\begin{itemize}
+    \item \textbf{Giai đoạn 1:} Nghiên cứu và Chuẩn bị (Tuần 1 - Tuần 4)
+    \begin{itemize}
+        \item Nghiên cứu lý thuyết về kiến trúc ESP32 (Dual-core), giao thức Camera DVP, MQTT và FreeRTOS.
+        \item Lựa chọn và mua sắm linh kiện phần cứng (ESP32-S3/Wrover, OV2640, DHT20, Relay, cảm biến đất).
+        \item Thiết kế sơ đồ nguyên lý và lắp ráp mạch thử nghiệm trên Breadboard.
+    \end{itemize}
+    \item \textbf{Giai đoạn 2:} Phát triển và Tích hợp hệ thống (Tuần 5 - Tuần 11)
+    \begin{itemize}
+        \item Phần cứng: Hoàn thiện mạch in (PCB) hoặc mạch hàn thủ công chắc chắn.
+        \item Firmware: Viết chương trình điều khiển trung tâm sử dụng FreeRTOS. Tách tác vụ xử lý ảnh (Core 0) và tác vụ điều khiển/kết nối (Core 1).
+        \item Kết nối: Xây dựng giao thức truyền nhận JSON qua MQTT và HTTP Streaming.
+    \end{itemize}
+    \item \textbf{Giai đoạn 3:} Kiểm thử, Tối ưu và Viết báo cáo (Tuần 12 - Tuần 15)
+    \begin{itemize}
+        \item Chạy thử nghiệm hệ thống trong môi trường thực tế (vườn mô phỏng).
+        \item Đo đạc thông số: Độ trễ (latency), độ ổn định WiFi, nhiệt độ chip.
+        \item Viết báo cáo thuyết minh và chuẩn bị slide bảo vệ.
+    \end{itemize}
+\end{itemize}
+
+
+\subsubsubsection{Software}
+\begin{itemize}
+    \item \textbf{Giai đoạn 1:} Khởi tạo nền tảng và Cơ sở dữ liệu (Tuần 1 - Tuần 4)
+    \begin{itemize}
+        \item Thiết lập môi trường phát triển (Docker, Git).
+        \item Xây dựng cấu trúc Database: Quan hệ (PostgreSQL) cho quản lý User/Farm và Chuỗi thời gian (TimescaleDB) cho dữ liệu cảm biến.
+        \item Xây dựng module xác thực (Authentication) và phân quyền (RBAC) làm nền tảng bảo mật.
+    \end{itemize}
+    \item \textbf{Giai đoạn 2:} Phát triển Backend Core và Tích hợp IoT (Tuần 5 - Tuần 9)
+    \begin{itemize}
+        \item Phát triển các API quản lý nghiệp vụ (Farm, Device Management).
+        \item Xây dựng IoT Data Processor: Dịch vụ tiêu thụ dữ liệu từ RabbitMQ, xử lý Validate Schema (JSON) và lưu trữ vào TimescaleDB.
+        \item Triển khai cơ chế cảnh báo thời gian thực (Real-time Alert).
+    \end{itemize}
+    \item \textbf{Giai đoạn 3:} Phát triển Frontend và Dashboard (Tuần 10 - Tuần 13)
+    \begin{itemize}
+        \item Xây dựng giao diện người dùng (Web Admin).
+        \item Trực quan hóa dữ liệu: Biểu đồ nhiệt độ/độ ẩm, thống kê trạng thái thiết bị.
+        \item Tích hợp module Báo cáo (Report) và Xử lý sự cố (Troubleshoot).
+    \end{itemize}
+    \item \textbf{Giai đoạn 4:} Kiểm thử, Tối ưu và Triển khai (Tuần 14 - Tuần 15)
+    \begin{itemize}
+        \item Kiểm thử tải (Load Testing) với hàng nghìn request giả lập.
+        \item Tối ưu truy vấn Database (Indexing, Compression).
+        \item Đóng gói (Containerization) và viết tài liệu hướng dẫn sử dụng.
+    \end{itemize}
+\end{itemize}

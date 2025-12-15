@@ -1,0 +1,264 @@
+\subsubsubsection{Firmware}
+\begin{longtable}{|c|>{\raggedright\arraybackslash}p{7.5cm}|>{\raggedright\arraybackslash}p{5cm}|}
+\caption{Bảng phân bố lịch trình thực hiện đồ án 15 tuần} \label{tab:lich_trinh} \\
+\hline
+\centering\textbf{Tuần} & \centering\textbf{Công việc chi tiết} & \centering\textbf{Kết quả bàn giao} \tabularnewline
+\hline
+\endfirsthead
+
+\multicolumn{3}{c}
+{\tablename\ \thetable\ -- \textit{tiếp theo từ trang trước}} \\
+\hline
+\centering\textbf{Tuần} & \centering\textbf{Công việc chi tiết} & \centering\textbf{Kết quả bàn giao} \tabularnewline
+\hline
+\endhead
+
+\hline \multicolumn{3}{r}{\textit{Tiếp tục ở trang sau...}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+% NỘI DUNG BẢNG
+1-2 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Nghiên cứu Datasheet ESP32, OV2640.
+    \item Tìm hiểu thư viện ArduinoJson, PubSubClient.
+    \item Đặt mua linh kiện phần cứng.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Chương 1 (Cơ sở lý thuyết).
+    \item Danh sách linh kiện đầy đủ.
+\end{itemize} \\
+\hline
+
+3 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Thiết kế sơ đồ khối và sơ đồ nguyên lý (Schematic).
+    \item Kiểm tra hoạt động riêng lẻ của module cảm biến, Relay.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Bản vẽ sơ đồ nguyên lý.
+    \item Code kiểm thử đơn giản.
+\end{itemize} \\
+\hline
+
+4 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Lắp ráp phần cứng hoàn chỉnh (trên mạch in hoặc đục lỗ).
+    \item Kiểm tra nguồn, đo đạc chống nhiễu.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Mô hình phần cứng thô.
+    \item Chương 2 (Thiết kế phần cứng).
+\end{itemize} \\
+\hline
+
+5-6 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item \textbf{Cấu hình FreeRTOS:} Tạo Task, Queue, Semaphore.
+    \item Lập trình đọc cảm biến (DHT20, Đất) và điều khiển Relay.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Code khung sườn (Skeleton code).
+    \item Dữ liệu hiển thị trên Serial Monitor.
+\end{itemize} \\
+\hline
+
+7-8 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item \textbf{Xử lý Camera (Trọng tâm):} Cấu hình giao thức DVP, lấy dữ liệu ảnh JPEG.
+    \item Lập trình Web Server để stream ảnh qua HTTP.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Hình ảnh hiển thị trên trình duyệt.
+    \item Frame rate đạt mức ổn định ($>$10fps).
+\end{itemize} \\
+\hline
+
+9 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item \textbf{Kết nối IoT:} Lập trình giao thức MQTT.
+    \item Đóng gói dữ liệu dạng JSON.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Gửi thành công JSON lên Broker.
+    \item Nhận lệnh điều khiển từ xa.
+\end{itemize} \\
+\hline
+
+10 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Tích hợp hệ thống: Ghép module Camera + Cảm biến + MQTT.
+    \item Xử lý xung đột tài nguyên giữa 2 nhân (Core 0/1).
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Firmware hoàn chỉnh v1.0.
+    \item Chương 3 (Thiết kế phần mềm).
+\end{itemize} \\
+\hline
+
+11 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Xây dựng Dashboard điều khiển (Web app hoặc Mobile app đơn giản).
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Giao diện người dùng (UI) hoạt động.
+\end{itemize} \\
+\hline
+
+12 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Chạy thử nghiệm hệ thống liên tục (Stress test).
+    \item Tinh chỉnh ngưỡng cảm biến, tối ưu bộ nhớ.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Số liệu thực nghiệm.
+    \item Bảng đánh giá độ ổn định.
+\end{itemize} \\
+\hline
+
+13 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Tổng hợp số liệu, vẽ biểu đồ kết quả.
+    \item Viết chương Kết quả và Thảo luận.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Chương 4 (Kết quả thực nghiệm).
+\end{itemize} \\
+\hline
+
+14 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Hoàn thiện toàn bộ báo cáo thuyết minh.
+    \item Chỉnh sửa định dạng, trích dẫn tài liệu tham khảo.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Bản thảo báo cáo hoàn chỉnh.
+\end{itemize} \\
+\hline
+
+15 & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Soạn thảo Slide thuyết trình.
+    \item Quay video demo và luyện tập bảo vệ.
+\end{itemize} & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Slide Powerpoint.
+    \item Video Demo sản phẩm.
+\end{itemize} \\
+\hline
+
+\end{longtable}
+
+
+
+
+
+
+
+
+
+
+\newpage
+\subsubsubsection{Software}
+\begin{longtable}{|c|p{7.5cm}|p{5cm}|}
+\caption{Lịch trình thực hiện phần mềm (Backend \& Web) trong 15 tuần} \label{tab:lich_trinh_sw} \\
+\hline
+\textbf{Tuần} & \centering\textbf{Công việc chi tiết} & \centering\textbf{Kết quả bàn giao} \tabularnewline
+\hline
+\endfirsthead
+\multicolumn{3}{c}%
+{\tablename\ \thetable\ -- \textit{tiếp theo từ trang trước}} \\
+\hline
+\textbf{Tuần} & \centering\textbf{Công việc chi tiết} & \centering\textbf{Kết quả bàn giao} \tabularnewline
+\hline
+\endhead
+\hline \multicolumn{3}{r}{\textit{Tiếp tục ở trang sau...}} \\
+\endfoot
+\hline
+\endlastfoot
+
+% --- GIAI ĐOẠN 1 ---
+1-2 & 
+\textbf{Khởi tạo nền tảng:} \newline
+- Thiết kế ERD vật lý cho PostgreSQL và TimescaleDB. \newline
+- Cài đặt Docker (Postgres, RabbitMQ). \newline
+- Khởi tạo cấu trúc dự án NestJS (Monorepo). & 
+- File \texttt{docker-compose.yml}. \newline
+- Script khởi tạo Database. \\
+\hline
+
+3-4 & 
+\textbf{Quản lý người dùng (Auth):} \newline
+- Phát triển API Đăng ký, Đăng nhập (JWT). \newline
+- Xây dựng cơ chế phân quyền RBAC (Admin/User). & 
+- API Documentation (Swagger). \newline
+- Sơ đồ phân quyền hoạt động. \\
+\hline
+
+% --- GIAI ĐOẠN 2 ---
+5-6 & 
+\textbf{Quản lý Farm \& Device:} \newline
+- API CRUD Nông trại, Khu vực. \newline
+- API Đăng ký thiết bị và gán vào Farm. & 
+- Các API quản lý chính hoàn thiện. \newline
+- Dữ liệu lưu trữ thành công vào Postgres. \\
+\hline
+
+7-8 & 
+\textbf{Tích hợp IoT (Core):} \newline
+- Cấu hình RabbitMQ Consumer trong NestJS. \newline
+- Xử lý Validate JSON Schema đầu vào. \newline
+- Lưu trữ dữ liệu cảm biến vào TimescaleDB. & 
+- Dữ liệu từ Queue được lưu vào bảng Hypertable. \newline
+- Log được các gói tin lỗi định dạng. \\
+\hline
+
+9 & 
+\textbf{Cảnh báo thời gian thực:} \newline
+- Xây dựng logic so sánh ngưỡng (Threshold). \newline
+- Tích hợp Socket.io để đẩy thông báo lên Web. & 
+- Cảnh báo hiển thị ngay lập tức khi vượt ngưỡng. \\
+\hline
+
+% --- GIAI ĐOẠN 3 ---
+10 & 
+\textbf{Frontend - Cơ bản:} \newline
+- Dựng khung Web Admin (React/Vue). \newline
+- Giao diện Login, Quản lý Farm/Device. & 
+- Giao diện quản lý cơ bản hoạt động. \\
+\hline
+
+11-12 & 
+\textbf{Frontend - Nâng cao:} \newline
+- Vẽ biểu đồ (Charts) nhiệt độ/độ ẩm. \newline
+- Trang Troubleshoot và Xuất báo cáo. & 
+- Dashboard hiển thị trực quan. \newline
+- Chức năng Export PDF/Excel. \\
+\hline
+
+% --- GIAI ĐOẠN 4 ---
+13 & 
+\textbf{Tích hợp hệ thống:} \newline
+- Ghép nối ESP32 (thực/ảo) - Backend - Web. \newline
+- Kiểm thử luồng dữ liệu E2E. & 
+- Hệ thống hoạt động thông suốt từ cảm biến lên Web. \\
+\hline
+
+14 & 
+\textbf{Tối ưu hóa:} \newline
+- Indexing và Materialized Views cho DB. \newline
+- Cấu hình nén dữ liệu TimescaleDB. & 
+- Báo cáo hiệu năng hệ thống (Response time). \\
+\hline
+
+15 & 
+\textbf{Đóng gói \& Báo cáo:} \newline
+- Deploy lên Server thực tế. \newline
+- Viết tài liệu hướng dẫn sử dụng. & 
+- Link Demo sản phẩm. \newline
+- Slide thuyết trình. \\
+\hline
+
+\end{longtable}

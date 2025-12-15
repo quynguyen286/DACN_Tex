@@ -77,8 +77,14 @@
 \contentsline {subsection}{\numberline {5.6}Cách đánh giá giải pháp}{39}{subsection.5.6}%
 \contentsline {section}{\numberline {6}Kế hoạch thực hiện}{40}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Mục tiêu theo từng giai đoạn}{40}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Lịch trình và mốc thời gian}{40}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Rủi ro và phương án giảm thiểu}{40}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Kết luận}{41}{section.7}%
-\contentsline {section}{\numberline {8}Phụ lục}{42}{section.8}%
-\contentsline {section}{Tài liệu tham khảo}{43}{section.8}%
+\contentsline {subsubsubsection}{\numberline {6.1.0.a}Firmware}{40}{subsubsubsection.6.1.0.1}%
+\contentsline {subsubsubsection}{\numberline {6.1.0.b}Software}{40}{subsubsubsection.6.1.0.2}%
+\contentsline {subsection}{\numberline {6.2}Lịch trình và mốc thời gian}{41}{subsection.6.2}%
+\contentsline {subsubsubsection}{\numberline {6.2.0.a}Firmware}{41}{subsubsubsection.6.2.0.1}%
+\contentsline {subsubsubsection}{\numberline {6.2.0.b}Software}{42}{subsubsubsection.6.2.0.2}%
+\contentsline {subsection}{\numberline {6.3}Rủi ro và phương án giảm thiểu}{43}{subsection.6.3}%
+\contentsline {subsubsubsection}{\numberline {6.3.0.a}Firmware}{43}{subsubsubsection.6.3.0.1}%
+\contentsline {subsubsubsection}{\numberline {6.3.0.b}Software}{43}{subsubsubsection.6.3.0.2}%
+\contentsline {section}{\numberline {7}Kết luận}{44}{section.7}%
+\contentsline {section}{\numberline {8}Phụ lục}{45}{section.8}%
+\contentsline {section}{Tài liệu tham khảo}{46}{section.8}%

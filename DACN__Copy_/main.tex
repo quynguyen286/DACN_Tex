@@ -1,4 +1,5 @@
 \documentclass[a4paper]{article}
+\usepackage{longtable} 
 \usepackage{vntex}
 \usepackage[english,vietnamese]{babel}
 \usepackage[utf8]{inputenc}
@@ -19,7 +20,6 @@
 \usepackage[framemethod=tikz]{mdframed}% For highlighting paragraph backgrounds
 \usepackage{caption,subcaption}
 \usepackage{float}
-\usepackage{lastpage}
 \usepackage[lined,boxed,commentsnumbered]{algorithm2e}
 \usepackage{color}
 \usepackage{graphicx}							% Standard graphics package
@@ -43,6 +43,11 @@
 \usetikzlibrary{arrows,snakes,backgrounds}
 \usepackage[unicode]{hyperref}
 \hypersetup{urlcolor=blue,linkcolor=black,citecolor=black,colorlinks=true} 
+\usepackage{lastpage}
+\usepackage{csquotes}
+\usepackage[backend=biber,style=ieee,autolang=other]{biblatex}
+\DeclareLanguageMapping{vietnamese}{english}
+\addbibresource{section/references.bib}
 %\usepackage{pstcol} 								% PSTricks with the standard color package
 
 %https://tex.stackexchange.com/questions/516029/media9-is-becoming-obsolete-dec-2020-any-alternatives-for-embedding-video-audio/516102#516102 
@@ -235,7 +240,6 @@
 \begin{document}
 
 \begin{titlepage}
-
 \begin{center}
 \large{
 ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH \\
@@ -273,7 +277,7 @@ KHOA KHOA HỌC \& KỸ THUẬT MÁY TÍNH
 & \large{GVHD:} & \large{Hoàng Lê Hải Thanh} \\
 & & \large{Trần Nguyễn Minh Duy} \\
 & \large{Sinh viên:} & \large{Lê Hoàng Việt} & \large{2252903}\\
-& & \large{Chế Minh Đức} & \large{}\\
+& & \large{Chế Minh Đức} & \large{2210783}\\
 & & \large{Nguyễn Phú Quý} & \large{2212871}\\
 \vspace{2em}
 \end{tabular}
@@ -336,7 +340,6 @@ KHOA KHOA HỌC \& KỸ THUẬT MÁY TÍNH
 \newpage
 \addcontentsline{toc}{section}{Tài liệu tham khảo}
 \nocite{*}% include all entries from references.bib even if not cited
-\bibliographystyle{ieeetr}
-\bibliography{section/references}
+\printbibliography
 
 \end{document}
