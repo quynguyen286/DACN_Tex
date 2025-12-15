@@ -1,0 +1,499 @@
+
+\subsubsection{Use case: Monitor Farm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/Farm.png}
+    \caption{Sơ đồ quản lý farm}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3} % Tăng khoảng cách dòng cho dễ đọc
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-01: Add Farm \\
+        \hline
+        \textbf{Tên usecase} & Tạo farm \\
+        \hline
+        \textbf{Mô tả} & Admin tạo 1 Farm \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Tài khoản Admin đã đăng nhập và có quyền truy cập module Farm. \\
+        \hline
+        \textbf{Hậu điều kiện} & Farm mới tạo được hiển thị trên danh sách farm \\
+        \hline
+        \textbf{Trigger} & Admin nhấn chọn menu ``Farm'' trên thanh điều hướng. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin truy cập màn hình Farm.
+            \item Hệ thống kiểm tra quyền xem của Admin.
+            \item Admin chọn nút ``Add Farm''.
+            \item Hệ thống hiển thị Form để nhập thông tin.
+            \item Admin điền thông tin cho farm rồi ấn nút ''Save''
+            \item Hệ thống hiển thị cập nhật Farm mới vào danh sách
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+    
+    \item \textbf{BR-01 (Authorization):} Chỉ tài khoản có vai trò \textbf{System Admin} mới được phép tạo Farm.
+    \item \textbf{BR-02 (Required Fields):} Các thông tin bắt buộc của Farm (ví dụ: Tên Farm, Vị trí) không được để trống.
+    \item \textbf{BR-03 (Unique Farm Name):} Tên Farm phải là duy nhất và không được trùng lặp với các Farm đã tồn tại trong hệ thống.
+    \item \textbf{BR-04 (Data Validation):} Dữ liệu nhập vào phải đúng định dạng và nằm trong phạm vi cho phép theo quy định của hệ thống.
+
+
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+       \begin{itemize}[leftmargin=*]
+    \item \textbf{E-01 (Cancel Create Farm):} Tại bước 4--5, Admin nhấn nút mũi tên ``Back'' ở góc trên bên trái hoặc nút ``Cancel'' cạnh nút ``Save'' 
+    \textrightarrow{} Hệ thống hủy thao tác tạo Farm và quay về màn hình danh sách Farm, không lưu dữ liệu.
+\end{itemize}\\
+
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-02: View Farm List \\
+        \hline
+        \textbf{Tên usecase} & Xem danh sách Farm \\
+        \hline
+        \textbf{Mô tả} & Admin xem danh sách các Farm có trong hệ thống \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Tài khoản Admin đã đăng nhập và có quyền truy cập module Farm \\
+        \hline
+        \textbf{Hậu điều kiện} & Danh sách Farm được hiển thị trên màn hình \\
+        \hline
+        \textbf{Trigger} & Admin nhấn chọn menu ``Farm'' trên thanh điều hướng \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin truy cập menu Farm.
+            \item Hệ thống kiểm tra quyền truy cập của Admin.
+            \item Hệ thống truy vấn dữ liệu Farm từ cơ sở dữ liệu.
+            \item Hệ thống hiển thị danh sách Farm.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-01 (Authorization):} Chỉ tài khoản có vai trò \textbf{System Admin} mới được phép xem danh sách Farm.
+            \item \textbf{BR-02 (Pagination):} Danh sách Farm được phân trang để đảm bảo hiệu năng hiển thị.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+
+
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-05: Edit Farm \\
+        \hline
+        \textbf{Tên usecase} & Chỉnh sửa Farm \\
+        \hline
+        \textbf{Mô tả} & Admin chỉnh sửa thông tin Farm \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Farm tồn tại trong hệ thống \\
+        \hline
+        \textbf{Hậu điều kiện} & Thông tin Farm được cập nhật \\
+        \hline
+        \textbf{Trigger} & Admin chọn nút ``Edit'' \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin chọn Farm cần chỉnh sửa.
+            \item Hệ thống hiển thị form chỉnh sửa.
+            \item Admin cập nhật thông tin.
+            \item Admin nhấn ``Save''.
+            \item Hệ thống lưu và cập nhật danh sách Farm.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-01 (Authorization):} Chỉ System Admin được phép chỉnh sửa Farm.
+            \item \textbf{BR-02 (Validation):} Dữ liệu chỉnh sửa phải hợp lệ.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-06: Delete Farm \\
+        \hline
+        \textbf{Tên usecase} & Xóa Farm \\
+        \hline
+        \textbf{Mô tả} & Admin xóa Farm khỏi hệ thống \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Farm tồn tại \\
+        \hline
+        \textbf{Hậu điều kiện} & Farm bị xóa khỏi danh sách \\
+        \hline
+        \textbf{Trigger} & Admin chọn nút ``Delete'' \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin chọn Farm cần xóa.
+            \item Hệ thống hiển thị hộp thoại xác nhận.
+            \item Admin xác nhận xóa.
+            \item Hệ thống xóa Farm và cập nhật danh sách.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-01 (Confirmation):} Phải xác nhận trước khi xóa.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-07: Import/Export Farm \\
+        \hline
+        \textbf{Tên usecase} & Import / Export Farm \\
+        \hline
+        \textbf{Mô tả} & Admin nhập hoặc xuất dữ liệu Farm \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Admin có quyền truy cập module Farm \\
+        \hline
+        \textbf{Hậu điều kiện} & Dữ liệu Farm được nhập hoặc xuất thành công \\
+        \hline
+        \textbf{Trigger} & Admin chọn chức năng Import hoặc Export \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin chọn Import hoặc Export.
+            \item Hệ thống hiển thị tùy chọn file.
+            \item Admin xác nhận thao tác.
+            \item Hệ thống xử lý dữ liệu.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-01 (File Format):} Chỉ hỗ trợ định dạng cho phép (CSV, Excel).
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-08: View Farm Detail \\
+        \hline
+        \textbf{Tên usecase} & Xem chi tiết Farm \\
+        \hline
+        \textbf{Mô tả} & Admin xem thông tin chi tiết của một Farm trong hệ thống \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Admin đã đăng nhập
+            \item Danh sách Farm đang được hiển thị
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & Thông tin chi tiết của Farm được hiển thị \\
+        \hline
+        \textbf{Trigger} & Admin nhấn chọn một Farm trong danh sách \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin xem danh sách Farm.
+            \item Admin nhấn chọn một Farm bất kỳ.
+            \item Hệ thống kiểm tra quyền truy cập của Admin.
+            \item Hệ thống truy vấn thông tin chi tiết của Farm.
+            \item Hệ thống hiển thị màn hình chi tiết Farm.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-01 (Authorization):} Chỉ tài khoản có vai trò \textbf{System Admin} mới được phép xem chi tiết Farm.
+            \item \textbf{BR-02 (Data Integrity):} Farm phải tồn tại trong hệ thống tại thời điểm truy vấn.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+           
+            \item \textbf{E-01 (Back to List):} Tại màn hình chi tiết, Admin nhấn nút mũi tên ``Back'' ở góc trên bên trái  
+            \textrightarrow{} Hệ thống quay về màn hình danh sách Farm.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsubsection{Use case: Monitor Device}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.95\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{img/Device.png}
+        \caption{Sơ đồ quản lý thiết bị}
+    \end{subfigure}
+\end{figure}
+
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-01: View device list \\
+        \hline
+        \textbf{Tên usecase} & Xem danh sách thiết bị \\
+        \hline
+        \textbf{Mô tả} & Admin xem danh sách các thiết bị trong hệ thống \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Admin đã đăng nhập và có quyền truy cập module Device \\
+        \hline
+        \textbf{Hậu điều kiện} & Danh sách thiết bị được hiển thị \\
+        \hline
+        \textbf{Trigger} & Admin chọn menu ``Device'' \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin truy cập module Device.
+            \item Hệ thống kiểm tra quyền truy cập.
+            \item Hệ thống hiển thị danh sách thiết bị.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-01 (Authorization):} Chỉ System Admin được phép xem danh sách thiết bị.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-02: View device detail \\
+        \hline
+        \textbf{Tên usecase} & Xem chi tiết thiết bị \\
+        \hline
+        \textbf{Mô tả} & Admin xem thông tin chi tiết của một thiết bị \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Danh sách thiết bị đã được hiển thị \\
+        \hline
+        \textbf{Hậu điều kiện} & Thông tin chi tiết thiết bị được hiển thị \\
+        \hline
+        \textbf{Trigger} & Admin chọn một thiết bị trong danh sách \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin nhấn chọn một thiết bị.
+            \item Hệ thống tải dữ liệu chi tiết thiết bị.
+            \item Hệ thống hiển thị màn hình chi tiết thiết bị.
+        \end{enumerate} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-01 (Back):} Admin nhấn nút ``Back'' \textrightarrow{} hệ thống quay lại danh sách thiết bị.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-03: Add device \\
+        \hline
+        \textbf{Tên usecase} & Thêm thiết bị \\
+        \hline
+        \textbf{Mô tả} & Admin tạo mới một thiết bị \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Admin có quyền quản lý thiết bị \\
+        \hline
+        \textbf{Hậu điều kiện} & Thiết bị mới được lưu và hiển thị trong danh sách \\
+        \hline
+        \textbf{Trigger} & Admin nhấn nút ``Add Device'' \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin mở màn hình Device.
+            \item Admin chọn ``Add Device''.
+            \item Hệ thống hiển thị form nhập thông tin.
+            \item Admin nhập thông tin và nhấn ``Save''.
+            \item Hệ thống lưu thiết bị và cập nhật danh sách.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-01:} Các trường bắt buộc không được để trống.
+      
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-04: Edit device \\
+        \hline
+        \textbf{Tên usecase} & Chỉnh sửa thiết bị \\
+        \hline
+        \textbf{Mô tả} & Admin cập nhật thông tin thiết bị \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Thiết bị đã tồn tại \\
+        \hline
+        \textbf{Hậu điều kiện} & Thông tin thiết bị được cập nhật \\
+        \hline
+        \textbf{Trigger} & Admin chọn ``Edit'' tại thiết bị \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin chọn thiết bị cần chỉnh sửa.
+            \item Hệ thống hiển thị form chỉnh sửa.
+            \item Admin cập nhật thông tin và nhấn ``Save''.
+            \item Hệ thống lưu thay đổi.
+        \end{enumerate} \\
+        \hline
+      
+\textbf{Quy tắc nghiệp vụ} &
+\begin{itemize}[leftmargin=*]
+    \item \textbf{BR-01 (Authorization):} Chỉ tài khoản có vai trò \textbf{System Admin} mới được phép chỉnh sửa thiết bị.
+    \item \textbf{BR-02 (Data Integrity):} Thiết bị phải tồn tại trong hệ thống tại thời điểm chỉnh sửa.
+    \item \textbf{BR-03 (Data Validation):} Dữ liệu chỉnh sửa phải đúng định dạng và nằm trong phạm vi cho phép của hệ thống.
+\end{itemize} \\
+
+\hline
+\textbf{Luồng thay thế / Mở rộng} &
+\begin{itemize}[leftmargin=*]
+  
+    \item \textbf{E-01 (Cancel Edit):} Tại bước 3--4, Admin nhấn nút ``Cancel'' hoặc ``Back'' \textrightarrow{} Hệ thống hủy thao tác chỉnh sửa và không lưu dữ liệu.
+\end{itemize} \\
+\hline
+
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-05: Delete device \\
+        \hline
+        \textbf{Tên usecase} & Xóa thiết bị \\
+        \hline
+        \textbf{Mô tả} & Admin xóa thiết bị khỏi hệ thống \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Thiết bị tồn tại trong hệ thống \\
+        \hline
+        \textbf{Hậu điều kiện} & Thiết bị bị xóa khỏi danh sách \\
+        \hline
+        \textbf{Trigger} & Admin chọn ``Delete'' tại thiết bị \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin chọn thiết bị cần xóa.
+            \item Hệ thống hiển thị hộp thoại xác nhận.
+            \item Admin xác nhận xóa.
+            \item Hệ thống xóa thiết bị.
+        \end{enumerate} \\
+        \hline
+   
+\textbf{Quy tắc nghiệp vụ} &
+\begin{itemize}[leftmargin=*]
+    \item \textbf{BR-01 (Authorization):} Chỉ tài khoản có vai trò \textbf{System Admin} mới được phép xóa thiết bị.
+    \item \textbf{BR-02 (Data Integrity):} Thiết bị phải tồn tại trong hệ thống tại thời điểm xóa.
+   
+\end{itemize} \\
+
+\hline
+\textbf{Luồng thay thế / Mở rộng} &
+\begin{itemize}[leftmargin=*]
+    \item \textbf{E-01 (Cancel Delete):} Tại bước xác nhận, Admin chọn ``Cancel'' \textrightarrow{} Hệ thống hủy thao tác xóa thiết bị.
+    \item \textbf{E-02 (Delete Not Allowed):} Nếu thiết bị còn sensor liên kết \textrightarrow{} Hệ thống hiển thị thông báo không thể xóa thiết bị.
+\end{itemize} \\
+\hline
+
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-06: Import/Export device \\
+        \hline
+        \textbf{Tên usecase} & Import / Export thiết bị \\
+        \hline
+        \textbf{Mô tả} & Admin nhập hoặc xuất danh sách thiết bị \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & Admin có quyền quản lý thiết bị \\
+        \hline
+        \textbf{Hậu điều kiện} & Dữ liệu thiết bị được nhập hoặc xuất thành công \\
+        \hline
+        \textbf{Trigger} & Admin chọn ``Import/Export Device'' \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin chọn chức năng Import hoặc Export.
+            \item Hệ thống xử lý dữ liệu.
+            \item Hệ thống thông báo kết quả.
+        \end{enumerate} \\
+        \hline
+    \end{tabular}
+\end{table}
