@@ -61,10 +61,7 @@
 \end{tabular}
 \end{table}
 
-
-
-
-
+\newpage 
 
 \subsubsubsection{Software}
 \begin{table}[h!]
@@ -72,45 +69,66 @@
 \caption{Phân tích rủi ro phần mềm và phương án xử lý}
 \label{tab:rui_ro_sw}
 \renewcommand{\arraystretch}{1.3} 
+\small 
 
-\begin{tabular}{|c|p{4.5cm}|c|p{6.5cm}|}
+% Giữ nguyên độ rộng cột như bảng Firmware để đồng bộ
+\begin{tabular}{|c|>{\raggedright\arraybackslash}p{4.5cm}|c|>{\raggedright\arraybackslash}p{7cm}|}
 \hline
-\textbf{STT} & \centering\textbf{Rủi ro (Risk)} & \textbf{Mức độ} & \centering\textbf{Phương án giảm thiểu} \tabularnewline
+\centering\textbf{STT} & \centering\textbf{Rủi ro (Risk)} & \textbf{Mức độ} & \centering\textbf{Phương án giảm thiểu} \tabularnewline
 \hline
 
 1 & 
-\textbf{Nghẽn cổ chai Database:} \newline Khi hàng trăm thiết bị gửi dữ liệu cùng lúc, việc Insert từng dòng gây chậm. & 
-Cao & 
-- Sử dụng kỹ thuật Batch Insert (gom 100-500 bản ghi/lần). \newline
-- Tận dụng kiến trúc Hypertables của TimescaleDB. \\
+\textbf{Nghẽn cổ chai Database:} \newline Khi hàng trăm thiết bị gửi dữ liệu cùng lúc, việc Insert từng dòng gây quá tải. & 
+\centering Cao & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Sử dụng kỹ thuật Batch Insert (gom 100-500 bản ghi/lần).
+    \item Tận dụng kiến trúc Hypertables của TimescaleDB để phân mảnh dữ liệu.
+\end{itemize} \\
 \hline
 
 2 & 
-\textbf{Mất dữ liệu tại Broker:} \newline RabbitMQ bị đầy hàng đợi (Queue overflow) nếu Backend xử lý chậm. & 
-Trung bình & 
-- Cấu hình cơ chế Message Acknowledgment (chỉ xóa khi đã xử lý). \newline
-- Tăng số lượng Worker (Consumer) trong NestJS. \\
+\textbf{Mất toàn vẹn dữ liệu (Data Inconsistency):} \newline Lỗi xảy ra giữa chừng khi tạo Nông trại và gán Thiết bị. & 
+\centering Cao & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Sử dụng Database Transaction (ACID) để đảm bảo "All or Nothing".
+    \item Cơ chế Rollback tự động khi có lỗi.
+\end{itemize} \\
 \hline
 
 3 & 
-\textbf{Dữ liệu rác (Invalid Schema):} \newline Thiết bị gửi sai định dạng JSON làm lỗi parser. & 
-Cao & 
-- Triển khai lớp Schema Validation (DTO) chặt chẽ tại đầu vào. \newline
-- Ghi log gói tin lỗi ra bảng riêng để debug. \\
+\textbf{Gián đoạn thời gian thực:} \newline Kết nối WebSocket bị ngắt khiến Dashboard không cập nhật số liệu. & 
+\centering Trung bình & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Cơ chế Heartbeat (Ping/Pong) để phát hiện mất kết nối.
+    \item Tự động kết nối lại (Auto-reconnect) ở phía Frontend React.
+\end{itemize} \\
 \hline
 
 4 & 
-\textbf{Truy vấn Dashboard chậm:} \newline Load biểu đồ lịch sử 1 năm mất quá nhiều thời gian ($>$5s). & 
-Trung bình & 
-- Sử dụng Materialized Views để tính sẵn giá trị trung bình theo giờ. \newline
-- Cache kết quả truy vấn vào Redis. \\
+\textbf{Mất dữ liệu tại Broker:} \newline RabbitMQ bị đầy hàng đợi (Queue overflow) nếu Backend xử lý chậm. & 
+\centering Trung bình & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Cấu hình Message Acknowledgment (chỉ xóa tin khi đã xử lý xong).
+    \item Tăng số lượng Worker (Consumer) trong NestJS để xử lý song song.
+\end{itemize} \\
 \hline
 
 5 & 
-\textbf{Lỗ hổng bảo mật API:} \newline Người dùng truy cập vào dữ liệu nông trại của người khác. & 
-Cao & 
-- Áp dụng chặt chẽ Guards và Interceptors. \newline
-- Kiểm tra quyền sở hữu (Ownership check) trong mọi API. \\
+\textbf{Dữ liệu rác (Invalid Schema):} \newline Thiết bị gửi sai định dạng JSON làm lỗi parser hệ thống. & 
+\centering Cao & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Triển khai lớp Validation (DTO) chặt chẽ tại đầu vào (Gateway).
+    \item Ghi log gói tin lỗi ra bảng riêng (Dead Letter Queue) để debug.
+\end{itemize} \\
+\hline
+
+6 & 
+\textbf{Sự cố Vận hành (Deployment):} \newline Docker Container bị crash do lỗi bộ nhớ hoặc lỗi runtime. & 
+\centering Cao & 
+\begin{itemize}[nosep, leftmargin=*]
+    \item Cấu hình Docker Restart Policy (\texttt{restart: always}).
+    \item Thiết lập Health Check định kỳ cho các service.
+\end{itemize} \\
 \hline
 
 \end{tabular}

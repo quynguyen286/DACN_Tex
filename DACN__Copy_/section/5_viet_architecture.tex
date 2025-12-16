@@ -1,4 +1,5 @@
 \subsection{Thiết kế Kiến trúc Hệ thống}
+\subsubsection{Kiến trúc Phân lớp (Layered Architecture)}
 
 Kiến trúc hệ thống được thiết kế theo mô hình Phân lớp (Layered Architecture) kết hợp với hướng dịch vụ (Service-oriented). Việc phân chia này giúp tách biệt các mối quan tâm (Separation of Concerns), dễ dàng bảo trì và mở rộng độc lập từng thành phần.
 
@@ -12,7 +13,7 @@ Sơ đồ dưới đây minh họa các tầng logic và luồng dữ liệu tro
     \label{fig:system_architecture}
 \end{figure}
 
-Hệ thống được tổ chức thành 5 tầng chính và 1 module bảo mật xuyên suốt:
+Hệ thống được tổ chức thành 6 tầng chính và 1 module bảo mật xuyên suốt:
 
 \begin{itemize}[leftmargin=*]
     \item \textbf{Presentation Layer (Tầng Giao diện):}
@@ -49,3 +50,39 @@ Hệ thống được tổ chức thành 5 tầng chính và 1 module bảo mậ
 
 \paragraph{Module Bảo mật (Cross-cutting Concern):}
 Thành phần \textit{Account Control Privileges} bao quát từ tầng Integration xuống tầng Business, đảm bảo mọi yêu cầu đi qua API Gateway đều được xác thực (Authentication) và phân quyền (Authorization) chặt chẽ trước khi được xử lý.
+
+\subsubsection{Kiến trúc Triển khai (Deployment Architecture)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{img/deploy_architecture.png}
+    \caption{Deployment Diagram}
+    \label{fig:deployment_diagram_firmware}
+\end{figure}
+
+Sơ đồ triển khai (Hình \ref{fig:deployment_diagram_firmware}) mô tả cách thức ánh xạ các thành phần phần mềm vào hạ tầng phần cứng vật lý và môi trường mạng. Hệ thống được triển khai theo mô hình tập trung (Centralized Cloud Architecture) kết hợp với các thiết bị biên (Edge Devices).
+
+Các thành phần triển khai chính bao gồm:
+
+\begin{itemize}
+    \item \textbf{Field Node (Nút thiết bị tại nông trại):}
+    \begin{itemize}
+        \item \textit{Vi điều khiển:} Sử dụng ESP32-S3 chạy Firmware dựa trên hệ điều hành thời gian thực FreeRTOS, đảm bảo khả năng xử lý đa nhiệm (đọc cảm biến và gửi mạng song song).
+        \item \textit{Kết nối vật lý:} Các cảm biến (DHT20, Soil Moisture) và camera (OV2640) được kết nối trực tiếp qua các giao tiếp I2C, Analog và DVP. Các thiết bị chấp hành (Máy bơm, Quạt) được điều khiển qua Module Relay.
+    \end{itemize}
+
+    \item \textbf{Server Infrastructure (Hạ tầng Máy chủ):}
+    Toàn bộ hệ thống Backend được đóng gói và triển khai trên nền tảng \textbf{Docker}, giúp đảm bảo tính nhất quán giữa môi trường phát triển và vận hành (Production). Hạ tầng bao gồm các Container chính:
+    \begin{itemize}
+        \item \textit{Nginx Reverse Proxy:} Đóng vai trò lớp bảo mật đầu tiên, tiếp nhận mọi yêu cầu từ Internet (Port 80/443), chấm dứt SSL (SSL Termination) và điều phối traffic vào các dịch vụ bên trong.
+        \item \textit{Application Container:} Chạy NestJS Backend để xử lý API và logic nghiệp vụ.
+        \item \textit{Message Broker Container:} Chạy RabbitMQ để tiếp nhận dữ liệu IoT qua giao thức MQTT.
+        \item \textit{Database Cluster:} Chạy PostgreSQL tích hợp Extension TimescaleDB, phục vụ lưu trữ dữ liệu lai (Hybrid Storage).
+    \end{itemize}
+
+    \item \textbf{Cơ chế Giao tiếp (Communication Protocols):}
+    \begin{itemize}
+        \item \textit{Device - Server:} Sử dụng giao thức \textbf{MQTT} qua WiFi/4G để truyền tải dữ liệu cảm biến (nhẹ, thời gian thực) và giao thức \textbf{HTTP} để tải lên hình ảnh (dữ liệu lớn).
+        \item \textit{Client - Server:} Web Admin giao tiếp với hệ thống thông qua \textbf{HTTPS} (bảo mật) và \textbf{WebSocket} (để nhận cập nhật dữ liệu thời gian thực trên Dashboard).
+    \end{itemize}
+\end{itemize}

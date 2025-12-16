@@ -1,2 +1,86 @@
 \newpage
-\section{Phụ lục}
+\appendix % Lệnh chuyển sang chế độ Phụ lục
+\renewcommand{\thesection}{Phụ lục \Alph{section}} % Đổi định dạng thành Phụ lục A, B...
+
+% ============================================================
+% PHỤ LỤC A: DATABASE
+% ============================================================
+\section{Sơ đồ Cơ sở dữ liệu vật lý (Physical ERD)}
+\label{appendix:erd}
+
+Hình dưới đây mô tả chi tiết toàn bộ lược đồ cơ sở dữ liệu của hệ thống, bao gồm các bảng, các trường dữ liệu, kiểu dữ liệu và mối quan hệ giữa chúng.
+
+\begin{figure}[H]
+    \centering
+    % Thay tên file ảnh ERD to đùng của bạn vào đây
+    \includegraphics[width=1.0\textwidth]{img/ERD.png} 
+    \caption{Sơ đồ thực thể quan hệ chi tiết (Physical Data Model)}
+\end{figure}
+
+% ============================================================
+% PHỤ LỤC B: API LIST (Thay thế bảng bằng hình ảnh Swagger)
+% ============================================================
+\section{Danh sách các API chính (API Specifications)}
+\label{appendix:api}
+
+Phần này cung cấp tài liệu kỹ thuật chi tiết về các API Endpoint đã được thiết kế cho hệ thống Backend, được trích xuất trực tiếp từ giao diện Swagger UI.
+
+Các hình ảnh dưới đây mô tả rõ ràng phương thức HTTP (GET, POST, PUT, PATCH, DELETE), đường dẫn (URI) và mô tả chức năng ngắn gọn cho từng Endpoint thuộc hai module quan trọng nhất là Quản lý Nông trại (Farms) và Quản lý Thiết bị (Devices).
+
+% --- Hình ảnh API Farms ---
+\begin{figure}[H]
+    \centering
+    % Đảm bảo file ảnh image_11.png nằm đúng trong thư mục img/ của dự án
+    \includegraphics[width=1.0\textwidth]{img/farm_api.png}
+    \caption{Đặc tả API Module Quản lý Nông trại (Farms Endpoint) [Nguồn: Swagger UI Hệ thống]}
+    \label{fig:api_farms}
+\end{figure}
+
+\vspace{0.5cm} % Thêm một chút khoảng trắng giữa các hình
+
+% --- Hình ảnh API Devices ---
+\begin{figure}[H]
+    \centering
+    % Đảm bảo file ảnh image_12.png nằm đúng trong thư mục img/ của dự án
+    \includegraphics[width=1.0\textwidth]{img/device_api.png}
+    \caption{Đặc tả API Module Quản lý Thiết bị (Devices Endpoint) [Nguồn: Swagger UI Hệ thống]}
+    \label{fig:api_devices}
+\end{figure}
+
+Nhìn vào các hình trên, có thể thấy hệ thống đã thiết kế đầy đủ các thao tác CRUD (Tạo, Đọc, Cập nhật, Xóa) cho Nông trại và Thiết bị, cũng như các API nghiệp vụ đặc thù như gán thiết bị vào nông trại (`/assign-to-farm`) hay lấy lịch sử dữ liệu cảm biến.
+% ============================================================
+% PHỤ LỤC C: HARDWARE
+% ============================================================
+\section{Danh sách linh kiện phần cứng (Bill of Materials)}
+\label{appendix:hardware}
+
+Bảng liệt kê các linh kiện được sử dụng để xây dựng Node IoT:
+
+\begin{table}[H]
+\centering
+\caption{Bill of Materials (BOM)}
+\begin{tabular}{|c|l|l|c|}
+\hline
+\textbf{STT} & \textbf{Tên linh kiện} & \textbf{Thông số kỹ thuật chính} & \textbf{Số lượng} \\
+\hline
+1 & ESP32-S3 WROOM & Dual-core 240MHz, WiFi/BLE & 01 \\
+\hline
+2 & Cảm biến DHT20 & Giao tiếp I2C, đo nhiệt độ/độ ẩm & 01 \\
+\hline
+3 & Camera OV2640 & 2 Megapixel, giao tiếp DVP & 01 \\
+\hline
+4 & Cảm biến độ ẩm đất & Capacitive (Điện dung), Analog & 01 \\
+\hline
+5 & Relay Module & 5V - 1 kênh, Opto cách ly & 02 \\
+\hline
+6 & Nguồn Adapter & 5V - 2A & 01 \\
+\hline
+\end{tabular}
+\end{table}
+
+% ============================================================
+% PHỤ LỤC D: KHẢO SÁT (Nếu có)
+% ============================================================
+% \section{Bảng so sánh các giải pháp tham khảo}
+% \label{appendix:survey}
+% (Nếu trong chương 1 hoặc 2 bạn có so sánh với các giải pháp khác thì đưa bảng chi tiết vào đây).

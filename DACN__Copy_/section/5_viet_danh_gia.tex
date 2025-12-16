@@ -1,0 +1,51 @@
+\subsection{Cách đánh giá giải pháp}
+
+Để đảm bảo tính khoa học và thực tiễn của đề tài, nhóm nghiên cứu đề xuất phương pháp đánh giá hệ thống dựa trên 3 trụ cột chính: Hiệu năng hệ thống (System Performance), Độ chính xác của thuật toán (Algorithmic Accuracy) và Trải nghiệm người dùng (User Experience).
+
+\subsubsection{Đánh giá Hiệu năng Hệ thống (Performance Evaluation)}
+Phần này tập trung vào khả năng chịu tải và độ ổn định của hạ tầng IoT (RabbitMQ, NestJS, TimescaleDB). Nhóm sẽ sử dụng các công cụ kiểm thử tự động (như JMeter hoặc Script mô phỏng) để giả lập tải.
+
+\begin{itemize}
+    \item \textbf{Kịch bản thử nghiệm:} Giả lập 50 thiết bị ảo gửi dữ liệu liên tục với tần suất 5 giây/gói tin trong thời gian 60 phút.
+    \item \textbf{Các chỉ số đo lường (Metrics):}
+    \begin{itemize}
+        \item \textit{Throughput (Thông lượng):} Số lượng bản tin xử lý được trên giây (msg/s).
+        \item \textit{End-to-End Latency:} Thời gian trễ từ khi thiết bị gửi dữ liệu đến khi hiển thị trên Dashboard (Mục tiêu: $< 5$ giây).
+        \item \textit{Resource Usage:} Mức tiêu thụ CPU và RAM của Server (Docker Containers) khi chịu tải đỉnh.
+        \item \textit{Packet Loss Rate:} Tỷ lệ gói tin bị mất tại Message Broker.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Đánh giá Hiệu quả Thuật toán Phát hiện lỗi (Algorithmic Evaluation)}
+Đối với module \textit{Sensor Fault Detection}, nhóm sẽ đánh giá dựa trên phương pháp "Tiêm lỗi" (Fault Injection) - chủ động tạo ra các dữ liệu sai lệch để kiểm tra khả năng phát hiện của hệ thống.
+
+\begin{table}[H]
+\centering
+\caption{Các kịch bản đánh giá thuật toán phát hiện lỗi}
+\label{tab:eval_algo}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|p{5cm}|p{6cm}|}
+\hline
+\textbf{STT} & \textbf{Loại lỗi giả lập} & \textbf{Tiêu chí Đạt (Pass Criteria)} \\
+\hline
+1 & \textbf{Mất kết nối (Hard Fault):} \newline Ngắt nguồn thiết bị đột ngột. & Hệ thống cập nhật trạng thái "Offline" và gửi cảnh báo trong vòng 3 chu kỳ gửi tin (khoảng 15s). \\
+\hline
+2 & \textbf{Dữ liệu bất thường (Outlier):} \newline Gửi giá trị nhiệt độ đột biến (ví dụ: $100^{\circ}C$). & Hệ thống phát hiện giá trị vượt ngưỡng (Threshold) và ghi nhận cảnh báo. \\
+\hline
+3 & \textbf{Dữ liệu đóng băng (Stuck):} \newline Gửi liên tục một giá trị không đổi trong 30 phút. & Hệ thống phát hiện phương sai (Variance) bằng 0 và cảnh báo lỗi cảm biến bị kẹt. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Đánh giá Trải nghiệm và Chức năng (Functional \& UX Evaluation)}
+Đánh giá mức độ hoàn thiện của sản phẩm đối với người dùng cuối (System Admin/Thương lái) thông qua kiểm thử chấp nhận (UAT - User Acceptance Testing).
+
+\begin{itemize}
+    \item \textbf{Phương pháp:} Thực hiện danh sách kiểm tra (Checklist) các chức năng nghiệp vụ cốt lõi trên giao diện Web Admin.
+    \item \textbf{Các chỉ số đánh giá:}
+    \begin{itemize}
+        \item \textit{Tỷ lệ hoàn thành tác vụ (Task Completion Rate):} Người dùng có thực hiện được các thao tác (Thêm Farm, Gán thiết bị, Xem báo cáo) mà không gặp lỗi không?
+        \item \textit{Thời gian phản hồi giao diện (UI Response Time):} Các thao tác chuyển trang, load dữ liệu lịch sử phải hoàn tất dưới 2 giây.
+        \item \textit{Tính trực quan:} Biểu đồ dữ liệu và các cảnh báo lỗi có dễ hiểu và dễ nhận biết hay không.
+    \end{itemize}
+\end{itemize}

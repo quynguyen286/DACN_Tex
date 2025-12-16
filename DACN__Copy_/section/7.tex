@@ -1,2 +1,73 @@
 \newpage
 \section{Kết luận}
+
+\subsection{Tóm tắt vấn đề và hướng tiếp cận}
+Đề tài "Hệ thống quản lý nông trại thông minh" được phát triển nhằm giải quyết bài toán thực tế về sự phân mảnh trong quản lý chuỗi nông trại của các thương lái và nhà đầu tư nông nghiệp. Hướng tiếp cận chủ đạo của nhóm là xây dựng một nền tảng quản lý tập trung (All-in-one), tích hợp khả năng giám sát dữ liệu thời gian thực từ thiết bị đa nguồn, đồng thời đơn giản hóa trải nghiệm vận hành cho đối tượng người dùng không chuyên về kỹ thuật.
+
+\subsection{Công việc đã hoàn thành trong giai đoạn Đồ án Chuyên ngành}
+Trong khuôn khổ giai đoạn thiết kế, nhóm đã hoàn thành các nhiệm vụ nền tảng sau:
+
+\begin{itemize}
+    \item \textbf{Khảo sát và Phân tích:} Đã thực hiện khảo sát các giải pháp hiện có, từ đó xác định rõ yêu cầu bài toán gồm các chức năng quản lý cốt lõi và các ràng buộc phi chức năng về hiệu năng, độ trễ.
+    
+    \item \textbf{Thiết kế Kiến trúc tổng thể:} Đã đề xuất mô hình kiến trúc phân lớp (Layered Architecture) hoàn chỉnh, kết hợp sức mạnh của \textbf{NestJS} (Backend), \textbf{RabbitMQ} (Message Queuing) và \textbf{TimescaleDB} (Time-series Data). Đây là nền tảng vững chắc để đảm bảo khả năng mở rộng (Scalability) và tính ổn định khi số lượng thiết bị gia tăng.
+    
+    \item \textbf{Thiết kế Chi tiết Module IoT:} Đã hoàn thiện thiết kế Firmware trên \textbf{ESP32} với cơ chế đa luồng (FreeRTOS) và phân tích kỹ lưỡng các rủi ro phần cứng (tràn bộ nhớ, nhiễu tín hiệu) cùng phương án giảm thiểu.
+    
+    \item \textbf{Lập kế hoạch hiện thực:} Đã xây dựng lộ trình chi tiết cho giai đoạn Đồ án Tốt nghiệp, bao gồm các mốc thời gian kiểm thử và triển khai cụ thể cho từng thành viên.
+\end{itemize}
+
+\subsection{Định hướng thực hiện Đồ án Tốt nghiệp}
+Giai đoạn tiếp theo sẽ tập trung vào việc hiện thực hóa bản thiết kế thành sản phẩm chạy thực tế:
+
+\textbf{1. Hiện thực hóa Firmware \& Phần cứng:}
+\begin{itemize}
+    \item Lập trình Firmware ESP32 sử dụng FreeRTOS, tích hợp đọc dữ liệu song song từ đa cảm biến (DHT20, độ ẩm đất) và Camera OV2640.
+    \item Cài đặt và tinh chỉnh thuật toán phát hiện lỗi cảm biến (sử dụng phương pháp thống kê hoặc RFE) để tự động nhận diện các bất thường như trôi số liệu (Drift) hoặc mất tín hiệu.
+    \item Tối ưu hóa giao thức MQTT để giảm thiểu độ trễ truyền tin.
+\end{itemize}
+
+\textbf{2. Xây dựng Hệ thống Backend \& Frontend:}
+\begin{itemize}
+    \item Phát triển bộ RESTful API và các Worker xử lý dữ liệu IoT chuyên biệt thông qua RabbitMQ.
+    \item Xây dựng Web Dashboard với ReactJS, tập trung vào tính năng trực quan hóa dữ liệu và hệ thống cảnh báo thời gian thực (Real-time Alerting).
+\end{itemize}
+
+\textbf{3. Kiểm thử và Tối ưu hóa:}
+\begin{itemize}
+    \item Thực hiện Load Testing với mạng lưới thiết bị mô phỏng quy mô vừa và lớn để đánh giá giới hạn chịu tải của hệ thống.
+    \item Triển khai hệ thống tại mô hình thực nghiệm (Pilot Test) để thu thập dữ liệu thật, từ đó đánh giá độ chính xác của thuật toán phát hiện lỗi và độ ổn định của phần cứng.
+\end{itemize}
+
+\textbf{4. Các chỉ số kỹ thuật mục tiêu (Target Performance Metrics):}
+Để đảm bảo tính định lượng cho việc đánh giá kết quả vào cuối kỳ, nhóm thiết lập các chỉ số KPI mục tiêu như sau:
+
+\begin{table}[H]
+\centering
+% \caption{Bảng chỉ số hiệu năng mục tiêu cho giai đoạn hoàn thiện}
+\label{tab:target_kpi}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabular}{|l|p{6cm}|p{5cm}|}
+\hline
+\textbf{Tiêu chí} & \textbf{Mô tả} & \textbf{Mục tiêu (Target)} \\
+\hline
+\textbf{Độ trễ (Latency)} & Thời gian từ khi thiết bị gửi dữ liệu đến khi hiển thị trên Dashboard. & \textbf{$<$ 3 giây} (với mạng 4G/WiFi tiêu chuẩn). \\
+\hline
+\textbf{Khả năng chịu tải} & Số lượng thiết bị gửi dữ liệu đồng thời mà không gây mất gói tin. & \textbf{50 thiết bị} (giả lập) với tần suất 5 giây/gói tin. \\
+\hline
+\textbf{Độ chính xác AI} & Tỷ lệ phát hiện đúng các lỗi cảm biến cơ bản (mất nguồn, gai dữ liệu). & \textbf{$>$ 85\%} trên tập dữ liệu kiểm thử. \\
+\hline
+\textbf{Tốc độ phản hồi Web} & Thời gian tải trang và hiển thị biểu đồ lịch sử. & \textbf{$<$ 2 giây} (cho truy vấn 7 ngày gần nhất). \\
+\hline
+\textbf{Độ ổn định} & Thời gian hoạt động liên tục không lỗi (Uptime) trong môi trường thử nghiệm. & \textbf{99\%} (trong 48 giờ chạy test liên tục). \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Bài học kinh nghiệm và Góc nhìn phản tư}
+Qua quá trình nghiên cứu, nhóm nhận thức sâu sắc rằng thách thức lớn nhất của dự án IoT không chỉ nằm ở việc lập trình, mà ở việc **thiết kế kiến trúc hệ thống** sao cho linh hoạt và chịu lỗi tốt ngay từ đầu.
+
+Nhóm đã rút ra bài học quan trọng về việc sử dụng cơ chế hàng đợi (Message Queue) để tách rời các thành phần hệ thống (Decoupling), giúp tránh nghẽn cổ chai khi lưu lượng dữ liệu tăng cao. Ngoài ra, việc phân tích rủi ro phần cứng ngay từ giai đoạn thiết kế sẽ giúp giảm thiểu đáng kể thời gian Debug và chi phí phát sinh khi triển khai thực tế.
+
+Dự án này là bước đệm quan trọng, không chỉ mang giá trị học thuật mà còn hướng tới một sản phẩm có tính ứng dụng cao, góp phần giải quyết bài toán chuyển đổi số trong nông nghiệp một cách thiết thực.
