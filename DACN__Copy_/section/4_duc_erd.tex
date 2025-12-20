@@ -1,0 +1,41 @@
+
+
+Mô hình Quan hệ Thực thể (ERD) chi tiết của hệ thống được trình bày tại \hyperref[appendix:erd]{Phụ lục A}. Thiết kế này đảm bảo tính toàn vẹn dữ liệu và khả năng mở rộng cho các nghiệp vụ giám sát nông nghiệp thông minh.
+
+Hệ thống cơ sở dữ liệu được tổ chức thành các phân hệ chính như sau:
+
+\subsubsection{Phân hệ Quản lý Nông trại:}
+
+Đây là nhóm thực thể trung tâm, bao gồm bảng \texttt{farms} (lưu thông tin nông trại) liên kết 1-nhiều với \texttt{plants} (cây trồng) và \texttt{crops} (mùa vụ). Cấu trúc này cho phép quản lý chi tiết quy trình canh tác từ lúc xuống giống đến khi thu hoạch, bao gồm cả việc theo dõi sức khỏe cây trồng qua bảng \texttt{plant\_health\_statuses}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/postgres - public - farms.png}
+    \caption{Sơ đồ thực thể quan hệ của phân hệ Quản lý Nông trại}
+\end{figure}
+\subsubsection{Phân hệ IoT và Thu thập dữ liệu:}
+
+Các thiết bị phần cứng được quản lý qua bảng \texttt{devices} và \texttt{sensors}. Dữ liệu quan trọng nhất của hệ thống là \texttt{telemetries}, nơi lưu trữ hàng triệu bản ghi dữ liệu cảm biến (nhiệt độ, độ ẩm, ánh sáng) được gửi về liên tục. Quan hệ giữa \texttt{devices} và \texttt{farms} giúp xác định thiết bị nào đang hoạt động tại khu vực nào.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/postgres - public - devices.png}
+    \caption{Sơ đồ thực thể quan hệ của phân hệ IoT và Thu thập dữ liệu}
+\end{figure}
+\subsubsection{Phân hệ Người dùng và Phân quyền:}
+
+Hệ thống sử dụng bảng \texttt{accounts} để quản lý người dùng, kết hợp với \texttt{permissions} và \texttt{user\_settings} để thực hiện cơ chế phân quyền , đảm bảo chỉ Admin hoặc chủ nông trại mới có quyền truy cập các dữ liệu nhạy cảm hoặc thực hiện cấu hình thiết bị.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/postgres - public - accounts.png}
+    \caption{Sơ đồ thực thể quan hệ của phân hệ Người dùng và Phân quyền}
+\end{figure}
+\subsubsection{Phân hệ Kinh doanh}
+
+Các nghiệp vụ kinh doanh như thuê thiết bị, đặt hàng, thanh toán được quản lý thông qua bảng \texttt{rentals} và \texttt{orders}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/postgres - public - rentals.png}
+    \caption{Sơ đồ thực thể quan hệ của phân hệ Kinh doanh}
+\end{figure}
+
+Và các bảng khác được trình bày tại \hyperref[appendix:erd]{Phụ lục A}.
+
