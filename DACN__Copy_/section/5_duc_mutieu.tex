@@ -1,0 +1,20 @@
+Giải pháp được đề xuất nhằm xây dựng một hệ thống giám sát nông nghiệp thông minh dựa trên công nghệ Internet vạn vật (IoT), với mục tiêu chính là cung cấp một nền tảng quản lý toàn diện cho các nông trại hiện đại. Hệ thống được thiết kế để đáp ứng các mục tiêu cụ thể sau:
+
+\subsubsection{Mục tiêu 1: Tự động hóa quá trình thu thập và xử lý dữ liệu môi trường}
+Hệ thống phải có khả năng tự động thu thập dữ liệu từ mạng lưới cảm biến phân tán (nhiệt độ, độ ẩm không khí, độ ẩm đất, ánh sáng) và xử lý chúng theo thời gian thực mà không cần sự can thiệp thủ công. Mục tiêu này nhằm giảm thiểu công sức quản lý của người nông dân, đồng thời đảm bảo tính liên tục và chính xác của dữ liệu giám sát.
+
+\subsubsection{Mục tiêu 2: Phát hiện và cảnh báo sớm các sự cố hệ thống}
+Hệ thống phải tích hợp các cơ chế phát hiện lỗi tự động (như mất kết nối thiết bị, dữ liệu bất thường, hoặc giá trị vượt ngưỡng an toàn) và gửi cảnh báo tức thì đến người quản trị. Mục tiêu này giúp giảm thiểu thời gian phản ứng khi xảy ra sự cố, từ đó hạn chế thiệt hại về năng suất cây trồng và tài sản.
+
+\subsubsection{Mục tiêu 3: Cung cấp giao diện quản lý trực quan và dễ sử dụng}
+Hệ thống phải cung cấp một Dashboard Web Admin với các tính năng trực quan hóa dữ liệu (biểu đồ, bảng thống kê) và các thao tác quản lý nhanh (Quick Actions), giúp người quản trị nắm bắt tình trạng hệ thống một cách nhanh chóng và thực hiện các tác vụ quản lý hiệu quả.
+
+\subsubsection{Mục tiêu 4: Đảm bảo khả năng mở rộng và hiệu năng cao}
+Hệ thống phải được thiết kế với kiến trúc có khả năng mở rộng (Scalable Architecture), cho phép thêm mới thiết bị hoặc nông trại mà không cần tắt server để bảo trì. Đồng thời, hệ thống phải đảm bảo xử lý ổn định dữ liệu từ hàng chục thiết bị đồng thời với độ trễ thấp.
+
+\subsubsection{Mục tiêu 5: Tối ưu hóa chi phí vận hành và bảo trì}
+Hệ thống phải sử dụng các công nghệ mã nguồn mở và kiến trúc tiết kiệm tài nguyên, giúp giảm thiểu chi phí triển khai và vận hành. Việc sử dụng các giao thức nhẹ như MQTT và cơ sở dữ liệu chuyên dụng cho Time-series (TimescaleDB) nhằm tối ưu hóa hiệu năng xử lý dữ liệu lớn.
+
+\subsubsection{Mục tiêu 6: Đảm bảo tính bảo mật và độ tin cậy}
+Hệ thống phải tích hợp các cơ chế bảo mật đa lớp (xác thực người dùng, phân quyền truy cập, mã hóa dữ liệu) và đảm bảo thời gian hoạt động (Uptime) đạt 99\%, với khả năng tự động kết nối lại khi mất kết nối mạng.
+
