@@ -16,8 +16,9 @@
 \contentsline {figure}{\numberline {17}{\ignorespaces Communication Diagram}}{43}{figure.caption.39}%
 \contentsline {figure}{\numberline {18}{\ignorespaces Component Diagram}}{43}{figure.caption.40}%
 \contentsline {figure}{\numberline {19}{\ignorespaces Sequence Diagram}}{44}{figure.caption.41}%
-\contentsline {figure}{\numberline {20}{\ignorespaces Timing Diagram}}{45}{figure.caption.42}%
-\contentsline {figure}{\numberline {21}{\ignorespaces State Machine Diagram}}{46}{figure.caption.43}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Sơ đồ thực thể quan hệ chi tiết (Physical Data Model)}}{55}{figure.caption.48}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Đặc tả API Module Quản lý Nông trại (Farms Endpoint) [Nguồn: Swagger UI Hệ thống]}}{56}{figure.caption.49}%
-\contentsline {figure}{\numberline {24}{\ignorespaces Đặc tả API Module Quản lý Thiết bị (Devices Endpoint) [Nguồn: Swagger UI Hệ thống]}}{56}{figure.caption.50}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Timing Diagram tác vụ xử lý cảm biến và điều khiển}}{45}{figure.caption.42}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Timing Diagram tác vụ camera}}{46}{figure.caption.43}%
+\contentsline {figure}{\numberline {22}{\ignorespaces State Machine Diagram}}{47}{figure.caption.44}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Sơ đồ thực thể quan hệ chi tiết (Physical Data Model)}}{56}{figure.caption.49}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Đặc tả API Module Quản lý Nông trại (Farms Endpoint) [Nguồn: Swagger UI Hệ thống]}}{57}{figure.caption.50}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Đặc tả API Module Quản lý Thiết bị (Devices Endpoint) [Nguồn: Swagger UI Hệ thống]}}{57}{figure.caption.51}%

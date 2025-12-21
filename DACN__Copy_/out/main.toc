@@ -71,28 +71,28 @@
 \contentsline {subsubsubsection}{\numberline {5.5.2.c}Component Diagram}{43}{subsubsubsection.5.5.2.3}%
 \contentsline {subsubsubsection}{\numberline {5.5.2.d}Sequence Diagram}{44}{subsubsubsection.5.5.2.4}%
 \contentsline {subsubsubsection}{\numberline {5.5.2.e}Timing Diagram}{45}{subsubsubsection.5.5.2.5}%
-\contentsline {subsubsubsection}{\numberline {5.5.2.f}State Machine Diagram}{46}{subsubsubsection.5.5.2.6}%
-\contentsline {subsection}{\numberline {5.6}Cách đánh giá giải pháp}{47}{subsection.5.6}%
-\contentsline {subsubsection}{\numberline {5.6.1}Đánh giá Hiệu năng Hệ thống (Performance Evaluation)}{47}{subsubsection.5.6.1}%
-\contentsline {subsubsection}{\numberline {5.6.2}Đánh giá Hiệu quả Thuật toán Phát hiện lỗi (Algorithmic Evaluation)}{47}{subsubsection.5.6.2}%
-\contentsline {subsubsection}{\numberline {5.6.3}Đánh giá Trải nghiệm và Chức năng (Functional \& UX Evaluation)}{47}{subsubsection.5.6.3}%
-\contentsline {section}{\numberline {6}Kế hoạch thực hiện}{48}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Mục tiêu theo từng giai đoạn}{48}{subsection.6.1}%
-\contentsline {subsubsubsection}{\numberline {6.1.0.a}Firmware}{48}{subsubsubsection.6.1.0.1}%
-\contentsline {subsubsubsection}{\numberline {6.1.0.b}Software}{48}{subsubsubsection.6.1.0.2}%
-\contentsline {subsection}{\numberline {6.2}Lịch trình và mốc thời gian}{49}{subsection.6.2}%
-\contentsline {subsubsubsection}{\numberline {6.2.0.a}Firmware}{49}{subsubsubsection.6.2.0.1}%
-\contentsline {subsubsubsection}{\numberline {6.2.0.b}Software}{50}{subsubsubsection.6.2.0.2}%
-\contentsline {subsection}{\numberline {6.3}Rủi ro và phương án giảm thiểu}{51}{subsection.6.3}%
-\contentsline {subsubsubsection}{\numberline {6.3.0.a}Firmware}{51}{subsubsubsection.6.3.0.1}%
-\contentsline {subsubsubsection}{\numberline {6.3.0.b}Software}{52}{subsubsubsection.6.3.0.2}%
-\contentsline {section}{\numberline {7}Kết luận}{53}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Tóm tắt vấn đề và hướng tiếp cận}{53}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Công việc đã hoàn thành trong giai đoạn Đồ án Chuyên ngành}{53}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Định hướng thực hiện Đồ án Tốt nghiệp}{53}{subsection.7.3}%
-\contentsline {subsection}{\numberline {7.4}Bài học kinh nghiệm và Góc nhìn phản tư}{54}{subsection.7.4}%
-\contentsline {section}{\numberline {Phụ lục A}Sơ đồ Cơ sở dữ liệu vật lý (Physical ERD)}{55}{appendix.A}%
-\contentsline {section}{\numberline {Phụ lục B}Danh sách các API chính (API Specifications)}{55}{appendix.B}%
-\contentsline {section}{\numberline {Phụ lục C}Danh sách linh kiện phần cứng (Bill of Materials)}{56}{appendix.C}%
-\contentsline {section}{\numberline {Phụ lục D}Bảng so sánh các giải pháp tham khảo}{57}{appendix.D}%
-\contentsline {section}{Tài liệu tham khảo}{58}{appendix.D}%
+\contentsline {subsubsubsection}{\numberline {5.5.2.f}State Machine Diagram}{47}{subsubsubsection.5.5.2.6}%
+\contentsline {subsection}{\numberline {5.6}Cách đánh giá giải pháp}{48}{subsection.5.6}%
+\contentsline {subsubsection}{\numberline {5.6.1}Đánh giá Hiệu năng Hệ thống (Performance Evaluation)}{48}{subsubsection.5.6.1}%
+\contentsline {subsubsection}{\numberline {5.6.2}Đánh giá Hiệu quả Thuật toán Phát hiện lỗi (Algorithmic Evaluation)}{48}{subsubsection.5.6.2}%
+\contentsline {subsubsection}{\numberline {5.6.3}Đánh giá Trải nghiệm và Chức năng (Functional \& UX Evaluation)}{48}{subsubsection.5.6.3}%
+\contentsline {section}{\numberline {6}Kế hoạch thực hiện}{49}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Mục tiêu theo từng giai đoạn}{49}{subsection.6.1}%
+\contentsline {subsubsubsection}{\numberline {6.1.0.a}Firmware}{49}{subsubsubsection.6.1.0.1}%
+\contentsline {subsubsubsection}{\numberline {6.1.0.b}Software}{49}{subsubsubsection.6.1.0.2}%
+\contentsline {subsection}{\numberline {6.2}Lịch trình và mốc thời gian}{50}{subsection.6.2}%
+\contentsline {subsubsubsection}{\numberline {6.2.0.a}Firmware}{50}{subsubsubsection.6.2.0.1}%
+\contentsline {subsubsubsection}{\numberline {6.2.0.b}Software}{51}{subsubsubsection.6.2.0.2}%
+\contentsline {subsection}{\numberline {6.3}Rủi ro và phương án giảm thiểu}{52}{subsection.6.3}%
+\contentsline {subsubsubsection}{\numberline {6.3.0.a}Firmware}{52}{subsubsubsection.6.3.0.1}%
+\contentsline {subsubsubsection}{\numberline {6.3.0.b}Software}{53}{subsubsubsection.6.3.0.2}%
+\contentsline {section}{\numberline {7}Kết luận}{54}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Tóm tắt vấn đề và hướng tiếp cận}{54}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Công việc đã hoàn thành trong giai đoạn Đồ án Chuyên ngành}{54}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Định hướng thực hiện Đồ án Tốt nghiệp}{54}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Bài học kinh nghiệm và Góc nhìn phản tư}{55}{subsection.7.4}%
+\contentsline {section}{\numberline {Phụ lục A}Sơ đồ Cơ sở dữ liệu vật lý (Physical ERD)}{56}{appendix.A}%
+\contentsline {section}{\numberline {Phụ lục B}Danh sách các API chính (API Specifications)}{56}{appendix.B}%
+\contentsline {section}{\numberline {Phụ lục C}Danh sách linh kiện phần cứng (Bill of Materials)}{57}{appendix.C}%
+\contentsline {section}{\numberline {Phụ lục D}Bảng so sánh các giải pháp tham khảo}{58}{appendix.D}%
+\contentsline {section}{Tài liệu tham khảo}{59}{appendix.D}%
