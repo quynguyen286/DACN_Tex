@@ -521,10 +521,6 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
@@ -560,14 +556,6 @@ INPUT .\section\2.tex
 INPUT .\section\2.tex
 INPUT .\section\2.tex
 INPUT section\2.tex
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT .\section\2_quy.tex
 INPUT .\section\2_quy.tex
 INPUT section\2_quy.tex
@@ -730,11 +718,64 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT .\section\5_viet_erd.tex
-INPUT .\section\5_viet_erd.tex
-INPUT .\section\5_viet_erd.tex
-INPUT .\section\5_viet_erd.tex
-INPUT section\5_viet_erd.tex
+INPUT .\section\5_duc_mutieu.tex
+INPUT .\section\5_duc_mutieu.tex
+INPUT .\section\5_duc_mutieu.tex
+INPUT .\section\5_duc_mutieu.tex
+INPUT section\5_duc_mutieu.tex
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\section\5_duc_erd.tex
+INPUT .\section\5_duc_erd.tex
+INPUT .\section\5_duc_erd.tex
+INPUT .\section\5_duc_erd.tex
+INPUT section\5_duc_erd.tex
+INPUT .\img\postgres - public - farms.png
+INPUT .\img\postgres - public - farms.png
+INPUT .\img\postgres - public - farms.png
+INPUT .\img\postgres - public - farms.png
+INPUT .\img\postgres - public - farms.png
+INPUT .\img\postgres - public - farms.png
+INPUT .\img\postgres - public - farms.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\postgres - public - devices.png
+INPUT .\img\postgres - public - devices.png
+INPUT .\img\postgres - public - devices.png
+INPUT .\img\postgres - public - devices.png
+INPUT .\img\postgres - public - devices.png
+INPUT .\img\postgres - public - devices.png
+INPUT .\img\postgres - public - devices.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\postgres - public - accounts.png
+INPUT .\img\postgres - public - accounts.png
+INPUT .\img\postgres - public - accounts.png
+INPUT .\img\postgres - public - accounts.png
+INPUT .\img\postgres - public - accounts.png
+INPUT .\img\postgres - public - accounts.png
+INPUT .\img\postgres - public - accounts.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\postgres - public - rentals.png
+INPUT .\img\postgres - public - rentals.png
+INPUT .\img\postgres - public - rentals.png
+INPUT .\img\postgres - public - rentals.png
+INPUT .\img\postgres - public - rentals.png
+INPUT .\img\postgres - public - rentals.png
+INPUT .\img\postgres - public - rentals.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\section\5_viet_architecture.tex
 INPUT .\section\5_viet_architecture.tex
 INPUT .\section\5_viet_architecture.tex
@@ -908,10 +949,6 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT .\section\6.tex
 INPUT .\section\6.tex
 INPUT .\section\6.tex
@@ -920,6 +957,10 @@ INPUT section\6.tex
 INPUT .\section\6.1_quy.tex
 INPUT .\section\6.1_quy.tex
 INPUT section\6.1_quy.tex
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\section\6.2_quy.tex
 INPUT .\section\6.2_quy.tex
 INPUT section\6.2_quy.tex
@@ -1018,10 +1059,16 @@ INPUT C:\Users\QUÝ\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm
 INPUT C:\Users\QUÝ\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi9.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi9.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnbx10.pfb

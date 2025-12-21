@@ -248,8 +248,8 @@
       \strng{authornamehash}{f24ae3118038ce13842c3337b5069a3f}
       \strng{authorfullhash}{d7652e65cf20812d32eac08f622e99de}
       \strng{authorfullhashraw}{d7652e65cf20812d32eac08f622e99de}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Communications Surveys \& Tutorials}
@@ -257,6 +257,7 @@
       \field{title}{Internet of Things: A Survey on Enabling Technologies, Protocols, and Applications}
       \field{volume}{17}
       \field{year}{2015}
+      \true{nocite}
       \field{pages}{2347\bibrangedash 2376}
       \range{pages}{30}
     \endentry
@@ -274,12 +275,13 @@
       \strng{authornamehash}{3f3bd75786eef10cc701f28994bc658b}
       \strng{authorfullhash}{3f3bd75786eef10cc701f28994bc658b}
       \strng{authorfullhashraw}{3f3bd75786eef10cc701f28994bc658b}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{NestJS Documentation: Introduction and Fundamentals}
       \field{year}{2024}
+      \true{nocite}
       \verb{urlraw}
       \verb https://docs.nestjs.com/
       \endverb
@@ -307,209 +309,12 @@
       \field{labeltitlesource}{title}
       \field{title}{TypeScript: Typed JavaScript at Any Scale}
       \field{year}{2024}
+      \true{nocite}
       \verb{urlraw}
       \verb https://www.typescriptlang.org/
       \endverb
       \verb{url}
       \verb https://www.typescriptlang.org/
-      \endverb
-    \endentry
-    \entry{postgres_docs}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=917cf2b2062aec0c604dbecc106084cd}{%
-           family={{The PostgreSQL Global Development Group}},
-           familyi={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{917cf2b2062aec0c604dbecc106084cd}
-      \strng{fullhash}{917cf2b2062aec0c604dbecc106084cd}
-      \strng{fullhashraw}{917cf2b2062aec0c604dbecc106084cd}
-      \strng{bibnamehash}{917cf2b2062aec0c604dbecc106084cd}
-      \strng{authorbibnamehash}{917cf2b2062aec0c604dbecc106084cd}
-      \strng{authornamehash}{917cf2b2062aec0c604dbecc106084cd}
-      \strng{authorfullhash}{917cf2b2062aec0c604dbecc106084cd}
-      \strng{authorfullhashraw}{917cf2b2062aec0c604dbecc106084cd}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{PostgreSQL 16.0 Documentation}
-      \field{year}{2024}
-      \verb{urlraw}
-      \verb https://www.postgresql.org/docs/current/
-      \endverb
-      \verb{url}
-      \verb https://www.postgresql.org/docs/current/
-      \endverb
-    \endentry
-    \entry{tsdb_importance}{article}{}{}
-      \true{moreauthor}
-      \true{morelabelname}
-      \name{author}{1}{}{%
-        {{hash=4fd438bc04d4cbb5749e32a89f2c8bb3}{%
-           family={Bader},
-           familyi={B\bibinitperiod},
-           given={A.},
-           giveni={A\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {VLDB}%
-      }
-      \strng{namehash}{283cc7d729e5d5f6775b2a9d276997ff}
-      \strng{fullhash}{283cc7d729e5d5f6775b2a9d276997ff}
-      \strng{fullhashraw}{283cc7d729e5d5f6775b2a9d276997ff}
-      \strng{bibnamehash}{283cc7d729e5d5f6775b2a9d276997ff}
-      \strng{authorbibnamehash}{283cc7d729e5d5f6775b2a9d276997ff}
-      \strng{authornamehash}{283cc7d729e5d5f6775b2a9d276997ff}
-      \strng{authorfullhash}{283cc7d729e5d5f6775b2a9d276997ff}
-      \strng{authorfullhashraw}{283cc7d729e5d5f6775b2a9d276997ff}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Proceedings of the VLDB Endowment}
-      \field{title}{Time Series Databases: New Ways to Store and Access Data}
-      \field{year}{2017}
-    \endentry
-    \entry{timescaledb_docs}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=63e1a33224907d324b868a2858238df4}{%
-           family={{Timescale Inc.}},
-           familyi={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{63e1a33224907d324b868a2858238df4}
-      \strng{fullhash}{63e1a33224907d324b868a2858238df4}
-      \strng{fullhashraw}{63e1a33224907d324b868a2858238df4}
-      \strng{bibnamehash}{63e1a33224907d324b868a2858238df4}
-      \strng{authorbibnamehash}{63e1a33224907d324b868a2858238df4}
-      \strng{authornamehash}{63e1a33224907d324b868a2858238df4}
-      \strng{authorfullhash}{63e1a33224907d324b868a2858238df4}
-      \strng{authorfullhashraw}{63e1a33224907d324b868a2858238df4}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Truy cập: 13/12/2025}
-      \field{title}{TimescaleDB Documentation: Hypertables and Chunking}
-      \field{year}{2024}
-      \verb{urlraw}
-      \verb https://docs.timescale.com/
-      \endverb
-      \verb{url}
-      \verb https://docs.timescale.com/
-      \endverb
-    \endentry
-    \entry{ESP32_docs}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=66589871a3c3f27bcbf3891133af42b1}{%
-           family={{Espressif Systems}},
-           familyi={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{66589871a3c3f27bcbf3891133af42b1}
-      \strng{fullhash}{66589871a3c3f27bcbf3891133af42b1}
-      \strng{fullhashraw}{66589871a3c3f27bcbf3891133af42b1}
-      \strng{bibnamehash}{66589871a3c3f27bcbf3891133af42b1}
-      \strng{authorbibnamehash}{66589871a3c3f27bcbf3891133af42b1}
-      \strng{authornamehash}{66589871a3c3f27bcbf3891133af42b1}
-      \strng{authorfullhash}{66589871a3c3f27bcbf3891133af42b1}
-      \strng{authorfullhashraw}{66589871a3c3f27bcbf3891133af42b1}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{ESP32 Series Datasheet}
-      \field{year}{2024}
-      \verb{urlraw}
-      \verb https://documentation.espressif.com/esp32_datasheet_en.pdf
-      \endverb
-      \verb{url}
-      \verb https://documentation.espressif.com/esp32_datasheet_en.pdf
-      \endverb
-    \endentry
-    \entry{I2C_spec}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=bdd95750033c6d1e71751acaf3c3d8de}{%
-           family={Semiconductors},
-           familyi={S\bibinitperiod},
-           given={NXP},
-           giveni={N\bibinitperiod}}}%
-      }
-      \strng{namehash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{fullhash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{fullhashraw}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{bibnamehash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{authorbibnamehash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{authornamehash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{authorfullhash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{authorfullhashraw}{bdd95750033c6d1e71751acaf3c3d8de}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{I2C Bus Specification and User Manual}
-      \field{year}{2021}
-      \verb{urlraw}
-      \verb https://www.nxp.com/docs/en/user-guide/UM10204.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.nxp.com/docs/en/user-guide/UM10204.pdf
-      \endverb
-    \endentry
-    \entry{Camera_DVPI_spec}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=3eaac2a04552d94ab7ca389d62b8053f}{%
-           family={OmniVision\bibnamedelima Technologies},
-           familyi={O\bibinitperiod\bibinitdelim T\bibinitperiod},
-           given={Inc.},
-           giveni={I\bibinitperiod}}}%
-      }
-      \strng{namehash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{fullhash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{fullhashraw}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{bibnamehash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{authorbibnamehash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{authornamehash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{authorfullhash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{authorfullhashraw}{3eaac2a04552d94ab7ca389d62b8053f}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{OV2640 Camera Module Datasheet}
-      \field{year}{2020}
-      \verb{urlraw}
-      \verb https://www.uctronics.com/download/cam_module/OV2640DS.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.uctronics.com/download/cam_module/OV2640DS.pdf
-      \endverb
-    \endentry
-    \entry{GPIO_spec}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=b1d5d0040be4721ebd66cd10ec68502c}{%
-           family={Systems},
-           familyi={S\bibinitperiod},
-           given={Espressif},
-           giveni={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{fullhash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{fullhashraw}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{bibnamehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authorbibnamehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authornamehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authorfullhash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authorfullhashraw}{b1d5d0040be4721ebd66cd10ec68502c}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{ESP32 Technical Reference Manual}
-      \field{year}{2016}
-      \verb{urlraw}
-      \verb https://documentation.espressif.com/esp32_technical_reference_manual_en.pdf
-      \endverb
-      \verb{url}
-      \verb https://documentation.espressif.com/esp32_technical_reference_manual_en.pdf
       \endverb
     \endentry
     \entry{mqtt_spec}{manual}{}{}
@@ -526,12 +331,13 @@
       \strng{authornamehash}{a7971f5bb0bc445669c151df3d7cf8ca}
       \strng{authorfullhash}{a7971f5bb0bc445669c151df3d7cf8ca}
       \strng{authorfullhashraw}{a7971f5bb0bc445669c151df3d7cf8ca}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{MQTT Version 5.0 Committee Specification}
       \field{year}{2019}
+      \true{nocite}
       \verb{urlraw}
       \verb https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
       \endverb
@@ -560,14 +366,220 @@
       \strng{authornamehash}{55d7afa00010e0ea88cf7be388134e11}
       \strng{authorfullhash}{55d7afa00010e0ea88cf7be388134e11}
       \strng{authorfullhashraw}{55d7afa00010e0ea88cf7be388134e11}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{number}{7230}
       \field{title}{Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing}
       \field{type}{Request for Comments}
       \field{year}{2014}
+      \true{nocite}
+    \endentry
+    \entry{postgres_docs}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=917cf2b2062aec0c604dbecc106084cd}{%
+           family={{The PostgreSQL Global Development Group}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{917cf2b2062aec0c604dbecc106084cd}
+      \strng{fullhash}{917cf2b2062aec0c604dbecc106084cd}
+      \strng{fullhashraw}{917cf2b2062aec0c604dbecc106084cd}
+      \strng{bibnamehash}{917cf2b2062aec0c604dbecc106084cd}
+      \strng{authorbibnamehash}{917cf2b2062aec0c604dbecc106084cd}
+      \strng{authornamehash}{917cf2b2062aec0c604dbecc106084cd}
+      \strng{authorfullhash}{917cf2b2062aec0c604dbecc106084cd}
+      \strng{authorfullhashraw}{917cf2b2062aec0c604dbecc106084cd}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{PostgreSQL 16.0 Documentation}
+      \field{year}{2024}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.postgresql.org/docs/current/
+      \endverb
+      \verb{url}
+      \verb https://www.postgresql.org/docs/current/
+      \endverb
+    \endentry
+    \entry{timescaledb_docs}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=63e1a33224907d324b868a2858238df4}{%
+           family={{Timescale Inc.}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{63e1a33224907d324b868a2858238df4}
+      \strng{fullhash}{63e1a33224907d324b868a2858238df4}
+      \strng{fullhashraw}{63e1a33224907d324b868a2858238df4}
+      \strng{bibnamehash}{63e1a33224907d324b868a2858238df4}
+      \strng{authorbibnamehash}{63e1a33224907d324b868a2858238df4}
+      \strng{authornamehash}{63e1a33224907d324b868a2858238df4}
+      \strng{authorfullhash}{63e1a33224907d324b868a2858238df4}
+      \strng{authorfullhashraw}{63e1a33224907d324b868a2858238df4}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Truy cập: 13/12/2025}
+      \field{title}{TimescaleDB Documentation: Hypertables and Chunking}
+      \field{year}{2024}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://docs.timescale.com/
+      \endverb
+      \verb{url}
+      \verb https://docs.timescale.com/
+      \endverb
+    \endentry
+    \entry{tsdb_importance}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=4fd438bc04d4cbb5749e32a89f2c8bb3}{%
+           family={Bader},
+           familyi={B\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {VLDB}%
+      }
+      \strng{namehash}{283cc7d729e5d5f6775b2a9d276997ff}
+      \strng{fullhash}{283cc7d729e5d5f6775b2a9d276997ff}
+      \strng{fullhashraw}{283cc7d729e5d5f6775b2a9d276997ff}
+      \strng{bibnamehash}{283cc7d729e5d5f6775b2a9d276997ff}
+      \strng{authorbibnamehash}{283cc7d729e5d5f6775b2a9d276997ff}
+      \strng{authornamehash}{283cc7d729e5d5f6775b2a9d276997ff}
+      \strng{authorfullhash}{283cc7d729e5d5f6775b2a9d276997ff}
+      \strng{authorfullhashraw}{283cc7d729e5d5f6775b2a9d276997ff}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the VLDB Endowment}
+      \field{title}{Time Series Databases: New Ways to Store and Access Data}
+      \field{year}{2017}
+      \true{nocite}
+    \endentry
+    \entry{ESP32_docs}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=66589871a3c3f27bcbf3891133af42b1}{%
+           family={{Espressif Systems}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{66589871a3c3f27bcbf3891133af42b1}
+      \strng{fullhash}{66589871a3c3f27bcbf3891133af42b1}
+      \strng{fullhashraw}{66589871a3c3f27bcbf3891133af42b1}
+      \strng{bibnamehash}{66589871a3c3f27bcbf3891133af42b1}
+      \strng{authorbibnamehash}{66589871a3c3f27bcbf3891133af42b1}
+      \strng{authornamehash}{66589871a3c3f27bcbf3891133af42b1}
+      \strng{authorfullhash}{66589871a3c3f27bcbf3891133af42b1}
+      \strng{authorfullhashraw}{66589871a3c3f27bcbf3891133af42b1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ESP32 Series Datasheet}
+      \field{year}{2024}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://documentation.espressif.com/esp32_datasheet_en.pdf
+      \endverb
+      \verb{url}
+      \verb https://documentation.espressif.com/esp32_datasheet_en.pdf
+      \endverb
+    \endentry
+    \entry{I2C_spec}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=bdd95750033c6d1e71751acaf3c3d8de}{%
+           family={Semiconductors},
+           familyi={S\bibinitperiod},
+           given={NXP},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{bdd95750033c6d1e71751acaf3c3d8de}
+      \strng{fullhash}{bdd95750033c6d1e71751acaf3c3d8de}
+      \strng{fullhashraw}{bdd95750033c6d1e71751acaf3c3d8de}
+      \strng{bibnamehash}{bdd95750033c6d1e71751acaf3c3d8de}
+      \strng{authorbibnamehash}{bdd95750033c6d1e71751acaf3c3d8de}
+      \strng{authornamehash}{bdd95750033c6d1e71751acaf3c3d8de}
+      \strng{authorfullhash}{bdd95750033c6d1e71751acaf3c3d8de}
+      \strng{authorfullhashraw}{bdd95750033c6d1e71751acaf3c3d8de}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{I2C Bus Specification and User Manual}
+      \field{year}{2021}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.nxp.com/docs/en/user-guide/UM10204.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.nxp.com/docs/en/user-guide/UM10204.pdf
+      \endverb
+    \endentry
+    \entry{Camera_DVPI_spec}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=3eaac2a04552d94ab7ca389d62b8053f}{%
+           family={OmniVision\bibnamedelima Technologies},
+           familyi={O\bibinitperiod\bibinitdelim T\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{3eaac2a04552d94ab7ca389d62b8053f}
+      \strng{fullhash}{3eaac2a04552d94ab7ca389d62b8053f}
+      \strng{fullhashraw}{3eaac2a04552d94ab7ca389d62b8053f}
+      \strng{bibnamehash}{3eaac2a04552d94ab7ca389d62b8053f}
+      \strng{authorbibnamehash}{3eaac2a04552d94ab7ca389d62b8053f}
+      \strng{authornamehash}{3eaac2a04552d94ab7ca389d62b8053f}
+      \strng{authorfullhash}{3eaac2a04552d94ab7ca389d62b8053f}
+      \strng{authorfullhashraw}{3eaac2a04552d94ab7ca389d62b8053f}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{OV2640 Camera Module Datasheet}
+      \field{year}{2020}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.uctronics.com/download/cam_module/OV2640DS.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.uctronics.com/download/cam_module/OV2640DS.pdf
+      \endverb
+    \endentry
+    \entry{GPIO_spec}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=b1d5d0040be4721ebd66cd10ec68502c}{%
+           family={Systems},
+           familyi={S\bibinitperiod},
+           given={Espressif},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{b1d5d0040be4721ebd66cd10ec68502c}
+      \strng{fullhash}{b1d5d0040be4721ebd66cd10ec68502c}
+      \strng{fullhashraw}{b1d5d0040be4721ebd66cd10ec68502c}
+      \strng{bibnamehash}{b1d5d0040be4721ebd66cd10ec68502c}
+      \strng{authorbibnamehash}{b1d5d0040be4721ebd66cd10ec68502c}
+      \strng{authornamehash}{b1d5d0040be4721ebd66cd10ec68502c}
+      \strng{authorfullhash}{b1d5d0040be4721ebd66cd10ec68502c}
+      \strng{authorfullhashraw}{b1d5d0040be4721ebd66cd10ec68502c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ESP32 Technical Reference Manual}
+      \field{year}{2016}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://documentation.espressif.com/esp32_technical_reference_manual_en.pdf
+      \endverb
+      \verb{url}
+      \verb https://documentation.espressif.com/esp32_technical_reference_manual_en.pdf
+      \endverb
     \endentry
     \entry{rtos}{manual}{}{}
       \name{author}{1}{}{%
@@ -589,6 +601,7 @@
       \field{labeltitlesource}{title}
       \field{title}{FreeRTOS Scheduler and Scheduling Policies}
       \field{year}{2022}
+      \true{nocite}
       \verb{urlraw}
       \verb https://www.freertos.org/
       \endverb
@@ -618,6 +631,7 @@
       \field{labeltitlesource}{title}
       \field{title}{The JSON Data Interchange Syntax (ECMA-404)}
       \field{year}{2017}
+      \true{nocite}
       \verb{urlraw}
       \verb https://www.ecma-international.org/wp-content/uploads/ECMA-404_2nd_edition_december_2017.pdf
       \endverb
@@ -647,6 +661,7 @@
       \field{labeltitlesource}{title}
       \field{title}{Improving Feature Extraction for Sensor Fault Detection in Low-Power IoT Systems}
       \field{year}{2025}
+      \true{nocite}
       \verb{urlraw}
       \verb https://www.researchgate.net/publication/393103517
       \endverb

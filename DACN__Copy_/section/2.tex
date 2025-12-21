@@ -1,83 +1,84 @@
 \section{Cơ sở lý thuyết}
-\subsection{Kiến trúc hệ thống IoT}
 
-\subsubsection{Mô hình kiến trúc phân lớp (Layered Architecture)}
-Hệ thống được thiết kế dựa trên mô hình kiến trúc phân lớp (Layered Architecture) kết hợp với hướng sự kiện (Event-driven). Việc phân chia này giúp tách biệt các mối 
-quan tâm (Separation of Concerns), trong đó việc thu thập dữ liệu từ thiết bị và việc xử lý logic nghiệp vụ được độc lập với nhau \cite{iot_arch_2015}. Kiến trúc bao gồm các 
-tầng chính:
-\begin{itemize}
-    \item \textbf{Physical Layer:} Các thiết bị ESP32 thu thập dữ liệu môi trường.
-    \item \textbf{Integration Layer:} Đóng vai trò trung gian tiếp nhận dữ liệu qua RabbitMQ và điều phối API qua Gateway.
-    \item \textbf{Business Layer:} Nơi xử lý logic chính, được xây dựng trên nền tảng NestJS.
-    \item \textbf{Database Layer:} Lưu trữ dữ liệu quan hệ và chuỗi thời gian.
-\end{itemize}
+% \subsection{Kiến trúc hệ thống IoT}
 
-\subsubsection{Tầng Xử lý nghiệp vụ với NestJS}
-Đối với tầng Business Layer, nhóm nghiên cứu lựa chọn \textbf{NestJS} - một framework mã nguồn mở dành cho việc xây dựng các ứng dụng phía máy chủ (server - side) hiệu quả và 
-dễ mở rộng trên nền tảng Node.js \cite{nestjs_docs}.
+% \subsubsection{Mô hình kiến trúc phân lớp (Layered Architecture)}
+% Hệ thống được thiết kế dựa trên mô hình kiến trúc phân lớp (Layered Architecture) kết hợp với hướng sự kiện (Event-driven). Việc phân chia này giúp tách biệt các mối 
+% quan tâm (Separation of Concerns), trong đó việc thu thập dữ liệu từ thiết bị và việc xử lý logic nghiệp vụ được độc lập với nhau \cite{iot_arch_2015}. Kiến trúc bao gồm các 
+% tầng chính:
+% \begin{itemize}
+%     \item \textbf{Physical Layer:} Các thiết bị ESP32 thu thập dữ liệu môi trường.
+%     \item \textbf{Integration Layer:} Đóng vai trò trung gian tiếp nhận dữ liệu qua RabbitMQ và điều phối API qua Gateway.
+%     \item \textbf{Business Layer:} Nơi xử lý logic chính, được xây dựng trên nền tảng NestJS.
+%     \item \textbf{Database Layer:} Lưu trữ dữ liệu quan hệ và chuỗi thời gian.
+% \end{itemize}
 
-Các lý do chính cho việc lựa chọn NestJS trong đề tài này bao gồm:
+% \subsubsection{Tầng Xử lý nghiệp vụ với NestJS}
+% Đối với tầng Business Layer, nhóm nghiên cứu lựa chọn \textbf{NestJS} - một framework mã nguồn mở dành cho việc xây dựng các ứng dụng phía máy chủ (server - side) hiệu quả và 
+% dễ mở rộng trên nền tảng Node.js \cite{nestjs_docs}.
 
-\begin{enumerate}
-    \item \textbf{Hỗ trợ kiến trúc Microservices và Giao tiếp bất đồng bộ:} 
-    Đây là yếu tố quan trọng nhất. Khác với các framework truyền thống, NestJS cung cấp cơ chế tích hợp sẵn (out - of - the - box) với các Message Broker như \textbf{RabbitMQ}. 
-    Điều này cho phép Backend dễ dàng chuyển đổi sang mô hình hướng sự kiện (Event - driven), giúp hệ thống có thể xử lý hàng nghìn thông điệp từ cảm biến gửi về đồng thời mà 
-    không bị tắc nghẽn (Non - blocking I/O) \cite{nestjs_docs}.
+% Các lý do chính cho việc lựa chọn NestJS trong đề tài này bao gồm:
+
+% \begin{enumerate}
+%     \item \textbf{Hỗ trợ kiến trúc Microservices và Giao tiếp bất đồng bộ:} 
+%     Đây là yếu tố quan trọng nhất. Khác với các framework truyền thống, NestJS cung cấp cơ chế tích hợp sẵn (out - of - the - box) với các Message Broker như \textbf{RabbitMQ}. 
+%     Điều này cho phép Backend dễ dàng chuyển đổi sang mô hình hướng sự kiện (Event - driven), giúp hệ thống có thể xử lý hàng nghìn thông điệp từ cảm biến gửi về đồng thời mà 
+%     không bị tắc nghẽn (Non - blocking I/O) \cite{nestjs_docs}.
     
-    \item \textbf{Kiến trúc Module hóa (Modularity):}
-    NestJS tổ chức mã nguồn thành các Module riêng biệt (như \textit{AuthModule}, \textit{FarmModule}, \textit{DeviceModule}). Cấu trúc này rất phù hợp với bài toán quản 
-    lý đa nông trại, giúp nhóm phát triển dễ dàng bảo trì, mở rộng tính năng cho từng phân hệ mà không ảnh hưởng đến toàn bộ hệ thống.
+%     \item \textbf{Kiến trúc Module hóa (Modularity):}
+%     NestJS tổ chức mã nguồn thành các Module riêng biệt (như \textit{AuthModule}, \textit{FarmModule}, \textit{DeviceModule}). Cấu trúc này rất phù hợp với bài toán quản 
+%     lý đa nông trại, giúp nhóm phát triển dễ dàng bảo trì, mở rộng tính năng cho từng phân hệ mà không ảnh hưởng đến toàn bộ hệ thống.
     
-    \item \textbf{Sử dụng TypeScript:}
-    Việc sử dụng TypeScript giúp đảm bảo tính chặt chẽ của dữ liệu (Type safety) \cite{typescript_lang}. Trong các hệ thống IoT, việc định nghĩa chính xác kiểu 
-    dữ liệu (Data Payload) từ cảm biến là rất quan trọng để tránh các lỗi logic tiềm ẩn trong quá trình xử lý.
-\end{enumerate}
+%     \item \textbf{Sử dụng TypeScript:}
+%     Việc sử dụng TypeScript giúp đảm bảo tính chặt chẽ của dữ liệu (Type safety) \cite{typescript_lang}. Trong các hệ thống IoT, việc định nghĩa chính xác kiểu 
+%     dữ liệu (Data Payload) từ cảm biến là rất quan trọng để tránh các lỗi logic tiềm ẩn trong quá trình xử lý.
+% \end{enumerate}
 
-\subsection{Hệ quản trị Cơ sở dữ liệu quan hệ (PostgreSQL)}
+% \subsection{Hệ quản trị Cơ sở dữ liệu quan hệ (PostgreSQL)}
 
-Trước khi áp dụng các công nghệ chuyên biệt cho dữ liệu chuỗi thời gian, hệ thống cần một nền tảng vững chắc để quản lý các dữ liệu có cấu trúc (Structured Data) như thông tin 
-người dùng, danh sách nông trại, và quyền truy cập. Nhóm nghiên cứu lựa chọn \textbf{PostgreSQL} vì các đặc tính kỹ thuật vượt trội sau \cite{postgres_docs}:
+% Trước khi áp dụng các công nghệ chuyên biệt cho dữ liệu chuỗi thời gian, hệ thống cần một nền tảng vững chắc để quản lý các dữ liệu có cấu trúc (Structured Data) như thông tin 
+% người dùng, danh sách nông trại, và quyền truy cập. Nhóm nghiên cứu lựa chọn \textbf{PostgreSQL} vì các đặc tính kỹ thuật vượt trội sau \cite{postgres_docs}:
 
-\subsubsection{Tuân thủ chuẩn ACID và Độ tin cậy cao}
-Đối với các phân hệ quản lý (User \& Farm Management), tính toàn vẹn dữ liệu là ưu tiên hàng đầu. PostgreSQL tuân thủ nghiêm ngặt chuẩn ACID (Atomicity, Consistency, Isolation, 
-Durability), đảm bảo các giao dịch quan trọng (như tạo mới nông trại, phân quyền người dùng) luôn được thực hiện chính xác và an toàn, ngay cả khi hệ thống gặp sự cố bất ngờ.
+% \subsubsection{Tuân thủ chuẩn ACID và Độ tin cậy cao}
+% Đối với các phân hệ quản lý (User \& Farm Management), tính toàn vẹn dữ liệu là ưu tiên hàng đầu. PostgreSQL tuân thủ nghiêm ngặt chuẩn ACID (Atomicity, Consistency, Isolation, 
+% Durability), đảm bảo các giao dịch quan trọng (như tạo mới nông trại, phân quyền người dùng) luôn được thực hiện chính xác và an toàn, ngay cả khi hệ thống gặp sự cố bất ngờ.
 
-\subsubsection{Hỗ trợ dữ liệu bán cấu trúc (JSONB)}
-Trong các hệ thống IoT, cấu hình của thiết bị (Device Configurations) thường đa dạng và thay đổi tùy theo loại cảm biến. PostgreSQL cung cấp kiểu dữ liệu \textbf{JSONB}, cho 
-phép lưu trữ các thuộc tính động này một cách linh hoạt mà không cần thay đổi cấu trúc bảng (Schema migration). Điều này giúp hệ thống tận dụng được sự linh hoạt của NoSQL (như 
-MongoDB) ngay bên trong một cơ sở dữ liệu quan hệ mạnh mẽ.
+% \subsubsection{Hỗ trợ dữ liệu bán cấu trúc (JSONB)}
+% Trong các hệ thống IoT, cấu hình của thiết bị (Device Configurations) thường đa dạng và thay đổi tùy theo loại cảm biến. PostgreSQL cung cấp kiểu dữ liệu \textbf{JSONB}, cho 
+% phép lưu trữ các thuộc tính động này một cách linh hoạt mà không cần thay đổi cấu trúc bảng (Schema migration). Điều này giúp hệ thống tận dụng được sự linh hoạt của NoSQL (như 
+% MongoDB) ngay bên trong một cơ sở dữ liệu quan hệ mạnh mẽ.
 
-\subsubsection{Khả năng mở rộng (Extensibility)}
-Khác với các hệ quản trị CSDL khác, PostgreSQL được thiết kế để dễ dàng mở rộng thông qua các \textit{Extensions}. Đây chính là tiền đề kỹ thuật quan trọng để nhóm nghiên cứu 
-có thể tích hợp \textbf{TimescaleDB} (một Extension của PostgreSQL) vào hệ thống, biến PostgreSQL thành một cơ sở dữ liệu lai (Hybrid) mạnh mẽ: vừa xử lý tốt dữ liệu quan hệ, 
-vừa tối ưu cho dữ liệu chuỗi thời gian.
+% \subsubsection{Khả năng mở rộng (Extensibility)}
+% Khác với các hệ quản trị CSDL khác, PostgreSQL được thiết kế để dễ dàng mở rộng thông qua các \textit{Extensions}. Đây chính là tiền đề kỹ thuật quan trọng để nhóm nghiên cứu 
+% có thể tích hợp \textbf{TimescaleDB} (một Extension của PostgreSQL) vào hệ thống, biến PostgreSQL thành một cơ sở dữ liệu lai (Hybrid) mạnh mẽ: vừa xử lý tốt dữ liệu quan hệ, 
+% vừa tối ưu cho dữ liệu chuỗi thời gian.
 
-\subsection{Cơ sở dữ liệu chuỗi thời gian (Time - series Database)}
+% \subsection{Cơ sở dữ liệu chuỗi thời gian (Time - series Database)}
 
-Đặc thù của hệ thống giám sát nông nghiệp là việc thu thập dữ liệu môi trường (nhiệt độ, độ ẩm, ánh sáng) diễn ra liên tục theo thời gian thực. Dữ liệu này có tính chất "chỉ 
-thêm vào" (append - only) và khối lượng tăng trưởng rất nhanh theo thời gian \cite{tsdb_importance}. Các hệ quản trị cơ sở dữ liệu quan hệ (RDBMS) truyền thống thường gặp vấn 
-đề về hiệu năng truy vấn (Query performance) khi bảng dữ liệu đạt kích thước hàng triệu bản ghi.
+% Đặc thù của hệ thống giám sát nông nghiệp là việc thu thập dữ liệu môi trường (nhiệt độ, độ ẩm, ánh sáng) diễn ra liên tục theo thời gian thực. Dữ liệu này có tính chất "chỉ 
+% thêm vào" (append - only) và khối lượng tăng trưởng rất nhanh theo thời gian \cite{tsdb_importance}. Các hệ quản trị cơ sở dữ liệu quan hệ (RDBMS) truyền thống thường gặp vấn 
+% đề về hiệu năng truy vấn (Query performance) khi bảng dữ liệu đạt kích thước hàng triệu bản ghi.
 
-Để giải quyết vấn đề này, nhóm nghiên cứu lựa chọn \textbf{TimescaleDB} - một cơ sở dữ liệu chuỗi thời gian mã nguồn mở được xây dựng dựa trên PostgreSQL. Các ưu điểm kỹ thuật 
-nổi bật bao gồm \cite{timescaledb_docs}:
+% Để giải quyết vấn đề này, nhóm nghiên cứu lựa chọn \textbf{TimescaleDB} - một cơ sở dữ liệu chuỗi thời gian mã nguồn mở được xây dựng dựa trên PostgreSQL. Các ưu điểm kỹ thuật 
+% nổi bật bao gồm \cite{timescaledb_docs}:
 
-\subsubsection{Kiến trúc Hypertables}
-TimescaleDB giới thiệu khái niệm \textbf{Hypertables} - một lớp trừu tượng hóa (abstraction layer) giúp tự động phân mảnh dữ liệu (partitioning) theo thời gian và không gian. 
-\begin{itemize}
-    \item Đối với ứng dụng (NestJS), Hypertable hoạt động giống như một bảng SQL bình thường.
-    \item Tuy nhiên, ở tầng vật lý, dữ liệu được chia nhỏ thành các \textit{Chunks}. Khi thực hiện truy vấn dữ liệu lịch sử (ví dụ: vẽ biểu đồ nhiệt độ trong 7 ngày qua), 
-    TimescaleDB chỉ cần quét các Chunks liên quan thay vì quét toàn bộ bảng, giúp tăng tốc độ truy vấn lên hàng trăm lần so với PostgreSQL thuần.
-\end{itemize}
+% \subsubsection{Kiến trúc Hypertables}
+% TimescaleDB giới thiệu khái niệm \textbf{Hypertables} - một lớp trừu tượng hóa (abstraction layer) giúp tự động phân mảnh dữ liệu (partitioning) theo thời gian và không gian. 
+% \begin{itemize}
+%     \item Đối với ứng dụng (NestJS), Hypertable hoạt động giống như một bảng SQL bình thường.
+%     \item Tuy nhiên, ở tầng vật lý, dữ liệu được chia nhỏ thành các \textit{Chunks}. Khi thực hiện truy vấn dữ liệu lịch sử (ví dụ: vẽ biểu đồ nhiệt độ trong 7 ngày qua), 
+%     TimescaleDB chỉ cần quét các Chunks liên quan thay vì quét toàn bộ bảng, giúp tăng tốc độ truy vấn lên hàng trăm lần so với PostgreSQL thuần.
+% \end{itemize}
 
-\subsubsection{Khả năng nén và quản lý vòng đời dữ liệu}
-Trong IoT, dữ liệu cũ (ví dụ: dữ liệu từ năm ngoái) thường ít giá trị hơn dữ liệu mới. TimescaleDB cung cấp cơ chế:
-\begin{itemize}
-    \item \textbf{Data Retention Policy:} Tự động xóa dữ liệu quá cũ (ví dụ: sau 1 năm) để giải phóng dung lượng lưu trữ mà không cần chạy các cron job thủ công.
-    \item \textbf{Native Compression:} Nén dữ liệu lịch sử giúp giảm tới 90\% dung lượng đĩa cứng, tiết kiệm chi phí vận hành cho hệ thống.
-\end{itemize}
+% \subsubsection{Khả năng nén và quản lý vòng đời dữ liệu}
+% Trong IoT, dữ liệu cũ (ví dụ: dữ liệu từ năm ngoái) thường ít giá trị hơn dữ liệu mới. TimescaleDB cung cấp cơ chế:
+% \begin{itemize}
+%     \item \textbf{Data Retention Policy:} Tự động xóa dữ liệu quá cũ (ví dụ: sau 1 năm) để giải phóng dung lượng lưu trữ mà không cần chạy các cron job thủ công.
+%     \item \textbf{Native Compression:} Nén dữ liệu lịch sử giúp giảm tới 90\% dung lượng đĩa cứng, tiết kiệm chi phí vận hành cho hệ thống.
+% \end{itemize}
 
-\subsubsection{Tính thống nhất trong hệ sinh thái (SQL Compatibility)}
-Vì TimescaleDB bản chất là một Extension của PostgreSQL, nhóm nghiên cứu có thể sử dụng cùng một ngôn ngữ truy vấn \textbf{SQL} và cùng một driver kết nối cho cả dữ liệu nghiệp 
-vụ (User/Farm - PostgreSQL) và dữ liệu cảm biến (Sensor Data - TimescaleDB). Điều này giúp giảm độ phức tạp khi phát triển và bảo trì hệ thống.
+% \subsubsection{Tính thống nhất trong hệ sinh thái (SQL Compatibility)}
+% Vì TimescaleDB bản chất là một Extension của PostgreSQL, nhóm nghiên cứu có thể sử dụng cùng một ngôn ngữ truy vấn \textbf{SQL} và cùng một driver kết nối cho cả dữ liệu nghiệp 
+% vụ (User/Farm - PostgreSQL) và dữ liệu cảm biến (Sensor Data - TimescaleDB). Điều này giúp giảm độ phức tạp khi phát triển và bảo trì hệ thống.
 
 \input{section/2_quy.tex}
