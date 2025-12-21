@@ -112,12 +112,6 @@
       \field{journaltitle}{Cổng Thông tin điện tử Chính phủ}
       \field{title}{Thủ tướng: Ngành nông nghiệp phải tăng tốc, bứt phá, xuất khẩu 70 tỷ USD trong năm 2025}
       \field{year}{2024}
-      \verb{urlraw}
-      \verb https://baochinhphu.vn/
-      \endverb
-      \verb{url}
-      \verb https://baochinhphu.vn/
-      \endverb
     \endentry
     \entry{vietnamreport2024}{misc}{}{}
       \name{author}{1}{}{%
@@ -282,12 +276,6 @@
       \field{title}{NestJS Documentation: Introduction and Fundamentals}
       \field{year}{2024}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://docs.nestjs.com/
-      \endverb
-      \verb{url}
-      \verb https://docs.nestjs.com/
-      \endverb
     \endentry
     \entry{typescript_lang}{manual}{}{}
       \name{author}{1}{}{%
@@ -310,12 +298,6 @@
       \field{title}{TypeScript: Typed JavaScript at Any Scale}
       \field{year}{2024}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://www.typescriptlang.org/
-      \endverb
-      \verb{url}
-      \verb https://www.typescriptlang.org/
-      \endverb
     \endentry
     \entry{mqtt_spec}{manual}{}{}
       \name{author}{1}{}{%
@@ -338,12 +320,6 @@
       \field{title}{MQTT Version 5.0 Committee Specification}
       \field{year}{2019}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
-      \endverb
-      \verb{url}
-      \verb https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
-      \endverb
     \endentry
     \entry{http_rfc}{report}{}{}
       \true{moreauthor}
@@ -397,12 +373,6 @@
       \field{title}{PostgreSQL 16.0 Documentation}
       \field{year}{2024}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://www.postgresql.org/docs/current/
-      \endverb
-      \verb{url}
-      \verb https://www.postgresql.org/docs/current/
-      \endverb
     \endentry
     \entry{timescaledb_docs}{manual}{}{}
       \name{author}{1}{}{%
@@ -426,12 +396,6 @@
       \field{title}{TimescaleDB Documentation: Hypertables and Chunking}
       \field{year}{2024}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://docs.timescale.com/
-      \endverb
-      \verb{url}
-      \verb https://docs.timescale.com/
-      \endverb
     \endentry
     \entry{tsdb_importance}{article}{}{}
       \true{moreauthor}
@@ -484,12 +448,6 @@
       \field{title}{ESP32 Series Datasheet}
       \field{year}{2024}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://documentation.espressif.com/esp32_datasheet_en.pdf
-      \endverb
-      \verb{url}
-      \verb https://documentation.espressif.com/esp32_datasheet_en.pdf
-      \endverb
     \endentry
     \entry{I2C_spec}{manual}{}{}
       \name{author}{1}{}{%
@@ -514,12 +472,6 @@
       \field{title}{I2C Bus Specification and User Manual}
       \field{year}{2021}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://www.nxp.com/docs/en/user-guide/UM10204.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.nxp.com/docs/en/user-guide/UM10204.pdf
-      \endverb
     \endentry
     \entry{Camera_DVPI_spec}{manual}{}{}
       \name{author}{1}{}{%
@@ -544,12 +496,6 @@
       \field{title}{OV2640 Camera Module Datasheet}
       \field{year}{2020}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://www.uctronics.com/download/cam_module/OV2640DS.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.uctronics.com/download/cam_module/OV2640DS.pdf
-      \endverb
     \endentry
     \entry{GPIO_spec}{manual}{}{}
       \name{author}{1}{}{%
@@ -574,12 +520,6 @@
       \field{title}{ESP32 Technical Reference Manual}
       \field{year}{2016}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://documentation.espressif.com/esp32_technical_reference_manual_en.pdf
-      \endverb
-      \verb{url}
-      \verb https://documentation.espressif.com/esp32_technical_reference_manual_en.pdf
-      \endverb
     \endentry
     \entry{rtos}{manual}{}{}
       \name{author}{1}{}{%
@@ -602,12 +542,6 @@
       \field{title}{FreeRTOS Scheduler and Scheduling Policies}
       \field{year}{2022}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://www.freertos.org/
-      \endverb
-      \verb{url}
-      \verb https://www.freertos.org/
-      \endverb
     \endentry
     \entry{json_spec}{manual}{}{}
       \name{author}{1}{}{%
@@ -632,12 +566,6 @@
       \field{title}{The JSON Data Interchange Syntax (ECMA-404)}
       \field{year}{2017}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://www.ecma-international.org/wp-content/uploads/ECMA-404_2nd_edition_december_2017.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.ecma-international.org/wp-content/uploads/ECMA-404_2nd_edition_december_2017.pdf
-      \endverb
     \endentry
     \entry{RFE_spec}{manual}{}{}
       \name{author}{1}{}{%
@@ -662,12 +590,6 @@
       \field{title}{Improving Feature Extraction for Sensor Fault Detection in Low-Power IoT Systems}
       \field{year}{2025}
       \true{nocite}
-      \verb{urlraw}
-      \verb https://www.researchgate.net/publication/393103517
-      \endverb
-      \verb{url}
-      \verb https://www.researchgate.net/publication/393103517
-      \endverb
     \endentry
   \enddatalist
 \endrefsection

@@ -437,6 +437,8 @@ INPUT D:\LaTeX\tex\latex\biblatex\biblatex.cfg
 INPUT D:\LaTeX\tex\latex\biblatex\biblatex.cfg
 INPUT D:\LaTeX\tex\latex\biblatex\blx-case-expl3.sty
 INPUT D:\LaTeX\tex\latex\biblatex\blx-case-expl3.sty
+INPUT D:\LaTeX\tex\latex\tocloft\tocloft.sty
+INPUT D:\LaTeX\tex\latex\tocloft\tocloft.sty
 INPUT D:\LaTeX\tex\latex\media9\pdfbase.sty
 INPUT D:\LaTeX\tex\latex\media9\pdfbase.sty
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.aux
@@ -504,6 +506,7 @@ INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr12.tfm
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
+OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
@@ -516,11 +519,6 @@ INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr5.tfm
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnbx5.tfm
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr7.tfm
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt8.tfm
-OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
@@ -529,10 +527,6 @@ INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lot
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lot
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lot
 OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lot
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr9.tfm
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnbx9.tfm
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnti9.tfm

@@ -33,7 +33,9 @@
 \usepackage{setspace}
 \usepackage{epsfig}
 \usepackage{tikz}
-
+% \usepackage{titlesec}
+% % \titlespacing*{<lệnh>}{<thụt lề trái>}{<cách đoạn trên>}{<cách đoạn dưới>}
+% \titlespacing*{\section}{1cm}{0ex plus 10ex minus .2ex}{2.3ex plus .2ex}
 \usepackage{listingsutf8}
 \setlength{\marginparwidth}{2cm} % Ensure todonotes fits in margin
 \usepackage{todonotes}
@@ -51,6 +53,11 @@
 %\usepackage{pstcol} 								% PSTricks with the standard color package
 
 %https://tex.stackexchange.com/questions/516029/media9-is-becoming-obsolete-dec-2020-any-alternatives-for-embedding-video-audio/516102#516102 
+\usepackage{tocloft}
+
+% Chỉnh cho SECTION (Cấp 1)
+% Mặc định khoảng 1.5em, tăng lên 3em hoặc 4em để chữ cách xa số ra
+\setlength{\cftsecnumwidth}{6em}
 \usepackage[bigfiles]{pdfbase}
 \ExplSyntaxOn
 \NewDocumentCommand\embedvideo{smm}{
@@ -204,12 +211,14 @@
 \makeatletter
 \newcounter {subsubsubsection}[subsubsection]
 \renewcommand\thesubsubsubsection{\thesubsubsection .\@alph\c@subsubsubsection}
+
 \newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
                                      {\normalfont\normalsize\bfseries}}
-\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+\newcommand*\l@subsubsubsection{\@dottedtocline{3}{8.0em}{4.1em}}
 \newcommand*{\subsubsubsectionmark}[1]{}
+
 \makeatother
 
 \everymath{\color{black}}%make in-line maths symbols blue to read/check easily
@@ -274,8 +283,9 @@ KHOA KHOA HỌC \& KỸ THUẬT MÁY TÍNH
 \begin{table}[h]
 \begin{tabular}{rrrl}
 \hspace{2.5cm}
-& \large{GVHD:} & \large{Hoàng Lê Hải Thanh} \\
-& & \large{Trần Nguyễn Minh Duy} \\
+& \large{GVHD:} & \large{PGS.TS. Thoại Nam} \\
+& & \large{ThS. Hoàng Lê Hải Thanh} \\
+& & \large{CN. Trần Nguyễn Minh Duy} \\
 & \large{Sinh viên:} & \large{Lê Hoàng Việt} & \large{2252903}\\
 & & \large{Chế Minh Đức} & \large{2210783}\\
 & & \large{Nguyễn Phú Quý} & \large{2212871}\\
