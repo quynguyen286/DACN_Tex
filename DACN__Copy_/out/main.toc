@@ -91,8 +91,8 @@
 \contentsline {subsection}{\numberline {7.2}Công việc đã hoàn thành trong giai đoạn Đồ án Chuyên ngành}{54}{subsection.7.2}%
 \contentsline {subsection}{\numberline {7.3}Định hướng thực hiện Đồ án Tốt nghiệp}{54}{subsection.7.3}%
 \contentsline {subsection}{\numberline {7.4}Bài học kinh nghiệm và Góc nhìn phản tư}{55}{subsection.7.4}%
-\contentsline {section}{\numberline {Phụ lục A}Sơ đồ Cơ sở dữ liệu vật lý (Physical ERD)}{56}{appendix.A}%
-\contentsline {section}{\numberline {Phụ lục B}Danh sách các API chính (API Specifications)}{56}{appendix.B}%
-\contentsline {section}{\numberline {Phụ lục C}Danh sách linh kiện phần cứng (Bill of Materials)}{57}{appendix.C}%
-\contentsline {section}{\numberline {Phụ lục D}Bảng so sánh các giải pháp tham khảo}{58}{appendix.D}%
+\contentsline {section}{\numberline {A}Sơ đồ Cơ sở dữ liệu vật lý (Physical ERD)}{56}{appendix.A}%
+\contentsline {section}{\numberline {B}Danh sách các API chính (API Specifications)}{56}{appendix.B}%
+\contentsline {section}{\numberline {C}Danh sách linh kiện phần cứng (Bill of Materials)}{57}{appendix.C}%
+\contentsline {section}{\numberline {D}Bảng so sánh các giải pháp tham khảo}{58}{appendix.D}%
 \contentsline {section}{Tài liệu tham khảo}{59}{appendix.D}%

@@ -53,11 +53,7 @@
 %\usepackage{pstcol} 								% PSTricks with the standard color package
 
 %https://tex.stackexchange.com/questions/516029/media9-is-becoming-obsolete-dec-2020-any-alternatives-for-embedding-video-audio/516102#516102 
-\usepackage{tocloft}
 
-% Chỉnh cho SECTION (Cấp 1)
-% Mặc định khoảng 1.5em, tăng lên 3em hoặc 4em để chữ cách xa số ra
-\setlength{\cftsecnumwidth}{6em}
 \usepackage[bigfiles]{pdfbase}
 \ExplSyntaxOn
 \NewDocumentCommand\embedvideo{smm}{
@@ -204,7 +200,11 @@
 \renewcommand{\headrulewidth}{0.3pt}
 \renewcommand{\footrulewidth}{0.3pt}
 
+\usepackage{tocloft}
 
+% Chỉnh cho SECTION (Cấp 1)
+% Mặc định khoảng 1.5em, tăng lên 3em hoặc 4em để chữ cách xa số ra
+\setlength{\cftsecnumwidth}{1.5em}
 %%%
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{3}
