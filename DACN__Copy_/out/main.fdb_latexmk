@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber out/main"] 1766311233.6728 "out/main.bcf" "out/main.bbl" "out/main" 1766313386.65031 0
-  "out/main.bcf" 1766313386 108299 e2497cb9a4773afe6c30897a73a482f5 "pdflatex"
+["biber out/main"] 1766311233.6728 "out/main.bcf" "out/main.bbl" "out/main" 1766313637.37896 0
+  "out/main.bcf" 1766313636 108299 e2497cb9a4773afe6c30897a73a482f5 "pdflatex"
   "section/references.bib" 1766311233 3927 44db9f4844558f021e8bb5dedebafe9c ""
   (generated)
   "out/main.bbl"
   "out/main.blg"
   (rewritten before read)
-["pdflatex"] 1766313371.57348 "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" "out/main.pdf" "main" 1766313386.65106 0
+["pdflatex"] 1766313615.56932 "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" "out/main.pdf" "main" 1766313637.38006 0
   "C:/Users/QUÝ/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1766310901 90743 50802c16d91daf99d49a1a63721c47e3 ""
   "C:/Users/QUÝ/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm0900.pk" 1765777521 10472 f55946eeb677e60dcee6df3ade5b89d7 ""
   "C:/Users/QUÝ/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1765687941 11548 fdf2a06a6ed088bb70bf6764728a941b ""
@@ -290,7 +290,7 @@
   "D:/LaTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "D:/LaTeX/tex/latex/zref/zref-abspage.sty" 1750428951 2269 2de6c7a5fd634dfef00a960544463a38 ""
   "D:/LaTeX/tex/latex/zref/zref-base.sty" 1750428951 20785 198a9cb2e04238d92c320d0d9edbd76a ""
-  "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" 1766313220 10799 a04b4df2b8a5c5962f636ad9f6778914 ""
+  "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" 1766313615 10793 43061eb2cf638c0ae4956a723b6aa007 ""
   "img/Device.png" 1765791117 72134 4c0f9fb43b32ff6f82b0147551ad5c0f ""
   "img/ERD.png" 1765619836 442257 92dc3638f027a99de698c9880b8a3773 ""
   "img/Farm.png" 1765791117 60806 3e9d962a32ff5bad8f34b492ce8a5b9d ""
@@ -316,14 +316,14 @@
   "img/reports.png" 1765619836 108385 5a14cc73a98338924a5e0da3a69ee37b ""
   "img/troubleshoot.png" 1765619836 98729 2c40e766640a7b0461f628925626b00d ""
   "img/troubleshoot_activity.png" 1765619836 99583 71176788115793fce7effb3ea873e7dd ""
-  "main.tex" 1766313220 10799 a04b4df2b8a5c5962f636ad9f6778914 ""
-  "out/main.aux" 1766313386 25775 650cf19267494be2894a91b6f5711b77 "pdflatex"
+  "main.tex" 1766313615 10793 43061eb2cf638c0ae4956a723b6aa007 ""
+  "out/main.aux" 1766313636 25775 650cf19267494be2894a91b6f5711b77 "pdflatex"
   "out/main.bbl" 1766311242 25768 7bf0a16c8babd671096e0c8f0f4af9fd "biber out/main"
-  "out/main.lof" 1766313386 3091 7f9a424a2718d80b3b523be46e86bcf1 "pdflatex"
-  "out/main.lot" 1766313386 788 e41538f12486a22ce71660d4bf9c7702 "pdflatex"
-  "out/main.out" 1766313386 23802 fc7e85c2b4d2f4ecdeb9a35177b3786e "pdflatex"
-  "out/main.run.xml" 1766313386 2410 fd3683b47dae39bbb9e60917a6b5d0b8 "pdflatex"
-  "out/main.toc" 1766313386 10800 2004c5f819bf1cbc3f74f91f3c41b03a "pdflatex"
+  "out/main.lof" 1766313636 3091 7f9a424a2718d80b3b523be46e86bcf1 "pdflatex"
+  "out/main.lot" 1766313636 788 e41538f12486a22ce71660d4bf9c7702 "pdflatex"
+  "out/main.out" 1766313636 23802 fc7e85c2b4d2f4ecdeb9a35177b3786e "pdflatex"
+  "out/main.run.xml" 1766313636 2410 fd3683b47dae39bbb9e60917a6b5d0b8 "pdflatex"
+  "out/main.toc" 1766313636 10800 2004c5f819bf1cbc3f74f91f3c41b03a "pdflatex"
   "section/1.tex" 1765778202 7296 59ef36a16b7bf1a1fb1c49a3ef38a479 ""
   "section/2.tex" 1766298645 8130 054c7090b64f3207806545146e6e2d24 ""
   "section/2_quy.tex" 1766305938 32934 ae8adf5d5acb8d0ab49f8db410d370db ""
@@ -333,7 +333,7 @@
   "section/4_quy.tex" 1765782712 18 59e4e068fb7039089a647fee4ce47a82 ""
   "section/4_viet.tex" 1765876085 10218 da8b1089f00745af7bcb96d595afdd52 ""
   "section/5.4_quy.tex" 1766311929 12018 b9763af171129d8024a858257bcd383d ""
-  "section/5.5_quy.tex" 1766313371 1885 41fb0f5364673ea1226ff8a0ee792893 ""
+  "section/5.5_quy.tex" 1766313546 1885 41fb0f5364673ea1226ff8a0ee792893 ""
   "section/5.tex" 1766298330 542 d7af99ac17569eeeb5cf9d41cbe2b639 ""
   "section/5_duc.tex" 1765876085 539 3437d0bab2e0cb410c559c04fe3cbc35 ""
   "section/5_duc_erd.tex" 1766298330 2964 21761cf88936e423f2c6ac453659805e ""
