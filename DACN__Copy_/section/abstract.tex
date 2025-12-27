@@ -1,0 +1,14 @@
+\section*{TÓM TẮT ĐỒ ÁN}
+
+\textbf{Tên đề tài:} Hệ thống quản lý nông trại thông minh
+
+\textbf{Tóm tắt:} \\
+Trong bối cảnh chuyển đổi số mạnh mẽ của ngành nông nghiệp Việt Nam, mô hình "Nông trại thông minh" đang trở thành xu hướng tất yếu để nâng cao năng suất và chất lượng nông sản. Tuy nhiên, việc triển khai thực tế đang đối mặt với thách thức lớn về sự phân mảnh của các thiết bị IoT đa nguồn gốc, độ tin cậy của dữ liệu cảm biến trong môi trường khắc nghiệt và rào cản kỹ thuật đối với những nhà quản lý không chuyên. Xuất phát từ thực tiễn đó, đề tài tập trung nghiên cứu và phát triển một hệ thống quản lý nông trại tập trung, nhằm cung cấp giải pháp vận hành thống nhất, đơn giản hóa trải nghiệm người dùng và đảm bảo tính toàn vẹn của dữ liệu giám sát.
+
+Để giải quyết bài toán trên, nhóm nghiên cứu đề xuất xây dựng hệ thống dựa trên kiến trúc phân lớp (Layered Architecture) kết hợp với hướng dịch vụ, đảm bảo khả năng mở rộng linh hoạt. Về mặt công nghệ, hệ thống tích hợp các giải pháp tiên tiến như NestJS cho Backend, RabbitMQ để xử lý hàng đợi thông điệp hiệu năng cao và TimescaleDB tối ưu cho lưu trữ dữ liệu chuỗi thời gian lớn. Tại lớp thiết bị biên, vi điều khiển ESP32 được vận hành trên hệ điều hành thời gian thực FreeRTOS với cơ chế đa luồng, giúp tối ưu hóa tác vụ đọc cảm biến và truyền tải dữ liệu. Điểm nổi bật trong hướng tiếp cận của đề tài là việc tích hợp thuật toán trích xuất đặc trưng mạnh (Robust Feature Extractor - RFE) và các quy tắc thống kê, cho phép hệ thống tự động phát hiện sớm các lỗi cảm biến phổ biến như trôi số liệu (drift), mất kết nối hoặc giá trị bất thường.
+
+Kết quả đạt được trong giai đoạn Đồ án chuyên ngành bao gồm việc hoàn thiện thiết kế kiến trúc tổng thể, xây dựng cơ sở dữ liệu vật lý chi tiết và đặc tả kỹ thuật cho các giao thức truyền thông lai (Hybrid Protocol MQTT/HTTP). Các phân tích và thiết kế này tạo nền tảng vững chắc cho giai đoạn hiện thực hóa sản phẩm, hướng tới mục tiêu triển khai một hệ thống thực tế có khả năng chịu tải trên 50 thiết bị đồng thời với độ trễ thấp và độ ổn định cao. Đề tài không chỉ mang ý nghĩa khoa học trong việc ứng dụng thuật toán phát hiện lỗi tại biên, mà còn có giá trị thực tiễn cao, góp phần tháo gỡ điểm nghẽn về công nghệ cho các mô hình kinh doanh nông nghiệp vừa và nhỏ.
+
+\textbf{Từ khóa:} \textit{Nông nghiệp thông minh, Quản lý tập trung, IoT, Phát hiện lỗi cảm biến.}
+
+\newpage

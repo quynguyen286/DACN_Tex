@@ -86,3 +86,67 @@ Các thành phần triển khai chính bao gồm:
         \item \textit{Client - Server:} Web Admin giao tiếp với hệ thống thông qua \textbf{HTTPS} (bảo mật) và \textbf{WebSocket} (để nhận cập nhật dữ liệu thời gian thực trên Dashboard).
     \end{itemize}
 \end{itemize}
+
+\paragraph{Đánh đổi kiến trúc và Rủi ro}
+Mặc dù kiến trúc phân lớp mang lại nhiều lợi ích về tính mô-đun và khả năng mở rộng, việc triển khai đòi hỏi đánh đổi về độ phức tạp. Nhóm đã cân nhắc kỹ lưỡng giữa lợi ích dài hạn (scalability, maintainability) và chi phí triển khai ban đầu. Chi tiết về phân tích đánh đổi được trình bày ở phần riêng sau.
+
+\subsection{Phân tích đánh đổi kiến trúc và Quản lý rủi ro}
+
+Việc lựa chọn kiến trúc phân lớp (Layered Architecture) kết hợp với các thành phần Microservices (như Worker tách rời) và Polyglot Persistence (đa cơ sở dữ liệu) mang lại khả năng mở rộng lớn, nhưng đồng thời cũng đặt ra bài toán về độ phức tạp khi triển khai. Dưới đây là phân tích chi tiết các đánh đổi (Trade-offs) và biện pháp giảm thiểu rủi ro của nhóm.
+
+\subsection{Tại sao không chọn kiến trúc Monolithic đơn giản?}
+Mặc dù kiến trúc nguyên khối (Monolithic) đơn giản, dễ triển khai (chỉ cần 1 Server + 1 DB), nhưng nhóm quyết định chọn kiến trúc phân tán hướng dịch vụ vì các lý do sau:
+
+\begin{itemize}
+    \item \textbf{Khả năng mở rộng độc lập (Scalability):} Module xử lý dữ liệu IoT (Worker) cần tài nguyên CPU cao để chạy thuật toán RFE, trong khi Web Server phục vụ API chỉ cần ít tài nguyên. Việc tách rời giúp nhóm có thể nhân bản (scale) Worker mà không ảnh hưởng đến Web API.
+    \item \textbf{Phù hợp làm việc nhóm:} Với 3 thành viên (Firmware, Backend, Frontend/AI), kiến trúc phân lớp giúp phân chia ranh giới công việc rõ ràng (Decoupling), tránh việc code chồng chéo (Merge conflicts) quá nhiều.
+    \item \textbf{Chuẩn bị cho Đồ án Tốt nghiệp:} Đồ án chuyên ngành là bước đệm. Việc xây dựng khung kiến trúc chuẩn ngay từ đầu giúp giai đoạn 2 chỉ cần tập trung phát triển tính năng mà không phải đập đi xây lại (Refactoring).
+\end{itemize}
+
+\subsection{Đánh đổi kỹ thuật}
+\begin{table}[H]
+    \centering
+    \caption{Bảng phân tích đánh đổi khi lựa chọn công nghệ}
+    \label{tab:tradeoff}
+    % 1. Tăng khoảng cách dòng lên 1.3 hoặc 1.5 cho dễ đọc
+    \renewcommand{\arraystretch}{1.5} 
+    
+    % 2. Định nghĩa lại cột X để tự động xuống dòng nhưng CĂN TRÁI (không bị giãn chữ)
+    % Cấu trúc: | p{chiều_rộng_cố_định} | >{\raggedright\arraybackslash}X | >{\raggedright\arraybackslash}X |
+    \begin{tabularx}{\textwidth}{|p{3.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \textbf{Quyết định kiến trúc} & \textbf{Lợi ích (Pros)} & \textbf{Cái giá phải trả (Cons)} \\
+    \hline
+    
+    \textbf{Sử dụng Message Queue (RabbitMQ)} & 
+    Đảm bảo tính bất đồng bộ, không mất dữ liệu khi Server quá tải (Back-pressure), giảm độ trễ phản hồi API. & 
+    Tăng độ phức tạp vận hành. Phải quản lý thêm một service Broker, khó debug luồng dữ liệu hơn so với gọi HTTP trực tiếp. \\
+    \hline
+    
+    \textbf{Polyglot Persistence (TimescaleDB + PostgreSQL)} & 
+    Tối ưu hóa truy vấn chuỗi thời gian (nhanh hơn 10x), nén dữ liệu tốt. & 
+    Phải quản lý schema phức tạp hơn. Cần kiến thức chuyên sâu về cả Relational và Time-series DB. \\
+    \hline
+    
+    \textbf{Containerization (Docker)} & 
+    Môi trường đồng nhất giữa Dev và Prod, dễ dàng triển khai. & 
+    Tốn tài nguyên hệ thống (RAM/CPU) hơn so với chạy Native trên máy ảo đơn giản. \\
+    \hline
+    
+    \end{tabularx}
+\end{table}
+
+\subsection{Rủi ro và Chiến lược giảm thiểu}
+Với quy mô của một đồ án sinh viên, việc vận hành hệ thống phức tạp tiềm ẩn nhiều rủi ro. Nhóm đã xác định và có phương án cụ thể:
+
+\begin{description}
+    \item[Rủi ro 1: Quá tải về mặt triển khai (DevOps Overhead)] \hfill \\
+    Việc cấu hình Nginx, Docker, RabbitMQ tốn nhiều thời gian. \\
+    $\rightarrow$ \textbf{Giải pháp:} Nhóm sử dụng \texttt{Docker Compose} để đóng gói toàn bộ môi trường (Infrastructure as Code). Chỉ cần 1 lệnh \texttt{docker-compose up} là dựng được toàn bộ hệ thống, giúp thành viên phát triển Frontend/Firmware không cần cài đặt phức tạp.
+
+    \item[Rủi ro 2: Khó kiểm soát lỗi (Debugging)] \hfill \\
+    Luồng dữ liệu đi qua nhiều trạm (MQTT $\rightarrow$ RabbitMQ $\rightarrow$ NestJS $\rightarrow$ DB) khiến việc tìm nguyên nhân lỗi khó khăn. \\
+    $\rightarrow$ \textbf{Giải pháp:} Nhóm xây dựng cơ chế \textbf{Centralized Logging} đơn giản, ghi log tập trung tại mỗi điểm nút quan trọng để truy vết (Traceability).
+\end{description}
+
+\textbf{Kết luận:} Kiến trúc này tuy có độ phức tạp cao hơn mức trung bình của một đồ án sinh viên, nhưng là sự đầu tư cần thiết để giải quyết bài toán "Real-time" và "Big Data" của Nông nghiệp thông minh, đồng thời tiệm cận với quy chuẩn thực tế của doanh nghiệp.

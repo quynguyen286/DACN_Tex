@@ -5,31 +5,92 @@
 \subsection{Kết quả thu thập yêu cầu}
 
 \subsection{Yêu cầu chức năng}
-Dựa trên phân tích hiện trạng và mô hình nghiệp vụ, các yêu cầu chức năng của hệ thống được chia thành các nhóm sau:
+
+\subsubsection*{Phân loại mức độ ưu tiên}
+Để đảm bảo tính khả thi trong giai đoạn Đồ án Chuyên ngành, các yêu cầu chức năng được phân loại theo mức độ ưu tiên như sau:
+
+\begin{itemize}
+    \item \textbf{[CORE]} - Chức năng tối thiểu bắt buộc: Đây là tập chức năng cốt lõi phải được hiện thực đầy đủ trong Đồ án Tốt nghiệp, bao gồm các tính năng thiết yếu cho hệ thống hoạt động cơ bản và điểm khác biệt chính của đề tài.
+    \item \textbf{[OPTIONAL]} - Chức năng mở rộng: Đây là các tính năng nâng cao giao diện người dùng, sẽ được bổ sung nếu còn thời gian và nguồn lực sau khi hoàn thành các chức năng CORE.
+\end{itemize}
+
+Dựa trên phân tích hiện trạng và mô hình nghiệp vụ, các yêu cầu chức năng được nhóm và phân loại như sau:
 
 \subsubsection*{Nhóm 1: Tổng quan (Dashboard Overview)}
-\begin{description}
-    \item[FR-03] Hệ thống phải hiển thị \textbf{thông số tổng quan} ngay khi đăng nhập, bao gồm: Tổng số người dùng, Số nông trại đang hoạt động (Active Farms), Số thiết bị đang kết nối (Connected Devices) và Thời gian hoạt động của hệ thống (System Uptime).
-    \item[FR-04] Hệ thống phải trực quan hóa dữ liệu hoạt động hàng tuần (Weekly Activity) dưới dạng \textbf{biểu đồ cột hoặc đường}, cho phép Admin so sánh nhanh số lượng người dùng mới, thiết bị mới và bài viết mới.
-    \item[FR-05] Hệ thống phải hiển thị danh sách \textbf{Cảnh báo hệ thống (System Alerts)} gần nhất (ví dụ: Nhiệt độ cao, Lịch bảo trì) ngay trên màn hình chính để Admin xử lý kịp thời.
-    \item[FR-06] Hệ thống phải cung cấp các nút \textbf{Thao tác nhanh (Quick Actions)} cho phép Admin tạo nhanh Người dùng mới, Nông trại mới hoặc Thêm thiết bị mới chỉ với 1 thao tác.
-\end{description}
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|c|X|}
+        \hline
+        \textbf{Mã YC} & \textbf{Độ ưu tiên} & \textbf{Mô tả chi tiết} \\
+        \hline
+        FR-03 & CORE & Hệ thống phải hiển thị \textbf{thông số tổng quan} ngay khi đăng nhập, bao gồm: Tổng số người dùng, Số nông trại đang hoạt động (Active Farms), Số thiết bị đang kết nối (Connected Devices) và Thời gian hoạt động của hệ thống (System Uptime). \\
+        \hline
+        FR-04 & OPTIONAL & Hệ thống phải trực quan hóa dữ liệu hoạt động hàng tuần (Weekly Activity) dưới dạng \textbf{biểu đồ cột hoặc đường}, cho phép Admin so sánh nhanh số lượng người dùng mới, thiết bị mới và bài viết mới. \\
+        \hline
+        FR-05 & CORE & Hệ thống phải hiển thị danh sách \textbf{Cảnh báo hệ thống (System Alerts)} gần nhất (ví dụ: Nhiệt độ cao, Lịch bảo trì) ngay trên màn hình chính để Admin xử lý kịp thời. \\
+        \hline
+        FR-06 & OPTIONAL & Hệ thống phải cung cấp các nút \textbf{Thao tác tiện lợi} cho phép Admin tạo nhanh Người dùng mới, Nông trại mới hoặc Thêm thiết bị mới chỉ với 1 thao tác. \\
+        \hline
+    \end{tabularx}
+    \caption{Yêu cầu chức năng - Nhóm 1: Tổng quan Dashboard}
+    \label{tab:fr_group1}
+\end{table}
 
 \subsubsection*{Nhóm 2: Quản lý Nông trại và Người dùng}
-\begin{description}
-    \item[FR-07 (Quản lý Nông trại)] Hệ thống phải cho phép Admin thực hiện đầy đủ các chức năng (CRUD): Tạo mới, Xem chi tiết, Cập nhật thông tin và Xóa (hoặc vô hiệu hóa) một nông trại khỏi hệ thống.
-    \item[FR-08 (Quản lý Người dùng)] Hệ thống phải cho phép quản lý danh sách người dùng (Thương lái/Chủ vườn), bao gồm việc cấp phát tài khoản và phân quyền truy cập (Role-based Access Control) vào từng nông trại cụ thể.
-    \item[FR-09 (Gán thiết bị)] Hệ thống phải cho phép Admin thực hiện thao tác \textbf{gán (assign)} một hoặc nhiều thiết bị IoT cụ thể vào một nông trại đã định.
-\end{description}
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|c|X|}
+        \hline
+        \textbf{Mã YC} & \textbf{Độ ưu tiên} & \textbf{Mô tả chi tiết} \\
+        \hline
+        FR-07 & CORE & (Quản lý Nông trại) Hệ thống phải cho phép Admin thực hiện đầy đủ các chức năng (CRUD): Tạo mới, Xem chi tiết, Cập nhật thông tin và Xóa (hoặc vô hiệu hóa) một nông trại khỏi hệ thống. \\
+        \hline
+        FR-08 & CORE & (Quản lý Người dùng) Hệ thống phải cho phép quản lý danh sách người dùng (Thương lái/Chủ vườn), bao gồm việc cấp phát tài khoản và phân quyền truy cập (Role-based Access Control) vào từng nông trại cụ thể. \\
+        \hline
+        FR-09 & CORE & (Gán thiết bị) Hệ thống phải cho phép Admin thực hiện thao tác \textbf{gán (assign)} một hoặc nhiều thiết bị IoT cụ thể vào một nông trại đã định. \\
+        \hline
+    \end{tabularx}
+    \caption{Yêu cầu chức năng - Nhóm 2: Quản lý Nông trại và Người dùng}
+    \label{tab:fr_group2}
+\end{table}
 
 \subsubsection*{Nhóm 3: Quản lý và Giám sát Thiết bị}
-\begin{description}
-    \item[FR-01 (Phát hiện lỗi)] Hệ thống phải có khả năng \textbf{tự động giám sát} dòng dữ liệu thời gian thực từ các cảm biến và phát hiện các trạng thái bất thường (ví dụ: mất kết nối quá 5 phút, giá trị vượt ngưỡng an toàn, hoặc dữ liệu bị "đóng băng").
-    \item[FR-02 (Cảnh báo)] Hệ thống phải \textbf{gửi cảnh báo tức thì} đến người quản trị (thông qua giao diện Dashboard, Email hoặc thông báo đẩy) ngay khi một lỗi cảm biến được xác nhận.
-    \item[FR-10 (Đăng ký thiết bị)] Hệ thống phải cho phép đăng ký thiết bị ESP32 mới vào hệ thống thông qua mã định danh duy nhất (Device ID/MAC Address).
-    \item[FR-11 (Giám sát trạng thái)] Hệ thống phải hiển thị trạng thái kết nối thời gian thực (Online/Offline) của từng thiết bị. Nếu thiết bị mất kết nối quá thời gian quy định (ví dụ: 5 phút), hệ thống phải tự động cập nhật trạng thái sang Offline.
-    \item[FR-12 (Điều khiển từ xa)] Hệ thống phải cho phép người dùng gửi lệnh điều khiển (Bật/Tắt) xuống các thiết bị chấp hành (Actuators) thông qua giao diện Web.
-\end{description}
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|c|X|}
+        \hline
+        \textbf{Mã YC} & \textbf{Độ ưu tiên} & \textbf{Mô tả chi tiết} \\
+        \hline
+        FR-01 & CORE & (Phát hiện lỗi) Hệ thống phải có khả năng \textbf{tự động giám sát} dòng dữ liệu thời gian thực từ các cảm biến và phát hiện các trạng thái bất thường (ví dụ: mất kết nối quá 5 phút, giá trị vượt ngưỡng an toàn, hoặc dữ liệu bị "đóng băng"). \\
+        \hline
+        FR-02 & CORE & (Cảnh báo) Hệ thống phải \textbf{gửi cảnh báo tức thì} đến người quản trị (thông qua giao diện Dashboard, Email hoặc thông báo đẩy) ngay khi một lỗi cảm biến được xác nhận. \\
+        \hline
+        FR-10 & CORE & (Đăng ký thiết bị) Hệ thống phải cho phép đăng ký thiết bị ESP32 mới vào hệ thống thông qua mã định danh duy nhất (Device ID/MAC Address). \\
+        \hline
+        FR-11 & CORE & (Giám sát trạng thái) Hệ thống phải hiển thị trạng thái kết nối thời gian thực (Online/Offline) của từng thiết bị. Nếu thiết bị mất kết nối quá thời gian quy định (ví dụ: 5 phút), hệ thống phải tự động cập nhật trạng thái sang Offline. \\
+        \hline
+        FR-12 & OPTIONAL & (Điều khiển từ xa) Hệ thống phải cho phép người dùng gửi lệnh điều khiển (Bật/Tắt) xuống các thiết bị chấp hành (Actuators) thông qua giao diện Web. \\
+        \hline
+    \end{tabularx}
+    \caption{Yêu cầu chức năng - Nhóm 3: Quản lý và Giám sát Thiết bị}
+    \label{tab:fr_group3}
+\end{table}
+
+\subsubsection*{Tóm tắt phân loại ưu tiên}
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|c|X|}
+        \hline
+        \textbf{Mức ưu tiên} & \textbf{Số lượng} & \textbf{Các chức năng bao gồm} \\
+        \hline
+        CORE & 8 chức năng & Tập tối thiểu bắt buộc cho Đồ án Tốt nghiệp: phát hiện lỗi cảm biến (FR-01, FR-02), quản lý nông trại/người dùng (FR-07, FR-08, FR-09), quản lý thiết bị cơ bản (FR-10, FR-11), và thông số tổng quan với cảnh báo (FR-03, FR-05). \\
+        \hline
+        OPTIONAL & 3 chức năng & Các tính năng nâng cao giao diện: biểu đồ thống kê (FR-04), thao tác nhanh (FR-06), và điều khiển từ xa (FR-12) - sẽ triển khai nếu còn thời gian. \\
+        \hline
+    \end{tabularx}
+    \caption{Tóm tắt phân loại ưu tiên các yêu cầu chức năng}
+    \label{tab:priority_summary}
+\end{table}
 
 \subsection{Yêu cầu phi chức năng}
 
