@@ -108,31 +108,28 @@ Mặc dù kiến trúc nguyên khối (Monolithic) đơn giản, dễ triển kh
     \centering
     \caption{Bảng phân tích đánh đổi khi lựa chọn công nghệ}
     \label{tab:tradeoff}
-    % 1. Tăng khoảng cách dòng lên 1.3 hoặc 1.5 cho dễ đọc
-    \renewcommand{\arraystretch}{1.5} 
-    
-    % 2. Định nghĩa lại cột X để tự động xuống dòng nhưng CĂN TRÁI (không bị giãn chữ)
-    % Cấu trúc: | p{chiều_rộng_cố_định} | >{\raggedright\arraybackslash}X | >{\raggedright\arraybackslash}X |
-    \begin{tabularx}{\textwidth}{|p{3.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \renewcommand{\arraystretch}{1.4}
+
+    \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
     \hline
     \textbf{Quyết định kiến trúc} & \textbf{Lợi ích (Pros)} & \textbf{Cái giá phải trả (Cons)} \\
     \hline
-    
-    \textbf{Sử dụng Message Queue (RabbitMQ)} & 
-    Đảm bảo tính bất đồng bộ, không mất dữ liệu khi Server quá tải (Back-pressure), giảm độ trễ phản hồi API. & 
+
+    \textbf{Sử dụng Message Queue (RabbitMQ)} &
+    Đảm bảo tính bất đồng bộ, không mất dữ liệu khi Server quá tải (Back-pressure), giảm độ trễ phản hồi API. &
     Tăng độ phức tạp vận hành. Phải quản lý thêm một service Broker, khó debug luồng dữ liệu hơn so với gọi HTTP trực tiếp. \\
     \hline
-    
-    \textbf{Polyglot Persistence (TimescaleDB + PostgreSQL)} & 
-    Tối ưu hóa truy vấn chuỗi thời gian (nhanh hơn 10x), nén dữ liệu tốt. & 
+
+    \textbf{Polyglot Persistence (TimescaleDB + PostgreSQL)} &
+    Tối ưu hóa truy vấn chuỗi thời gian (nhanh hơn 10x), nén dữ liệu tốt. &
     Phải quản lý schema phức tạp hơn. Cần kiến thức chuyên sâu về cả Relational và Time-series DB. \\
     \hline
-    
-    \textbf{Containerization (Docker)} & 
-    Môi trường đồng nhất giữa Dev và Prod, dễ dàng triển khai. & 
+
+    \textbf{Containerization (Docker)} &
+    Môi trường đồng nhất giữa Dev và Prod, dễ dàng triển khai. &
     Tốn tài nguyên hệ thống (RAM/CPU) hơn so với chạy Native trên máy ảo đơn giản. \\
     \hline
-    
+
     \end{tabularx}
 \end{table}
 
