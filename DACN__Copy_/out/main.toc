@@ -50,28 +50,28 @@
 \contentsline {subsection}{\numberline {5.3}Thiết kế Kiến trúc Hệ thống}{30}{subsection.5.3}%
 \contentsline {subsubsection}{\numberline {5.3.1}Kiến trúc Phân lớp (Layered Architecture)}{30}{subsubsection.5.3.1}%
 \contentsline {paragraph}{\numberline {5.3.1.1}Module Bảo mật (Cross-cutting Concern):}{32}{paragraph.5.3.1.1}%
-\contentsline {subsubsection}{\numberline {5.3.2}Kiến trúc Triển khai (Deployment Architecture)}{32}{subsubsection.5.3.2}%
-\contentsline {paragraph}{\numberline {5.3.2.1}Đánh đổi kiến trúc và Rủi ro}{33}{paragraph.5.3.2.1}%
-\contentsline {subsection}{\numberline {5.4}Phân tích đánh đổi kiến trúc và Quản lý rủi ro}{33}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Tại sao không chọn kiến trúc Monolithic đơn giản?}{33}{subsection.5.5}%
-\contentsline {subsection}{\numberline {5.6}Đánh đổi kỹ thuật}{34}{subsection.5.6}%
-\contentsline {subsection}{\numberline {5.7}Rủi ro và Chiến lược giảm thiểu}{34}{subsection.5.7}%
-\contentsline {subsection}{\numberline {5.8}Đề xuất hiện thực và lựa chọn công nghệ}{34}{subsection.5.8}%
-\contentsline {subsubsection}{\numberline {5.8.1}Quản lý lược đồ dữ liệu cảm biến từ xa}{34}{subsubsection.5.8.1}%
-\contentsline {subsubsection}{\numberline {5.8.2}Đề xuất cải tiến cho thuật toán RFE}{36}{subsubsection.5.8.2}%
-\contentsline {subsubsubsection}{\numberline {5.8.2.a}Vấn đề và hạn chế của RFE nguyên bản}{36}{subsubsubsection.5.8.2.1}%
-\contentsline {subsubsubsection}{\numberline {5.8.2.b}Giải pháp đề xuất:}{36}{subsubsubsection.5.8.2.2}%
-\contentsline {subsubsubsection}{\numberline {5.8.2.c}Cơ chế hoạt động}{37}{subsubsubsection.5.8.2.3}%
-\contentsline {subsubsubsection}{\numberline {5.8.2.d}Kết luận}{37}{subsubsubsection.5.8.2.4}%
-\contentsline {subsection}{\numberline {5.9}Thiết kế các thành phần chính}{38}{subsection.5.9}%
-\contentsline {subsubsection}{\numberline {5.9.1}Software}{38}{subsubsection.5.9.1}%
-\contentsline {subsubsubsection}{\numberline {5.9.1.a}Luồng Giám sát và Phân tích Hệ thống:}{38}{subsubsubsection.5.9.1.1}%
-\contentsline {subsubsubsection}{\numberline {5.9.1.b}Quy trình quản lý Farm:}{39}{subsubsubsection.5.9.1.2}%
-\contentsline {subsubsubsection}{\numberline {5.9.1.c}Quy trình quản lý thiết bị:}{40}{subsubsubsection.5.9.1.3}%
-\contentsline {subsubsection}{\numberline {5.9.2}Firmware}{41}{subsubsection.5.9.2}%
-\contentsline {subsubsubsection}{\numberline {5.9.2.a}Activity Diagram}{41}{subsubsubsection.5.9.2.1}%
-\contentsline {subsubsubsection}{\numberline {5.9.2.b}Sequence Diagram}{42}{subsubsubsection.5.9.2.2}%
-\contentsline {subsubsubsection}{\numberline {5.9.2.c}Timing Diagram}{43}{subsubsubsection.5.9.2.3}%
+\contentsline {subsubsection}{\numberline {5.3.2}Kiến trúc Triển khai (Deployment Architecture)}{33}{subsubsection.5.3.2}%
+\contentsline {paragraph}{\numberline {5.3.2.1}Đánh đổi kiến trúc và Rủi ro}{34}{paragraph.5.3.2.1}%
+\contentsline {subsection}{\numberline {5.4}Phân tích đánh đổi kiến trúc và Quản lý rủi ro}{34}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Tại sao không chọn kiến trúc Monolithic đơn giản?}{34}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Đánh đổi kỹ thuật}{35}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.7}Rủi ro và Chiến lược giảm thiểu}{35}{subsection.5.7}%
+\contentsline {subsection}{\numberline {5.8}Đề xuất hiện thực và lựa chọn công nghệ}{35}{subsection.5.8}%
+\contentsline {subsubsection}{\numberline {5.8.1}Quản lý lược đồ dữ liệu cảm biến từ xa}{35}{subsubsection.5.8.1}%
+\contentsline {subsubsection}{\numberline {5.8.2}Đề xuất cải tiến cho thuật toán RFE}{37}{subsubsection.5.8.2}%
+\contentsline {subsubsubsection}{\numberline {5.8.2.a}Vấn đề và hạn chế của RFE nguyên bản}{37}{subsubsubsection.5.8.2.1}%
+\contentsline {subsubsubsection}{\numberline {5.8.2.b}Giải pháp đề xuất:}{37}{subsubsubsection.5.8.2.2}%
+\contentsline {subsubsubsection}{\numberline {5.8.2.c}Cơ chế hoạt động}{38}{subsubsubsection.5.8.2.3}%
+\contentsline {subsubsubsection}{\numberline {5.8.2.d}Kết luận}{38}{subsubsubsection.5.8.2.4}%
+\contentsline {subsection}{\numberline {5.9}Thiết kế các thành phần chính}{39}{subsection.5.9}%
+\contentsline {subsubsection}{\numberline {5.9.1}Software}{39}{subsubsection.5.9.1}%
+\contentsline {subsubsubsection}{\numberline {5.9.1.a}Luồng Giám sát và Phân tích Hệ thống:}{39}{subsubsubsection.5.9.1.1}%
+\contentsline {subsubsubsection}{\numberline {5.9.1.b}Quy trình quản lý Farm:}{40}{subsubsubsection.5.9.1.2}%
+\contentsline {subsubsubsection}{\numberline {5.9.1.c}Quy trình quản lý thiết bị:}{41}{subsubsubsection.5.9.1.3}%
+\contentsline {subsubsection}{\numberline {5.9.2}Firmware}{42}{subsubsection.5.9.2}%
+\contentsline {subsubsubsection}{\numberline {5.9.2.a}Activity Diagram}{42}{subsubsubsection.5.9.2.1}%
+\contentsline {subsubsubsection}{\numberline {5.9.2.b}Sequence Diagram}{43}{subsubsubsection.5.9.2.2}%
+\contentsline {subsubsubsection}{\numberline {5.9.2.c}Timing Diagram}{44}{subsubsubsection.5.9.2.3}%
 \contentsline {subsubsubsection}{\numberline {5.9.2.d}State Machine Diagram}{47}{subsubsubsection.5.9.2.4}%
 \contentsline {subsection}{\numberline {5.10}Cách đánh giá giải pháp}{48}{subsection.5.10}%
 \contentsline {subsubsection}{\numberline {5.10.1}Đánh giá Hiệu năng Hệ thống (Performance Evaluation)}{48}{subsubsection.5.10.1}%

@@ -8,14 +8,14 @@
 \contentsline {figure}{\numberline {8}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Người dùng và Phân quyền}}{29}{figure.caption.35}%
 \contentsline {figure}{\numberline {9}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Kinh doanh}}{30}{figure.caption.36}%
 \contentsline {figure}{\numberline {10}{\ignorespaces Sơ đồ Kiến trúc Phân lớp của Hệ thống}}{31}{figure.caption.37}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Deployment Diagram}}{32}{figure.caption.38}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Activity Diagram mô tả luồng giám sát và tương tác trên Dashboard}}{38}{figure.caption.40}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Activity Diagram mô tả luồng quản lý farm}}{39}{figure.caption.41}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Activity Diagram mô tả luồng quản lý thiệt bị}}{40}{figure.caption.42}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Activity Diagram}}{41}{figure.caption.43}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Sequence Diagram}}{42}{figure.caption.44}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Timing Diagram for sensor processing and control tasks}}{43}{figure.caption.45}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Timing Diagram for camera task}}{45}{figure.caption.46}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Deployment Diagram}}{33}{figure.caption.38}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Activity Diagram mô tả luồng giám sát và tương tác trên Dashboard}}{39}{figure.caption.40}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Activity Diagram mô tả luồng quản lý farm}}{40}{figure.caption.41}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Activity Diagram mô tả luồng quản lý thiệt bị}}{41}{figure.caption.42}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Activity Diagram}}{42}{figure.caption.43}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Sequence Diagram}}{43}{figure.caption.44}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Timing Diagram for sensor processing and control tasks}}{44}{figure.caption.45}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Timing Diagram for camera task}}{46}{figure.caption.46}%
 \contentsline {figure}{\numberline {19}{\ignorespaces State Machine Diagram}}{47}{figure.caption.47}%
 \contentsline {figure}{\numberline {20}{\ignorespaces Sơ đồ thực thể quan hệ chi tiết (Physical Data Model)}}{56}{figure.caption.52}%
 \contentsline {figure}{\numberline {21}{\ignorespaces Đặc tả API Module Quản lý Nông trại (Farms Endpoint) [Nguồn: Swagger UI Hệ thống]}}{57}{figure.caption.53}%
