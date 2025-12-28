@@ -95,73 +95,49 @@
 \end{itemize}
 
 \subsubsection{Đề xuất cải tiến cho thuật toán RFE}
+
+\subsubsubsection{Vấn đề và hạn chế của RFE nguyên bản}
+\indent Thuật toán Robust Feature Extractor (RFE) nguyên bản hoạt động dựa trên cơ chế phân tích chuỗi thời gian đơn biến (Univariate Time-series Analysis). Tức là, việc đánh giá trạng thái của một cảm biến chỉ dựa vào dữ liệu quá khứ của chính nó.
+\indent Mặc dù hiệu quả trong việc phát hiện các lỗi cục bộ (như gai nhiễu, kẹt giá trị), phương pháp này tồn tại một hạn chế lớn khi gặp các biến động môi trường đồng loạt.
 \begin{itemize}
-    \item \textbf{Cốt lõi thuật toán RFE:}
-    \begin{itemize}
-        \item Phương pháp RFE trong bài báo chủ yếu tập trung vào dữ liệu của của một cảm biến đơn lẻ và tránh đặc trưng dựa trên tương quan để giảm chi phí tính toán.
-        \item Tuy nhiên, trong một nhà kính, các cảm biến không hoạt động độc lập. Nhiệt độ ở mọi điểm phải tương quan với nhau.
-    \end{itemize}
-    \item \textbf{Đề xuất cải tiến:} Đặc trưng tương quan không gian.
-    \begin{itemize}
-        \item Nếu một cảm biến báo nhiệt độ 50 độ C trong khi 10 cảm biến xung quanh nó báo 25 độ C thì cảm biến đó chắc chắn bị lỗi.
-        \item Ý tưởng: $\Delta$ valueER = value\_A - avr(all\_other\_sensors\_value) (So một cảm biến với giá trị trung bình của tất cả các cảm biến).
-        \item Khó khăn: khó để phát hiện ngưỡng nào quyết định cảm biến bị lỗi hay cảm biến bình thường
-    \end{itemize}
-    \item \textbf{Khả năng tích hợp vào dự án:}
-    \begin{itemize}
-        \item RFE nguyên bản:
-        \begin{itemize}
-            \item Ưu điểm:
-            \begin{itemize}
-                \item Hiệu quả tính toán rất cao: Thuật toán được thiết kế cho các hệ thống IoT năng lượng thấp. Các phép toán rất nhanh 
-                và nhẹ. Hoàn toàn phù hợp để chạy trên một gateway tại nhà kính mà không cần phần cứng mạnh.
-                \item Phát hiện lỗi cục bộ tốt: RFE rất phù hợp trong việc phát hiện các lỗi truyền thống của một cảm biến khi nó hoạt 
-                động sai so với chính nó như:
-                \begin{enumerate}
-                    \item Giá trị bị kẹt (Stuck): Cảm biến luôn báo 25 độ C. RFE sẽ phát hiện ra vì đặc trưng tốc độ thay đổi và độ biến động sẽ bằng 0.
-                    \item Lỗi đột biến (Spike): Giá trị nhảy vọt bất thường. RFE sẽ phát hiện qua tốc độ thay đổi.
-                    \item Lỗi trôi (Drift): Giá trị từ từ sai lệch. RFE sẽ phát hiện qua các đặc trưng "xu hướng" (EWMA).
-                \end{enumerate}
-            \end{itemize}
-            \item Nhược điểm:
-            \begin{itemize}
-                \item RFE nguyên bản chủ động tránh các đặc trưng dựa trên tương quan để giảm chi phí. 
-                Do đó, nó không thể trả lời câu hỏi: "Cảm biến này đang báo giá trị có hợp lý so với các cảm biến xung quanh nó không?".
-                \item Nếu một cảm biến nhiệt độ bị lỗi và báo giá trị 20°C (một giá trị hợp lệ) một cách ổn định, trong khi cả nhà kính 
-                đang là 35°C, RFE nguyên bản sẽ không phát hiện được lỗi này. Nó chỉ thấy một tín hiệu ổn định và cho là "bình thường".
-            \end{itemize}
-            \item Kết luận:
-            \begin{itemize}
-                \item Khả năng tích hợp cao.
-                \item Hiệu quả về tài nguyên.
-                \item Giải quyết phần lớn các lỗi phần cứng cơ bản của từng cảm biến riêng lẻ.
-            \end{itemize}
-        \end{itemize}
-        \item RFE cải tiến với đặc trưng tương quan không gian:
-        \begin{itemize}
-            \item Ưu điểm: 
-            \begin{itemize}
-                \item Khắc phục điểm yếu lớn nhất: Bằng cách thêm đặc trưng "Tương quan không gian" (Delta = Giá trị cảm biến - Trung bình 
-                của mạng lưới), hệ thống giờ đây đã có "nhận thức về bối cảnh". Nó có thể phát hiện "lỗi logic" (cảm biến báo 20°C trong 
-                khi cả nhà kính là 35°C).
-                \item Tăng độ chính xác: Việc bổ sung bối cảnh không gian cung cấp cho mô hình một bức tranh hoàn chỉnh hơn. Điều này sẽ 
-                làm tăng đáng kể độ chính xác phát hiện lỗi.
-                \item Phù hợp với nông nghiệp: Môi trường nhà kính có tính tương quan cao. Phiên bản cải tiến khai thác được cả hai yếu 
-                tố này.
-            \end{itemize}
-            \item Nhược điểm:
-            \begin{itemize}
-                \item Tăng chi phí tính toán: Để tính đặc trưng "tương quan không gian", hệ thống phải thu thập dữ liệu từ nhiều cảm 
-                biến rồi mới thực hiện phép tính. Điều này nặng hơn một chút so với RFE gốc.
-                \item Độ phức tạp của luồng dữ liệu tăng lên: Cần một bước gom dữ liệu trước khi chạy kỹ thuật đặc trưng, thay vì xử 
-                lý song song từng cảm biến.
-            \end{itemize}
-            \item Kết luận:
-            \begin{itemize}
-                \item Khả năng tích hợp cao.
-                \item Tăng nhẹ về chi phí tính toán.
-                \item Độ chính xác và khả năng phát hiện lỗi logic vượt trội.
-            \end{itemize}
-        \end{itemize}
-    \end{itemize} 
+    \item Ví dụ: Khi hệ thống nhà màng mở lưới che nắng vào buổi trưa, nhiệt độ của toàn bộ khu vườn sẽ tăng vọt trong thời gian ngắn.
+    \item Vấn đề: RFE cơ bản sẽ ghi nhận "Tốc độ thay đổi" ($v_t$) tăng cao đột ngột và có thể nhầm lẫn đây là lỗi trôi (Drift) hoặc gai (Spike), dẫn đến cảnh báo sai (False Positive).
 \end{itemize}
+
+\subsubsubsection{Giải pháp đề xuất:}
+\indent Để khắc phục hạn chế trên, nghiên cứu đề xuất mở rộng vector đặc trưng bằng cách bổ sung thông tin tương quan không gian. Ý tưởng cốt lõi là so sánh hành vi của cảm biến mục tiêu với các cảm biến lân cận trong cùng một khu vực canh tác.
+\indent Vector đặc trưng đầu ra $F_t$ của thuật toán cải tiến sẽ có dạng:
+$$F_t = [\underbrace{x_t, v_t, \sigma_t, EWMA_t, Lags}_{\text{Temporal}}, \underbrace{S_t}_{\text{Spatial}}]$$
+Trong đó, $S_t$ là chỉ số Độ lệch Không gian (Spatial Deviation), được tính toán nhằm lượng hóa mức độ khác biệt của cảm biến hiện tại so với tập thể.
+
+\subsubsubsection{Cơ chế hoạt động}
+\indent Giả sử tại thời điểm $t$, ta có giá trị của cảm biến mục tiêu là $x_t$ và tập hợp giá trị của $k$ cảm biến lân cận là $N_t = \{y_t^{(1)}, y_t^{(2)}, ..., y_t^{(k)}\}$.
+\indent Chỉ số $S_t$ được tính toán đơn giản theo công thức:
+$$S_t = |x_t - \text{median}(N_t)|$$
+Trong đó: 
+$$\text{median}(N) = \begin{cases} y_{(\frac{k+1}{2})} & \text{nếu } k \text{ lẻ} \\ \frac{1}{2} (y_{(\frac{k}{2})} + y_{(\frac{k}{2} + 1)}) & \text{nếu } k \text{ chẵn} \end{cases}$$
+(Sử dụng trung vị (median) thay vì trung bình (mean) để tăng cường khả năng chịu đựng giá trị ngoại lai (Outliers).).
+
+\indent Về lí do sử dụng median thay vì mean:
+\begin{itemize}
+    \item Mean tính toán dựa trên độ lớn của tất cả các phần tử, nên nó rất nhạy cảm với nhiễu. Một giá trị nhiễu lớn có thể kéo lệch toàn bộ giá trị tham chiếu.
+    \item Median là một đại lượng thống kê thứ tự, có tính kháng nhiễu cao hơn hẳn. Nó coi các giá trị lỗi đột biến là các phần tử nằm ở rìa của phân phối và loại bỏ chúng, giúp thuật toán không bị báo động giả.
+\end{itemize}
+
+\subsubsubsection{Kết luận}
+\indent Việc chuyển đổi từ phân tích đơn biến sang đa biến thông qua chỉ số $S_t$ mang lại hai lợi ích thiết thực cho hệ thống Smart Farm:
+\begin{itemize}
+    \item \textbf{Giảm tỷ lệ báo động giả:} Phân biệt rõ ràng giữa sự cố thiết bị và các hiện tượng thời tiết cực đoan.
+    \item \textbf{Tăng độ tin cậy:} Hệ thống tận dụng được lợi thế của mạng lưới thiết bị IoT dày đặc để tự kiểm chứng chéo dữ liệu lẫn nhau ngay tại biên trước khi gửi về máy chủ.
+\end{itemize}
+
+\indent Hạn chế của phương pháp cải tiến đề xuất: 
+\begin{itemize}
+    \item Mặc dù sử dụng bộ lọc trung vị (Median Filter) giúp tăng cường khả năng kháng nhiễu so với trung bình cộng, phương pháp này vẫn tồn tại giới hạn về điểm gãy. Theo lý thuyết thống kê, điểm gãy của trung vị là 50\%. Điều này có nghĩa là nếu hơn 50\% số lượng cảm biến tham chiếu trong mạng lưới gặp sự cố đồng thời và sai lệch theo cùng một hướng, giá trị trung vị sẽ bị sai lệch theo, dẫn đến khả năng tính toán chỉ số tương quan không gian $S_t$ không còn chính xác.
+    \item Tuy nhiên, trong thực tế vận hành hệ thống IoT nông nghiệp:
+    \begin{itemize}
+        \item Các lỗi cảm biến phần cứng thường mang tính ngẫu nhiên và độc lập, xác suất xảy ra đồng thời trên diện rộng là thấp.
+        \item Trường hợp các giá trị thay đổi đồng loạt thường là dấu hiệu của sự thay đổi môi trường thực tế hoặc sự cố cấp hệ thống (mất nguồn), lúc này hệ thống giám sát cần chuyển sang cơ chế cảnh báo mức độ cao hơn thay vì phát hiện lỗi mức node.
+    \end{itemize}
+\end{itemize}
+\indent Hướng khắc phục: Để giải quyết triệt để vấn đề này, các nghiên cứu tiếp theo có thể tích hợp cơ chế trọng số tin cậy. Hệ thống sẽ đánh giá độ tin cậy của từng node lân cận dựa trên lịch sử hoạt động của chúng. Các node có tiền sử lỗi thường xuyên sẽ bị giảm trọng số hoặc loại bỏ khỏi tập tham chiếu khi tính toán Median. 

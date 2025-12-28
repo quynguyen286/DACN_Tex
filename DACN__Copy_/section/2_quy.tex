@@ -90,20 +90,26 @@ tài nguyên hạn chế (Low-power IoT devices):
 \indent Từ những phân tích trên, đặt ra yêu cầu về một phương pháp trích xuất đặc trưng (Feature Extraction) chuyên biệt, vừa đảm bảo độ chính xác cao, vừa tối ưu hóa tài nguyên tính toán.
 
 \subsubsection{Cơ sở lý thuyết của phương pháp Robust Feature Extractor (RFE)}
-\indentĐể giải quyết bài toán trên, nghiên cứu đề xuất phương pháp luận Robust Feature Extractor (RFE). Thay vì tăng độ phức tạp của mô hình phân loại, RFE tập trung vào việc biến đổi dữ liệu thô thành các đặc trưng giàu thông tin dựa trên các nguyên lý thống kê và xử lý tín hiệu sau:
+\indent Để giải quyết bài toán trên, nghiên cứu đề xuất phương pháp Robust Feature Extractor (RFE). Thay vì tăng độ phức tạp của mô hình phân loại, RFE tập trung RFE hoạt động như một bộ lọc đa tầng biến đổi tín hiệu đầu vào $x_t$ tại thời điểm $t$ thành vector đặc trưng $F_t$. Các thành phần cốt lõi của RFE bao gồm:
 \begin{itemize}
-    \item \textbf{Phân tích động lực thời gian (Temporal Dynamics):} Dữ liệu cảm biến là dữ liệu chuỗi thời gian, do đó trạng thái hiện tại có quan hệ mật thiết với các trạng thái trước đó. RFE khai thác yếu tố này qua:
-    \begin{itemize}
-        \item \textbf{Tốc độ thay đổi (Speed of Change):} Tính toán đạo hàm bậc nhất rời rạc của tín hiệu ($value_t - value_{t-1}$) nhằm nắm bắt vận tốc và hướng biến thiên, giúp phát hiện các điểm gai bất thường.
-        \item \textbf{Bộ nhớ tạm thời (Temporal Memory):} Sử dụng các giá trị trễ (lagged values) để cung cấp ngữ cảnh ngắn hạn cho mô hình.
-    \end{itemize}
-    \item \textbf{Thống kê cục bộ đa quy mô (Multi-Scale Local Statistics):} Một điểm dữ liệu cần được đánh giá trong ngữ cảnh của các điểm lân cận. RFE áp dụng kỹ thuật Cửa sổ trượt (Sliding Window) với nhiều kích thước khác nhau (ví dụ: $w=5, 10, 20$) để tính toán các tham số thống kê (trung bình, độ lệch chuẩn, độ xiên...).
-    \begin{itemize}
-        \item Ý nghĩa: Giúp mô hình nhận diện hành vi của tín hiệu ở cả quy mô ngắn hạn (nhiễu tức thời) và trung hạn (xu hướng trôi).
-    \end{itemize}
-    \item \textbf{Phân tích biến động (Volatility Analysis):} Một đóng góp mới của RFE là việc áp dụng thống kê trượt trên chính đặc trưng "Tốc độ thay đổi".
-    \begin{itemize}
-        \item Khi cảm biến gặp lỗi hoặc nhiễu loạn, độ lệch chuẩn của tốc độ thay đổi sẽ tăng cao. Đặc trưng này giúp lượng hóa sự "bất ổn" (instability) của tín hiệu một cách trực quan.
-    \end{itemize}
-    \item \textbf{Làm trơn và khử nhiễu (Smoothing):} Sử dụng Trung bình động lũy thừa (EWMA - Exponentially Weighted Moving Average) để làm nổi bật xu hướng (trend) của dữ liệu và giảm thiểu tác động của nhiễu ngẫu nhiên, giúp phân biệt rõ hơn giữa nhiễu môi trường và lỗi thực sự của thiết bị.
+    \item \textbf{Tốc độ thay đổi (Speed of Change):} Để nắm bắt sự thay đổi đột ngột (thường gặp ở lỗi Spike), RFE tính toán đạo hàm bậc nhất rời rạc: $$v_t = x_t - x_{t-1}$$ Giá trị này đại diện cho "vận tốc" của tín hiệu.
+    \item \textbf{Độ biến động cục bộ (Local Variance):} Đây là điểm cải tiến quan trọng của RFE. Thuật toán tính toán độ lệch chuẩn trượt (Rolling Standard Deviation) trên chính giá trị vận tốc $v_t$ trong cửa sổ $w$: $$\sigma_t = \sqrt{\frac{1}{w} \sum_{i=0}^{w-1} (v_{t-i} - \bar{v})^2}$$ Đặc trưng này giúp phân biệt nhiễu môi trường (biến động thấp) với lỗi cảm biến (biến động bất thường).
+    \item \textbf{Xu hướng dài hạn (Smoothed Trends):} Sử dụng Trung bình động lũy thừa (EWMA) để làm mượt tín hiệu, giúp mô hình nhận diện các lỗi trôi (Drift) diễn ra từ từ: $$EWMA_t = \alpha \cdot x_t + (1-\alpha) \cdot EWMA_{t-1}$$   
+    \item \textbf{Bộ nhớ thời gian (Temporal Memory):} Bổ sung các giá trị trễ (Lag features: $x_{t-1}, x_{t-2}, ...$) để cung cấp ngữ cảnh quá khứ cho mô hình phân loại tại thời điểm hiện tại.
 \end{itemize}
+
+
+\subsubsection{Sơ đồ Luồng xử lý tổng thể}
+\indent Để giải quyết bài toán phát hiện lỗi cảm biến trong hệ thống IoT tài nguyên hạn chế, chúng em đề xuất một luồng xử lý khép kín bao gồm 4 giai đoạn chính: Thu thập dữ liệu thô,
+\begin{itemize}
+    \item \textbf{Thu thập dữ liệu thô (Input):} Dữ liệu chuỗi thời gian $x_t$ (nhiệt độ, độ ẩm...) được thu thập từ các node cảm biến (như DHT11, cảm biến đất) theo thời gian thực.       
+    \item \textbf{Trích xuất đặc trưng (RFE):} Dữ liệu thô đi qua khối RFE. Tại đây, thay vì dùng trực tiếp giá trị thô, thuật toán sẽ tính toán các đặc trưng dẫn xuất (derived features) như tốc độ thay đổi, độ biến động cục bộ và xu hướng dài hạn. 
+    \item \textbf{Phân lớp lỗi:} Bộ đặc trưng đầu ra được đưa vào mô hình Học máy (ví dụ: Random Forest hoặc XGBoost) để phân loại trạng thái hiện tại là Normal (Bình thường) hay Fault (Lỗi: Spike, Drift, Stuck-at).
+    \item \textbf{Cảnh báo:} Nếu phát hiện lỗi, hệ thống kích hoạt cơ chế cảnh báo, gửi thông báo đến backend và hiển thị trên giao diện quản trị.
+\end{itemize} 
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{img/Firmware/Fault Detection Process Mermain img.png}
+    \caption{Sơ đồ luồng xử lý phát hiện lỗi cảm biến với RFE}
+\end{figure}

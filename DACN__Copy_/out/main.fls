@@ -565,6 +565,17 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\Firmware\Fault Detection Process Mermain img.png
+INPUT .\img\Firmware\Fault Detection Process Mermain img.png
+INPUT .\img\Firmware\Fault Detection Process Mermain img.png
+INPUT .\img\Firmware\Fault Detection Process Mermain img.png
+INPUT .\img\Firmware\Fault Detection Process Mermain img.png
+INPUT .\img\Firmware\Fault Detection Process Mermain img.png
+INPUT .\img\Firmware\Fault Detection Process Mermain img.png
 INPUT .\section\3.tex
 INPUT .\section\3.tex
 INPUT .\section\3.tex
@@ -587,6 +598,10 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\section\4_duc.tex
 INPUT .\section\4_duc.tex
 INPUT .\section\4_duc.tex
@@ -599,10 +614,6 @@ INPUT .\img\Farm.png
 INPUT .\img\Farm.png
 INPUT .\img\Farm.png
 INPUT .\img\Farm.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT D:\LaTeX\fonts\tfm\public\cm\cmr9.tfm
 INPUT D:\LaTeX\fonts\tfm\public\cm\cmr6.tfm
 INPUT D:\LaTeX\fonts\tfm\public\cm\cmmi9.tfm
@@ -664,21 +675,6 @@ INPUT .\img\analytics.png
 INPUT .\img\analytics.png
 INPUT .\img\analytics.png
 INPUT .\img\analytics.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\troubleshoot.png
-INPUT .\img\troubleshoot.png
-INPUT .\img\troubleshoot.png
-INPUT .\img\troubleshoot.png
-INPUT .\img\troubleshoot.png
-INPUT .\img\troubleshoot.png
-INPUT .\img\troubleshoot.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
@@ -801,6 +797,10 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\section\5.4_quy.tex
 INPUT .\section\5.4_quy.tex
 INPUT section\5.4_quy.tex
@@ -827,17 +827,6 @@ INPUT .\img\analytics_activity.png
 INPUT .\img\analytics_activity.png
 INPUT .\img\analytics_activity.png
 INPUT .\img\analytics_activity.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\troubleshoot_activity.png
-INPUT .\img\troubleshoot_activity.png
-INPUT .\img\troubleshoot_activity.png
-INPUT .\img\troubleshoot_activity.png
-INPUT .\img\troubleshoot_activity.png
-INPUT .\img\troubleshoot_activity.png
-INPUT .\img\troubleshoot_activity.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
@@ -881,28 +870,17 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT .\img\Firmware\Communication Diagram Mermaid Image.png
-INPUT .\img\Firmware\Communication Diagram Mermaid Image.png
-INPUT .\img\Firmware\Communication Diagram Mermaid Image.png
-INPUT .\img\Firmware\Communication Diagram Mermaid Image.png
-INPUT .\img\Firmware\Communication Diagram Mermaid Image.png
-INPUT .\img\Firmware\Communication Diagram Mermaid Image.png
-INPUT .\img\Firmware\Communication Diagram Mermaid Image.png
+INPUT .\img\Firmware\Sequence Diagram Mermain.png
+INPUT .\img\Firmware\Sequence Diagram Mermain.png
+INPUT .\img\Firmware\Sequence Diagram Mermain.png
+INPUT .\img\Firmware\Sequence Diagram Mermain.png
+INPUT .\img\Firmware\Sequence Diagram Mermain.png
+INPUT .\img\Firmware\Sequence Diagram Mermain.png
+INPUT .\img\Firmware\Sequence Diagram Mermain.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT .\img\Firmware\Component Diagram Mermaid image.png
-INPUT .\img\Firmware\Component Diagram Mermaid image.png
-INPUT .\img\Firmware\Component Diagram Mermaid image.png
-INPUT .\img\Firmware\Component Diagram Mermaid image.png
-INPUT .\img\Firmware\Component Diagram Mermaid image.png
-INPUT .\img\Firmware\Component Diagram Mermaid image.png
-INPUT .\img\Firmware\Component Diagram Mermaid image.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
@@ -914,6 +892,10 @@ INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
 INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
 INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
 INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
 INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
 INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
@@ -1055,14 +1037,20 @@ INPUT C:\Users\QUÝ\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm
 INPUT C:\Users\QUÝ\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0900.pk
 INPUT C:\Users\QUÝ\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
 INPUT C:\Users\QUÝ\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi5.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi5.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi9.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmmi9.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr5.pfb
+INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr5.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT D:\LaTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
@@ -1081,6 +1069,8 @@ INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr10.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr10.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr12.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr12.pfb
+INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr7.pfb
+INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr7.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr8.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr8.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr9.pfb
