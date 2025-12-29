@@ -23,33 +23,14 @@
 \hline
 
 2 & 
-\textbf{Tràn bộ nhớ (Stack Overflow):} \newline Do xử lý ảnh JPEG lớn trên FreeRTOS. & 
-\centering Cao & 
-\begin{itemize}[nosep, leftmargin=*]
-    \item Sử dụng hàm: \newline \texttt{uxTaskGetStackHighWaterMark} để giám sát RAM.
-    \item Cân nhắc sử dụng ESP32 có PSRAM.
-\end{itemize} \\
-\hline
-
-3 & 
-\textbf{Nhiễu tín hiệu:} \newline Camera bị sọc hoặc cảm biến đất báo giá trị ảo. & 
-\centering Trung bình & 
-\begin{itemize}[nosep, leftmargin=*]
-    \item Sử dụng tụ lọc nguồn 100uF và 100nF.
-    \item Đi dây tín hiệu ngắn gọn, tách biệt với dây động cơ.
-\end{itemize} \\
-\hline
-
-4 & 
 \textbf{Độ trễ truyền ảnh cao:} \newline Video bị giật, lag khi mạng WiFi yếu. & 
 \centering Trung bình & 
 \begin{itemize}[nosep, leftmargin=*]
-    \item Giảm độ phân giải ảnh (VGA/QVGA) khi mạng kém.
     \item Tách luồng gửi ảnh sang Core 0 độc lập.
 \end{itemize} \\
 \hline
 
-5 & 
+3 & 
 \textbf{Chậm tiến độ:} \newline Do vướng mắc thuật toán phức tạp. & 
 \centering Thấp & 
 \begin{itemize}[nosep, leftmargin=*]
@@ -61,7 +42,6 @@
 \end{tabular}
 \end{table}
 
-\newpage 
 
 \subsubsubsection{Software}
 \begin{table}[h!]
