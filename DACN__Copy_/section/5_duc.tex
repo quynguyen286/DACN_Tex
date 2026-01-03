@@ -5,7 +5,83 @@
     \caption{Activity Diagram mô tả luồng quản lý farm}
     \label{fig:activity_farm}
 \end{figure}
-\noindent Biểu đồ mô tả quy trình tương tác giữa Quản trị viên và Hệ thống thông qua 5 chức năng chính: Thêm, Sửa, Xóa, Xem chi tiết và Nhập/Xuất dữ liệu. Quy trình chú trọng bước kiểm tra tính hợp lệ của dữ liệu trước khi lưu và luôn điều hướng quay lại danh sách trang trại sau mỗi tác vụ để tối ưu hóa việc quản lý liên tục.
+\noindent {Quy trình quản lý trang trại}
+
+\subsubsection*{Tổng quan sơ đồ}
+Sơ đồ mô tả quy trình quản lý trang trại (Farm Management), thể hiện sự tương tác giữa \textbf{System Admin} (Quản trị viên hệ thống) và \textbf{System} (Hệ thống). Quy trình bao gồm các thao tác cơ bản như xem danh sách, tìm kiếm, thêm, chỉnh sửa, xóa, xem chi tiết và nhập/xuất dữ liệu trang trại.
+
+\subsubsection*{Mô tả chi tiết luồng hoạt động}
+
+\begin{itemize}
+    \item \textbf{Giai đoạn khởi đầu và hiển thị:}
+    \begin{itemize}
+        \item \textbf{Truy cập:}  
+        Quản trị viên truy cập vào màn hình quản lý trang trại (\textit{Access Farm Management Screen}).
+        
+        \item \textbf{Hiển thị:}  
+        Hệ thống hiển thị danh sách các trang trại hiện có (\textit{Display Farm List}).
+        
+        \item \textbf{Tìm kiếm/Lọc:}  
+        Quản trị viên có thể thực hiện tìm kiếm hoặc lọc danh sách trang trại (\textit{Search/Filter Farm List}).
+    \end{itemize}
+
+    \item \textbf{Giai đoạn lựa chọn tác vụ (\textit{Select Main Farm Action}):}  
+    Tại bước này, Quản trị viên có thể lựa chọn một trong các nhánh xử lý sau:
+    
+    \begin{itemize}
+        \item \textbf{Nhánh thêm trang trại (Add):}
+        \begin{itemize}
+            \item Quản trị viên chọn thêm trang trại (\textit{Click Add Farm}).
+            \item Hệ thống hiển thị giao diện thêm mới (\textit{Display Add Farm Interface}).
+            \item Quản trị viên nhập thông tin trang trại và lưu (\textit{Enter Farm Info and Save}).
+            \item Hệ thống kiểm tra tính hợp lệ của dữ liệu (\textit{Check Data Validity}).
+            \begin{itemize}
+                \item Nếu dữ liệu hợp lệ, hệ thống thông báo \textit{Farm Saved Successfully} và quay lại màn hình danh sách.
+                \item Nếu dữ liệu không hợp lệ, hệ thống yêu cầu nhập lại tại giao diện thêm mới.
+            \end{itemize}
+        \end{itemize}
+
+        \item \textbf{Nhánh chỉnh sửa trang trại (Edit):}
+        \begin{itemize}
+            \item Quản trị viên chọn và chỉnh sửa trang trại (\textit{Select and Click Edit Farm}).
+            \item Hệ thống hiển thị giao diện chỉnh sửa.
+            \item Quản trị viên cập nhật thông tin và lưu (\textit{Update Info and Save}).
+            \item Hệ thống kiểm tra dữ liệu và thông báo \textit{Farm Updated Successfully} nếu hợp lệ.
+        \end{itemize}
+
+        \item \textbf{Nhánh xóa trang trại (Delete):}
+        \begin{itemize}
+            \item Quản trị viên chọn và xóa trang trại (\textit{Select and Click Delete Farm}).
+            \item Quản trị viên xác nhận thao tác xóa (\textit{Confirm Deletion}).
+            \item Hệ thống thực hiện xóa và thông báo \textit{Farm Deleted Successfully}.
+        \end{itemize}
+
+        \item \textbf{Nhánh xem chi tiết (View Detail):}
+        \begin{itemize}
+            \item Quản trị viên chọn xem chi tiết trang trại (\textit{Select and View Farm Detail}).
+            \item Hệ thống hiển thị màn hình chi tiết trang trại (\textit{Display Farm Detail Screen}).
+        \end{itemize}
+
+        \item \textbf{Nhánh nhập/xuất dữ liệu (Import/Export):}
+        \begin{itemize}
+            \item Quản trị viên thực hiện thao tác nhập hoặc xuất dữ liệu (\textit{Perform Import/Export Data}).
+            \item Hệ thống xử lý và phản hồi kết quả (\textit{Import/Export Data Processed}).
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Giai đoạn kết thúc:}  
+    Sau khi hoàn tất các tác vụ quản lý, Quản trị viên có thể lựa chọn thoát hoặc đăng xuất (\textit{Exit/Logout}) để kết thúc quy trình tại điểm \textit{End}.
+\end{itemize}
+
+\subsubsection*{Quy tắc điều hướng và dữ liệu}
+\begin{itemize}
+    \item \textbf{Vòng lặp thao tác:}  
+    Sau mỗi tác vụ thành công như lưu, cập nhật, xóa hoặc xử lý dữ liệu, hệ thống đều điều hướng người dùng quay trở lại màn hình hiển thị danh sách trang trại nhằm đảm bảo luồng làm việc liên tục.
+    
+    \item \textbf{Kiểm tra điều kiện dữ liệu:}  
+    Các thao tác thêm và chỉnh sửa trang trại bắt buộc phải trải qua bước kiểm tra tính hợp lệ của dữ liệu trước khi hệ thống ghi nhận thay đổi.
+\end{itemize}
+
 
 
 \subsubsubsection{Quy trình quản lý thiết bị:} 
@@ -15,4 +91,69 @@
     \caption{Activity Diagram mô tả luồng quản lý thiệt bị}
     \label{fig:activity_analytics}
 \end{figure}
-\noindent Biểu đồ hoạt động Quản lý thiết bị: Mô tả luồng tương tác giữa Quản trị viên và Hệ thống. Quy trình bắt đầu từ việc truy cập danh sách, cho phép Admin thực hiện các nghiệp vụ cốt lõi như Thêm, Sửa, Xóa và Nhập/Xuất dữ liệu thiết bị. Ngoài ra, biểu đồ còn chi tiết hóa các thao tác quản lý Cảm biến (Sensors) bên trong từng thiết bị cụ thể. Hệ thống đóng vai trò phản hồi giao diện, xác nhận lưu trữ và cập nhật trạng thái sau mỗi hành động của người dùng.
+\noindent {Mô tả quy trình quản lý thiết bị và cảm biến}
+
+\subsubsection*{Tổng quan sơ đồ}
+Sơ đồ mô tả quy trình quản lý các thiết bị trong hệ thống với hai cấp độ quản lý chính: cấp độ thiết bị (Device) và cấp độ chi tiết bên trong là cảm biến (Sensor). Quy trình thể hiện rõ sự phân chia trách nhiệm giữa Quản trị viên hệ thống (System Admin) và Hệ thống (System) trong suốt quá trình thao tác.
+
+\subsubsection*{Mô tả chi tiết luồng hoạt động}
+
+\begin{itemize}
+    \item \textbf{Giai đoạn khởi đầu và điều hướng:}
+    \begin{itemize}
+        \item \textbf{Truy cập hệ thống:}  
+        Quản trị viên truy cập vào màn hình quản lý thiết bị (\textit{Access Device Management Screen}).
+        
+        \item \textbf{Hiển thị danh sách:}  
+        Hệ thống phản hồi bằng cách hiển thị danh sách các thiết bị hiện có (\textit{Display Device List}).
+        
+        \item \textbf{Tìm kiếm/Lọc:}  
+        Quản trị viên có thể thực hiện tìm kiếm hoặc lọc thiết bị nhằm thu hẹp phạm vi quản lý.
+    \end{itemize}
+
+    \item \textbf{Giai đoạn lựa chọn hành động chính (\textit{Select Main Action}):}  
+    Tại bước này, Quản trị viên có thể rẽ nhánh sang các tác vụ CRUD khác nhau:
+    \begin{itemize}
+        \item \textbf{Nhánh thêm thiết bị (Add Device):}  
+        Quản trị viên nhấn nút thêm thiết bị, hệ thống hiển thị giao diện nhập liệu. Sau khi nhập thông tin và lưu, hệ thống thông báo \textit{Device Saved Successfully} và quay lại màn hình danh sách.
+        
+        \item \textbf{Nhánh sửa thiết bị (Edit Device):}  
+        Quản trị viên chọn thiết bị cần chỉnh sửa, hệ thống hiển thị giao diện chỉnh sửa. Sau khi cập nhật và lưu, hệ thống thông báo \textit{Device Updated Successfully}.
+        
+        \item \textbf{Nhánh xóa thiết bị (Delete Device):}  
+        Quản trị viên chọn thiết bị và thực hiện bước xác nhận xóa (\textit{Confirm Deletion}). Hệ thống tiến hành xóa và thông báo kết quả thành công.
+        
+        \item \textbf{Nhánh nhập/xuất dữ liệu (Import/Export):}  
+        Quản trị viên thực hiện thao tác nhập hoặc xuất dữ liệu thiết bị, hệ thống xử lý dữ liệu tương ứng.
+    \end{itemize}
+
+    \item \textbf{Giai đoạn quản lý chi tiết cảm biến (\textit{Sensor Action}):}  
+    Đây là điểm khác biệt quan trọng của sơ đồ khi Quản trị viên lựa chọn xem chi tiết thiết bị (\textit{View Detail}).
+    \begin{itemize}
+        \item \textbf{Hiển thị chi tiết:}  
+        Hệ thống chuyển sang màn hình chi tiết thiết bị, hiển thị danh sách các cảm biến thuộc thiết bị đó (\textit{Display Device Detail Screen (Sensors)}).
+        
+        \item \textbf{Thao tác với cảm biến:}  
+        Quản trị viên có thể thực hiện các thao tác quản lý cảm biến bao gồm:
+        \begin{itemize}
+            \item \textbf{Add Sensor:} Nhập thông tin và lưu cảm biến mới.
+            \item \textbf{Edit Sensor:} Cập nhật thông tin cảm biến hiện tại.
+            \item \textbf{Delete Sensor:} Xác nhận và xóa cảm biến khỏi thiết bị.
+        \end{itemize}
+        
+        \item \textbf{Kết quả:}  
+        Sau mỗi thao tác, hệ thống đều hiển thị thông báo xác nhận trạng thái thành công.
+    \end{itemize}
+
+    \item \textbf{Giai đoạn kết thúc:}  
+    Quản trị viên có thể quay lại danh sách thiết bị chính (\textit{Back to List}) để tiếp tục quản lý hoặc chọn thoát/đăng xuất (\textit{Exit/Logout}) để kết thúc phiên làm việc tại điểm \textit{End}.
+\end{itemize}
+
+\subsubsection*{Quy tắc nghiệp vụ đặc trưng}
+\begin{itemize}
+    \item \textbf{Quản lý phân cấp:}  
+    Thiết bị và cảm biến có mối quan hệ cha--con, do đó việc quản lý cảm biến chỉ được thực hiện sau khi người dùng truy cập vào màn hình chi tiết của thiết bị.
+    
+    \item \textbf{Vòng lặp tương tác:}  
+    Sau mỗi thao tác lưu hoặc cập nhật thành công, hệ thống luôn có luồng quay trở lại màn hình danh sách thông qua các nút điều hướng, cho phép Quản trị viên tiếp tục các thao tác quản lý.
+\end{itemize}
