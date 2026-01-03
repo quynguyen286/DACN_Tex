@@ -8,6 +8,13 @@
     \label{fig:activity_diagram_firware}
 \end{figure}
 
+\indent Hình trên minh họa luồng xử lý đa nhiệm của hệ thống, được xây dựng trên nền tảng hệ điều hành thời gian thực FreeRTOS. Để tận dụng sức mạnh phần cứng của ESP32, firmware được thiết kế phân chia thành hai luồng tác vụ (Tasks) chạy song song trên hai lõi CPU riêng biệt nhằm tránh hiện tượng nghẽn cổ chai (blocking):
+
+\begin{itemize}
+    \item \textbf{Luồng 1 (Core 1 - Sensor \& Control Task):} Đây là luồng xử lý chính, chịu trách nhiệm khởi tạo kết nối WiFi/MQTT. Trong vòng lặp vô hạn (Client Loop), luồng này thực hiện đọc dữ liệu cảm biến (DHT20, độ ẩm đất), kiểm tra tính hợp lệ của dữ liệu (Data Valid), đóng gói JSON và gửi về Broker thông qua giao thức MQTT. Đồng thời, nó cũng lắng nghe các lệnh điều khiển (MQTT Cmd) để kích hoạt Relay/Còi báo động tức thì.
+    \item \textbf{Luồng 2 (Core 0 - Camera Task):} Được dành riêng cho tác vụ xử lý hình ảnh vốn tiêu tốn nhiều tài nguyên. Quy trình bao gồm khởi tạo Camera, chụp ảnh, nén định dạng JPEG và gửi lên Server thông qua giao thức HTTP POST. Việc tách rời này đảm bảo rằng quá trình gửi ảnh không làm gián đoạn việc gửi dữ liệu cảm biến thời gian thực ở Core 1.
+\end{itemize}
+
 \subsubsubsection{Sequence Diagram}
 \begin{figure}[H]
     \centering
@@ -63,11 +70,10 @@
 \subsubsubsection{Timing Diagram}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth]{img/Firmware/Timing Diagram Other Tasks Mermaid image.png}
+    \includegraphics[width=1.0\textwidth]{img/Firmware/Timing Diagram Other Tasks Mermaid image.png}
     \caption{Timing Diagram for sensor processing and control tasks}
     \label{fig:timing_diagram_firmware_1}
 \end{figure}
-\newpage
 \indent Các thành phần tham gia:
 \begin{itemize}
     \item \textbf{System Timer:} Bộ định thời kích hoạt vòng lặp Monitoring.
@@ -87,6 +93,7 @@
         \item \textbf{Truyền tin:} Dữ liệu sau khi kiểm tra được đóng gói thành định dạng JSON (ví dụ: {"temp":32, "soil":40...}) và Publish lên MQTT.
         \item \textbf{Cập nhật:} MQTT chuyển dữ liệu này tới App để người dùng theo dõi thời gian thực.
     \end{itemize}
+    \newpage
     \item PHASE 2: Controlling (Điều khiển - Theo sự kiện)
     \begin{itemize}
         \item \textbf{Lệnh từ người dùng:} Từ App, người dùng nhấn nút bật bơm, gửi lệnh "PUMP: ON" tới MQTT.
@@ -129,7 +136,12 @@
 \subsubsubsection{State Machine Diagram}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/Firmware/State Machine Diagram Mermaid image.png}
+    \includegraphics[width=0.75\textwidth]{img/Firmware/State Machine Diagram Mermaid image.png}
     \caption{State Machine Diagram}
     \label{fig:state_machine_diagram_firmware}
 \end{figure}
+\indent Biểu đồ mô tả hoạt động của Firmware trên nền tảng FreeRTOS, trong đó trạng thái vận hành chính (RTOS$\_$RUN) được chia thành hai luồng tác vụ chạy song song trên hai lõi CPU:
+\begin{itemize}
+    \item \textbf{Core 1 Task (Cảm biến \& Kết nối):} Chịu trách nhiệm duy trì kết nối WiFi/MQTT. Hệ thống chuyển đổi linh hoạt giữa trạng thái Khởi tạo (T1$\_$Init) và Vận hành (T1$\_$Running). Trong trạng thái vận hành, vi điều khiển hoạt động theo cơ chế hướng sự kiện (Event-driven): tự động đọc cảm biến khi hết Timer (5s) hoặc xử lý lệnh điều khiển ngay khi nhận được tín hiệu từ MQTT.
+    \item \textbf{Core 0 Task (Camera):} Hoạt động độc lập theo chu trình tuần tự khép kín (T2$\_$Cycle): Chụp ảnh $\rightarrow$ Nén dữ liệu $\rightarrow$ Tải lên qua HTTP.
+\end{itemize}
