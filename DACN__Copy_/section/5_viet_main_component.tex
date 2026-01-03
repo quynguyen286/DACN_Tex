@@ -6,5 +6,76 @@
     \caption{Activity Diagram mô tả luồng giám sát và tương tác trên Dashboard}
     \label{fig:activity_analytics_}
 \end{figure}
-\noindent Sơ đồ thể hiện tính tương tác liên tục: Admin có thể thực hiện nhiều tác vụ (Lọc, Xuất, Cấu hình) và quay lại màn hình chính mà không bị ngắt quãng phiên làm việc.
+
+\noindent Activity Diagram trên mô tả chi tiết quy trình tương tác giữa System Admin và Hệ thống trong module Giám sát và Phân tích. Luồng được tổ chức thành hai swimlane chính, thể hiện trách nhiệm rõ ràng giữa người dùng và hệ thống.
+
+\paragraph*{Giai đoạn khởi tạo và hiển thị Dashboard:}
+\begin{itemize}
+    \item \textbf{Bước 1:} Admin khởi động phiên làm việc bằng cách truy cập module Analytics thông qua menu điều hướng. Hệ thống thực hiện kiểm tra quyền truy cập (Authorization Check) để đảm bảo Admin có quyền xem dữ liệu thống kê.
+    \item \textbf{Bước 2:} Hệ thống tải dữ liệu tổng hợp từ cơ sở dữ liệu (PostgreSQL và TimescaleDB) theo quy tắc mặc định \textbf{BR-02}: hiển thị dữ liệu 7 ngày gần nhất của toàn hệ thống. Quá trình này bao gồm truy vấn dữ liệu từ nhiều nguồn (sensor data, farm metrics, device status) và tính toán các chỉ số KPI.
+    \item \textbf{Bước 3:} Hệ thống hiển thị Overview Dashboard với ba nhóm thông tin chính:
+    \begin{itemize}
+        \item \textit{Dashboard Metrics:} Doanh thu, sản lượng, nhiệt độ trung bình, độ ẩm đất
+        \item \textit{Farm Performance Rankings:} Xếp hạng nông trại dựa trên chỉ số KPI (theo \textbf{BR-04})
+        \item \textit{Device Statistics:} Biểu đồ trạng thái thiết bị Online/Offline, biểu đồ phân bố theo khu vực
+    \end{itemize}
+    \item \textbf{Bước 4:} Hệ thống tự động thiết lập kết nối WebSocket để cập nhật dữ liệu thời gian thực (Real-time Updates) theo quy tắc \textbf{BR-01}: độ trễ tối đa 30 giây.
+\end{itemize}
+
+\paragraph*{Giai đoạn tương tác và xử lý các tác vụ:}
+Sau khi Dashboard được hiển thị, Admin có thể thực hiện một trong bốn tác vụ chính thông qua decision node ``Select Action'':
+
+\begin{enumerate}
+    \item \textbf{Filter (Lọc dữ liệu) - Luồng E-01:}
+    \begin{itemize}
+        \item Admin chọn khoảng thời gian (Date Range) hoặc khu vực địa lý từ bộ lọc.
+        \item Hệ thống xác thực tham số lọc (kiểm tra định dạng ngày, phạm vi hợp lệ).
+        \item Hệ thống truy vấn lại dữ liệu từ database với điều kiện lọc mới.
+        \item Hệ thống cập nhật tất cả các biểu đồ và bảng thống kê (Update Charts) theo dữ liệu đã lọc.
+        \item Admin có thể tiếp tục lọc hoặc chuyển sang tác vụ khác.
+    \end{itemize}
+    
+    \item \textbf{Export (Xuất báo cáo) - Luồng E-02:}
+    \begin{itemize}
+        \item Admin nhấn nút ``Export Report'' và chọn định dạng (PDF hoặc CSV/Excel).
+        \item Hệ thống kiểm tra quy tắc \textbf{BR-09}: hỗ trợ cả hai định dạng PDF (cho in ấn) và CSV (cho phân tích).
+        \item Hệ thống tạo báo cáo động dựa trên dữ liệu hiện tại trên Dashboard (bao gồm các biểu đồ, bảng xếp hạng).
+        \item Hệ thống thực hiện Generate \& Download Report, tự động tải file về thiết bị của Admin.
+        \item Hệ thống ghi log hoạt động xuất báo cáo để theo dõi audit trail.
+    \end{itemize}
+    
+    \item \textbf{Compare (So sánh nông trại):}
+    \begin{itemize}
+        \item Admin chọn hai hoặc nhiều nông trại từ danh sách để so sánh hiệu suất.
+        \item Hệ thống xác thực số lượng nông trại được chọn (tối thiểu 2, tối đa 5 để đảm bảo hiển thị rõ ràng).
+        \item Hệ thống truy vấn dữ liệu so sánh từ database, tính toán các chỉ số tương đối.
+        \item Hệ thống hiển thị Comparison Table với các metrics song song: doanh thu, năng suất, hiệu quả sử dụng năng lượng, tỷ lệ thiết bị hoạt động.
+        \item Admin có thể thay đổi bộ nông trại so sánh hoặc quay lại Dashboard chính.
+    \end{itemize}
+    
+    \item \textbf{Configure (Cấu hình cảnh báo) - Luồng E-03:}
+    \begin{itemize}
+        \item Hệ thống kiểm tra quy tắc \textbf{BR-03}: chỉ hiển thị chức năng này nếu Admin có quyền ``Manage''.
+        \item Admin cấu hình các ngưỡng cảnh báo (Alert Thresholds) như: nhiệt độ tối đa, độ ẩm đất tối thiểu, mức tiêu thụ năng lượng bất thường.
+        \item Hệ thống xác thực giá trị ngưỡng (kiểm tra giá trị hợp lệ, logic nghiệp vụ).
+        \item Hệ thống lưu cấu hình mới vào database và áp dụng ngay lập tức cho hệ thống giám sát.
+        \item Hệ thống gửi xác nhận (Confirmation) về việc lưu thành công và hiển thị thời điểm áp dụng.
+    \end{itemize}
+\end{enumerate}
+
+\paragraph*{Giai đoạn kết thúc phiên:}
+\begin{itemize}
+    \item Admin có thể chọn ``Exit'' hoặc ``Logout'' từ decision node ``Select Action'' bất cứ lúc nào.
+    \item Hệ thống đóng kết nối WebSocket, giải phóng tài nguyên.
+    \item Hệ thống lưu trạng thái phiên làm việc (session state) nếu cần để Admin có thể tiếp tục sau.
+    \item Luồng kết thúc tại End node.
+\end{itemize}
+
+\paragraph*{Tính năng nổi bật của Activity Diagram:}
+\begin{itemize}
+    \item \textbf{Tính tương tác liên tục:} Admin có thể thực hiện nhiều tác vụ (Lọc, Xuất, So sánh, Cấu hình) và quay lại màn hình chính mà không bị ngắt quãng phiên làm việc, thông qua vòng lặp quay lại decision node ``Select Action''.
+    \item \textbf{Xử lý lỗi tiềm ẩn:} Mỗi tác vụ đều có bước xác thực (validation) để đảm bảo dữ liệu hợp lệ trước khi xử lý. Nếu validation thất bại, hệ thống sẽ hiển thị thông báo lỗi và quay lại trạng thái trước đó.
+    \item \textbf{Cập nhật thời gian thực:} WebSocket connection đảm bảo Dashboard tự động cập nhật dữ liệu mới mà không cần Admin làm mới trang (refresh), tuân thủ quy tắc \textbf{BR-01} về độ trễ dữ liệu.
+    \item \textbf{Phân quyền rõ ràng:} Chức năng cấu hình chỉ xuất hiện cho Admin có quyền ``Manage'', thể hiện nguyên tắc bảo mật theo quy tắc \textbf{BR-03}.
+\end{itemize}
 
