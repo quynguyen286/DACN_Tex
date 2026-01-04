@@ -1,0 +1,21 @@
+\babel@toc {vietnamese}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Sơ đồ luồng xử lý sơ cấp ở Edge Node}}{16}{figure.caption.11}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Sơ đồ luồng xử lý phát hiện lỗi với RFE ở Backend Server}}{17}{figure.caption.12}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Nông trại Netafim NetBeat™}}{19}{figure.caption.16}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Nông trại Fujitsu Akisai}}{20}{figure.caption.18}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Giái pháp của MobiFone Smart Agriculture}}{22}{figure.caption.24}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Sơ đồ quản lý farm}}{27}{figure.caption.42}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Sơ đồ luồng quản lý và tạo báo cáo}}{34}{figure.caption.56}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Sơ đồ luồng quản lý và tạo báo cáo}}{36}{figure.caption.58}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Quản lý Nông trại}}{39}{figure.caption.60}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ IoT và Thu thập dữ liệu}}{40}{figure.caption.61}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Người dùng và Phân quyền}}{41}{figure.caption.62}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Kinh doanh}}{42}{figure.caption.63}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Sơ đồ Kiến trúc Tổng thể của Hệ thống}}{43}{figure.caption.64}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Activity Diagram mô tả luồng quản lý farm}}{53}{figure.caption.78}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Activity Diagram mô tả luồng quản lý thiệt bị}}{55}{figure.caption.82}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Sơ đồ quy trình xử lý dữ liệu tại biên trên Firmware ESP32}}{59}{figure.caption.87}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Biểu đồ Gantt thể hiện tiến độ thực hiện đề tài}}{66}{figure.caption.91}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Sơ đồ thực thể quan hệ chi tiết (Physical Data Model)}}{69}{figure.caption.93}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Đặc tả API Module Quản lý Nông trại (Farms Endpoint) [Nguồn: Swagger UI Hệ thống]}}{70}{figure.caption.94}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Đặc tả API Module Quản lý Thiết bị (Devices Endpoint) [Nguồn: Swagger UI Hệ thống]}}{70}{figure.caption.95}%
