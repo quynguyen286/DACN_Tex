@@ -1,0 +1,810 @@
+\subsubsection{Biểu đồ Use Case: Quản lý và Vận hành (Management \& Operation)}
+
+Biểu đồ Use Case này mô tả các tương tác giữa người dùng (Admin và Farm Operator) với hệ thống Dashboard, tập trung vào các chức năng quản lý thiết bị và giám sát hoạt động.
+
+\begin{figure}[H]
+    \centering
+    \begin{verbatim}
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e1f5ff', 'primaryTextColor':'#000', 'primaryBorderColor':'#000', 'lineColor':'#000', 'secondaryColor':'#fff4e1', 'tertiaryColor':'#fff'}}}%%
+graph TB
+    Admin[Admin]
+    FarmOp["Farm Operator"]
+    
+    UC1["Authentication & Authorization"]
+    UC2["Device Provisioning & Management"]
+    UC3["Telemetry Monitoring"]
+    UC4["Visual Verification<br/>Camera Stream"]
+    UC5["Alert Management<br/>& Notification"]
+    UC6["Data Analytics<br/>& Reporting"]
+    UC7["Health Status<br/>Visualization"]
+    
+    Admin --> UC1
+    Admin --> UC2
+    Admin --> UC3
+    Admin --> UC4
+    Admin --> UC5
+    Admin --> UC6
+    
+    FarmOp --> UC1
+    FarmOp --> UC3
+    FarmOp --> UC4
+    FarmOp --> UC5
+    FarmOp --> UC7
+    
+    style Admin fill:#e1f5ff,stroke:#000,stroke-width:2px
+    style FarmOp fill:#e1f5ff,stroke:#000,stroke-width:2px
+    style UC1 fill:#fff4e1,stroke:#000,stroke-width:1px
+    style UC2 fill:#fff4e1,stroke:#000,stroke-width:1px
+    style UC3 fill:#fff4e1,stroke:#000,stroke-width:1px
+    style UC4 fill:#fff4e1,stroke:#000,stroke-width:1px
+    style UC5 fill:#fff4e1,stroke:#000,stroke-width:1px
+    style UC6 fill:#fff4e1,stroke:#000,stroke-width:1px
+    style UC7 fill:#fff4e1,stroke:#000,stroke-width:1px
+    \end{verbatim}
+    \caption{Use Case Diagram: Quản lý và Vận hành (Management \& Operation)}
+    \label{fig:use_case_management}
+\end{figure}
+
+Các quy trình nghiệp vụ dưới đây được kế thừa và chuẩn hóa dựa trên kết quả vận hành thực nghiệm tại Tomochan Farm, đảm bảo tính ổn định và khả năng sử dụng cho người dùng cuối. Biểu đồ này thể hiện lớp tương tác người-máy của hệ thống, nơi các actor (Admin và Farm Operator) thực hiện các thao tác quản lý và giám sát thông qua giao diện Dashboard. Các Use Case này tạo nền tảng cho việc quản lý metadata, tổ chức thiết bị theo cấu trúc địa lý và nghiệp vụ, và hỗ trợ ra quyết định dựa trên dữ liệu có chất lượng cao.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/Analytic-Management_flow.drawio.png}
+    \caption{Use Case Diagram: Luồng Quản lý và Vận hành (Management Flow)}
+    \label{fig:use_case_management_flow}
+\end{figure}
+
+\paragraph*{UC-MGMT-01: Xác thực và Phân quyền}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-MGMT-01: Xác thực và Phân quyền \\
+        \hline
+        \textbf{Tên usecase} & Authentication \& Authorization \\
+        \hline
+        \textbf{Mô tả} & Hệ thống xác thực người dùng và phân quyền truy cập dựa trên Role-Based Access Control (RBAC). Admin có quyền truy cập toàn bộ chức năng, trong khi Farm Operator chỉ được phép xem và giám sát các Farm được gán quyền. \\
+        \hline
+        \textbf{Actor} & System Admin, Farm Operator \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Người dùng đã có tài khoản trong hệ thống.
+            \item Hệ thống đã được khởi động và sẵn sàng nhận request.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Người dùng đã được xác thực và nhận được token/CSRF token.
+            \item Quyền truy cập đã được gán theo vai trò (Role).
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Người dùng truy cập giao diện Dashboard và thực hiện đăng nhập (Login). \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Người dùng nhập thông tin đăng nhập (username, password) vào form Login.
+            \item Hệ thống kiểm tra thông tin đăng nhập với database (username và password hash).
+            \item Hệ thống xác thực thành công và truy vấn vai trò (Role) của người dùng từ database.
+            \item Hệ thống tạo session/JWT token và gán quyền truy cập theo Role (Admin hoặc Farm Operator).
+            \item Hệ thống redirect người dùng đến Dashboard với quyền truy cập tương ứng.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-MGMT-01 (Password Security):} Mật khẩu phải được hash (bcrypt) trước khi lưu vào database, không được lưu plain text.
+            \item \textbf{BR-MGMT-02 (RBAC):} Quyền truy cập được phân chia theo Role: System Admin có quyền truy cập toàn bộ, Farm Operator chỉ được xem dữ liệu của Farm được gán quyền.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-MGMT-01 (Login Failed):} Nếu username hoặc password không đúng, hệ thống hiển thị thông báo lỗi và yêu cầu đăng nhập lại.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\paragraph*{UC-MGMT-02: Quản lý Thiết bị}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-MGMT-02: Quản lý Thiết bị \\
+        \hline
+        \textbf{Tên usecase} & Device Provisioning \& Management \\
+        \hline
+        \textbf{Mô tả} & Admin thực hiện việc đăng ký thiết bị mới, cấu hình thông số (sensor type, location, calibration parameters) và quản lý vòng đời thiết bị (activate, deactivate, maintenance scheduling). Đây là bước đầu tiên trong Data-centric Sensor Management, nơi mỗi cảm biến được gán Behavior Profile. \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Admin đã đăng nhập và có quyền truy cập module Device Management.
+            \item Schema Registry đã được khởi tạo để hỗ trợ validation.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Thiết bị đã được đăng ký và lưu metadata vào database.
+            \item Behavior Profile đã được khởi tạo cho thiết bị.
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Admin truy cập module Device Management và chọn "Add Device" hoặc "Edit Device". \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin truy cập module Device Management thông qua Dashboard.
+            \item Admin nhập thông tin thiết bị: Device ID, MAC Address, sensor type, communication protocol (WiFi/MQTT, RS485 Modbus RTU).
+            \item Admin cấu hình Behavior Profile: expected value range, transmission frequency, calibration parameters.
+            \item Admin gán thiết bị vào một Farm và Zone cụ thể.
+            \item Hệ thống validate dữ liệu và kiểm tra tính duy nhất của Device ID.
+            \item Hệ thống lưu metadata và Behavior Profile vào database, đánh dấu thiết bị là Active.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-MGMT-03 (Device ID Uniqueness):} Device ID và MAC Address phải là duy nhất trong toàn hệ thống.
+            \item \textbf{BR-MGMT-04 (Behavior Profile):} Behavior Profile phải được cấu hình đầy đủ để hỗ trợ Data Quality Monitoring.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-MGMT-02 (Duplicate Device ID):} Nếu Device ID đã tồn tại, hệ thống hiển thị cảnh báo và yêu cầu nhập ID khác.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\paragraph*{UC-MGMT-03: Giám sát Telemetry}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-MGMT-03: Giám sát Telemetry \\
+        \hline
+        \textbf{Tên usecase} & Telemetry Monitoring \\
+        \hline
+        \textbf{Mô tả} & Người dùng xem dữ liệu cảm biến thời gian thực và lịch sử thông qua các biểu đồ tương tác. Hệ thống hiển thị không chỉ giá trị đo lường mà còn \textbf{Chỉ số tin cậy (Confidence Score)} để người dùng đánh giá chất lượng dữ liệu. \\
+        \hline
+        \textbf{Actor} & System Admin, Farm Operator \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Người dùng đã đăng nhập và có quyền truy cập Dashboard.
+            \item Có ít nhất một thiết bị đang hoạt động và gửi dữ liệu.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Dữ liệu telemetry được hiển thị với Confidence Score.
+            \item Kết nối WebSocket được thiết lập để cập nhật real-time.
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Người dùng truy cập trang Dashboard hoặc chọn một thiết bị để xem chi tiết. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Người dùng truy cập Dashboard hoặc trang Device Detail.
+            \item Hệ thống truy vấn dữ liệu telemetry từ TimescaleDB (real-time và lịch sử).
+            \item Hệ thống truy vấn Health Status và Confidence Score từ bảng device\_health.
+            \item Hệ thống render biểu đồ tương tác hiển thị giá trị đo lường kèm Confidence Score.
+            \item Hệ thống thiết lập kết nối WebSocket để cập nhật real-time (độ trễ tối đa 30 giây).
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-MGMT-05 (Confidence Score Display):} Mọi giá trị telemetry phải được hiển thị kèm Confidence Score để người dùng đánh giá độ tin cậy.
+            \item \textbf{BR-MGMT-06 (Real-time Update):} Dữ liệu phải được cập nhật real-time qua WebSocket, độ trễ tối đa 30 giây (theo NFR-01).
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\paragraph*{UC-MGMT-04: Xác minh Trực quan}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-MGMT-04: Xác minh Trực quan \\
+        \hline
+        \textbf{Tên usecase} & Visual Verification (Camera Stream) \\
+        \hline
+        \textbf{Mô tả} & Sử dụng camera IP để xác minh trực quan trạng thái môi trường, hỗ trợ cross-validation với dữ liệu cảm biến và giảm tỷ lệ false positive trong cảnh báo lỗi. Đây là phần của Multi-modal Cross-validation, nơi dữ liệu hình ảnh được sử dụng như một kênh tham chiếu phụ (Ground Truth). \\
+        \hline
+        \textbf{Actor} & System Admin, Farm Operator \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Camera IP đã được cấu hình và kết nối với hệ thống (qua Raspberry Pi 4).
+            \item Người dùng đã đăng nhập và có quyền truy cập module Camera.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Video stream được hiển thị trên Dashboard.
+            \item Dữ liệu hình ảnh được sử dụng để cross-validate với dữ liệu cảm biến (nếu có cảnh báo).
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Người dùng truy cập trang Camera Stream hoặc hệ thống tự động sử dụng hình ảnh để cross-validate cảnh báo. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Người dùng truy cập trang Camera Stream từ Dashboard.
+            \item Hệ thống kết nối với Camera IP (Hikvision DS-2CD1021G0-I) qua Raspberry Pi 4.
+            \item Hệ thống nhận video stream và hiển thị trên giao diện.
+            \item Khi có cảnh báo từ cảm biến (ví dụ: độ ẩm đất báo "Khô hạn"), hệ thống tự động phân tích hình ảnh để xác thực:
+            \begin{itemize}[leftmargin=*]
+                \item Nếu hình ảnh cho thấy đất sẫm màu (ướt), hệ thống kết luận: cảm biến bị hỏng/lỗi tiếp xúc.
+                \item Nếu hình ảnh cho thấy đất khô, hệ thống xác nhận cảnh báo là hợp lệ.
+            \end{itemize}
+            \item Kết quả cross-validation được cập nhật vào Health Status và Confidence Score.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-MGMT-07 (Visual Cross-validation):} Camera stream được sử dụng như một kênh tham chiếu phụ để giảm tỷ lệ false positive trong cảnh báo lỗi.
+            \item \textbf{BR-MGMT-08 (Real-time Stream):} Video stream phải có độ trễ thấp ($<$ 2 giây) để hỗ trợ xác minh trực quan hiệu quả.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\paragraph*{UC-MGMT-05: Quản lý Cảnh báo}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-MGMT-05: Quản lý Cảnh báo \\
+        \hline
+        \textbf{Tên usecase} & Alert Management \& Notification \\
+        \hline
+        \textbf{Mô tả} & Hệ thống gửi cảnh báo real-time (qua WebSocket) và notification (email) khi phát hiện lỗi cảm biến hoặc giá trị vượt ngưỡng. Người dùng có thể xem, quản lý và cấu hình ngưỡng cảnh báo và quy tắc routing. \\
+        \hline
+        \textbf{Actor} & System Admin, Farm Operator \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Người dùng đã đăng nhập.
+            \item Hệ thống đã phát hiện lỗi cảm biến hoặc giá trị vượt ngưỡng (từ Automated Analysis Pipeline).
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Cảnh báo đã được hiển thị trên Dashboard (qua WebSocket).
+            \item Email notification đã được gửi (nếu được cấu hình).
+            \item Alert record đã được lưu vào database.
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Hệ thống phát hiện lỗi cảm biến (từ UC-AUTO-07: Kích hoạt cảnh báo) hoặc người dùng truy cập trang Alert Management. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Hệ thống tự động tạo alert record với thông tin: Device ID, Health Status, Confidence Score, Priority, Timestamp.
+            \item Hệ thống định tuyến cảnh báo:
+            \begin{itemize}[leftmargin=*]
+                \item \textbf{WebSocket:} Gửi real-time notification đến Dashboard để hiển thị ngay lập tức.
+                \item \textbf{Email:} Gửi email cho Admin khi Priority = High (nếu được cấu hình).
+            \end{itemize}
+            \item Người dùng xem danh sách cảnh báo trên Dashboard.
+            \item Người dùng có thể xem chi tiết, đánh dấu đã đọc, hoặc cấu hình ngưỡng cảnh báo (nếu là Admin).
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-MGMT-09 (Priority Routing):} Mức độ ưu tiên (Priority) quyết định kênh thông báo: High Priority $\rightarrow$ Email + WebSocket, Medium Priority $\rightarrow$ WebSocket only.
+            \item \textbf{BR-MGMT-10 (Alert Retention):} Cảnh báo được lưu trữ trong database ít nhất 90 ngày để phục vụ audit và phân tích.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-MGMT-03 (Configure Alert Threshold):} Admin có thể thay đổi ngưỡng cảnh báo \textrightarrow{} Hệ thống lưu quy tắc mới và áp dụng ngay lập tức.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\paragraph*{UC-MGMT-06: Phân tích Dữ liệu và Báo cáo}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-MGMT-06: Phân tích Dữ liệu và Báo cáo \\
+        \hline
+        \textbf{Tên usecase} & Data Analytics \& Reporting \\
+        \hline
+        \textbf{Mô tả} & Hệ thống tổng hợp dữ liệu từ nhiều nông trại, tính toán KPI và tạo báo cáo (PDF/CSV). Admin có thể so sánh hiệu suất giữa các nông trại và đưa ra quyết định dựa trên dữ liệu có chất lượng cao (với Confidence Score). \\
+        \hline
+        \textbf{Actor} & System Admin \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Admin đã đăng nhập và có quyền truy cập module Analytics.
+            \item Hệ thống đã có dữ liệu từ ít nhất một nguồn (telemetry, device status, alerts).
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item KPI đã được tính toán và hiển thị trên Dashboard.
+            \item Báo cáo đã được tạo (nếu Admin yêu cầu) và lưu trữ hoặc tải xuống.
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Admin truy cập module Analytics hoặc yêu cầu tạo báo cáo. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Admin truy cập module Analytics từ Dashboard.
+            \item Hệ thống truy vấn dữ liệu tổng hợp từ TimescaleDB và PostgreSQL:
+            \begin{itemize}[leftmargin=*]
+                \item Telemetry aggregation theo cửa sổ thời gian (mặc định: 7 ngày gần nhất).
+                \item Device status statistics (Online/Offline, Normal/Suspect/Faulty).
+                \item Farm performance metrics (tỷ lệ sản lượng / mức tiêu thụ năng lượng).
+            \end{itemize}
+            \item Hệ thống tính toán KPI và xếp hạng nông trại dựa trên thuật toán ranking.
+            \item Hệ thống hiển thị Dashboard Metrics với Confidence Score cho từng metric.
+            \item Admin có thể so sánh hiệu suất giữa các nông trại hoặc tạo báo cáo (PDF/CSV).
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-MGMT-13 (Data Latency):} Dữ liệu hiển thị phải được cập nhật gần thời gian thực, độ trễ tối đa 30 giây (theo NFR-01).
+            \item \textbf{BR-MGMT-14 (Confidence Score):} Các metrics hiển thị phải kèm theo Confidence Score để Admin đánh giá độ tin cậy của dữ liệu.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-MGMT-05 (Export Report):} Admin có thể export báo cáo PDF/CSV \textrightarrow{} Hệ thống tạo báo cáo động và tự động tải xuống.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\paragraph*{UC-MGMT-07: Trực quan hóa Trạng thái Sức khỏe}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-MGMT-07: Trực quan hóa Trạng thái Sức khỏe \\
+        \hline
+        \textbf{Tên usecase} & Health Status Visualization \\
+        \hline
+        \textbf{Mô tả} & Hiển thị trạng thái sức khỏe cảm biến (Normal/Suspect/Faulty) dựa trên kết quả phân tích từ pipeline phát hiện lỗi, kèm theo xu hướng suy giảm và đề xuất bảo trì. Đây là phần thể hiện giá trị của Data-driven Lifecycle Management. \\
+        \hline
+        \textbf{Actor} & System Admin, Farm Operator \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Người dùng đã đăng nhập và có quyền truy cập Dashboard.
+            \item Automated Analysis Pipeline đã tính toán Health Status và Confidence Score cho các cảm biến.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Health Status và Confidence Score được hiển thị trên Dashboard.
+            \item Xu hướng suy giảm và đề xuất bảo trì được hiển thị (nếu có).
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Người dùng truy cập Dashboard hoặc trang Device Detail để xem Health Status. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Người dùng truy cập Dashboard hoặc chọn một thiết bị để xem chi tiết.
+            \item Hệ thống truy vấn Health Status (Normal/Suspect/Faulty) và Confidence Score từ bảng device\_health.
+            \item Hệ thống truy vấn xu hướng suy giảm (Degradation Trend) từ bảng device\_degradation\_tracking.
+            \item Hệ thống hiển thị:
+            \begin{itemize}[leftmargin=*]
+                \item Health Status với màu sắc trực quan (Xanh = Normal, Vàng = Suspect, Đỏ = Faulty).
+                \item Confidence Score (ví dụ: 98\% = Normal, 20\% = Suspect/Drift Error).
+                \item Biểu đồ xu hướng suy giảm (Degradation Trend) nếu có.
+                \item Đề xuất bảo trì (Calibration hoặc Replacement) từ Degradation Tracking.
+            \end{itemize}
+            \item Hệ thống cập nhật real-time qua WebSocket khi Health Status thay đổi.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-MGMT-15 (Visual Indicators):} Health Status phải được hiển thị với màu sắc trực quan để người dùng dễ dàng nhận biết.
+            \item \textbf{BR-MGMT-16 (Degradation Visualization):} Xu hướng suy giảm phải được hiển thị dưới dạng biểu đồ để hỗ trợ ra quyết định bảo trì chủ động.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsubsection{Use Case: Khối Phân tích \& Xử lý Trung tâm (Central Analysis \& Processing Block)}
+
+Biểu đồ Use Case này minh họa chi tiết quy trình xử lý dữ liệu tự động của hệ thống, tập trung vào các bước cụ thể trong Pipeline phát hiện lỗi cảm biến và quản lý vòng đời thiết bị. Khác với biểu đồ tổng quan ở trên, biểu đồ này thể hiện rõ các mối quan hệ include và extend giữa các Use Case, làm rõ cách hệ thống đảm bảo tính toàn vẹn dữ liệu thông qua nhiều lớp kiểm tra và xác thực.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/Analytic-Analytic site.drawio.png}
+    \caption{Use Case Diagram: Khối Phân tích \& Xử lý Trung tâm (Central Analysis \& Processing Block)}
+    \label{fig:use_case_central_analysis}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-AUTO-01: Thu thập dòng dữ liệu Telemetry \\
+        \hline
+        \textbf{Tên usecase} & Thu thập dòng dữ liệu Telemetry \\
+        \hline
+        \textbf{Mô tả} & Backend Service đóng vai trò MQTT Consumer tiếp nhận dòng dữ liệu liên tục từ các thiết bị IoT qua Message Broker (RabbitMQ). Use Case này luôn bao gồm (include) Use Case "Kiểm tra chất lượng dữ liệu" để đảm bảo mọi dữ liệu đầu vào đều được validate ngay từ bước đầu. \\
+        \hline
+        \textbf{Actor} & Hệ thống (System Agent / Backend Service) \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Backend Service đã được khởi động và kết nối với Message Broker (RabbitMQ).
+            \item Các thiết bị IoT đã được đăng ký và đang gửi dữ liệu qua MQTT.
+            \item Schema Registry đã được khởi tạo để hỗ trợ validation.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Dữ liệu telemetry được tiếp nhận và đưa vào queue xử lý.
+            \item Dữ liệu đã được kiểm tra chất lượng sơ cấp (thông qua include Use Case).
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Backend Service nhận message từ MQTT topic (ví dụ: \texttt{telemetry/+/+}) thông qua Message Broker. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Backend Service đăng ký làm MQTT Consumer với Message Broker.
+            \item Backend Service nhận message từ MQTT topic theo cơ chế pub/sub.
+            \item Backend Service parse message JSON và extract metadata (device ID, timestamp, sensor type).
+            \item Backend Service đưa dữ liệu vào internal queue để xử lý bất đồng bộ.
+            \item \textbf{Include:} Hệ thống tự động thực hiện Use Case "Kiểm tra chất lượng dữ liệu" cho mọi message nhận được.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-AUTO-01 (Message Queue):} Sử dụng Message Queue đảm bảo không mất mát dữ liệu khi lưu lượng tăng đột biến và cho phép xử lý bất đồng bộ với khả năng scale độc lập.
+            \item \textbf{BR-AUTO-02 (Include Relationship):} Mọi dữ liệu telemetry đều phải trải qua "Kiểm tra chất lượng dữ liệu" trước khi vào Pipeline xử lý, không có ngoại lệ.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-AUTO-01 (Invalid Message Format):} Nếu message không đúng định dạng JSON hoặc thiếu required fields, hệ thống loại bỏ message và ghi log lỗi để theo dõi.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-AUTO-02: Kiểm tra chất lượng dữ liệu \\
+        \hline
+        \textbf{Tên usecase} & Kiểm tra chất lượng dữ liệu (Data Quality Check) \\
+        \hline
+        \textbf{Mô tả} & Hệ thống thực hiện các kiểm tra chất lượng dữ liệu sơ cấp để phát hiện các vấn đề cơ bản trước khi đưa dữ liệu vào Pipeline xử lý phức tạp. Use Case này được include bởi "Thu thập dòng dữ liệu Telemetry". \\
+        \hline
+        \textbf{Actor} & Hệ thống (System Agent / Backend Service) \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Dữ liệu telemetry đã được tiếp nhận từ MQTT.
+            \item Behavior Profile của thiết bị đã được khởi tạo trong hệ thống.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Dữ liệu đã được validate và đánh dấu chất lượng (Pass/Fail).
+            \item Dữ liệu hợp lệ được đưa vào Pipeline xử lý tiếp theo.
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Tự động được kích hoạt khi "Thu thập dòng dữ liệu Telemetry" nhận được message mới (include relationship). \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item \textbf{Missing Data Detection:} Hệ thống kiểm tra timestamp liên tục, phát hiện các gói tin bị thiếu hoặc timestamp không liên tục, đánh dấu cảm biến có thể đang gặp vấn đề kết nối.
+            \item \textbf{Basic Outlier Detection:} Hệ thống so sánh giá trị với Behavior Profile (expected value range), loại bỏ các giá trị rõ ràng ngoại lai (ví dụ: nhiệt độ $>$ 100°C trong môi trường nhà kính).
+            \item \textbf{Stuck-at Detection:} Hệ thống phát hiện giá trị bị kẹt (không thay đổi trong thời gian dài) so với dải giá trị dự kiến từ Behavior Profile.
+            \item \textbf{Timestamp Validation:} Hệ thống kiểm tra tính hợp lệ của timestamp và phát hiện dữ liệu out-of-order.
+            \item Hệ thống đánh dấu kết quả kiểm tra (Pass/Fail) và ghi log nếu phát hiện vấn đề.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-AUTO-03 (Mandatory Include):} Use Case này phải được thực hiện cho mọi message telemetry, không có ngoại lệ.
+            \item \textbf{BR-AUTO-04 (Behavior Profile Reference):} Các kiểm tra phải tham chiếu đến Behavior Profile của thiết bị để đảm bảo tính chính xác.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-AUTO-03: Phát hiện lỗi cảm biến (RFE) \\
+        \hline
+        \textbf{Tên usecase} & Phát hiện lỗi cảm biến sử dụng thuật toán RFE \\
+        \hline
+        \textbf{Mô tả} & Hệ thống áp dụng thuật toán \textbf{Recursive Feature Elimination (RFE)} kết hợp với mô hình phân lớp Machine Learning (Random Forest/XGBoost) để phát hiện các loại lỗi phức tạp mà các kiểm tra sơ cấp không thể phát hiện. Use Case này bao gồm (include) "Phân tích tương quan chéo" và "Gán nhãn trạng thái sức khỏe". \\
+        \hline
+        \textbf{Actor} & Hệ thống (System Agent / Backend Service) \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Dữ liệu đã được kiểm tra chất lượng sơ cấp và pass validation.
+            \item Mô hình RFE đã được train và sẵn sàng sử dụng.
+            \item Lịch sử dữ liệu đủ để thực hiện phân tích.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Kết quả phát hiện lỗi đã được tính toán và lưu trữ.
+            \item Health Status đã được gán cho cảm biến (thông qua include Use Case).
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Dữ liệu telemetry đã pass Data Quality Check và được đưa vào Pipeline phát hiện lỗi. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Hệ thống trích xuất features từ dữ liệu telemetry (giá trị hiện tại, xu hướng, độ lệch chuẩn, tần suất).
+            \item Hệ thống áp dụng thuật toán RFE để chọn lọc features quan trọng nhất.
+            \item Hệ thống đưa features đã chọn vào mô hình phân lớp (Random Forest/XGBoost) để phân loại lỗi.
+            \item Mô hình trả về kết quả phân loại: Normal, Drift, Anomaly, hoặc Hardware Failure.
+            \item \textbf{Include:} Hệ thống tự động thực hiện "Phân tích tương quan chéo" để xác thực kết quả.
+            \item \textbf{Include:} Hệ thống tự động thực hiện "Gán nhãn trạng thái sức khỏe" dựa trên kết quả RFE và Cross-correlation.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-AUTO-05 (RFE Algorithm):} Thuật toán RFE phải được áp dụng để chọn lọc features quan trọng, giảm noise và tăng độ chính xác của mô hình.
+            \item \textbf{BR-AUTO-06 (Multi-source Validation):} Kết quả RFE phải được xác thực bằng Cross-correlation Analysis trước khi gán Health Status.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-AUTO-04: Phân tích tương quan chéo \\
+        \hline
+        \textbf{Tên usecase} & Phân tích tương quan chéo (Cross-correlation Analysis) \\
+        \hline
+        \textbf{Mô tả} & Hệ thống so sánh dữ liệu giữa các cảm biến lân cận trong cùng một khu vực địa lý để xác thực tính hợp lệ của dữ liệu. Đây là bước quan trọng trong Multi-modal Cross-validation, giúp phân biệt giữa biến động môi trường thực tế và lỗi thiết bị. Use Case này được include bởi "Phát hiện lỗi cảm biến (RFE)". \\
+        \hline
+        \textbf{Actor} & Hệ thống (System Agent / Backend Service) \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Có ít nhất 2 cảm biến cùng loại trong cùng một khu vực địa lý.
+            \item Dữ liệu từ các cảm biến lân cận đã được thu thập và lưu trữ.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Kết quả so sánh tương quan đã được tính toán.
+            \item Cảm biến nghi ngờ đã được đánh dấu nếu có sự khác biệt đáng kể.
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Tự động được kích hoạt khi "Phát hiện lỗi cảm biến (RFE)" thực hiện phân tích (include relationship). \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Hệ thống xác định các cảm biến lân cận trong cùng khu vực địa lý dựa trên metadata (Farm, Zone).
+            \item Hệ thống truy vấn dữ liệu từ các cảm biến lân cận trong cùng khoảng thời gian.
+            \item Hệ thống tính toán độ tương quan (correlation coefficient) giữa cảm biến đang phân tích và các cảm biến lân cận.
+            \item Nếu một cảm biến báo giá trị khác biệt đáng kể so với các cảm biến khác (ví dụ: 1 cảm biến báo nhiệt độ 40°C trong khi 3 cảm biến xung quanh báo 30°C), hệ thống đánh dấu nghi ngờ lỗi.
+            \item Hệ thống phân biệt giữa biến động môi trường thực tế (ví dụ: mưa làm độ ẩm tăng vọt) và lỗi thiết bị (ví dụ: trời nắng nhưng độ ẩm tăng vọt).
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-AUTO-07 (Spatial Correlation):} Chỉ so sánh các cảm biến trong cùng khu vực địa lý (cùng Farm và Zone) để đảm bảo tính hợp lệ của so sánh.
+            \item \textbf{BR-AUTO-08 (Threshold):} Ngưỡng khác biệt để đánh dấu nghi ngờ phải được cấu hình dựa trên loại cảm biến và điều kiện môi trường.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-AUTO-05: Gán nhãn trạng thái sức khỏe \\
+        \hline
+        \textbf{Tên usecase} & Gán nhãn trạng thái sức khỏe (Health Status Labeling) \\
+        \hline
+        \textbf{Mô tả} & Hệ thống gán nhãn trạng thái sức khỏe cho từng cảm biến dựa trên kết quả phân tích từ RFE và Cross-correlation Analysis. Use Case này được include bởi "Phát hiện lỗi cảm biến (RFE)" và có thể extend "Kích hoạt cảnh báo" khi điều kiện được thỏa mãn. \\
+        \hline
+        \textbf{Actor} & Hệ thống (System Agent / Backend Service) \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Kết quả phân tích từ RFE và Cross-correlation Analysis đã sẵn sàng.
+            \item Confidence Score đã được tính toán.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Health Status đã được gán cho cảm biến (Normal/Suspect/Faulty).
+            \item Health Status và Confidence Score đã được lưu vào database.
+            \item Nếu điều kiện extend được thỏa mãn, Use Case "Kích hoạt cảnh báo" được kích hoạt.
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Tự động được kích hoạt sau khi "Phát hiện lỗi cảm biến (RFE)" hoàn tất phân tích (include relationship). \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Hệ thống tổng hợp kết quả từ RFE và Cross-correlation Analysis.
+            \item Hệ thống tính toán Confidence Score dựa trên độ nhất quán của các nguồn dữ liệu.
+            \item Hệ thống gán nhãn Health Status:
+            \begin{itemize}[leftmargin=*]
+                \item \textbf{Normal:} Cảm biến hoạt động bình thường, Confidence Score $>$ 90\%.
+                \item \textbf{Suspect:} Cảm biến có dấu hiệu bất thường cần theo dõi, Confidence Score: 50-90\%.
+                \item \textbf{Faulty:} Cảm biến có lỗi rõ ràng, Confidence Score $<$ 50\%.
+            \end{itemize}
+            \item Hệ thống lưu Health Status và Confidence Score vào bảng device\_health trong database.
+            \item \textbf{Extend:} Nếu Health Status = "Faulty" hoặc "Suspect" kéo dài quá ngưỡng thời gian, hệ thống kích hoạt Use Case "Kích hoạt cảnh báo".
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-AUTO-09 (Confidence Score):} Confidence Score phải được tính toán dựa trên độ nhất quán của RFE, Cross-correlation, và Behavior Profile.
+            \item \textbf{BR-AUTO-10 (Health Status Threshold):} Ngưỡng Confidence Score để phân loại Normal/Suspect/Faulty phải được cấu hình và có thể điều chỉnh.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{Extend: Kích hoạt cảnh báo:} Nếu Health Status = "Faulty" hoặc "Suspect" kéo dài quá ngưỡng thời gian (ví dụ: 5 phút), hệ thống tự động kích hoạt Use Case "Kích hoạt cảnh báo".
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-AUTO-06: Theo dõi độ suy hao thiết bị \\
+        \hline
+        \textbf{Tên usecase} & Theo dõi độ suy hao thiết bị (Device Degradation Tracking) \\
+        \hline
+        \textbf{Mô tả} & Hệ thống lưu trữ và phân tích lịch sử hoạt động của cảm biến để theo dõi xu hướng suy giảm dần theo thời gian. Module này hỗ trợ Predictive Maintenance bằng cách cảnh báo sớm khi cảm biến có dấu hiệu cần hiệu chuẩn hoặc thay thế. \\
+        \hline
+        \textbf{Actor} & Hệ thống (System Agent / Backend Service) \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Cảm biến đã hoạt động đủ lâu để có lịch sử dữ liệu (ít nhất 7 ngày).
+            \item Health Status đã được gán và lưu trữ trong database.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Degradation Index đã được tính toán và cập nhật.
+            \item Đề xuất bảo trì (nếu có) đã được tạo và lưu trữ.
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Hệ thống thực hiện phân tích định kỳ (ví dụ: mỗi 24 giờ) hoặc khi có Health Status mới được gán. \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Hệ thống truy vấn lịch sử hoạt động của cảm biến từ TimescaleDB (độ lệch chuẩn, tần suất lỗi, xu hướng drift).
+            \item Hệ thống phân tích xu hướng dài hạn để phát hiện các dấu hiệu suy giảm:
+            \begin{itemize}[leftmargin=*]
+                \item Tăng độ lệch chuẩn theo thời gian.
+                \item Tăng tần suất lỗi (từ Normal $\rightarrow$ Suspect $\rightarrow$ Faulty).
+                \item Xu hướng drift (giá trị trôi dần khỏi giá trị chuẩn).
+            \end{itemize}
+            \item Hệ thống tính toán Degradation Index dựa trên phân tích xu hướng.
+            \item Hệ thống tạo đề xuất bảo trì:
+            \begin{itemize}[leftmargin=*]
+                \item \textbf{Calibration:} Khi độ lệch chuẩn tăng nhưng chưa vượt ngưỡng Faulty.
+                \item \textbf{Replacement:} Khi xu hướng suy giảm rõ ràng và không thể khắc phục bằng hiệu chuẩn.
+            \end{itemize}
+            \item Hệ thống lưu Degradation Index và đề xuất vào bảng device\_degradation\_tracking.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-AUTO-11 (Historical Data):} Phân tích suy giảm phải dựa trên ít nhất 7 ngày dữ liệu lịch sử để đảm bảo tính chính xác.
+            \item \textbf{BR-AUTO-12 (Predictive Maintenance):} Đề xuất bảo trì phải được tạo sớm trước khi thiết bị hỏng hoàn toàn, hỗ trợ bảo trì chủ động.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|p{3.2cm}|p{11.5cm}|}
+        \hline
+        \textbf{Mã số usecase} & UC-AUTO-07: Kích hoạt cảnh báo \\
+        \hline
+        \textbf{Tên usecase} & Kích hoạt cảnh báo (Activate Alert) \\
+        \hline
+        \textbf{Mô tả} & Hệ thống tự động kích hoạt cảnh báo và định tuyến đến các kênh thông báo phù hợp khi phát hiện lỗi nghiêm trọng hoặc giá trị vượt ngưỡng. Use Case này được extend từ "Gán nhãn trạng thái sức khỏe", chỉ được kích hoạt khi điều kiện mở rộng được thỏa mãn. \\
+        \hline
+        \textbf{Actor} & Hệ thống (System Agent / Backend Service) \\
+        \hline
+        \textbf{Tiền điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Health Status đã được gán và lưu trữ.
+            \item Điều kiện extend được thỏa mãn: Health Status = "Faulty" hoặc "Suspect" kéo dài quá ngưỡng thời gian.
+        \end{itemize} \\
+        \hline
+        \textbf{Hậu điều kiện} & 
+        \begin{itemize}[leftmargin=*]
+            \item Alert record đã được tạo và lưu vào database.
+            \item Cảnh báo đã được gửi đến các kênh thông báo phù hợp.
+            \item Audit trail đã được ghi log.
+        \end{itemize} \\
+        \hline
+        \textbf{Trigger} & Điều kiện extend được thỏa mãn sau khi "Gán nhãn trạng thái sức khỏe" hoàn tất (extend relationship). \\
+        \hline
+        \textbf{Luồng chính} &
+        \begin{enumerate}[leftmargin=*]
+            \item Hệ thống kiểm tra điều kiện extend: Health Status = "Faulty" hoặc "Suspect" kéo dài quá ngưỡng thời gian (ví dụ: 5 phút).
+            \item Hệ thống tạo alert record trong database với:
+            \begin{itemize}[leftmargin=*]
+                \item Device ID và sensor type.
+                \item Health Status và Confidence Score.
+                \item Mức độ ưu tiên (Priority) dựa trên Health Status và Confidence Score.
+                \item Timestamp và mô tả lỗi.
+            \end{itemize}
+            \item Hệ thống định tuyến cảnh báo đến các kênh thông báo phù hợp:
+            \begin{itemize}[leftmargin=*]
+                \item \textbf{WebSocket:} Gửi real-time notification đến Dashboard để hiển thị ngay lập tức.
+                \item \textbf{Email:} Gửi email cho Admin khi cảnh báo quan trọng (Priority = High).
+                \item \textbf{API Callback:} Gọi API callback cho tích hợp với hệ thống bên ngoài (nếu được cấu hình).
+            \end{itemize}
+            \item Hệ thống ghi log audit trail để theo dõi lịch sử cảnh báo và phục vụ phân tích sau này.
+        \end{enumerate} \\
+        \hline
+        \textbf{Quy tắc nghiệp vụ} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{BR-AUTO-13 (Extend Condition):} Cảnh báo chỉ được kích hoạt khi Health Status = "Faulty" hoặc "Suspect" kéo dài quá ngưỡng thời gian, tránh spam cảnh báo không cần thiết.
+            \item \textbf{BR-AUTO-14 (Priority Routing):} Mức độ ưu tiên (Priority) quyết định kênh thông báo: High Priority $\rightarrow$ Email + WebSocket, Medium Priority $\rightarrow$ WebSocket only.
+        \end{itemize} \\
+        \hline
+        \textbf{Luồng thay thế / Mở rộng} &
+        \begin{itemize}[leftmargin=*]
+            \item \textbf{E-AUTO-02 (Condition Not Met):} Nếu điều kiện extend không được thỏa mãn (ví dụ: Health Status = "Normal" hoặc "Suspect" chỉ kéo dài 1 phút), Use Case này không được kích hoạt.
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{table}
