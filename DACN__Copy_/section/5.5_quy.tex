@@ -1,4 +1,4 @@
-\subsubsection{Thiết kế Firmware và xử lý tại biên}
+\subsubsection*{Thiết kế Firmware và xử lý tại biên}
 
 % \subsubsubsection{Activity Diagram}
 % \begin{figure}[H]
@@ -192,7 +192,6 @@
         JsonObject doc = outputDoc.to<JsonObject>();
         if (result == node.ku8MBSuccess) {
             float value = node.getResponseBuffer(0) / 10.0; // Scale gia tri
-           
             // Kiem tra nguong vat ly (Pre-processing)
             if (value < MIN_THRESHOLD || value > MAX_THRESHOLD) {
                 doc["quality_flag"] = 1; // SUSPECT: Nghi ngo
@@ -218,7 +217,7 @@
 \end{itemize}
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth]{img/Firmware/Edge Preprocess mermaid img.png}
+    \includegraphics[width=0.5\textwidth]{img/Firmware/Edge Preprocess mermaid img.png}
     \caption{Sơ đồ quy trình xử lý dữ liệu tại biên trên Firmware ESP32}
     \label{fig:edge_processing_flowchart}
 \end{figure}
