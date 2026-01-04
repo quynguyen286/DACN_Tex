@@ -1,9 +1,12 @@
+\subsubsection{Use Case: Quản lý Nông trại (Farm Management)}
 
-\subsubsection{Use case: Giám sát Nông trại}
+Các quy trình nghiệp vụ dưới đây được kế thừa và chuẩn hóa dựa trên kết quả vận hành thực nghiệm tại Tomochan Farm, đảm bảo tính ổn định và khả năng sử dụng cho người dùng cuối. Use Case này hỗ trợ quản lý metadata của các đơn vị canh tác (Farm) trong hệ thống, tạo nền tảng cho việc tổ chức và phân bổ thiết bị cảm biến theo cấu trúc địa lý và nghiệp vụ.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{img/Farm.png}
-    \caption{Sơ đồ quản lý farm}
+    \caption{Sơ đồ Use Case: Quản lý Nông trại (Farm Management)}
+    \label{fig:use_case_farm}
 \end{figure}
 
 \begin{table}[H]
@@ -260,7 +263,10 @@
 
 \newpage
 
-\subsubsection{Use case: Giám sát Thiết bị}
+\subsubsection{Use Case: Quản lý Thiết bị Cảm biến (Device Management)}
+
+Các quy trình nghiệp vụ dưới đây được kế thừa và chuẩn hóa dựa trên kết quả vận hành thực nghiệm tại Tomochan Farm, nơi hệ thống cần tích hợp và quản lý các thiết bị cảm biến công nghiệp đa dạng về giao thức (WiFi, RS485 Modbus RTU). Use Case này hỗ trợ quy trình đăng ký, cấu hình và quản lý vòng đời của thiết bị cảm biến trong mô hình Data-centric Sensor Management, đảm bảo mỗi thiết bị được mô hình hóa như một thực thể dữ liệu với Behavior Profile đầy đủ.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.95\textwidth}

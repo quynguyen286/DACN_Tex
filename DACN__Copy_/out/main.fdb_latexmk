@@ -1,4 +1,5 @@
 # Fdb version 4
+<<<<<<< HEAD
 ["bibtex out/main"] 0 "out/main.aux" "out/main.bbl" "out/main" 1767532586.94806 -1
   "./section/references.bib" 1766902145 3998 049e8f34de049b15fb7bbc0b64acef5e ""
   "D:/LaTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
@@ -350,12 +351,13 @@
   "section/Pref.tex" 1765705442 58 bc1a2117cb33f84b14ba44c484b7ba33 ""
   "section/abstract.tex" 1766902145 3176 376697f1e8f43f4b142044f205f2c293 ""
   "section/loi_cam_on.tex" 1766902145 1897 c488c050a893b0b8eb4cc1faf48e16b3 ""
+=======
+["pdflatex"] 0 "/home/vietlh/Documents/system/CK/DACN_Tex/DACN__Copy_/main.tex" "main.pdf" "main" 0 -1
+  "/home/vietlh/Documents/system/CK/DACN_Tex/DACN__Copy_/main.tex" 0 -1 0 ""
+  "out/main.aux" 0 -1 0 "pdflatex"
+>>>>>>> 72fb2266308321add16a3a6d6ae88ac5d1d55654
   (generated)
+  "main.pdf"
   "out/main.aux"
-  "out/main.lof"
   "out/main.log"
-  "out/main.lot"
-  "out/main.out"
-  "out/main.pdf"
-  "out/main.toc"
   (rewritten before read)
