@@ -1,609 +1,105 @@
-% $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.3 $
-% Do not modify the above lines!
-%
-% This is an auxiliary file used by the 'biblatex' package.
-% This file may safely be deleted. It will be recreated by
-% biber as required.
-%
-\begingroup
-\makeatletter
-\@ifundefined{ver@biblatex.sty}
-  {\@latex@error
-     {Missing 'biblatex' package}
-     {The bibliography requires the 'biblatex' package.}
-      \aftergroup\endinput}
-  {}
-\endgroup
+\begin{thebibliography}{10}
 
+\bibitem{iot_arch_2015}
+A.~Al-Fuqaha, M.~Guizani, M.~Mohammadi, M.~Aledhari, and M.~Ayyash.
+\newblock Internet of things: A survey on enabling technologies, protocols, and
+  applications.
+\newblock {\em IEEE Communications Surveys \& Tutorials}, 17(4):2347--2376,
+  2015.
 
-\refsection{0}
-  \datalist[entry]{none/global//global/global/global}
-    \entry{smart_farm_trend}{article}{}{}
-      \name{author}{1}{}{%
-        {{hash=a4f7bac2821eb215a2c38c6ef351a4b0}{%
-           family={Boursianis},
-           familyi={B\bibinitperiod},
-           given={et\bibnamedelima al.},
-           giveni={e\bibinitperiod\bibinitdelim a\bibinitperiod},
-           suffix={A.\bibnamedelimi D.},
-           suffixi={A\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {MDPI}%
-      }
-      \strng{namehash}{a4f7bac2821eb215a2c38c6ef351a4b0}
-      \strng{fullhash}{a4f7bac2821eb215a2c38c6ef351a4b0}
-      \strng{fullhashraw}{a4f7bac2821eb215a2c38c6ef351a4b0}
-      \strng{bibnamehash}{a4f7bac2821eb215a2c38c6ef351a4b0}
-      \strng{authorbibnamehash}{a4f7bac2821eb215a2c38c6ef351a4b0}
-      \strng{authornamehash}{a4f7bac2821eb215a2c38c6ef351a4b0}
-      \strng{authorfullhash}{a4f7bac2821eb215a2c38c6ef351a4b0}
-      \strng{authorfullhashraw}{a4f7bac2821eb215a2c38c6ef351a4b0}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Sensors}
-      \field{number}{10}
-      \field{title}{Smart farming: Internet of Things technologies, challenges and future directions}
-      \field{volume}{22}
-      \field{year}{2022}
-      \field{pages}{3735}
-      \range{pages}{1}
-    \endentry
-    \entry{iot_fragmentation}{inproceedings}{}{}
-      \name{author}{3}{}{%
-        {{hash=7507d44cdd4fd949c97082f9571f54cf}{%
-           family={Noura},
-           familyi={N\bibinitperiod},
-           given={M.},
-           giveni={M\bibinitperiod}}}%
-        {{hash=5501169992fe7593d29c0bcd04b02205}{%
-           family={Atiquzzaman},
-           familyi={A\bibinitperiod},
-           given={M.},
-           giveni={M\bibinitperiod}}}%
-        {{hash=fed3052feb0aa064b155608c3d8364c1}{%
-           family={Gaedke},
-           familyi={G\bibinitperiod},
-           given={M.},
-           giveni={M\bibinitperiod}}}%
-      }
-      \list{organization}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{f593efc476310ba4226cc193663e3f0f}
-      \strng{fullhash}{84bb149618190c9311e23171b7294d36}
-      \strng{fullhashraw}{84bb149618190c9311e23171b7294d36}
-      \strng{bibnamehash}{84bb149618190c9311e23171b7294d36}
-      \strng{authorbibnamehash}{84bb149618190c9311e23171b7294d36}
-      \strng{authornamehash}{f593efc476310ba4226cc193663e3f0f}
-      \strng{authorfullhash}{84bb149618190c9311e23171b7294d36}
-      \strng{authorfullhashraw}{84bb149618190c9311e23171b7294d36}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Proceedings of the International Conference on IoT}
-      \field{title}{Interoperability in IoT: Challenges and solutions}
-      \field{year}{2019}
-      \field{pages}{1\bibrangedash 6}
-      \range{pages}{6}
-    \endentry
-    \entry{chinhphu2024}{article}{}{}
-      \name{author}{1}{}{%
-        {{hash=1610db212722294b8dd7c9684744f685}{%
-           family={{Báo Chính Phủ}},
-           familyi={B\bibinitperiod}}}%
-      }
-      \strng{namehash}{1610db212722294b8dd7c9684744f685}
-      \strng{fullhash}{1610db212722294b8dd7c9684744f685}
-      \strng{fullhashraw}{1610db212722294b8dd7c9684744f685}
-      \strng{bibnamehash}{1610db212722294b8dd7c9684744f685}
-      \strng{authorbibnamehash}{1610db212722294b8dd7c9684744f685}
-      \strng{authornamehash}{1610db212722294b8dd7c9684744f685}
-      \strng{authorfullhash}{1610db212722294b8dd7c9684744f685}
-      \strng{authorfullhashraw}{1610db212722294b8dd7c9684744f685}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Cổng Thông tin điện tử Chính phủ}
-      \field{title}{Thủ tướng: Ngành nông nghiệp phải tăng tốc, bứt phá, xuất khẩu 70 tỷ USD trong năm 2025}
-      \field{year}{2024}
-    \endentry
-    \entry{vietnamreport2024}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=90501fcde7e6bf2823215212390a00cf}{%
-           family={Report},
-           familyi={R\bibinitperiod},
-           given={Vietnam},
-           giveni={V\bibinitperiod}}}%
-      }
-      \list{institution}{1}{%
-        {Công ty cổ phần Báo cáo Đánh giá Việt Nam}%
-      }
-      \strng{namehash}{90501fcde7e6bf2823215212390a00cf}
-      \strng{fullhash}{90501fcde7e6bf2823215212390a00cf}
-      \strng{fullhashraw}{90501fcde7e6bf2823215212390a00cf}
-      \strng{bibnamehash}{90501fcde7e6bf2823215212390a00cf}
-      \strng{authorbibnamehash}{90501fcde7e6bf2823215212390a00cf}
-      \strng{authornamehash}{90501fcde7e6bf2823215212390a00cf}
-      \strng{authorfullhash}{90501fcde7e6bf2823215212390a00cf}
-      \strng{authorfullhashraw}{90501fcde7e6bf2823215212390a00cf}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Báo cáo tăng trưởng và 6 thách thức của nông nghiệp công nghệ cao Việt Nam}
-      \field{year}{2024}
-    \endentry
-    \entry{ieee2025}{article}{}{}
-      \name{author}{2}{}{%
-        {{hash=b18f02a97cf23823923df8c18784f5df}{%
-           family={Smith},
-           familyi={S\bibinitperiod},
-           given={J.},
-           giveni={J\bibinitperiod}}}%
-        {{hash=b09b9fab0bc3ed13d1127f4ee47fa373}{%
-           family={Nguyen},
-           familyi={N\bibinitperiod},
-           given={T.},
-           giveni={T\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {IEEE}%
-      }
-      \strng{namehash}{49570eaff02104980e6dc8191734ff44}
-      \strng{fullhash}{49570eaff02104980e6dc8191734ff44}
-      \strng{fullhashraw}{49570eaff02104980e6dc8191734ff44}
-      \strng{bibnamehash}{49570eaff02104980e6dc8191734ff44}
-      \strng{authorbibnamehash}{49570eaff02104980e6dc8191734ff44}
-      \strng{authornamehash}{49570eaff02104980e6dc8191734ff44}
-      \strng{authorfullhash}{49570eaff02104980e6dc8191734ff44}
-      \strng{authorfullhashraw}{49570eaff02104980e6dc8191734ff44}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE Internet of Things Journal}
-      \field{number}{4}
-      \field{title}{Intelligent Fault Detection in IoT-Based WSNs for Precision Agriculture Using Machine Learning}
-      \field{volume}{12}
-      \field{year}{2025}
-      \field{pages}{1023\bibrangedash 1035}
-      \range{pages}{13}
-    \endentry
-    \entry{agritech_comparison}{article}{}{}
-      \name{author}{1}{}{%
-        {{hash=3663c642eb0d8aaadf6ff5cb3e46d08c}{%
-           family={Stapleton},
-           familyi={S\bibinitperiod},
-           given={et\bibnamedelima al.},
-           giveni={e\bibinitperiod\bibinitdelim a\bibinitperiod},
-           suffix={P.},
-           suffixi={P\bibinitperiod}}}%
-      }
-      \strng{namehash}{3663c642eb0d8aaadf6ff5cb3e46d08c}
-      \strng{fullhash}{3663c642eb0d8aaadf6ff5cb3e46d08c}
-      \strng{fullhashraw}{3663c642eb0d8aaadf6ff5cb3e46d08c}
-      \strng{bibnamehash}{3663c642eb0d8aaadf6ff5cb3e46d08c}
-      \strng{authorbibnamehash}{3663c642eb0d8aaadf6ff5cb3e46d08c}
-      \strng{authornamehash}{3663c642eb0d8aaadf6ff5cb3e46d08c}
-      \strng{authorfullhash}{3663c642eb0d8aaadf6ff5cb3e46d08c}
-      \strng{authorfullhashraw}{3663c642eb0d8aaadf6ff5cb3e46d08c}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of Agricultural Science}
-      \field{number}{3}
-      \field{title}{A review of low-cost precision agriculture: sensors, monitoring and communication systems}
-      \field{volume}{12}
-      \field{year}{2023}
-      \field{pages}{55\bibrangedash 70}
-      \range{pages}{16}
-    \endentry
-    \entry{iot_arch_2015}{article}{}{}
-      \name{author}{5}{}{%
-        {{hash=4d1263e7d767bd180b78bb6304bbebc9}{%
-           family={Al-Fuqaha},
-           familyi={A\bibinithyphendelim F\bibinitperiod},
-           given={A.},
-           giveni={A\bibinitperiod}}}%
-        {{hash=e31e9a938cc1cf28dd8b92dedf0dff13}{%
-           family={Guizani},
-           familyi={G\bibinitperiod},
-           given={M.},
-           giveni={M\bibinitperiod}}}%
-        {{hash=fb894afe61c86a63d9ab56fb3f186bf5}{%
-           family={Mohammadi},
-           familyi={M\bibinitperiod},
-           given={M.},
-           giveni={M\bibinitperiod}}}%
-        {{hash=4af2271475a29885e0d92959ca3be818}{%
-           family={Aledhari},
-           familyi={A\bibinitperiod},
-           given={M.},
-           giveni={M\bibinitperiod}}}%
-        {{hash=7b751c3d56701f2813eee11a4a28801b}{%
-           family={Ayyash},
-           familyi={A\bibinitperiod},
-           given={M.},
-           giveni={M\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {IEEE}%
-      }
-      \strng{namehash}{f24ae3118038ce13842c3337b5069a3f}
-      \strng{fullhash}{d7652e65cf20812d32eac08f622e99de}
-      \strng{fullhashraw}{d7652e65cf20812d32eac08f622e99de}
-      \strng{bibnamehash}{d7652e65cf20812d32eac08f622e99de}
-      \strng{authorbibnamehash}{d7652e65cf20812d32eac08f622e99de}
-      \strng{authornamehash}{f24ae3118038ce13842c3337b5069a3f}
-      \strng{authorfullhash}{d7652e65cf20812d32eac08f622e99de}
-      \strng{authorfullhashraw}{d7652e65cf20812d32eac08f622e99de}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE Communications Surveys \& Tutorials}
-      \field{number}{4}
-      \field{title}{Internet of Things: A Survey on Enabling Technologies, Protocols, and Applications}
-      \field{volume}{17}
-      \field{year}{2015}
-      \true{nocite}
-      \field{pages}{2347\bibrangedash 2376}
-      \range{pages}{30}
-    \endentry
-    \entry{nestjs_docs}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=b952e9f5db4436c88c4f9e76cfca46e3}{%
-           family={Team},
-           familyi={T\bibinitperiod},
-           given={NestJS},
-           giveni={N\bibinitperiod}}}%
-      }
-      \strng{namehash}{b952e9f5db4436c88c4f9e76cfca46e3}
-      \strng{fullhash}{b952e9f5db4436c88c4f9e76cfca46e3}
-      \strng{fullhashraw}{b952e9f5db4436c88c4f9e76cfca46e3}
-      \strng{bibnamehash}{b952e9f5db4436c88c4f9e76cfca46e3}
-      \strng{authorbibnamehash}{b952e9f5db4436c88c4f9e76cfca46e3}
-      \strng{authornamehash}{b952e9f5db4436c88c4f9e76cfca46e3}
-      \strng{authorfullhash}{b952e9f5db4436c88c4f9e76cfca46e3}
-      \strng{authorfullhashraw}{b952e9f5db4436c88c4f9e76cfca46e3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{NestJS Documentation: Introduction and Fundamentals}
-      \field{year}{2024}
-      \true{nocite}
-    \endentry
-    \entry{typescript_lang}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=140864078aeca1c7c35b4beb33c53c34}{%
-           family={Microsoft},
-           familyi={M\bibinitperiod}}}%
-      }
-      \strng{namehash}{140864078aeca1c7c35b4beb33c53c34}
-      \strng{fullhash}{140864078aeca1c7c35b4beb33c53c34}
-      \strng{fullhashraw}{140864078aeca1c7c35b4beb33c53c34}
-      \strng{bibnamehash}{140864078aeca1c7c35b4beb33c53c34}
-      \strng{authorbibnamehash}{140864078aeca1c7c35b4beb33c53c34}
-      \strng{authornamehash}{140864078aeca1c7c35b4beb33c53c34}
-      \strng{authorfullhash}{140864078aeca1c7c35b4beb33c53c34}
-      \strng{authorfullhashraw}{140864078aeca1c7c35b4beb33c53c34}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{TypeScript: Typed JavaScript at Any Scale}
-      \field{year}{2024}
-      \true{nocite}
-    \endentry
-    \entry{mqtt_spec}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=6ec60ab9ce327f5a12fbab109e691c73}{%
-           family={OASIS},
-           familyi={O\bibinitperiod}}}%
-      }
-      \strng{namehash}{6ec60ab9ce327f5a12fbab109e691c73}
-      \strng{fullhash}{6ec60ab9ce327f5a12fbab109e691c73}
-      \strng{fullhashraw}{6ec60ab9ce327f5a12fbab109e691c73}
-      \strng{bibnamehash}{6ec60ab9ce327f5a12fbab109e691c73}
-      \strng{authorbibnamehash}{6ec60ab9ce327f5a12fbab109e691c73}
-      \strng{authornamehash}{6ec60ab9ce327f5a12fbab109e691c73}
-      \strng{authorfullhash}{6ec60ab9ce327f5a12fbab109e691c73}
-      \strng{authorfullhashraw}{6ec60ab9ce327f5a12fbab109e691c73}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{MQTT Version 5.0 Committee Specification}
-      \field{year}{2019}
-      \true{nocite}
-    \endentry
-    \entry{http_rfc}{report}{}{}
-      \name{author}{1}{}{%
-        {{hash=0223d348a8eab4791ac7ef04b296dad7}{%
-           family={Fielding},
-           familyi={F\bibinitperiod},
-           given={et\bibnamedelima al.},
-           giveni={e\bibinitperiod\bibinitdelim a\bibinitperiod},
-           suffix={R.},
-           suffixi={R\bibinitperiod}}}%
-      }
-      \list{institution}{1}{%
-        {IETF}%
-      }
-      \strng{namehash}{0223d348a8eab4791ac7ef04b296dad7}
-      \strng{fullhash}{0223d348a8eab4791ac7ef04b296dad7}
-      \strng{fullhashraw}{0223d348a8eab4791ac7ef04b296dad7}
-      \strng{bibnamehash}{0223d348a8eab4791ac7ef04b296dad7}
-      \strng{authorbibnamehash}{0223d348a8eab4791ac7ef04b296dad7}
-      \strng{authornamehash}{0223d348a8eab4791ac7ef04b296dad7}
-      \strng{authorfullhash}{0223d348a8eab4791ac7ef04b296dad7}
-      \strng{authorfullhashraw}{0223d348a8eab4791ac7ef04b296dad7}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{number}{7230}
-      \field{title}{Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing}
-      \field{type}{Request for Comments}
-      \field{year}{2014}
-      \true{nocite}
-    \endentry
-    \entry{postgres_docs}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=b581fcfb94d2e7bd4d4e79744683e3dc}{%
-           family={Group},
-           familyi={G\bibinitperiod},
-           given={PostgreSQL\bibnamedelimb Global\bibnamedelima Development},
-           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
-      }
-      \strng{namehash}{b581fcfb94d2e7bd4d4e79744683e3dc}
-      \strng{fullhash}{b581fcfb94d2e7bd4d4e79744683e3dc}
-      \strng{fullhashraw}{b581fcfb94d2e7bd4d4e79744683e3dc}
-      \strng{bibnamehash}{b581fcfb94d2e7bd4d4e79744683e3dc}
-      \strng{authorbibnamehash}{b581fcfb94d2e7bd4d4e79744683e3dc}
-      \strng{authornamehash}{b581fcfb94d2e7bd4d4e79744683e3dc}
-      \strng{authorfullhash}{b581fcfb94d2e7bd4d4e79744683e3dc}
-      \strng{authorfullhashraw}{b581fcfb94d2e7bd4d4e79744683e3dc}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{PostgreSQL 16.0 Documentation}
-      \field{year}{2024}
-      \true{nocite}
-    \endentry
-    \entry{timescaledb_docs}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=04040e25c5b843fb928d7d86371a847c}{%
-           family={Inc.},
-           familyi={I\bibinitperiod},
-           given={Timescale},
-           giveni={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{04040e25c5b843fb928d7d86371a847c}
-      \strng{fullhash}{04040e25c5b843fb928d7d86371a847c}
-      \strng{fullhashraw}{04040e25c5b843fb928d7d86371a847c}
-      \strng{bibnamehash}{04040e25c5b843fb928d7d86371a847c}
-      \strng{authorbibnamehash}{04040e25c5b843fb928d7d86371a847c}
-      \strng{authornamehash}{04040e25c5b843fb928d7d86371a847c}
-      \strng{authorfullhash}{04040e25c5b843fb928d7d86371a847c}
-      \strng{authorfullhashraw}{04040e25c5b843fb928d7d86371a847c}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Truy cập: 13/12/2025}
-      \field{title}{TimescaleDB Documentation: Hypertables and Chunking}
-      \field{year}{2024}
-      \true{nocite}
-    \endentry
-    \entry{tsdb_importance}{article}{}{}
-      \name{author}{1}{}{%
-        {{hash=8d89578304fd412637704b465fd6f315}{%
-           family={Bader},
-           familyi={B\bibinitperiod},
-           given={et\bibnamedelima al.},
-           giveni={e\bibinitperiod\bibinitdelim a\bibinitperiod},
-           suffix={A.},
-           suffixi={A\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {VLDB}%
-      }
-      \strng{namehash}{8d89578304fd412637704b465fd6f315}
-      \strng{fullhash}{8d89578304fd412637704b465fd6f315}
-      \strng{fullhashraw}{8d89578304fd412637704b465fd6f315}
-      \strng{bibnamehash}{8d89578304fd412637704b465fd6f315}
-      \strng{authorbibnamehash}{8d89578304fd412637704b465fd6f315}
-      \strng{authornamehash}{8d89578304fd412637704b465fd6f315}
-      \strng{authorfullhash}{8d89578304fd412637704b465fd6f315}
-      \strng{authorfullhashraw}{8d89578304fd412637704b465fd6f315}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Proceedings of the VLDB Endowment}
-      \field{title}{Time Series Databases: New Ways to Store and Access Data}
-      \field{year}{2017}
-      \true{nocite}
-    \endentry
-    \entry{ESP32_docs}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=b1d5d0040be4721ebd66cd10ec68502c}{%
-           family={Systems},
-           familyi={S\bibinitperiod},
-           given={Espressif},
-           giveni={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{fullhash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{fullhashraw}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{bibnamehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authorbibnamehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authornamehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authorfullhash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authorfullhashraw}{b1d5d0040be4721ebd66cd10ec68502c}
-      \field{extraname}{1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{ESP32 Series Datasheet}
-      \field{year}{2024}
-      \true{nocite}
-    \endentry
-    \entry{I2C_spec}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=bdd95750033c6d1e71751acaf3c3d8de}{%
-           family={Semiconductors},
-           familyi={S\bibinitperiod},
-           given={NXP},
-           giveni={N\bibinitperiod}}}%
-      }
-      \strng{namehash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{fullhash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{fullhashraw}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{bibnamehash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{authorbibnamehash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{authornamehash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{authorfullhash}{bdd95750033c6d1e71751acaf3c3d8de}
-      \strng{authorfullhashraw}{bdd95750033c6d1e71751acaf3c3d8de}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{I2C Bus Specification and User Manual}
-      \field{year}{2021}
-      \true{nocite}
-    \endentry
-    \entry{Camera_DVPI_spec}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=3eaac2a04552d94ab7ca389d62b8053f}{%
-           family={OmniVision\bibnamedelima Technologies},
-           familyi={O\bibinitperiod\bibinitdelim T\bibinitperiod},
-           given={Inc.},
-           giveni={I\bibinitperiod}}}%
-      }
-      \strng{namehash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{fullhash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{fullhashraw}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{bibnamehash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{authorbibnamehash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{authornamehash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{authorfullhash}{3eaac2a04552d94ab7ca389d62b8053f}
-      \strng{authorfullhashraw}{3eaac2a04552d94ab7ca389d62b8053f}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{OV2640 Camera Module Datasheet}
-      \field{year}{2020}
-      \true{nocite}
-    \endentry
-    \entry{GPIO_spec}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=b1d5d0040be4721ebd66cd10ec68502c}{%
-           family={Systems},
-           familyi={S\bibinitperiod},
-           given={Espressif},
-           giveni={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{fullhash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{fullhashraw}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{bibnamehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authorbibnamehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authornamehash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authorfullhash}{b1d5d0040be4721ebd66cd10ec68502c}
-      \strng{authorfullhashraw}{b1d5d0040be4721ebd66cd10ec68502c}
-      \field{extraname}{2}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{ESP32 Technical Reference Manual}
-      \field{year}{2016}
-      \true{nocite}
-    \endentry
-    \entry{rtos}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=4f13d5ca06d44d58bfd963798bcdcbfb}{%
-           family={FreeRTOS},
-           familyi={F\bibinitperiod}}}%
-      }
-      \strng{namehash}{4f13d5ca06d44d58bfd963798bcdcbfb}
-      \strng{fullhash}{4f13d5ca06d44d58bfd963798bcdcbfb}
-      \strng{fullhashraw}{4f13d5ca06d44d58bfd963798bcdcbfb}
-      \strng{bibnamehash}{4f13d5ca06d44d58bfd963798bcdcbfb}
-      \strng{authorbibnamehash}{4f13d5ca06d44d58bfd963798bcdcbfb}
-      \strng{authornamehash}{4f13d5ca06d44d58bfd963798bcdcbfb}
-      \strng{authorfullhash}{4f13d5ca06d44d58bfd963798bcdcbfb}
-      \strng{authorfullhashraw}{4f13d5ca06d44d58bfd963798bcdcbfb}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{FreeRTOS Scheduler and Scheduling Policies}
-      \field{year}{2022}
-      \true{nocite}
-    \endentry
-    \entry{json_spec}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=465e8a87e9374ae02e0399ddf89fd1b1}{%
-           family={International},
-           familyi={I\bibinitperiod},
-           given={ECMA},
-           giveni={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{465e8a87e9374ae02e0399ddf89fd1b1}
-      \strng{fullhash}{465e8a87e9374ae02e0399ddf89fd1b1}
-      \strng{fullhashraw}{465e8a87e9374ae02e0399ddf89fd1b1}
-      \strng{bibnamehash}{465e8a87e9374ae02e0399ddf89fd1b1}
-      \strng{authorbibnamehash}{465e8a87e9374ae02e0399ddf89fd1b1}
-      \strng{authornamehash}{465e8a87e9374ae02e0399ddf89fd1b1}
-      \strng{authorfullhash}{465e8a87e9374ae02e0399ddf89fd1b1}
-      \strng{authorfullhashraw}{465e8a87e9374ae02e0399ddf89fd1b1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{The JSON Data Interchange Syntax (ECMA-404)}
-      \field{year}{2017}
-      \true{nocite}
-    \endentry
-    \entry{RFE_spec}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=973b9ca5d7a926aa4bb83432a3a54c1e}{%
-           family={Duy},
-           familyi={D\bibinitperiod},
-           given={Tran\bibnamedelimb Nguyen\bibnamedelima Minh},
-           giveni={T\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
-      }
-      \strng{namehash}{973b9ca5d7a926aa4bb83432a3a54c1e}
-      \strng{fullhash}{973b9ca5d7a926aa4bb83432a3a54c1e}
-      \strng{fullhashraw}{973b9ca5d7a926aa4bb83432a3a54c1e}
-      \strng{bibnamehash}{973b9ca5d7a926aa4bb83432a3a54c1e}
-      \strng{authorbibnamehash}{973b9ca5d7a926aa4bb83432a3a54c1e}
-      \strng{authornamehash}{973b9ca5d7a926aa4bb83432a3a54c1e}
-      \strng{authorfullhash}{973b9ca5d7a926aa4bb83432a3a54c1e}
-      \strng{authorfullhashraw}{973b9ca5d7a926aa4bb83432a3a54c1e}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Improving Feature Extraction for Sensor Fault Detection in Low-Power IoT Systems}
-      \field{year}{2025}
-      \true{nocite}
-    \endentry
-  \enddatalist
-\endrefsection
-\endinput
+\bibitem{tsdb_importance}
+et~al. Bader, A.
+\newblock Time series databases: New ways to store and access data.
+\newblock {\em Proceedings of the VLDB Endowment}, 2017.
 
+\bibitem{smart_farm_trend}
+et~al. Boursianis, A.~D.
+\newblock Smart farming: Internet of things technologies, challenges and future
+  directions.
+\newblock {\em Sensors}, 22(10):3735, 2022.
+
+\bibitem{chinhphu2024}
+{Báo Chính Phủ}.
+\newblock Thủ tướng: Ngành nông nghiệp phải tăng tốc, bứt phá,
+  xuất khẩu 70 tỷ usd trong năm 2025.
+\newblock {\em Cổng Thông tin điện tử Chính phủ}, 2024.
+
+\bibitem{RFE_spec}
+Tran Nguyen~Minh Duy.
+\newblock {\em Improving Feature Extraction for Sensor Fault Detection in
+  Low-Power IoT Systems}, 2025.
+
+\bibitem{http_rfc}
+et~al. Fielding, R.
+\newblock Hypertext transfer protocol (http/1.1): Message syntax and routing.
+\newblock Request for Comments 7230, IETF, 2014.
+
+\bibitem{rtos}
+FreeRTOS.
+\newblock {\em FreeRTOS Scheduler and Scheduling Policies}, 2022.
+
+\bibitem{postgres_docs}
+PostgreSQL Global~Development Group.
+\newblock {\em PostgreSQL 16.0 Documentation}, 2024.
+
+\bibitem{timescaledb_docs}
+Timescale Inc.
+\newblock {\em TimescaleDB Documentation: Hypertables and Chunking}, 2024.
+\newblock Truy cập: 13/12/2025.
+
+\bibitem{json_spec}
+ECMA International.
+\newblock {\em The JSON Data Interchange Syntax (ECMA-404)}, 2017.
+
+\bibitem{typescript_lang}
+Microsoft.
+\newblock {\em TypeScript: Typed JavaScript at Any Scale}, 2024.
+
+\bibitem{iot_fragmentation}
+M.~Noura, M.~Atiquzzaman, and M.~Gaedke.
+\newblock Interoperability in iot: Challenges and solutions.
+\newblock In {\em Proceedings of the International Conference on IoT}, pages
+  1--6. Springer, 2019.
+
+\bibitem{mqtt_spec}
+OASIS.
+\newblock {\em MQTT Version 5.0 Committee Specification}, 2019.
+
+\bibitem{Camera_DVPI_spec}
+Inc. OmniVision~Technologies.
+\newblock {\em OV2640 Camera Module Datasheet}, 2020.
+
+\bibitem{vietnamreport2024}
+Vietnam Report.
+\newblock Báo cáo tăng trưởng và 6 thách thức của nông nghiệp
+  công nghệ cao việt nam, 2024.
+
+\bibitem{I2C_spec}
+NXP Semiconductors.
+\newblock {\em I2C Bus Specification and User Manual}, 2021.
+
+\bibitem{ieee2025}
+J.~Smith and T.~Nguyen.
+\newblock Intelligent fault detection in iot-based wsns for precision
+  agriculture using machine learning.
+\newblock {\em IEEE Internet of Things Journal}, 12(4):1023--1035, 2025.
+
+\bibitem{agritech_comparison}
+et~al. Stapleton, P.
+\newblock A review of low-cost precision agriculture: sensors, monitoring and
+  communication systems.
+\newblock {\em Journal of Agricultural Science}, 12(3):55--70, 2023.
+
+\bibitem{GPIO_spec}
+Espressif Systems.
+\newblock {\em ESP32 Technical Reference Manual}, 2016.
+
+\bibitem{ESP32_docs}
+Espressif Systems.
+\newblock {\em ESP32 Series Datasheet}, 2024.
+
+\bibitem{nestjs_docs}
+NestJS Team.
+\newblock {\em NestJS Documentation: Introduction and Fundamentals}, 2024.
+
+\end{thebibliography}

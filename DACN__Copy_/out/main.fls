@@ -396,47 +396,6 @@ INPUT D:\LaTeX\tex\latex\csquotes\csquotes.def
 INPUT D:\LaTeX\tex\latex\csquotes\csquotes.cfg
 INPUT D:\LaTeX\tex\latex\csquotes\csquotes.cfg
 INPUT D:\LaTeX\tex\latex\csquotes\csquotes.cfg
-INPUT D:\LaTeX\tex\latex\biblatex\biblatex.sty
-INPUT D:\LaTeX\tex\latex\biblatex\biblatex.sty
-INPUT D:\LaTeX\tex\latex\logreq\logreq.sty
-INPUT D:\LaTeX\tex\latex\logreq\logreq.sty
-INPUT D:\LaTeX\tex\latex\logreq\logreq.def
-INPUT D:\LaTeX\tex\latex\logreq\logreq.def
-INPUT D:\LaTeX\tex\latex\logreq\logreq.def
-INPUT D:\LaTeX\tex\latex\biblatex\blx-dm.def
-INPUT D:\LaTeX\tex\latex\biblatex\blx-dm.def
-INPUT D:\LaTeX\tex\latex\biblatex\blx-dm.def
-INPUT D:\LaTeX\tex\latex\biblatex\blx-compat.def
-INPUT D:\LaTeX\tex\latex\biblatex\blx-compat.def
-INPUT D:\LaTeX\tex\latex\biblatex\blx-compat.def
-INPUT D:\LaTeX\tex\latex\biblatex\biblatex.def
-INPUT D:\LaTeX\tex\latex\biblatex\biblatex.def
-INPUT D:\LaTeX\tex\latex\biblatex\biblatex.def
-INPUT D:\LaTeX\tex\latex\biblatex-ieee\ieee.bbx
-INPUT D:\LaTeX\tex\latex\biblatex-ieee\ieee.bbx
-INPUT D:\LaTeX\tex\latex\biblatex-ieee\ieee.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\bbx\numeric-comp.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\bbx\numeric-comp.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\bbx\numeric-comp.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\bbx\numeric.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\bbx\numeric.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\bbx\numeric.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\bbx\standard.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\bbx\standard.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\bbx\standard.bbx
-INPUT D:\LaTeX\tex\latex\biblatex\lbx\english.lbx
-INPUT D:\LaTeX\tex\latex\biblatex\lbx\english.lbx
-INPUT D:\LaTeX\tex\latex\biblatex-ieee\ieee.cbx
-INPUT D:\LaTeX\tex\latex\biblatex-ieee\ieee.cbx
-INPUT D:\LaTeX\tex\latex\biblatex-ieee\ieee.cbx
-INPUT D:\LaTeX\tex\latex\biblatex\cbx\numeric-verb.cbx
-INPUT D:\LaTeX\tex\latex\biblatex\cbx\numeric-verb.cbx
-INPUT D:\LaTeX\tex\latex\biblatex\cbx\numeric-verb.cbx
-INPUT D:\LaTeX\tex\latex\biblatex\biblatex.cfg
-INPUT D:\LaTeX\tex\latex\biblatex\biblatex.cfg
-INPUT D:\LaTeX\tex\latex\biblatex\biblatex.cfg
-INPUT D:\LaTeX\tex\latex\biblatex\blx-case-expl3.sty
-INPUT D:\LaTeX\tex\latex\biblatex\blx-case-expl3.sty
 INPUT D:\LaTeX\tex\latex\media9\pdfbase.sty
 INPUT D:\LaTeX\tex\latex\media9\pdfbase.sty
 INPUT D:\LaTeX\tex\latex\tocloft\tocloft.sty
@@ -461,13 +420,6 @@ OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.pdf
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.out
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.out
 OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.out
-INPUT D:\LaTeX\tex\latex\biblatex\lbx\english.lbx
-OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bcf
-INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
-INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
-INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
-INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
-INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr12.tfm
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
@@ -507,18 +459,6 @@ INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
 OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
-INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
-INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt10.tfm
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr5.tfm
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnbx5.tfm
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr7.tfm
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt8.tfm
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
@@ -535,6 +475,14 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
+INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
+INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
+INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt10.tfm
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr5.tfm
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnbx5.tfm
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr7.tfm
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt8.tfm
 INPUT .\section\abstract.tex
 INPUT .\section\abstract.tex
 INPUT section\abstract.tex
@@ -871,6 +819,10 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\img\deviceact.jpg
 INPUT .\img\deviceact.jpg
 INPUT .\img\deviceact.jpg
@@ -878,6 +830,10 @@ INPUT .\img\deviceact.jpg
 INPUT .\img\deviceact.jpg
 INPUT .\img\deviceact.jpg
 INPUT .\img\deviceact.jpg
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
@@ -885,10 +841,6 @@ INPUT .\img\hcmut.png
 INPUT .\section\5.5_quy.tex
 INPUT .\section\5.5_quy.tex
 INPUT section\5.5_quy.tex
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT .\img\Firmware\Activity_Diagram.drawio.png
 INPUT .\img\Firmware\Activity_Diagram.drawio.png
 INPUT .\img\Firmware\Activity_Diagram.drawio.png
@@ -990,11 +942,25 @@ INPUT .\section\6.3_quy.tex
 INPUT .\section\6.3_quy.tex
 INPUT section\6.3_quy.tex
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt9.tfm
+INPUT .\section\6.4_quy.tex
+INPUT .\section\6.4_quy.tex
+INPUT section\6.4_quy.tex
+INPUT .\img\Firmware\Gantt chart mermaid img(1).png
+INPUT .\img\Firmware\Gantt chart mermaid img(1).png
+INPUT .\img\Firmware\Gantt chart mermaid img(1).png
+INPUT .\img\Firmware\Gantt chart mermaid img(1).png
+INPUT .\img\Firmware\Gantt chart mermaid img(1).png
+INPUT .\img\Firmware\Gantt chart mermaid img(1).png
+INPUT .\img\Firmware\Gantt chart mermaid img(1).png
 INPUT .\section\7.tex
 INPUT .\section\7.tex
 INPUT .\section\7.tex
 INPUT .\section\7.tex
 INPUT section\7.tex
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
@@ -1017,13 +983,13 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT .\img\ERD.png
-INPUT .\img\ERD.png
-INPUT .\img\ERD.png
-INPUT .\img\ERD.png
-INPUT .\img\ERD.png
-INPUT .\img\ERD.png
-INPUT .\img\ERD.png
+INPUT .\img\postgres - public3.png
+INPUT .\img\postgres - public3.png
+INPUT .\img\postgres - public3.png
+INPUT .\img\postgres - public3.png
+INPUT .\img\postgres - public3.png
+INPUT .\img\postgres - public3.png
+INPUT .\img\postgres - public3.png
 INPUT .\img\farm_api.png
 INPUT .\img\farm_api.png
 INPUT .\img\farm_api.png
@@ -1050,6 +1016,9 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
+INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
+INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
+INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
@@ -1057,8 +1026,6 @@ INPUT .\img\hcmut.png
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.aux
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.out
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.out
-INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.run.xml
-OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.run.xml
 INPUT C:\Users\QUÝ\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0900.pk
 INPUT C:\Users\QUÝ\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0900.pk
 INPUT C:\Users\QUÝ\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
