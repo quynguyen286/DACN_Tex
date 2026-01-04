@@ -722,10 +722,6 @@ INPUT .\section\5_duc_mutieu.tex
 INPUT .\section\5_duc_mutieu.tex
 INPUT .\section\5_duc_mutieu.tex
 INPUT section\5_duc_mutieu.tex
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT .\section\5_duc_erd.tex
 INPUT .\section\5_duc_erd.tex
 INPUT .\section\5_duc_erd.tex
@@ -780,32 +776,17 @@ INPUT .\section\5_viet_architecture.tex
 INPUT .\section\5_viet_architecture.tex
 INPUT .\section\5_viet_architecture.tex
 INPUT section\5_viet_architecture.tex
-INPUT .\img\architecture.png
-INPUT .\img\architecture.png
-INPUT .\img\architecture.png
-INPUT .\img\architecture.png
-INPUT .\img\architecture.png
-INPUT .\img\architecture.png
-INPUT .\img\architecture.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\deploy_architecture.png
-INPUT .\img\deploy_architecture.png
-INPUT .\img\deploy_architecture.png
-INPUT .\img\deploy_architecture.png
-INPUT .\img\deploy_architecture.png
-INPUT .\img\deploy_architecture.png
-INPUT .\img\deploy_architecture.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
+INPUT .\img\Firmware\Architecture overall mermaid img.png
+INPUT .\img\Firmware\Architecture overall mermaid img.png
+INPUT .\img\Firmware\Architecture overall mermaid img.png
+INPUT .\img\Firmware\Architecture overall mermaid img.png
+INPUT .\img\Firmware\Architecture overall mermaid img.png
+INPUT .\img\Firmware\Architecture overall mermaid img.png
+INPUT .\img\Firmware\Architecture overall mermaid img.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png

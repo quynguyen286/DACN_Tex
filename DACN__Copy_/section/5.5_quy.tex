@@ -1,147 +1,147 @@
 \subsubsection{Firmware}
 
-\subsubsubsection{Activity Diagram}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{img/Firmware/Activity_Diagram.drawio.png}
-    \caption{Activity Diagram}
-    \label{fig:activity_diagram_firware}
-\end{figure}
+% \subsubsubsection{Activity Diagram}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=1.0\textwidth]{img/Firmware/Activity_Diagram.drawio.png}
+%     \caption{Activity Diagram}
+%     \label{fig:activity_diagram_firware}
+% \end{figure}
 
-\indent Hình trên minh họa luồng xử lý đa nhiệm của hệ thống, được xây dựng trên nền tảng hệ điều hành thời gian thực FreeRTOS. Để tận dụng sức mạnh phần cứng của ESP32, firmware được thiết kế phân chia thành hai luồng tác vụ (Tasks) chạy song song trên hai lõi CPU riêng biệt nhằm tránh hiện tượng nghẽn cổ chai (blocking):
+% \indent Hình trên minh họa luồng xử lý đa nhiệm của hệ thống, được xây dựng trên nền tảng hệ điều hành thời gian thực FreeRTOS. Để tận dụng sức mạnh phần cứng của ESP32, firmware được thiết kế phân chia thành hai luồng tác vụ (Tasks) chạy song song trên hai lõi CPU riêng biệt nhằm tránh hiện tượng nghẽn cổ chai (blocking):
 
-\begin{itemize}
-    \item \textbf{Luồng 1 (Core 1 - Sensor \& Control Task):} Đây là luồng xử lý chính, chịu trách nhiệm khởi tạo kết nối WiFi/MQTT. Trong vòng lặp vô hạn (Client Loop), luồng này thực hiện đọc dữ liệu cảm biến (DHT20, độ ẩm đất), kiểm tra tính hợp lệ của dữ liệu (Data Valid), đóng gói JSON và gửi về Broker thông qua giao thức MQTT. Đồng thời, nó cũng lắng nghe các lệnh điều khiển (MQTT Cmd) để kích hoạt Relay/Còi báo động tức thì.
-    \item \textbf{Luồng 2 (Core 0 - Camera Task):} Được dành riêng cho tác vụ xử lý hình ảnh vốn tiêu tốn nhiều tài nguyên. Quy trình bao gồm khởi tạo Camera, chụp ảnh, nén định dạng JPEG và gửi lên Server thông qua giao thức HTTP POST. Việc tách rời này đảm bảo rằng quá trình gửi ảnh không làm gián đoạn việc gửi dữ liệu cảm biến thời gian thực ở Core 1.
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{Luồng 1 (Core 1 - Sensor \& Control Task):} Đây là luồng xử lý chính, chịu trách nhiệm khởi tạo kết nối WiFi/MQTT. Trong vòng lặp vô hạn (Client Loop), luồng này thực hiện đọc dữ liệu cảm biến (DHT20, độ ẩm đất), kiểm tra tính hợp lệ của dữ liệu (Data Valid), đóng gói JSON và gửi về Broker thông qua giao thức MQTT. Đồng thời, nó cũng lắng nghe các lệnh điều khiển (MQTT Cmd) để kích hoạt Relay/Còi báo động tức thì.
+%     \item \textbf{Luồng 2 (Core 0 - Camera Task):} Được dành riêng cho tác vụ xử lý hình ảnh vốn tiêu tốn nhiều tài nguyên. Quy trình bao gồm khởi tạo Camera, chụp ảnh, nén định dạng JPEG và gửi lên Server thông qua giao thức HTTP POST. Việc tách rời này đảm bảo rằng quá trình gửi ảnh không làm gián đoạn việc gửi dữ liệu cảm biến thời gian thực ở Core 1.
+% \end{itemize}
 
-\subsubsubsection{Sequence Diagram}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{img/Firmware/Sequence Diagram Mermain.png}
-    \caption{Sequence Diagram}
-    \label{fig:sequence_diagram_firmware}
-\end{figure}
-\indent Hệ thống bao gồm 7 thực thể chính:
-\begin{itemize}
-    \item \textbf{System Timer:} Bộ định thời hệ thống, đóng vai trò kích hoạt các tác vụ theo chu kỳ.
-    \item \textbf{Task Sensor (Core 1):} Tác vụ xử lý cảm biến, chạy trên lõi 1 của vi điều khiển.
-    \item \textbf{Task Camera (Core 0):} Tác vụ xử lý camera (nặng về tính toán), chạy trên lõi 0.
-    \item \textbf{MQTT:} Giao thức truyền tin nhắn nhẹ, dùng để gửi dữ liệu cảm biến và nhận lệnh điều khiển.
-    \item \textbf{HTTP:} Giao thức dùng để tải dữ liệu lớn (hình ảnh JPEG) lên server.
-    \item \textbf{Server/App:} Nơi nhận dữ liệu và là giao diện để người dùng tương tác.
-    \item \textbf{Relay Bơm:} Thiết bị ngoại vi thực hiện hành động vật lý (bật/tắt bơm).
-\end{itemize}
-\indent Quy trình được chia thành các giai đoạn chính trong một chu kỳ từ T = 0ms đến T = 3500ms như sau:
-\begin{itemize}
-    \item Kích hoạt và Xử lý dữ liệu tại chỗ (T = 0ms)
-    \begin{itemize}
-        \item System Timer gửi tín hiệu Trigger song song để kích hoạt hai tác vụ: 
-        \begin{itemize}
-            \item Task 1 (Sensor): Chu kỳ 5 giây/lần.
-            \item Task 2 (Camera): Chu kỳ 5 phút/lần.
-        \end{itemize}
+% \subsubsubsection{Sequence Diagram}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=1.0\textwidth]{img/Firmware/Sequence Diagram Mermain.png}
+%     \caption{Sequence Diagram}
+%     \label{fig:sequence_diagram_firmware}
+% \end{figure}
+% \indent Hệ thống bao gồm 7 thực thể chính:
+% \begin{itemize}
+%     \item \textbf{System Timer:} Bộ định thời hệ thống, đóng vai trò kích hoạt các tác vụ theo chu kỳ.
+%     \item \textbf{Task Sensor (Core 1):} Tác vụ xử lý cảm biến, chạy trên lõi 1 của vi điều khiển.
+%     \item \textbf{Task Camera (Core 0):} Tác vụ xử lý camera (nặng về tính toán), chạy trên lõi 0.
+%     \item \textbf{MQTT:} Giao thức truyền tin nhắn nhẹ, dùng để gửi dữ liệu cảm biến và nhận lệnh điều khiển.
+%     \item \textbf{HTTP:} Giao thức dùng để tải dữ liệu lớn (hình ảnh JPEG) lên server.
+%     \item \textbf{Server/App:} Nơi nhận dữ liệu và là giao diện để người dùng tương tác.
+%     \item \textbf{Relay Bơm:} Thiết bị ngoại vi thực hiện hành động vật lý (bật/tắt bơm).
+% \end{itemize}
+% \indent Quy trình được chia thành các giai đoạn chính trong một chu kỳ từ T = 0ms đến T = 3500ms như sau:
+% \begin{itemize}
+%     \item Kích hoạt và Xử lý dữ liệu tại chỗ (T = 0ms)
+%     \begin{itemize}
+%         \item System Timer gửi tín hiệu Trigger song song để kích hoạt hai tác vụ: 
+%         \begin{itemize}
+%             \item Task 1 (Sensor): Chu kỳ 5 giây/lần.
+%             \item Task 2 (Camera): Chu kỳ 5 phút/lần.
+%         \end{itemize}
 
-        \item \textbf{Tại Task Camera:} Thực hiện chụp và nén ảnh JPEG (Capture $\&$ Compress). Quá trình này mất khoảng 100ms.
-        \item \textbf{Tại Task Sensor:} Thực hiện đọc dữ liệu từ cảm biến DHT20 và xác thực dữ liệu. Quá trình này mất khoảng 20ms.
-    \end{itemize}
-    \item Truyền tải dữ liệu lên Server (Upstream)
-    \begin{itemize}
-        \item \textbf{Dữ liệu ảnh:} Task Camera sử dụng giao thức HTTP POST để bắt đầu tải ảnh lên Server.
-        \item \textbf{Dữ liệu cảm biến:} Task Sensor sử dụng giao thức MQTT để Publish (xuất bản) dữ liệu lên broker, sau đó dữ liệu được chuyển đến Server/App trong khoảng 50ms.
-    \end{itemize}
-    \item Tương tác người dùng và Điều khiển (Downstream)
-    \begin{itemize}
-        \item Người dùng thực hiện hành động "User turn PUMP ON" trên App.
-        \item Server gửi một tin nhắn MQTT với nội dung \texttt{CMD: PUMP\_ON}.
-        \item MQTT Broker gửi một tín hiệu Callback về cho Task Sensor trên ESP32.
-        \item Task Sensor thực hiện lệnh digitalWrite(HIGH) gửi đến Relay Bơm.
-        \item Relay Bơm phản hồi trạng thái bằng cách thực hiện hành động "Turn on pump".
-        \item Sau khi bật thành công, Task Sensor gửi một gói tin xác nhận (Ack "Status: ON") ngược lại phía MQTT để cập nhật lên Server.
-    \end{itemize}
-    \item Kết thúc chu kỳ ($T \approx 3.5s$)
-    \begin{itemize}
-        \item Quá trình tải ảnh lên (HTTP) hoàn tất (Upload Complete).
-        \item Server phản hồi mã trạng thái 200 OK cho tác vụ Camera.
-        \item Toàn bộ chu kỳ kết thúc tại mốc xấp xỉ 3.5 giây.
-    \end{itemize}
-\end{itemize}
+%         \item \textbf{Tại Task Camera:} Thực hiện chụp và nén ảnh JPEG (Capture $\&$ Compress). Quá trình này mất khoảng 100ms.
+%         \item \textbf{Tại Task Sensor:} Thực hiện đọc dữ liệu từ cảm biến DHT20 và xác thực dữ liệu. Quá trình này mất khoảng 20ms.
+%     \end{itemize}
+%     \item Truyền tải dữ liệu lên Server (Upstream)
+%     \begin{itemize}
+%         \item \textbf{Dữ liệu ảnh:} Task Camera sử dụng giao thức HTTP POST để bắt đầu tải ảnh lên Server.
+%         \item \textbf{Dữ liệu cảm biến:} Task Sensor sử dụng giao thức MQTT để Publish (xuất bản) dữ liệu lên broker, sau đó dữ liệu được chuyển đến Server/App trong khoảng 50ms.
+%     \end{itemize}
+%     \item Tương tác người dùng và Điều khiển (Downstream)
+%     \begin{itemize}
+%         \item Người dùng thực hiện hành động "User turn PUMP ON" trên App.
+%         \item Server gửi một tin nhắn MQTT với nội dung \texttt{CMD: PUMP\_ON}.
+%         \item MQTT Broker gửi một tín hiệu Callback về cho Task Sensor trên ESP32.
+%         \item Task Sensor thực hiện lệnh digitalWrite(HIGH) gửi đến Relay Bơm.
+%         \item Relay Bơm phản hồi trạng thái bằng cách thực hiện hành động "Turn on pump".
+%         \item Sau khi bật thành công, Task Sensor gửi một gói tin xác nhận (Ack "Status: ON") ngược lại phía MQTT để cập nhật lên Server.
+%     \end{itemize}
+%     \item Kết thúc chu kỳ ($T \approx 3.5s$)
+%     \begin{itemize}
+%         \item Quá trình tải ảnh lên (HTTP) hoàn tất (Upload Complete).
+%         \item Server phản hồi mã trạng thái 200 OK cho tác vụ Camera.
+%         \item Toàn bộ chu kỳ kết thúc tại mốc xấp xỉ 3.5 giây.
+%     \end{itemize}
+% \end{itemize}
 
-\subsubsubsection{Timing Diagram}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{img/Firmware/Timing Diagram Other Tasks Mermaid image.png}
-    \caption{Timing Diagram for sensor processing and control tasks}
-    \label{fig:timing_diagram_firmware_1}
-\end{figure}
-\indent Các thành phần tham gia:
-\begin{itemize}
-    \item \textbf{System Timer:} Bộ định thời kích hoạt vòng lặp Monitoring.
-    \item \textbf{App:} Giao diện người dùng trên điện thoại hoặc máy tính.
-    \item \textbf{MQTT:} Broker đóng vai trò trung gian truyền tin.
-    \item \textbf{Task 1 (Core 1):} Tác vụ xử lý chính chạy trên lõi 1 của vi điều khiển.
-    \item \textbf{Sensors:} Các cảm biến vật lý (DHT20 cho nhiệt độ/độ ẩm và Soil cho độ ẩm đất).
-    \item \textbf{Relay/Bơm/Quạt:} Các thiết bị chấp hành.
-\end{itemize}
-\indent Chi tiết quy trình:
-\begin{itemize}
-    \item PHASE 1: Monitoring (Giám sát - Chu kỳ 5 giây)
-    \begin{itemize}
-        \item \textbf{Kích hoạt:} System Timer gửi tín hiệu Trigger Loop sau mỗi 5000ms (5 giây).
-        \item \textbf{Đọc dữ liệu:} Task 1 thực hiện đọc liên tiếp hai loại cảm biến: DHT20 và Soil (cảm biến đất).
-        \item \textbf{Xử lý dữ liệu:} Sau khi nhận giá trị (return value), hệ thống chạy bước SensorValidator. Đây là điểm quan trọng để kiểm tra dữ liệu có bị lỗi (NULL hoặc giá trị ảo) hay không trước khi gửi đi.
-        \item \textbf{Truyền tin:} Dữ liệu sau khi kiểm tra được đóng gói thành định dạng JSON (ví dụ: {"temp":32, "soil":40...}) và Publish lên MQTT.
-        \item \textbf{Cập nhật:} MQTT chuyển dữ liệu này tới App để người dùng theo dõi thời gian thực.
-    \end{itemize}
-    \newpage
-    \item PHASE 2: Controlling (Điều khiển - Theo sự kiện)
-    \begin{itemize}
-        \item \textbf{Lệnh từ người dùng:} Từ App, người dùng nhấn nút bật bơm, gửi lệnh "PUMP: ON" tới MQTT.
-        \item \textbf{Nhận lệnh:} MQTT chuyển gói tin này tới ESP32.
-        \item \textbf{Cơ chế Callback:} Tại Task 1, hàm client.loop() liên tục kiểm tra tín hiệu đến. Khi thấy tin nhắn, nó kích hoạt hàm Callback.
-        \item \textbf{Thực thi vật lý:} Task 1 thực hiện lệnh digitalWrite(PIN\_PUMP, HIGH) để đóng Relay, kích hoạt bơm.
-        \item \textbf{Xác nhận (Feedback Loop):}
-        \begin{itemize}
-            \item Sau khi Relay phản hồi "Done", Task 1 gửi ngược lại MQTT một bản tin Publish "Status: ON".
-            \item MQTT cập nhật trạng thái này lên App để hiển thị nút bấm đã chuyển sang màu xanh (hoặc trạng thái ON).
-        \end{itemize}
-    \end{itemize}
-\end{itemize}
+% \subsubsubsection{Timing Diagram}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=1.0\textwidth]{img/Firmware/Timing Diagram Other Tasks Mermaid image.png}
+%     \caption{Timing Diagram for sensor processing and control tasks}
+%     \label{fig:timing_diagram_firmware_1}
+% \end{figure}
+% \indent Các thành phần tham gia:
+% \begin{itemize}
+%     \item \textbf{System Timer:} Bộ định thời kích hoạt vòng lặp Monitoring.
+%     \item \textbf{App:} Giao diện người dùng trên điện thoại hoặc máy tính.
+%     \item \textbf{MQTT:} Broker đóng vai trò trung gian truyền tin.
+%     \item \textbf{Task 1 (Core 1):} Tác vụ xử lý chính chạy trên lõi 1 của vi điều khiển.
+%     \item \textbf{Sensors:} Các cảm biến vật lý (DHT20 cho nhiệt độ/độ ẩm và Soil cho độ ẩm đất).
+%     \item \textbf{Relay/Bơm/Quạt:} Các thiết bị chấp hành.
+% \end{itemize}
+% \indent Chi tiết quy trình:
+% \begin{itemize}
+%     \item PHASE 1: Monitoring (Giám sát - Chu kỳ 5 giây)
+%     \begin{itemize}
+%         \item \textbf{Kích hoạt:} System Timer gửi tín hiệu Trigger Loop sau mỗi 5000ms (5 giây).
+%         \item \textbf{Đọc dữ liệu:} Task 1 thực hiện đọc liên tiếp hai loại cảm biến: DHT20 và Soil (cảm biến đất).
+%         \item \textbf{Xử lý dữ liệu:} Sau khi nhận giá trị (return value), hệ thống chạy bước SensorValidator. Đây là điểm quan trọng để kiểm tra dữ liệu có bị lỗi (NULL hoặc giá trị ảo) hay không trước khi gửi đi.
+%         \item \textbf{Truyền tin:} Dữ liệu sau khi kiểm tra được đóng gói thành định dạng JSON (ví dụ: {"temp":32, "soil":40...}) và Publish lên MQTT.
+%         \item \textbf{Cập nhật:} MQTT chuyển dữ liệu này tới App để người dùng theo dõi thời gian thực.
+%     \end{itemize}
+%     \newpage
+%     \item PHASE 2: Controlling (Điều khiển - Theo sự kiện)
+%     \begin{itemize}
+%         \item \textbf{Lệnh từ người dùng:} Từ App, người dùng nhấn nút bật bơm, gửi lệnh "PUMP: ON" tới MQTT.
+%         \item \textbf{Nhận lệnh:} MQTT chuyển gói tin này tới ESP32.
+%         \item \textbf{Cơ chế Callback:} Tại Task 1, hàm client.loop() liên tục kiểm tra tín hiệu đến. Khi thấy tin nhắn, nó kích hoạt hàm Callback.
+%         \item \textbf{Thực thi vật lý:} Task 1 thực hiện lệnh digitalWrite(PIN\_PUMP, HIGH) để đóng Relay, kích hoạt bơm.
+%         \item \textbf{Xác nhận (Feedback Loop):}
+%         \begin{itemize}
+%             \item Sau khi Relay phản hồi "Done", Task 1 gửi ngược lại MQTT một bản tin Publish "Status: ON".
+%             \item MQTT cập nhật trạng thái này lên App để hiển thị nút bấm đã chuyển sang màu xanh (hoặc trạng thái ON).
+%         \end{itemize}
+%     \end{itemize}
+% \end{itemize}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{img/Firmware/Timing Diagram Camera Task Mermaid image.png}
-    \caption{Timing Diagram for camera task}
-    \label{fig:timing_diagram_firmware_2}
-\end{figure}
-\indent Các thành phần tham gia:
-\begin{itemize}
-    \item \textbf{Timer:} Bộ định thời, đóng vai trò kích hoạt sự kiện theo chu kỳ.
-    \item \textbf{CamTask:} Tác vụ xử lý camera (chụp ảnh, nén dữ liệu).
-    \item \textbf{HTTP:} Giao thức/Thành phần đảm nhận việc truyền tải dữ liệu qua mạng.
-    \item \textbf{Server:} Máy chủ từ xa tiếp nhận và lưu trữ hình ảnh.
-\end{itemize}
-\indent Chi tiết quy trình xảy ra trong một chu kỳ mỗi 3500ms:
-\begin{itemize}
-    \item \textbf{Trigger (Every 5 mins):} Cứ mỗi 5 phút, Timer gửi một tín hiệu kích hoạt cho CamTask. Đây là cơ chế tiết kiệm năng lượng, thay vì chạy liên tục, thiết bị chỉ thức dậy để làm việc rồi có thể nghỉ (Deep Sleep).
-    \item \textbf{Capture (QVGA) \& Compress JPEG (0.5s):} CamTask thực hiện chụp ảnh ở độ phân giải QVGA ($320 \times 240$ pixel) và nén sang định dạng JPEG. Quá trình này tiêu tốn 0.5s.
-    \item \textbf{HTTP POST:} Sau khi có file ảnh đã nén, CamTask chuyển dữ liệu cho thành phần HTTP để chuẩn bị gửi đi bằng phương thức POST.
-    \item \textbf{Uploading... (Packet 1):} Dữ liệu ảnh được chia nhỏ thành nhiều gói tin (Packets) để gửi đi. Gói tin đầu tiên được gửi tới Server.
-    \item \textbf{Slow network (3 seconds):} Đây là điểm đáng chú ý nhất. Sơ đồ giả định một tình huống mạng chậm. Việc gửi các gói tin (từ Packet 2 đến Packet N) kéo dài tới 3 giây.
-    \item \textbf{Uploading... (Packet N):} Gói tin cuối cùng được gửi hoàn tất.
-    \item \textbf{200 OK:} Sau khi nhận đủ các gói tin và xử lý xong, Server phản hồi mã trạng thái 200 OK, xác nhận việc tải ảnh lên đã thành công.
-    \item \textbf{Free up RAM:} Sau khi nhận xác nhận từ server, CamTask thực hiện giải phóng bộ nhớ (RAM) đã dùng để chứa bức ảnh. Đây là bước cực kỳ quan trọng trong lập trình nhúng (như ESP32) để tránh lỗi tràn bộ nhớ (Memory Leak).
-\end{itemize}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=1.0\textwidth]{img/Firmware/Timing Diagram Camera Task Mermaid image.png}
+%     \caption{Timing Diagram for camera task}
+%     \label{fig:timing_diagram_firmware_2}
+% \end{figure}
+% \indent Các thành phần tham gia:
+% \begin{itemize}
+%     \item \textbf{Timer:} Bộ định thời, đóng vai trò kích hoạt sự kiện theo chu kỳ.
+%     \item \textbf{CamTask:} Tác vụ xử lý camera (chụp ảnh, nén dữ liệu).
+%     \item \textbf{HTTP:} Giao thức/Thành phần đảm nhận việc truyền tải dữ liệu qua mạng.
+%     \item \textbf{Server:} Máy chủ từ xa tiếp nhận và lưu trữ hình ảnh.
+% \end{itemize}
+% \indent Chi tiết quy trình xảy ra trong một chu kỳ mỗi 3500ms:
+% \begin{itemize}
+%     \item \textbf{Trigger (Every 5 mins):} Cứ mỗi 5 phút, Timer gửi một tín hiệu kích hoạt cho CamTask. Đây là cơ chế tiết kiệm năng lượng, thay vì chạy liên tục, thiết bị chỉ thức dậy để làm việc rồi có thể nghỉ (Deep Sleep).
+%     \item \textbf{Capture (QVGA) \& Compress JPEG (0.5s):} CamTask thực hiện chụp ảnh ở độ phân giải QVGA ($320 \times 240$ pixel) và nén sang định dạng JPEG. Quá trình này tiêu tốn 0.5s.
+%     \item \textbf{HTTP POST:} Sau khi có file ảnh đã nén, CamTask chuyển dữ liệu cho thành phần HTTP để chuẩn bị gửi đi bằng phương thức POST.
+%     \item \textbf{Uploading... (Packet 1):} Dữ liệu ảnh được chia nhỏ thành nhiều gói tin (Packets) để gửi đi. Gói tin đầu tiên được gửi tới Server.
+%     \item \textbf{Slow network (3 seconds):} Đây là điểm đáng chú ý nhất. Sơ đồ giả định một tình huống mạng chậm. Việc gửi các gói tin (từ Packet 2 đến Packet N) kéo dài tới 3 giây.
+%     \item \textbf{Uploading... (Packet N):} Gói tin cuối cùng được gửi hoàn tất.
+%     \item \textbf{200 OK:} Sau khi nhận đủ các gói tin và xử lý xong, Server phản hồi mã trạng thái 200 OK, xác nhận việc tải ảnh lên đã thành công.
+%     \item \textbf{Free up RAM:} Sau khi nhận xác nhận từ server, CamTask thực hiện giải phóng bộ nhớ (RAM) đã dùng để chứa bức ảnh. Đây là bước cực kỳ quan trọng trong lập trình nhúng (như ESP32) để tránh lỗi tràn bộ nhớ (Memory Leak).
+% \end{itemize}
 
-\subsubsubsection{State Machine Diagram}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{img/Firmware/State Machine Diagram Mermaid image.png}
-    \caption{State Machine Diagram}
-    \label{fig:state_machine_diagram_firmware}
-\end{figure}
-\indent Biểu đồ mô tả hoạt động của Firmware trên nền tảng FreeRTOS, trong đó trạng thái vận hành chính (RTOS$\_$RUN) được chia thành hai luồng tác vụ chạy song song trên hai lõi CPU:
-\begin{itemize}
-    \item \textbf{Core 1 Task (Cảm biến \& Kết nối):} Chịu trách nhiệm duy trì kết nối WiFi/MQTT. Hệ thống chuyển đổi linh hoạt giữa trạng thái Khởi tạo (T1$\_$Init) và Vận hành (T1$\_$Running). Trong trạng thái vận hành, vi điều khiển hoạt động theo cơ chế hướng sự kiện (Event-driven): tự động đọc cảm biến khi hết Timer (5s) hoặc xử lý lệnh điều khiển ngay khi nhận được tín hiệu từ MQTT.
-    \item \textbf{Core 0 Task (Camera):} Hoạt động độc lập theo chu trình tuần tự khép kín (T2$\_$Cycle): Chụp ảnh $\rightarrow$ Nén dữ liệu $\rightarrow$ Tải lên qua HTTP.
-\end{itemize}
+% \subsubsubsection{State Machine Diagram}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.75\textwidth]{img/Firmware/State Machine Diagram Mermaid image.png}
+%     \caption{State Machine Diagram}
+%     \label{fig:state_machine_diagram_firmware}
+% \end{figure}
+% \indent Biểu đồ mô tả hoạt động của Firmware trên nền tảng FreeRTOS, trong đó trạng thái vận hành chính (RTOS$\_$RUN) được chia thành hai luồng tác vụ chạy song song trên hai lõi CPU:
+% \begin{itemize}
+%     \item \textbf{Core 1 Task (Cảm biến \& Kết nối):} Chịu trách nhiệm duy trì kết nối WiFi/MQTT. Hệ thống chuyển đổi linh hoạt giữa trạng thái Khởi tạo (T1$\_$Init) và Vận hành (T1$\_$Running). Trong trạng thái vận hành, vi điều khiển hoạt động theo cơ chế hướng sự kiện (Event-driven): tự động đọc cảm biến khi hết Timer (5s) hoặc xử lý lệnh điều khiển ngay khi nhận được tín hiệu từ MQTT.
+%     \item \textbf{Core 0 Task (Camera):} Hoạt động độc lập theo chu trình tuần tự khép kín (T2$\_$Cycle): Chụp ảnh $\rightarrow$ Nén dữ liệu $\rightarrow$ Tải lên qua HTTP.
+% \end{itemize}

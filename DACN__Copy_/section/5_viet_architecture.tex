@@ -1,91 +1,135 @@
 \subsection{Thiết kế Kiến trúc Hệ thống}
-\subsubsection{Kiến trúc Phân lớp (Layered Architecture)}
+% \subsubsection{Kiến trúc Phân lớp (Layered Architecture)}
 
-Kiến trúc hệ thống được thiết kế theo mô hình Phân lớp (Layered Architecture) kết hợp với hướng dịch vụ (Service-oriented). Việc phân chia này giúp tách biệt các mối quan tâm (Separation of Concerns), dễ dàng bảo trì và mở rộng độc lập từng thành phần.
+% Kiến trúc hệ thống được thiết kế theo mô hình Phân lớp (Layered Architecture) kết hợp với hướng dịch vụ (Service-oriented). Việc phân chia này giúp tách biệt các mối quan tâm (Separation of Concerns), dễ dàng bảo trì và mở rộng độc lập từng thành phần.
 
-Sơ đồ dưới đây minh họa các tầng logic và luồng dữ liệu trong hệ thống:
+% Sơ đồ dưới đây minh họa các tầng logic và luồng dữ liệu trong hệ thống:
+
+% \begin{figure}[H]
+%     \centering
+%     % Đổi tên file ảnh kiến trúc của bạn vào đây
+%     \includegraphics[width=0.75\textwidth]{img/architecture.png}
+%     \caption{Sơ đồ Kiến trúc Phân lớp của Hệ thống}
+%     \label{fig:system_architecture}
+% \end{figure}
+
+% Hệ thống được tổ chức thành 6 tầng chính và 1 module bảo mật xuyên suốt:
+
+% \begin{itemize}[leftmargin=*]
+%     \item \textbf{Presentation Layer (Tầng Giao diện):}
+%     Là điểm tiếp xúc với người dùng cuối (System Admin). Tầng này gửi các yêu cầu HTTP đến hệ thống thông qua giao diện Web Admin để thực hiện các tác vụ quản lý.
+
+%     \item \textbf{Integration Layer (Tầng Tích hợp):}
+%     Đóng vai trò là cổng vào duy nhất (Entry Point) và điều phối luồng dữ liệu, bao gồm 2 thành phần:
+%     \begin{itemize}
+%         \item \textit{API Gateway:} Tiếp nhận và định tuyến các yêu cầu RESTful từ Web Admin xuống các dịch vụ nghiệp vụ tương ứng.
+%         \item \textit{RabbitMQ Message Queue:} Đóng vai trò Broker trung gian, tiếp nhận hàng loạt dữ liệu bất đồng bộ từ các thiết bị IoT (Sensors/ESP32), giúp giảm tải cho hệ thống xử lý chính (Decoupling).
+%     \end{itemize}
+
+%     \item \textbf{Business Layer (Tầng Nghiệp vụ):}
+%     Nơi chứa toàn bộ logic xử lý của hệ thống:
+%     \begin{itemize}
+%         \item \textit{User \& Farm Management:} Xử lý các logic về quản lý người dùng, nông trại, và cấu hình thiết bị.
+%         \item \textit{IoT Data Processor:} Service chuyên biệt (Worker) để tiêu thụ dữ liệu từ RabbitMQ, xử lý tính toán, cảnh báo và chuẩn hóa dữ liệu trước khi lưu trữ.
+%     \end{itemize}
+
+%     \item \textbf{Persistence Layer (Tầng Truy xuất Dữ liệu):}
+%     Cung cấp lớp trừu tượng hóa (Abstraction) để giao tiếp với cơ sở dữ liệu (Data Access Component), giúp tách biệt logic nghiệp vụ khỏi các câu lệnh truy vấn SQL cụ thể.
+
+%     \item \textbf{Database Layer (Tầng Dữ liệu):}
+%     Sử dụng chiến lược lưu trữ đa mô hình (Polyglot Persistence):
+%     \begin{itemize}
+%         \item \textit{PostgreSQL:} Lưu trữ dữ liệu quan hệ có cấu trúc (Users, Farms, Devices).
+%         \item \textit{TimescaleDB:} Cơ sở dữ liệu chuyên dụng cho Time-series để lưu trữ hàng triệu bản ghi nhật ký cảm biến (Telemetries) với hiệu năng cao.
+%         \item \textit{AWS S3:} Lưu trữ các file tĩnh (hình ảnh cây trồng, log files).
+%     \end{itemize}
+
+%     \item \textbf{Physical Layer (Tầng Vật lý):}
+%     Bao gồm các thiết bị phần cứng (ESP32, Sensors, Actuators) thu thập dữ liệu môi trường và thực thi các lệnh điều khiển từ server.
+% \end{itemize}
+
+% \paragraph{Module Bảo mật (Cross-cutting Concern):}
+% Thành phần \textit{Account Control Privileges} bao quát từ tầng Integration xuống tầng Business, đảm bảo mọi yêu cầu đi qua API Gateway đều được xác thực (Authentication) và phân quyền (Authorization) chặt chẽ trước khi được xử lý.
+
+% \subsubsection{Kiến trúc Triển khai (Deployment Architecture)}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=1.0\textwidth]{img/deploy_architecture.png}
+%     \caption{Deployment Diagram}
+%     \label{fig:deployment_diagram_firmware}
+% \end{figure}
+
+% Sơ đồ triển khai (Hình \ref{fig:deployment_diagram_firmware}) mô tả cách thức ánh xạ các thành phần phần mềm vào hạ tầng phần cứng vật lý và môi trường mạng. Hệ thống được triển khai theo mô hình tập trung (Centralized Cloud Architecture) kết hợp với các thiết bị biên (Edge Devices).
+
+% Các thành phần triển khai chính bao gồm:
+
+% \begin{itemize}
+%     \item \textbf{Field Node (Nút thiết bị tại nông trại):}
+%     \begin{itemize}
+%         \item \textit{Vi điều khiển:} Sử dụng ESP32-S3 chạy Firmware dựa trên hệ điều hành thời gian thực FreeRTOS, đảm bảo khả năng xử lý đa nhiệm (đọc cảm biến và gửi mạng song song).
+%         \item \textit{Kết nối vật lý:} Các cảm biến (DHT20, Soil Moisture) và camera (OV2640) được kết nối trực tiếp qua các giao tiếp I2C, Analog và DVP. Các thiết bị chấp hành (Máy bơm, Quạt) được điều khiển qua Module Relay.
+%     \end{itemize}
+
+%     \item \textbf{Server Infrastructure (Hạ tầng Máy chủ):}
+%     Toàn bộ hệ thống Backend được đóng gói và triển khai trên nền tảng \textbf{Docker}, giúp đảm bảo tính nhất quán giữa môi trường phát triển và vận hành (Production). Hạ tầng bao gồm các Container chính:
+%     \begin{itemize}
+%         \item \textit{Nginx Reverse Proxy:} Đóng vai trò lớp bảo mật đầu tiên, tiếp nhận mọi yêu cầu từ Internet (Port 80/443), chấm dứt SSL (SSL Termination) và điều phối traffic vào các dịch vụ bên trong.
+%         \item \textit{Application Container:} Chạy NestJS Backend để xử lý API và logic nghiệp vụ.
+%         \item \textit{Message Broker Container:} Chạy RabbitMQ để tiếp nhận dữ liệu IoT qua giao thức MQTT.
+%         \item \textit{Database Cluster:} Chạy PostgreSQL tích hợp Extension TimescaleDB, phục vụ lưu trữ dữ liệu lai (Hybrid Storage).
+%     \end{itemize}
+
+%     \item \textbf{Cơ chế Giao tiếp (Communication Protocols):}
+%     \begin{itemize}
+%         \item \textit{Device - Server:} Sử dụng giao thức \textbf{MQTT} qua WiFi/4G để truyền tải dữ liệu cảm biến (nhẹ, thời gian thực) và giao thức \textbf{HTTP} để tải lên hình ảnh (dữ liệu lớn).
+%         \item \textit{Client - Server:} Web Admin giao tiếp với hệ thống thông qua \textbf{HTTPS} (bảo mật) và \textbf{WebSocket} (để nhận cập nhật dữ liệu thời gian thực trên Dashboard).
+%     \end{itemize}
+% \end{itemize}
+
+\indent Hệ thống được thiết kế theo mô hình kiến trúc phân tầng (Layered Architecture) điển hình của các hệ thống IoT công nghiệp (IIoT). Kiến trúc được chia thành 3 tầng chính: Tầng Vật lý (Physical Layer), Tầng Biên (Edge Layer), và Tầng Dữ liệu $\&$ Ứng dụng (Cloud/Application Layer).
+\indent Mô hình này đảm bảo sự tách biệt rõ ràng giữa nhiệm vụ thu thập phần cứng (CE contribution) và xử lý dữ liệu nâng cao (CS contribution).
+
+\subsubsection{Sơ đồ kiến trúc tổng thể}
 
 \begin{figure}[H]
     \centering
-    % Đổi tên file ảnh kiến trúc của bạn vào đây
-    \includegraphics[width=0.75\textwidth]{img/architecture.png}
-    \caption{Sơ đồ Kiến trúc Phân lớp của Hệ thống}
-    \label{fig:system_architecture}
+    \includegraphics[width=1.0\textwidth]{img/Firmware/Architecture overall mermaid img.png}
+    \caption{Sơ đồ Kiến trúc Tổng thể của Hệ thống}
+    \label{fig:architecture_overall}
 \end{figure}
 
-Hệ thống được tổ chức thành 6 tầng chính và 1 module bảo mật xuyên suốt:
-
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Presentation Layer (Tầng Giao diện):}
-    Là điểm tiếp xúc với người dùng cuối (System Admin). Tầng này gửi các yêu cầu HTTP đến hệ thống thông qua giao diện Web Admin để thực hiện các tác vụ quản lý.
-
-    \item \textbf{Integration Layer (Tầng Tích hợp):}
-    Đóng vai trò là cổng vào duy nhất (Entry Point) và điều phối luồng dữ liệu, bao gồm 2 thành phần:
-    \begin{itemize}
-        \item \textit{API Gateway:} Tiếp nhận và định tuyến các yêu cầu RESTful từ Web Admin xuống các dịch vụ nghiệp vụ tương ứng.
-        \item \textit{RabbitMQ Message Queue:} Đóng vai trò Broker trung gian, tiếp nhận hàng loạt dữ liệu bất đồng bộ từ các thiết bị IoT (Sensors/ESP32), giúp giảm tải cho hệ thống xử lý chính (Decoupling).
-    \end{itemize}
-
-    \item \textbf{Business Layer (Tầng Nghiệp vụ):}
-    Nơi chứa toàn bộ logic xử lý của hệ thống:
-    \begin{itemize}
-        \item \textit{User \& Farm Management:} Xử lý các logic về quản lý người dùng, nông trại, và cấu hình thiết bị.
-        \item \textit{IoT Data Processor:} Service chuyên biệt (Worker) để tiêu thụ dữ liệu từ RabbitMQ, xử lý tính toán, cảnh báo và chuẩn hóa dữ liệu trước khi lưu trữ.
-    \end{itemize}
-
-    \item \textbf{Persistence Layer (Tầng Truy xuất Dữ liệu):}
-    Cung cấp lớp trừu tượng hóa (Abstraction) để giao tiếp với cơ sở dữ liệu (Data Access Component), giúp tách biệt logic nghiệp vụ khỏi các câu lệnh truy vấn SQL cụ thể.
-
-    \item \textbf{Database Layer (Tầng Dữ liệu):}
-    Sử dụng chiến lược lưu trữ đa mô hình (Polyglot Persistence):
-    \begin{itemize}
-        \item \textit{PostgreSQL:} Lưu trữ dữ liệu quan hệ có cấu trúc (Users, Farms, Devices).
-        \item \textit{TimescaleDB:} Cơ sở dữ liệu chuyên dụng cho Time-series để lưu trữ hàng triệu bản ghi nhật ký cảm biến (Telemetries) với hiệu năng cao.
-        \item \textit{AWS S3:} Lưu trữ các file tĩnh (hình ảnh cây trồng, log files).
-    \end{itemize}
-
-    \item \textbf{Physical Layer (Tầng Vật lý):}
-    Bao gồm các thiết bị phần cứng (ESP32, Sensors, Actuators) thu thập dữ liệu môi trường và thực thi các lệnh điều khiển từ server.
-\end{itemize}
-
-\paragraph{Module Bảo mật (Cross-cutting Concern):}
-Thành phần \textit{Account Control Privileges} bao quát từ tầng Integration xuống tầng Business, đảm bảo mọi yêu cầu đi qua API Gateway đều được xác thực (Authentication) và phân quyền (Authorization) chặt chẽ trước khi được xử lý.
-
-\subsubsection{Kiến trúc Triển khai (Deployment Architecture)}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{img/deploy_architecture.png}
-    \caption{Deployment Diagram}
-    \label{fig:deployment_diagram_firmware}
-\end{figure}
-
-Sơ đồ triển khai (Hình \ref{fig:deployment_diagram_firmware}) mô tả cách thức ánh xạ các thành phần phần mềm vào hạ tầng phần cứng vật lý và môi trường mạng. Hệ thống được triển khai theo mô hình tập trung (Centralized Cloud Architecture) kết hợp với các thiết bị biên (Edge Devices).
-
-Các thành phần triển khai chính bao gồm:
-
+\subsubsection{Chi tiết các tầng}
+\subsubsubsection{Tầng Vật lý (Physical Layer)}
+\indent Tầng này bao gồm các thiết bị đầu cuối chịu trách nhiệm tương tác trực tiếp với môi trường:
 \begin{itemize}
-    \item \textbf{Field Node (Nút thiết bị tại nông trại):}
+    \item \textbf{Cụm cảm biến môi trường:} Sử dụng các cảm biến công nghiệp (SHTC3, pH, EC) giao tiếp qua chuẩn Modbus RTU (RS485). Việc sử dụng chuẩn này giúp tín hiệu truyền đi xa (lên đến 1200m) và kháng nhiễu tốt trong môi trường khắc nghiệt.
+    \item \textbf{Thiết bị quan sát:} Camera IP Hikvision cung cấp dữ liệu hình ảnh thời gian thực về khu vực giám sát.
+\end{itemize}
+\subsubsubsection{Tầng Biên (Edge Layer)}
+\indent Đây là tầng trung gian xử lý dữ liệu tại nguồn, được chia thành hai node chức năng chuyên biệt để tối ưu hóa tài nguyên phần cứng:
+\begin{itemize}
+    \item \textbf{Telemetry Node (Sử dụng ESP32):}
     \begin{itemize}
-        \item \textit{Vi điều khiển:} Sử dụng ESP32-S3 chạy Firmware dựa trên hệ điều hành thời gian thực FreeRTOS, đảm bảo khả năng xử lý đa nhiệm (đọc cảm biến và gửi mạng song song).
-        \item \textit{Kết nối vật lý:} Các cảm biến (DHT20, Soil Moisture) và camera (OV2640) được kết nối trực tiếp qua các giao tiếp I2C, Analog và DVP. Các thiết bị chấp hành (Máy bơm, Quạt) được điều khiển qua Module Relay.
+        \item Đóng vai trò là Modbus Master, truy vấn dữ liệu từ các cảm biến theo chu kỳ.
+        \item Kiểm tra toàn vẹn dữ liệu: Thực hiện tính toán mã lỗi CRC-16 để loại bỏ các gói tin bị nhiễu trên đường truyền RS485.
+        \item Gán nhãn chất lượng (Quality Flagging): Thực hiện so sánh sơ cấp để gán nhãn trạng thái cho dữ liệu (ví dụ: Flag=0 là tốt, Flag=1 là nghi ngờ lỗi gai/trôi) trước khi gửi đi.
     \end{itemize}
-
-    \item \textbf{Server Infrastructure (Hạ tầng Máy chủ):}
-    Toàn bộ hệ thống Backend được đóng gói và triển khai trên nền tảng \textbf{Docker}, giúp đảm bảo tính nhất quán giữa môi trường phát triển và vận hành (Production). Hạ tầng bao gồm các Container chính:
+    \item \textbf{Vision Gateway (Sử dụng Raspberry Pi):}
     \begin{itemize}
-        \item \textit{Nginx Reverse Proxy:} Đóng vai trò lớp bảo mật đầu tiên, tiếp nhận mọi yêu cầu từ Internet (Port 80/443), chấm dứt SSL (SSL Termination) và điều phối traffic vào các dịch vụ bên trong.
-        \item \textit{Application Container:} Chạy NestJS Backend để xử lý API và logic nghiệp vụ.
-        \item \textit{Message Broker Container:} Chạy RabbitMQ để tiếp nhận dữ liệu IoT qua giao thức MQTT.
-        \item \textit{Database Cluster:} Chạy PostgreSQL tích hợp Extension TimescaleDB, phục vụ lưu trữ dữ liệu lai (Hybrid Storage).
-    \end{itemize}
-
-    \item \textbf{Cơ chế Giao tiếp (Communication Protocols):}
-    \begin{itemize}
-        \item \textit{Device - Server:} Sử dụng giao thức \textbf{MQTT} qua WiFi/4G để truyền tải dữ liệu cảm biến (nhẹ, thời gian thực) và giao thức \textbf{HTTP} để tải lên hình ảnh (dữ liệu lớn).
-        \item \textit{Client - Server:} Web Admin giao tiếp với hệ thống thông qua \textbf{HTTPS} (bảo mật) và \textbf{WebSocket} (để nhận cập nhật dữ liệu thời gian thực trên Dashboard).
+        \item Tiếp nhận luồng video (RTSP Stream) từ Camera Hikvision.
+        \item Đồng bộ thời gian (Time Synchronization): Sử dụng giao thức NTP để đảm bảo dữ liệu hình ảnh và dữ liệu cảm biến được đồng bộ chính xác về mặt thời gian (Timestamp alignment), phục vụ cho việc đối soát dữ liệu sau này.
     \end{itemize}
 \end{itemize}
+\subsubsubsection{Tầng Dữ liệu \& Ứng dụng (Cloud/Application Layer)}
+\indent Tầng này chịu trách nhiệm lưu trữ lâu dài và xử lý dữ liệu chuyên sâu:
+\begin{itemize}
+    \item \textbf{Cơ sở dữ liệu TimescaleDB:} Là một hệ quản trị cơ sở dữ liệu chuỗi thời gian (Time-series Database) được tối ưu hóa để lưu trữ lượng lớn dữ liệu cảm biến với tốc độ truy vấn cao.
+    \item \textbf{Thuật toán RFE (Robust Feature Extraction):} Đây là thành phần xử lý thông minh cốt lõi. Thuật toán nhận đầu vào là dữ liệu thô (kèm Quality Flag từ ESP32), thực hiện các phép toán thống kê bền vững (Robust Statistics) để trích xuất các đặc trưng chính xác, loại bỏ hoàn toàn ảnh hưởng của nhiễu Drift hoặc Spike.
+    \item \textbf{Dashboard:} Giao diện người dùng hiển thị trực quan các thông số môi trường đã được làm sạch và hình ảnh giám sát thời gian thực.
+\end{itemize}
+
+
 
 \paragraph{Đánh đổi kiến trúc và Rủi ro}
 Mặc dù kiến trúc phân lớp mang lại nhiều lợi ích về tính mô-đun và khả năng mở rộng, việc triển khai đòi hỏi đánh đổi về độ phức tạp. Nhóm đã cân nhắc kỹ lưỡng giữa lợi ích dài hạn (scalability, maintainability) và chi phí triển khai ban đầu. Chi tiết về phân tích đánh đổi được trình bày ở phần riêng sau.

@@ -200,7 +200,7 @@ tài nguyên hạn chế (Low-power IoT devices):
     \item \textbf{Tiết kiệm tài nguyên Server:} Server không phải tốn chu kỳ CPU để xử lý các tác vụ mức thấp như lọc nhiễu, chuẩn hóa định dạng hay loại bỏ các giá trị null/NaN. Server chỉ tập trung vào các tác vụ cao cấp như lưu trữ dài hạn, phân tích xu hướng (Trend Analysis) và chạy các thuật toán phức tạp như RFE (Rpbust Feature Extraction).
 \end{itemize}
 
-\subsubsection{Mô hình xử lý dữ liệu tại biên trong đề tài}
+\subsubsection{Mô hình xử lý dữ liệu tại biên}
 \indent Dựa trên lý thuyết Edge Computing, hệ thống đề xuất áp dụng quy trình xử lý 3 giai đoạn tại ESP32:
 \begin{itemize}
     \item \textbf{Giai đoạn Tiền xử lý (Preprocessing):} Áp dụng các bộ lọc số (Digital Filters) đơn giản như Trung bình trượt (Moving Average) hoặc Lọc trung vị (Median Filter) để loại bỏ nhiễu trắng và làm mượt dữ liệu trước khi xử lý tiếp.
