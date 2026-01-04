@@ -1,4 +1,4 @@
-\subsubsection{Firmware}
+\subsubsection{Thiết kế Firmware và xử lý tại biên}
 
 % \subsubsubsection{Activity Diagram}
 % \begin{figure}[H]
@@ -145,3 +145,96 @@
 %     \item \textbf{Core 1 Task (Cảm biến \& Kết nối):} Chịu trách nhiệm duy trì kết nối WiFi/MQTT. Hệ thống chuyển đổi linh hoạt giữa trạng thái Khởi tạo (T1$\_$Init) và Vận hành (T1$\_$Running). Trong trạng thái vận hành, vi điều khiển hoạt động theo cơ chế hướng sự kiện (Event-driven): tự động đọc cảm biến khi hết Timer (5s) hoặc xử lý lệnh điều khiển ngay khi nhận được tín hiệu từ MQTT.
 %     \item \textbf{Core 0 Task (Camera):} Hoạt động độc lập theo chu trình tuần tự khép kín (T2$\_$Cycle): Chụp ảnh $\rightarrow$ Nén dữ liệu $\rightarrow$ Tải lên qua HTTP.
 % \end{itemize}
+
+\indent Phần mềm nhúng (Firmware) trên thiết bị Datalogger (ESP32) được thiết kế đóng vai trò là chốt chặn đầu tiên đảm bảo chất lượng dòng dữ liệu (Telemetry Stream) trước khi gửi lên Cloud.
+
+\subsubsubsection{Kiến trúc giao tiếp cảm biến}
+\indent Thay vì sử dụng các giao thức đơn giản dễ bị nhiễu, hệ thống sử dụng chuẩn công nghiệp Modbus RTU qua giao tiếp RS485. Firmware ESP32 được thiết kế hoạt động ở chế độ Modbus Master với cơ chế Polling.
+\begin{itemize}
+    \item \textbf{Cơ chế Polling:} ESP32 chủ động gửi lệnh truy vấn đến từng địa chỉ (Slave ID) của các cảm biến (SHTC3, pH, EC, Ánh sáng, Mưa) theo chu kỳ lấy mẫu $T_{sample} = 5$ phút.
+    \item \textbf{Ưu điểm kỹ thuật:} Cơ chế này giúp tránh xung đột dữ liệu trên đường truyền (Bus contention) và cho phép Firmware kiểm soát chính xác thời điểm lấy mẫu của từng loại cảm biến.
+\end{itemize}
+
+\subsubsubsection{Xử lý dữ liệu tại biên}
+\indent Đây là tầng xử lý quan trọng nhất để chuyển đổi dữ liệu thô (Raw Data) thành thông tin có ý nghĩa và độ tin cậy cao. Quy trình xử lý bao gồm 3 bước:
+\begin{itemize}
+    \item \textbf{Bước 1: Kiểm tra lỗi truyền dẫn (Transmission Verification)}
+    \begin{itemize}
+        \item Sử dụng mã kiểm tra lỗi CRC16 (Cyclic Redundancy Check) có sẵn trong khung truyền Modbus.
+        \item Logic: Nếu CRC tính toán khác với CRC nhận được $\rightarrow$ Gói tin bị nhiễu đường truyền $\rightarrow$ Hủy gói tin và đánh dấu lỗi truyền dẫn (Transmission Error).
+    \end{itemize}
+
+    \item \textbf{Bước 2: Xác thực dữ liệu và Gắn cờ chất lượng (Validation \& Quality Flagging)}
+    
+    \begin{itemize}
+        \item Dữ liệu sau khi giải mã (Decode) sẽ được so sánh với ngưỡng vật lý chấp nhận được (Physical Thresholds).
+        \item Hệ thống gán cờ chất lượng (quality\_flag) cho mỗi điểm dữ liệu theo bảng sau:
+        \begin{table}
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \textbf{Trạng thái} & \textbf{Điều kiện logic} & \textbf{Ý nghĩa} \\
+                \hline
+                0 (GOOD) & CRC OK và $Min \le Value \le Max$ & Dữ liệu tin cậy, sẵn sàng phân tích \\
+                \hline
+                1 (SUSPECT) & CRC OK nhưng giá trị bất thường (VD: Ẩm > 100$\%$) & Cần kiểm tra chéo \\
+                \hline
+                2 (BAD) & CRC Fail hoặc Sensor Timeout & Lỗi phần cứng hoặc đường dây \\
+                \hline
+            \end{tabular}
+            \caption{Bảng gán cờ chất lượng dữ liệu tại biên}
+            \label{tab:quality_flagging}
+        \end{table}
+    \end{itemize}
+    \begin{lstlisting}[language=C++, caption={Đoạn mã minh họa quy trình xử lý dữ liệu tại biên trên Firmware ESP32}]
+        // Logic doc Modbus va gan Quality Flag
+        uint8_t result = node.readHoldingRegisters(SENSOR_ADDR, 2);
+        JsonObject doc = outputDoc.to<JsonObject>();
+        if (result == node.ku8MBSuccess) {
+            float value = node.getResponseBuffer(0) / 10.0; // Scale gia tri
+           
+            // Kiem tra nguong vat ly (Pre-processing)
+            if (value < MIN_THRESHOLD || value > MAX_THRESHOLD) {
+                doc["quality_flag"] = 1; // SUSPECT: Nghi ngo
+            } else {
+                doc["quality_flag"] = 0; // GOOD: Du lieu sach
+            }
+            doc["value"] = value;
+        } else {
+            // Logic CE: Xu ly loi giao thuc (CRC Fail hoac Timeout)
+            doc["quality_flag"] = 2; // BAD: Loi he thong/duong truyen
+            doc["value"] = 0;        // Gia tri mac dinh
+        }
+        // Dong dau thoi gian thuc ngay tai bien
+        doc["timestamp"] = getEpochTime(); 
+        sendToMQTTQueue(doc);
+    \end{lstlisting}
+
+    \item \textbf{Bước 3: Đồng bộ thời gian (Timestamping)}
+    \begin{itemize}
+        \item Dữ liệu được gắn nhãn thời gian thực (Unix Timestamp) ngay khi ESP32 đọc thành công, sử dụng đồng hồ thời gian thực được đồng bộ qua NTP.
+        \item \textbf{Mục đích:} Loại bỏ sai số thời gian do độ trễ mạng (Network Latency), đảm bảo dữ liệu phản ánh đúng hiện trạng môi trường tại thời điểm đo.
+    \end{itemize}
+\end{itemize}
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{img/Firmware/Edge Preprocess mermaid img.png}
+    \caption{Sơ đồ quy trình xử lý dữ liệu tại biên trên Firmware ESP32}
+    \label{fig:edge_processing_flowchart}
+\end{figure}
+
+
+
+\subsubsubsection{Cơ chế đảm bảo tính liên tục (Data Continuity $\&$ Resilience)}
+\indent Để giải quyết bài toán mất kết nối mạng thường gặp tại Tomochan Farm, Firmware tích hợp cơ chế Store-and-Forward (Lưu và Chuyển tiếp):
+\begin{itemize}
+    \item \textbf{Bộ đệm vòng (Circular Buffer):} Khi mất kết nối MQTT/WiFi, dữ liệu (kèm timestamp và flag) được ghi vào hàng đợi trên RAM (hoặc Flash SPIFFS nếu mất mạng lâu dài).
+    \item \textbf{Cơ chế tái truyền (Retransmission):} Khi mạng khôi phục, Firmware ưu tiên gửi dữ liệu mới nhất (Real-time) để phục vụ giám sát tức thì, sau đó sử dụng băng thông rảnh để gửi dần dữ liệu trong bộ đệm lên Server, đảm bảo không có "khoảng trống dữ liệu" (Data Gaps) trên biểu đồ lịch sử.
+\end{itemize}
+
+\subsubsubsection{Luồng thực thi đa nhiệm}
+\indent Tận dụng kiến trúc Dual-core của ESP32 và hệ điều hành thời gian thực FreeRTOS:
+\begin{itemize}
+    \item \textbf{Task Sensor (Core 1 - High Priority):} Thực hiện giao tiếp RS485 ngặt nghèo về thời gian (Timing-critical).
+    \item \textbf{Task Network (Core 0 - Low Priority):} Xử lý chồng giao thức TCP/IP, duy trì kết nối MQTT và xử lý bộ đệm.
+\end{itemize}

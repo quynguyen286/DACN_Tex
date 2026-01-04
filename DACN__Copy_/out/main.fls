@@ -471,10 +471,6 @@ INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnbx5.tfm
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr7.tfm
 INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt8.tfm
 OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
@@ -483,6 +479,10 @@ INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lot
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lot
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lot
 OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lot
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\section\loi_cam_on.tex
 INPUT .\section\loi_cam_on.tex
 INPUT section\loi_cam_on.tex
@@ -867,65 +867,35 @@ INPUT .\img\hcmut.png
 INPUT .\section\5.5_quy.tex
 INPUT .\section\5.5_quy.tex
 INPUT section\5.5_quy.tex
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
-INPUT .\img\Firmware\Activity_Diagram.drawio.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
+INPUT D:\LaTeX\tex\latex\listings\lstlang1.sty
+INPUT D:\LaTeX\tex\latex\listings\lstlang1.sty
+INPUT D:\LaTeX\tex\latex\listings\lstlang1.sty
+INPUT D:\LaTeX\tex\latex\listings\lstlang1.sty
+INPUT D:\LaTeX\tex\latex\listings\lstlang1.sty
+INPUT D:\LaTeX\tex\latex\listings\lstlang1.sty
+INPUT D:\LaTeX\tex\latex\listings\lstmisc.sty
+INPUT D:\LaTeX\tex\latex\listings\lstmisc.sty
+INPUT D:\LaTeX\tex\latex\listings\lstmisc.sty
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt8.tfm
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT .\img\Firmware\Sequence Diagram Mermain.png
-INPUT .\img\Firmware\Sequence Diagram Mermain.png
-INPUT .\img\Firmware\Sequence Diagram Mermain.png
-INPUT .\img\Firmware\Sequence Diagram Mermain.png
-INPUT .\img\Firmware\Sequence Diagram Mermain.png
-INPUT .\img\Firmware\Sequence Diagram Mermain.png
-INPUT .\img\Firmware\Sequence Diagram Mermain.png
+INPUT .\img\Firmware\Edge Preprocess mermaid img.png
+INPUT .\img\Firmware\Edge Preprocess mermaid img.png
+INPUT .\img\Firmware\Edge Preprocess mermaid img.png
+INPUT .\img\Firmware\Edge Preprocess mermaid img.png
+INPUT .\img\Firmware\Edge Preprocess mermaid img.png
+INPUT .\img\Firmware\Edge Preprocess mermaid img.png
+INPUT .\img\Firmware\Edge Preprocess mermaid img.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Other Tasks Mermaid image.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
-INPUT .\img\Firmware\Timing Diagram Camera Task Mermaid image.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\Firmware\State Machine Diagram Mermaid image.png
-INPUT .\img\Firmware\State Machine Diagram Mermaid image.png
-INPUT .\img\Firmware\State Machine Diagram Mermaid image.png
-INPUT .\img\Firmware\State Machine Diagram Mermaid image.png
-INPUT .\img\Firmware\State Machine Diagram Mermaid image.png
-INPUT .\img\Firmware\State Machine Diagram Mermaid image.png
-INPUT .\img\Firmware\State Machine Diagram Mermaid image.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
@@ -1045,10 +1015,6 @@ INPUT .\img\hcmut.png
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.bbl
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
-INPUT .\img\hcmut.png
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.aux
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.out
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.out
@@ -1090,6 +1056,8 @@ INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr10.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr10.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr12.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr12.pfb
+INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr5.pfb
+INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr5.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr7.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr7.pfb
 INPUT D:\LaTeX\fonts\type1\vntex\vnr\vnr8.pfb
