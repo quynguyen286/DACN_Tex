@@ -12,6 +12,165 @@ Mô hình kinh doanh của họ thường bao gồm việc quản lý chuỗi c�
     \item \textbf{Yêu cầu về minh bạch chất lượng:} Khi kinh doanh dịch vụ, họ cần một công cụ tin cậy để chứng minh chất lượng môi trường canh tác (nhiệt độ, độ ẩm ổn định) cho khách hàng.
 \end{itemize}
 
+\subsection{Bài toán cốt lõi và tính liên ngành CS + CE}
+
+\subsubsection{Định nghĩa bài toán cốt lõi}
+
+Bài toán cốt lõi của đồ án này được định nghĩa là: \textbf{"Thách thức về đảm bảo độ tin cậy dữ liệu trong môi trường phân tán với tài nguyên hạn chế."}
+
+Cụ thể, bài toán không chỉ đơn giản là thu thập dữ liệu (CE) hay hiển thị dữ liệu (CS), mà là bài toán \textbf{đảm bảo tính toàn vẹn của luồng dữ liệu (Data Integrity Pipeline)} từ vật lý đến đám mây trong điều kiện mạng và môi trường không ổn định. Trong môi trường nông nghiệp thực tế, các cảm biến IoT phải hoạt động trong điều kiện khắc nghiệt (nhiệt độ cao, độ ẩm cao, bụi bẩn, dao động nguồn điện), dẫn đến các thách thức:
+
+\begin{itemize}
+    \item \textbf{Dữ liệu nhiễu và không ổn định:} Cảm biến có thể gặp nhiễu do môi trường, dẫn đến các giá trị bất thường (outliers) không phản ánh đúng trạng thái thực tế.
+    \item \textbf{Mất kết nối mạng:} Thiết bị IoT thường hoạt động ở các vùng nông thôn với kết nối mạng không ổn định, dễ bị gián đoạn.
+    \item \textbf{Trôi số liệu (Sensor Drift):} Cảm biến có thể bị trôi theo thời gian do lão hóa hoặc điều kiện môi trường, dẫn đến dữ liệu sai lệch dần.
+    \item \textbf{Hạn chế tài nguyên:} Thiết bị IoT (ESP32) có RAM/CPU hạn chế, không thể xử lý các thuật toán phức tạp hoặc lưu trữ lịch sử dài hạn.
+    \item \textbf{Quy mô phân tán:} Hệ thống cần quản lý hàng trăm node IoT phân bố trên nhiều nông trại địa lý khác nhau.
+\end{itemize}
+
+Giải pháp cho bài toán này không thể chỉ dừng lại ở việc "thu thập và hiển thị", mà phải xây dựng một \textbf{pipeline xử lý dữ liệu đa tầng} đảm bảo chất lượng dữ liệu ở mọi giai đoạn: từ thu thập tại edge (CE), truyền tải qua mạng, đến lưu trữ và phân tích tại cloud (CS).
+
+\subsubsection{Phân tích: Tại sao bài toán đòi hỏi sự kết hợp CE và CS?}
+
+Dựa trên phân tích các thách thức nêu trên, bài toán này \textbf{đòi hỏi sự kết hợp liên ngành giữa Khoa học Máy tính (Computer Science - CS) và Kỹ thuật Máy tính (Computer Engineering - CE)} để giải quyết hiệu quả. Việc chỉ dựa vào một trong hai lĩnh vực sẽ gặp những hạn chế đáng kể. Phân tích cụ thể như sau:
+
+\paragraph*{Tại sao CS làm một mình không được?}
+
+Giả sử chỉ xây dựng một hệ thống phần mềm mạnh mẽ trên máy chủ (Backend NestJS với kiến trúc microservices, thuật toán Machine Learning phức tạp như Random Forest, Isolation Forest, cơ sở dữ liệu TimescaleDB tối ưu) mà không có phần cứng và firmware tương ứng được thiết kế cẩn thận:
+
+\begin{itemize}
+    \item \textbf{Chất lượng dữ liệu đầu vào (Data Quality):} Theo nguyên lý "Garbage In, Garbage Out" trong khoa học dữ liệu, hiệu quả của các thuật toán phân tích phụ thuộc trực tiếp vào chất lượng dữ liệu đầu vào. Trong môi trường nông nghiệp khắc nghiệt, cảm biến có thể gặp các vấn đề sau:
+    \begin{itemize}
+        \item Nhiễu điện từ (EMI) do máy móc nông nghiệp, dẫn đến các giá trị bất thường không có ý nghĩa.
+        \item Mất kết nối mạng tạm thời, khiến dữ liệu bị mất hoặc đến server không đồng bộ.
+        \item Trôi số liệu (sensor drift) do cảm biến bị lão hóa hoặc ảnh hưởng bởi môi trường (nhiệt độ, độ ẩm cao), dẫn đến dữ liệu sai lệch dần theo thời gian mà không dễ nhận biết.
+        \item Lỗi phần cứng (hardware failure) như cảm biến bị chết hoặc kết nối lỏng lẻo, tạo ra dữ liệu cố định (frozen values) hoặc giá trị null liên tục.
+    \end{itemize}
+    
+    \item \textbf{CS cần CE để đảm bảo chất lượng nguồn tin ngay tại biên (Edge):} Để giải quyết vấn đề trên, hệ thống cần xử lý dữ liệu ngay tại edge (trên thiết bị IoT) trước khi gửi về server:
+    \begin{itemize}
+        \item \textbf{Firmware phải có cơ chế lọc nhiễu cơ bản:} Xử lý tín hiệu analog, áp dụng bộ lọc số (digital filter), loại bỏ giá trị ngoại lai rõ ràng (obvious outliers) trước khi truyền tải.
+        \item \textbf{Firmware phải có cơ chế phát hiện lỗi hardware-level:} Phát hiện cảm biến không phản hồi (I2C/SPI timeout), kiểm tra tính hợp lệ của dữ liệu (range checking, sanity check) ngay trên thiết bị.
+        \item \textbf{Firmware phải đảm bảo tính nhất quán dữ liệu:} Thêm timestamp chính xác, sequence number, checksum để đảm bảo dữ liệu không bị mất hoặc đảo thứ tự khi truyền qua mạng không ổn định.
+        \item \textbf{Firmware phải có cơ chế buffering và retry:} Khi mất kết nối, firmware phải lưu dữ liệu tạm thời và gửi lại khi kết nối khôi phục, đảm bảo không mất dữ liệu quan trọng.
+    \end{itemize}
+    
+    Nếu thiếu các cơ chế trên ở tầng CE, hệ thống CS sẽ phải xử lý một lượng lớn dữ liệu chất lượng thấp, dẫn đến các hệ quả:
+    \begin{itemize}
+        \item Tăng tải tính toán không cần thiết trên server để xử lý và làm sạch dữ liệu không hợp lệ.
+        \item Tăng độ trễ trong việc phát hiện lỗi do phải thu thập đủ dữ liệu để phân tích pattern bất thường.
+        \item Giảm độ chính xác của thuật toán phát hiện lỗi do tỷ lệ false positive/false negative cao, làm giảm độ tin cậy của hệ thống.
+    \end{itemize}
+    
+    \item \textbf{CS không thể tích hợp thiết bị đa nguồn hiệu quả:} Vấn đề phân mảnh thiết bị IoT từ nhiều nhà cung cấp khác nhau (như thực tế tại Tomochan Farm với các cảm biến SHTC3, ES-ALS-02, ES-RAIN-02, và camera Hikvision) đòi hỏi phải có một lớp chuẩn hóa ở mức firmware và phần cứng. Mỗi thiết bị có thể sử dụng giao thức khác nhau (WiFi, RS485 Modbus RTU, IP camera protocol), định dạng dữ liệu khác nhau, và cơ chế báo lỗi khác nhau. Nếu không có firmware tùy chỉnh trên ESP-32 và Raspberry Pi để chuẩn hóa giao tiếp, hệ thống CS sẽ phải xử lý quá nhiều edge cases và khó bảo trì.
+    
+    \item \textbf{CS không thể điều khiển thiết bị vật lý:} Để thực hiện các hành động khắc phục tự động (như bật quạt khi nhiệt độ cao, bơm nước khi độ ẩm đất thấp), hệ thống cần firmware trên ESP32 để điều khiển relay, bật/tắt thiết bị chấp hành. CS chỉ có thể gửi lệnh, nhưng việc thực thi phải được thực hiện ở tầng CE.
+\end{itemize}
+
+\textbf{Kết luận:} Hiệu quả của hệ thống phần mềm (Backend, thuật toán ML) phụ thuộc đáng kể vào chất lượng dữ liệu đầu vào từ thiết bị vật lý. CS cần CE để đảm bảo chất lượng dữ liệu ngay tại biên (Edge), tạo nền tảng cho việc phân tích ở tầng cloud. Nhiều nghiên cứu đã chỉ ra rằng xử lý dữ liệu tại edge giúp giảm tải mạng và cải thiện độ tin cậy của hệ thống IoT \cite{iot_arch_2015}.
+
+\paragraph*{Tại sao CE làm một mình không được?}
+
+Giả sử chỉ phát triển phần cứng và firmware tốt cho các node cảm biến (ESP32-S3 với firmware tối ưu, cảm biến chất lượng cao, xử lý tín hiệu tốt) mà không có hệ thống phần mềm phía server được thiết kế để chịu tải và xử lý dữ liệu quy mô lớn:
+
+\begin{itemize}
+    \item \textbf{Giới hạn về tài nguyên tính toán và lưu trữ:} Thiết bị ESP32-S3 có các đặc tính kỹ thuật sau \cite{ESP32_docs}:
+    \begin{itemize}
+        \item RAM: 512KB (hoặc 8MB với PSRAM), đủ cho xử lý real-time nhưng hạn chế cho lưu trữ lịch sử dữ liệu dài hạn (ví dụ: 30 ngày với tần suất 5 giây/lần $\approx$ 518,400 bản ghi, mỗi bản ghi khoảng 50-100 bytes cần khoảng 25-50MB).
+        \item CPU: Dual-core 240MHz, phù hợp cho xử lý real-time và các thuật toán đơn giản, nhưng không đủ để chạy các mô hình Machine Learning phức tạp như Random Forest hoặc Isolation Forest (thường yêu cầu hàng nghìn phép tính và dung lượng bộ nhớ lớn cho cây quyết định).
+        \item Flash: Dung lượng hạn chế (thường 4-16MB), không đủ để lưu trữ mô hình ML lớn hoặc dataset training đầy đủ.
+    \end{itemize}
+    
+    Do các ràng buộc tài nguyên này, firmware trên ESP32 chủ yếu có thể:
+    \begin{itemize}
+        \item Thực hiện phát hiện lỗi cơ bản ở mức phần cứng (hardware failure detection, threshold checking).
+        \item Khó khăn trong việc phát hiện các lỗi phức tạp như sensor drift (đòi hỏi so sánh với xu hướng lịch sử dài hạn) hoặc anomaly detection dựa trên pattern (cần phân tích tương quan giữa nhiều cảm biến và dữ liệu lịch sử).
+        \item Không thể thực hiện learning từ dữ liệu lịch sử do hạn chế về dung lượng lưu trữ và khả năng tính toán.
+    \end{itemize}
+    
+    \item \textbf{Không thể mở rộng cho hàng trăm node:} Nếu không có kiến trúc phần mềm phía server được thiết kế để chịu tải:
+    \begin{itemize}
+        \item \textbf{Thiếu Message Queue (RabbitMQ):} Khi có hàng trăm thiết bị gửi dữ liệu đồng thời (mỗi thiết bị 5 giây/lần), hệ thống sẽ bị quá tải. Message queue giúp buffer dữ liệu, decoupling giữa producer (thiết bị) và consumer (xử lý), đảm bảo không mất dữ liệu khi server tạm thời quá tải.
+        \item \textbf{Thiếu Time-series Database (TimescaleDB):} Lưu trữ và truy vấn hàng triệu bản ghi dữ liệu cảm biến đòi hỏi cơ sở dữ liệu chuyên dụng cho time-series data. TimescaleDB, một extension của PostgreSQL được tối ưu hóa cho time-series, có hiệu năng truy vấn tốt hơn đáng kể so với PostgreSQL thông thường khi xử lý dữ liệu chuỗi thời gian \cite{timescaledb_docs,tsdb_importance}.
+        \item \textbf{Thiếu kiến trúc Microservices:} Xử lý dữ liệu từ hàng trăm thiết bị đòi hỏi khả năng scale độc lập từng module. Module xử lý dữ liệu (Worker) cần scale theo số lượng thiết bị, trong khi Web API chỉ cần scale theo số lượng người dùng. Kiến trúc monolithic không thể đáp ứng yêu cầu này.
+    \end{itemize}
+    
+    \item \textbf{Không thể phát hiện các mẫu lỗi phức tạp:} Các lỗi cảm biến thông minh đòi hỏi phân tích ở tầng cao hơn:
+    \begin{itemize}
+        \item \textbf{Sensor Drift Detection:} Cần so sánh dữ liệu hiện tại với xu hướng lịch sử dài hạn (30-90 ngày) để phát hiện cảm biến bị trôi dần. Firmware trên ESP32 không thể lưu trữ đủ dữ liệu lịch sử để thực hiện phân tích này.
+        \item \textbf{Anomaly Detection dựa trên Correlation:} Một cảm biến nhiệt độ có thể báo giá trị bình thường, nhưng nếu so sánh với cảm biến độ ẩm và ánh sáng cùng khu vực, có thể phát hiện được sự bất thường (ví dụ: nhiệt độ cao nhưng độ ẩm không giảm như dự kiến → có thể cảm biến nhiệt độ bị lỗi). Phân tích correlation này cần dữ liệu từ nhiều cảm biến, không thể thực hiện trên một node IoT đơn lẻ.
+        \item \textbf{Learning từ dữ liệu lịch sử:} Thuật toán RFE (Recursive Feature Elimination) hoặc các mô hình ML khác cần được train trên dataset lớn để học pattern bất thường. Quá trình training này đòi hỏi sức mạnh tính toán của server, không thể thực hiện trên ESP32.
+    \end{itemize}
+    
+    \item \textbf{Không thể quản lý tập trung đa nông trại:} Vấn đề quản lý chuỗi nông trại phân tán (bài toán cốt lõi) không thể giải quyết nếu chỉ có các node IoT độc lập. Cần hệ thống phần mềm với:
+    \begin{itemize}
+        \item Cơ sở dữ liệu tập trung để tổng hợp dữ liệu từ hàng trăm thiết bị thuộc nhiều nông trại.
+        \item Giao diện web để admin quản lý, so sánh hiệu suất giữa các nông trại, và đưa ra quyết định dựa trên dữ liệu tổng hợp.
+        \item Cơ chế phân quyền (RBAC) để người dùng chỉ xem được dữ liệu nông trại của mình.
+    \end{itemize}
+    
+    \item \textbf{Không có cơ chế cảnh báo và tương tác với người dùng:} Người dùng (thương lái/chủ vườn) không thể tương tác trực tiếp với firmware của ESP32. Họ cần:
+    \begin{itemize}
+        \item Giao diện web trực quan để xem dashboard, nhận cảnh báo real-time.
+        \item Email/notification khi phát hiện lỗi nghiêm trọng.
+        \item Khả năng điều khiển thiết bị từ xa qua web interface.
+    \end{itemize}
+    
+    Đây là các chức năng thuộc về CS (phát triển web application, email service, notification system).
+\end{itemize}
+
+\textbf{Kết luận:} Phần cứng IoT (ESP32, cảm biến) có giới hạn về tài nguyên tính toán và lưu trữ do yêu cầu về kích thước, giá thành và tiêu thụ năng lượng. Việc thiếu kiến trúc phần mềm phía server được thiết kế để chịu tải (message queue, time-series database, microservices) và các thuật toán hậu xử lý (như RFE trên server) sẽ hạn chế khả năng mở rộng hệ thống cho quy mô lớn (hàng trăm node) và khả năng phát hiện các mẫu lỗi phức tạp như sensor drift hay anomaly detection dựa trên correlation giữa nhiều cảm biến.
+
+\subsubsection{Sự kết hợp liên ngành CS + CE trong bài toán}
+
+Bài toán này yêu cầu một \textbf{kiến trúc phân tầng} nơi CE và CS bổ sung lẫn nhau:
+
+\begin{itemize}
+    \item \textbf{Tầng CE (Edge Layer - Phần cứng và Firmware):}
+    \begin{itemize}
+        \item \textbf{Tích hợp và chuẩn hóa đa giao thức:} Thiết kế và phát triển firmware trên ESP-32 và Raspberry Pi để tích hợp các thiết bị công nghiệp đa dạng tại Tomochan Farm (cảm biến WiFi SHTC3, cảm biến RS485 Modbus RTU như ES-ALS-02, ES-RAIN-02, EC \& TDS, và camera IP Hikvision), tạo ra một lớp trừu tượng hóa (abstraction layer) để chuẩn hóa dữ liệu trước khi gửi về server.
+        
+        \item \textbf{Quản lý tài nguyên và điều phối:} Firmware trên ESP-32 quản lý việc đọc dữ liệu song song từ nhiều cảm biến với các giao tiếp khác nhau (I2C cho SHTC3, RS485 Modbus RTU cho các cảm biến công nghiệp), đảm bảo không mất dữ liệu khi xử lý đa nhiệm.
+        
+        \item \textbf{Thiết kế giao thức truyền thông:} Thiết kế cơ chế đóng gói dữ liệu (data packaging) và giao thức truyền tải (MQTT) để đảm bảo tính nhất quán và hiệu quả trong truyền tải, đồng thời hỗ trợ nhiều loại dữ liệu khác nhau (sensor telemetry, camera images, video streams).
+        
+        \item \textbf{Xử lý dữ liệu tại edge:} Thực hiện xử lý sơ bộ (pre-processing) như chuyển đổi định dạng (Modbus RTU → JSON), lọc nhiễu cơ bản, và đảm bảo tính nhất quán dữ liệu ngay tại thiết bị để giảm tải cho server.
+        
+        \item \textbf{Quản lý nguồn và khả năng tự khôi phục:} Quản lý nguồn điện và khả năng tự khôi phục (auto-recovery) khi mất kết nối, đặc biệt quan trọng với các thiết bị hoạt động ở môi trường thực địa.
+    \end{itemize}
+    
+    \item \textbf{Tầng CS (Cloud/Server Layer - Phần mềm và Dữ liệu):}
+    \begin{itemize}
+        \item Xây dựng hệ thống quản lý tập trung với kiến trúc microservices để xử lý dữ liệu từ nhiều node IoT.
+        \item Phát triển các thuật toán Machine Learning để phát hiện lỗi cảm biến dựa trên phân tích xu hướng và pattern recognition.
+        \item Thiết kế cơ sở dữ liệu tối ưu (TimescaleDB cho time-series data, PostgreSQL cho metadata) để lưu trữ và truy vấn hiệu quả.
+        \item Phát triển giao diện web thân thiện với người dùng để quản lý, giám sát và cảnh báo.
+        \item Xây dựng hệ thống tích hợp đa thiết bị (multi-vendor device integration) thông qua API và message queue.
+    \end{itemize}
+    
+    \item \textbf{Lớp tương tác (Interaction Layer):}
+    Sự kết hợp giữa CE và CS tạo ra một vòng lặp phản hồi (feedback loop):
+    \begin{itemize}
+        \item CE cung cấp dữ liệu thô từ môi trường vật lý → CS phân tích và phát hiện bất thường.
+        \item CS phát hiện lỗi và gửi cảnh báo → CE có thể thực hiện hành động khắc phục tự động (như bật quạt, bơm nước).
+        \item CS cung cấp giao diện quản lý → Người dùng có thể cấu hình và điều khiển → CE thực thi các lệnh điều khiển từ xa.
+    \end{itemize}
+\end{itemize}
+
+\paragraph*{Kết luận: Sự cần thiết của sự kết hợp CE + CS}
+
+Từ phân tích trên, có thể nhận thấy rằng bài toán đảm bảo tính toàn vẹn của luồng dữ liệu từ vật lý đến đám mây \textbf{đòi hỏi sự kết hợp} giữa CE và CS. Hai lĩnh vực này bổ sung lẫn nhau và tạo thành một pipeline xử lý dữ liệu đa tầng:
+
+\begin{itemize}
+    \item \textbf{CE đảm bảo chất lượng dữ liệu tại edge:} Firmware và phần cứng được thiết kế để thực hiện xử lý sơ bộ (pre-processing) như lọc nhiễu, phát hiện lỗi hardware-level, và đảm bảo tính nhất quán dữ liệu ngay tại thiết bị. Điều này giúp giảm tải xử lý ở tầng cloud và cải thiện độ tin cậy của hệ thống.
+    
+    \item \textbf{CS đảm bảo khả năng mở rộng và phân tích nâng cao:} Kiến trúc phần mềm phân tán (message queue, time-series database, microservices) và các thuật toán Machine Learning (RFE, Isolation Forest) cho phép hệ thống xử lý quy mô lớn và phát hiện các mẫu lỗi phức tạp đòi hỏi phân tích dữ liệu lịch sử và tương quan giữa nhiều cảm biến.
+    
+    \item \textbf{Sự kết hợp tạo ra Data Integrity Pipeline:} Dữ liệu được xử lý và kiểm tra chất lượng ở nhiều tầng: tại edge (CE), trong quá trình truyền tải (với cơ chế checksum, retry), và tại cloud (CS với thuật toán phát hiện lỗi thông minh). Việc xử lý đa tầng này giúp đảm bảo tính toàn vẹn của dữ liệu từ đầu đến cuối.
+\end{itemize}
+
+Đồ án này nghiên cứu và phát triển một \textbf{hệ thống tích hợp được thiết kế có chủ đích} để giải quyết bài toán thách thức về độ tin cậy dữ liệu trong môi trường phân tán với tài nguyên hạn chế. Bài toán này \textbf{đòi hỏi kiến thức chuyên sâu từ cả hai lĩnh vực CE và CS} để có thể giải quyết một cách hiệu quả và toàn diện.
+
 \subsection{Tính cấp thiết của đề tài}
 Đề tài trở nên cấp thiết xuất phát từ nhu cầu thực tế của việc vận hành chuỗi nông trại quy mô thương mại và xu hướng chuyển đổi số mạnh mẽ tại Việt Nam:
 
@@ -38,9 +197,13 @@ Nghiên cứu và phát triển hệ thống quản lý tập trung và nhận d
 
 \textbf{Mục tiêu cụ thể:}
 \begin{itemize}
-    \item Xây dựng kiến trúc hệ thống thống nhất có khả năng tích hợp thiết bị từ nhiều nguồn khác nhau.
-    \item Phát triển module Sensor Fault Detection ứng dụng thuật toán để tự động phát hiện các bất thường (mất kết nối, dữ liệu sai lệch, trôi cảm biến).
-    \item Thiết kế giao diện người dùng (Dashboard) trực quan, thân thiện với đối tượng thương lái/chủ vườn, hỗ trợ giám sát đa nông trại và cảnh báo thời gian thực.
+    \item Xây dựng kiến trúc quản lý dữ liệu cảm biến (Data-centric Sensor Management) có khả năng tích hợp và quản lý thiết bị từ nhiều nguồn khác nhau, trong đó mỗi cảm biến được mô hình hóa như một thực thể dữ liệu với hồ sơ hành vi (Behavior Profile).
+    
+    \item Phát triển pipeline phát hiện và phân loại lỗi cảm biến (Sensor Fault Detection Pipeline) ứng dụng thuật toán Machine Learning (RFE kết hợp Random Forest/XGBoost) để tự động phát hiện và phân loại các bất thường (mất kết nối, trôi dạt, giá trị bị kẹt) dựa trên phân tích dữ liệu thời gian thực và tương quan không gian.
+    
+    \item Thiết kế hệ thống quản lý vòng đời thiết bị dựa trên dữ liệu (Data-driven Lifecycle Management) để theo dõi xu hướng suy giảm và hỗ trợ ra quyết định bảo trì chủ động (predictive maintenance).
+    
+    \item Xây dựng kiến trúc hệ thống và giao diện quản trị với Dashboard hiển thị chỉ số tin cậy (Confidence Score) cho từng giá trị cảm biến, phục vụ đối tượng người dùng không chuyên kỹ thuật.
 \end{itemize}
 
 \textbf{Câu hỏi nghiên cứu:}
@@ -53,9 +216,40 @@ Nghiên cứu và phát triển hệ thống quản lý tập trung và nhận d
 \subsection{Phạm vi và giới hạn của đề tài}
 \textbf{Phạm vi:}
 \begin{itemize}
-    \item \textit{Đối tượng nghiên cứu:} Các thiết bị IoT cảm biến môi trường phổ biến và các thiết bị chấp hành cơ bản trong mô hình nhà kính.
+    \item \textit{Bối cảnh và Kế thừa:} Đề tài được thực hiện trong bối cảnh kế thừa và tận dụng hạ tầng IoT thực tế đã được triển khai tại \textbf{Tomochan Farm} (thuộc dự án nghiên cứu của phòng thí nghiệm TIST Lab - HCMUT). Hệ thống hiện có bao gồm:
+    
+    \begin{enumerate}
+        \item \textbf{Hệ thống datalogger với cảm biến công nghiệp:}
+        \begin{itemize}
+            \item Vi điều khiển chính: ESP-32 gửi dữ liệu qua WiFi
+            \item Cảm biến độ ẩm, nhiệt độ không khí: SHTC3 Temperature Humidity
+            \item Cảm biến ánh sáng công nghiệp: ES-ALS-02 (giao tiếp RS485 Modbus RTU)
+            \item Cảm biến mưa: ES-RAIN-02 (giao tiếp RS485)
+            \item Cảm biến đo pH: giao tiếp công nghiệp
+            \item Cảm biến EC \& TDS: MODBUS-RTU RS485
+        \end{itemize}
+        
+        \item \textbf{Hệ thống camera:}
+        \begin{itemize}
+            \item Camera IP: Hikvision DS-2CD1021G0-I
+            \item Raspberry Pi 4 Model B: đọc hình ảnh từ camera, gửi về server và stream live video qua WiFi
+        \end{itemize}
+    \end{enumerate}
+    
+    Trên cơ sở hệ thống thu thập vật lý đã có (Proof of Concept) với các thiết bị công nghiệp đa dạng về giao thức (WiFi, RS485 Modbus RTU), nhóm tập trung nghiên cứu xây dựng \textbf{Kiến trúc quản lý dữ liệu cảm biến (Data-centric Sensor Management)} và phát triển các thuật toán nhằm giám sát chất lượng, trạng thái và độ tin cậy của thiết bị dựa trên dòng dữ liệu thực tế.
+    
+    \textbf{Đóng góp của CE trong PoC:} Trong giai đoạn Proof of Concept, khối CE không chỉ đơn giản là phần cứng, mà đóng góp ở các quyết định kỹ thuật quan trọng:
+    \begin{itemize}
+        \item \textbf{Tích hợp đa giao thức:} Thiết kế firmware trên ESP-32 để tích hợp và chuẩn hóa dữ liệu từ nhiều loại cảm biến với giao thức khác nhau (WiFi cho SHTC3, RS485 Modbus RTU cho ES-ALS-02, ES-RAIN-02, EC \& TDS, và giao tiếp với Raspberry Pi cho camera).
+        \item \textbf{Điều phối tài nguyên:} Quản lý và điều phối việc đọc dữ liệu từ nhiều cảm biến song song, đảm bảo không mất dữ liệu khi xử lý đa nhiệm.
+        \item \textbf{Xử lý dữ liệu tại edge:} Thực hiện xử lý sơ bộ và chuẩn hóa dữ liệu từ các định dạng khác nhau (Modbus RTU, analog, digital) trước khi gửi về server qua WiFi.
+    \end{itemize}
+    
+    \item \textit{Đối tượng nghiên cứu:} Các thiết bị IoT cảm biến môi trường công nghiệp đã có sẵn tại vườn (như nêu trên) và các thiết bị chấp hành cơ bản trong mô hình nhà kính.
+    
     \item \textit{Nền tảng công nghệ:} Hệ thống quản lý tập trung trên nền tảng Web (Web-based platform), sử dụng Cơ sở dữ liệu chuỗi thời gian (Time-series Database) tối ưu cho lưu trữ dữ liệu lớn IoT, và các giao thức truyền thông điệp nhẹ (Lightweight messaging protocols).
-    \item \textit{Triển khai:} Thử nghiệm trên mô hình nông trại mẫu (Pilot testing) với dữ liệu mô phỏng và thực tế.
+    
+    \item \textit{Triển khai:} Thử nghiệm trên mô hình nông trại mẫu (Pilot testing) với dữ liệu mô phỏng và thực tế, trong đó bao gồm việc tích hợp với hệ thống hiện có tại Tomochan Farm.
 \end{itemize}
 
 \textbf{Giới hạn:}
