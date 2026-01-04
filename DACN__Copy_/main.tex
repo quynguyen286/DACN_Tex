@@ -44,12 +44,10 @@
 
 \usetikzlibrary{arrows,snakes,backgrounds}
 \usepackage[unicode]{hyperref}
-\hypersetup{urlcolor=blue,linkcolor=black,citecolor=black,colorlinks=true} 
+\hypersetup{urlcolor=blue,linkcolor=black,citecolor=black,colorlinks=true}
 \usepackage{lastpage}
 \usepackage{csquotes}
-\usepackage[backend=biber,style=ieee,autolang=other]{biblatex}
-\DeclareLanguageMapping{vietnamese}{english}
-\addbibresource{section/references.bib}
+% Moved to after \begin{document}
 %\usepackage{pstcol} 								% PSTricks with the standard color package
 
 %https://tex.stackexchange.com/questions/516029/media9-is-becoming-obsolete-dec-2020-any-alternatives-for-embedding-video-audio/516102#516102 
@@ -301,9 +299,7 @@ KHOA KHOA HỌC \& KỸ THUẬT MÁY TÍNH
 \end{titlepage}
 \newpage
 \tableofcontents
-% \newpage
-% \input{section/loi_cam_on.tex}
-\newpage
+
 \addcontentsline{toc}{section}{Danh sách hình vẽ}
 \listoffigures
 \addcontentsline{toc}{section}{Danh sách bảng}
@@ -350,7 +346,8 @@ KHOA KHOA HỌC \& KỸ THUẬT MÁY TÍNH
 
 \newpage
 \addcontentsline{toc}{section}{Tài liệu tham khảo}
-\nocite{*}% include all entries from references.bib even if not cited
-\printbibliography
+\bibliographystyle{plain}
+\nocite{*} % Hiển thị tất cả tài liệu trong .bib, kể cả chưa được cite
+\bibliography{section/references}
 
 \end{document}
