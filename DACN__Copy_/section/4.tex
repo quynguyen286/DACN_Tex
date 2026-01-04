@@ -117,6 +117,15 @@ Dựa trên phân tích hiện trạng và mô hình nghiệp vụ, các yêu c�
     Dữ liệu truyền từ thiết bị về Server phải được mã hóa hoặc xác thực quyền truy cập. Mật khẩu người dùng phải được băm (hashing) trước khi lưu vào cơ sở dữ liệu.
 \end{description}
 \subsection{Các mô hình phân tích UML}
+
+\subsubsection{Nhóm Use Case Tương tác \& Vận hành (Operational Use Cases)}
+
+Các quy trình nghiệp vụ dưới đây được kế thừa và chuẩn hóa dựa trên kết quả vận hành thực nghiệm tại Tomochan Farm, đảm bảo tính ổn định và khả năng sử dụng cho người dùng cuối. Một hệ thống dù có các thuật toán phân tích thông minh (AI, RFE) đến đâu thì vẫn bắt buộc phải có các chức năng quản lý cơ bản (CRUD, Dashboard, Báo cáo) để người dùng có thể tương tác và vận hành hệ thống một cách hiệu quả. Các Use Case này tạo nền tảng cho việc quản lý metadata, tổ chức thiết bị theo cấu trúc địa lý và nghiệp vụ, và hỗ trợ ra quyết định dựa trên dữ liệu.
+
 \input{section/4_duc}
-\input{section/4_viet}
-\input{section/4_quy}
+
+\subsubsection{Nhóm Use Case Phân tích \& Tự động hóa (Automated Analysis Use Cases)}
+
+Các quy trình dưới đây thể hiện phần trí tuệ nhân tạo và xử lý ngầm của hệ thống, nơi Backend Service tự động thực hiện các tác vụ phân tích dữ liệu, phát hiện lỗi, và đảm bảo độ tin cậy mà không cần sự can thiệp trực tiếp của người dùng. Đây là phần thể hiện rõ đóng góp của khối CS trong bài toán Data Integrity Pipeline, nơi các thuật toán Machine Learning (RFE, Random Forest) và kỹ thuật phân tích dữ liệu được áp dụng để đảm bảo tính toàn vẹn dữ liệu từ khi tiếp nhận đến khi lưu trữ và phân tích.
+
+\input{section/4_use_case_diagrams}
