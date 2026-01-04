@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex out/main"] 1767514282.47061 "out/main.aux" "out/main.bbl" "out/main" 1767514310.11839 0
+["bibtex out/main"] 1767518341.70005 "out/main.aux" "out/main.bbl" "out/main" 1767518361.61171 0
   "./section/references.bib" 1766902145 3998 049e8f34de049b15fb7bbc0b64acef5e ""
   "D:/LaTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "out/main.aux" 1767514308 26431 95c5fa685f2e25ed58689d4ae7e57d64 "pdflatex"
+  "out/main.aux" 1767518360 27113 8225446aabcd0a13c503272a1e059878 "pdflatex"
   (generated)
   "out/main.bbl"
   "out/main.blg"
   (rewritten before read)
-["pdflatex"] 1767514282.7769 "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" "out/main.pdf" "main" 1767514310.11968 0
+["pdflatex"] 1767518341.97469 "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" "out/main.pdf" "main" 1767518361.61296 0
   "C:/Users/QUÝ/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1766490897 90743 50802c16d91daf99d49a1a63721c47e3 ""
   "C:/Users/QUÝ/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm0900.pk" 1765777521 10472 f55946eeb677e60dcee6df3ade5b89d7 ""
   "C:/Users/QUÝ/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1765687941 11548 fdf2a06a6ed088bb70bf6764728a941b ""
@@ -284,7 +284,8 @@
   "img/Device.png" 1765791117 72134 4c0f9fb43b32ff6f82b0147551ad5c0f ""
   "img/Farm.png" 1765791117 60806 3e9d962a32ff5bad8f34b492ce8a5b9d ""
   "img/Firmware/Activity_Diagram.drawio.png" 1765619837 89132 70d987b4748342e66f600ca40ef8305b ""
-  "img/Firmware/Fault Detection Process Mermain img.png" 1766910909 931518 f6b1356d80c7e0fb9e14e9e5308265e5 ""
+  "img/Firmware/Fault Detection Process Mermain cloud node.png" 1767518250 826740 c195499f31798a00d3c8eb30974485d7 ""
+  "img/Firmware/Fault Detection Process Mermain edge node.png" 1767518218 403286 4ecc65bf92b06f6e402cdcecf7fd8f74 ""
   "img/Firmware/Gantt chart mermaid img(1).png" 1767506508 1146804 65ce209c9863a6c5dd67ddfebd2b0e90 ""
   "img/Firmware/Sequence Diagram Mermain.png" 1765619837 1630389 d68b092e77a7ddb923e74d39a9c0e75d ""
   "img/Firmware/State Machine Diagram Mermaid image.png" 1765619837 1149019 a28b340d535026ae536ed36c20e8713e ""
@@ -306,15 +307,15 @@
   "img/postgres - public3.png" 1767505409 656437 ba3a97bcb3f4e495e716fb2ffa8529b9 ""
   "img/reports.png" 1765619836 108385 5a14cc73a98338924a5e0da3a69ee37b ""
   "main.tex" 1767511557 10912 818d5afbf92d58c1614efd8e54f70b2a ""
-  "out/main.aux" 1767514308 26431 95c5fa685f2e25ed58689d4ae7e57d64 "pdflatex"
-  "out/main.bbl" 1767514282 3350 37cac794e5ea312b51a5d3c43105eec1 "bibtex out/main"
-  "out/main.lof" 1767514308 3013 df79dfa0e296a9c5aabc0df2ca8528aa "pdflatex"
-  "out/main.lot" 1767514308 1511 6d1457f54795ab07f2575708b4873b25 "pdflatex"
-  "out/main.out" 1767514308 25154 857e5a21e7784626029aef3e2e4f4f1c "pdflatex"
-  "out/main.toc" 1767514308 11558 31c8059ba958d718ccca037c9fe640b5 "pdflatex"
+  "out/main.aux" 1767518360 27113 8225446aabcd0a13c503272a1e059878 "pdflatex"
+  "out/main.bbl" 1767518341 3350 37cac794e5ea312b51a5d3c43105eec1 "bibtex out/main"
+  "out/main.lof" 1767518360 3149 96e64f7e3553019c7bb23060d1723c8a "pdflatex"
+  "out/main.lot" 1767518360 1654 a38f66a2395b97c21a05d933f45c41bb "pdflatex"
+  "out/main.out" 1767518360 25595 82fa552ac4b1f4960a7833ca8df613df "pdflatex"
+  "out/main.toc" 1767518360 11797 d974771671463c8542762b237ca61a23 "pdflatex"
   "section/1.tex" 1767505534 7296 59ef36a16b7bf1a1fb1c49a3ef38a479 ""
   "section/2.tex" 1766298645 8130 054c7090b64f3207806545146e6e2d24 ""
-  "section/2_quy.tex" 1767514236 18190 dd8dc659461428e7d2d6e627a28b327f ""
+  "section/2_quy.tex" 1767518321 20031 d1baaed3b4416a5efbf407f17bcc24c5 ""
   "section/3.tex" 1765619836 282 8d3095b93bb7ab3f3756dc1c3296280c ""
   "section/4.tex" 1766902145 9294 52bc6034cff5045fbbfe575175300aea ""
   "section/4_duc.tex" 1766902145 20221 fd6a2ad9bacb34c053357840021838f6 ""
