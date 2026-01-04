@@ -1,81 +1,199 @@
-\subsubsection{Software} 
-\subsubsubsection{Luồng Giám sát và Phân tích Hệ thống:} 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth]{img/analytics_activity.png}
-    \caption{Activity Diagram mô tả luồng giám sát và tương tác trên Dashboard}
-    \label{fig:activity_analytics_}
-\end{figure}
+\subsubsection{Thiết kế thành phần phần mềm: Quản lý cảm biến hướng dữ liệu}
 
-\noindent Activity Diagram trên mô tả chi tiết quy trình tương tác giữa System Admin và Hệ thống trong module Giám sát và Phân tích. Luồng được tổ chức thành hai swimlane chính, thể hiện trách nhiệm rõ ràng giữa người dùng và hệ thống.
+\paragraph*{Phạm vi và Kế thừa:}
+Đề tài được thực hiện trong bối cảnh kế thừa kết quả triển khai hạ tầng IoT thực tế tại \textbf{Tomochan Farm} (thuộc dự án nghiên cứu của phòng thí nghiệm TIST Lab - HCMUT). Trên cơ sở hệ thống thu thập vật lý đã có (PoC), nhóm tập trung nghiên cứu xây dựng \textbf{Kiến trúc quản lý dữ liệu cảm biến (Data-centric Sensor Management)} và phát triển các thuật toán nhằm giám sát chất lượng, trạng thái và độ tin cậy của thiết bị dựa trên dòng dữ liệu thực tế.
 
-\paragraph*{Giai đoạn khởi tạo và hiển thị Dashboard:}
+Phần này trình bày các đóng góp chính của khối Khoa học Máy tính (CS) trong việc thiết kế và xây dựng hệ thống quản lý, tập trung vào bốn khía cạnh: quản lý cảm biến hướng dữ liệu, pipeline phát hiện lỗi, quản lý vòng đời thiết bị, và kiến trúc hệ thống tổng thể.
+
+\subsubsubsection{Quản lý cảm biến hướng dữ liệu (Data-centric Sensor Management)}
+
+Mục tiêu của thành phần này là chứng minh rằng hệ thống coi cảm biến như một \textbf{thực thể dữ liệu (Data Entity)} chứ không chỉ đơn giản là một thiết bị phần cứng. Cách tiếp cận này cho phép quản lý và giám sát cảm biến dựa trên hành vi dữ liệu thay vì chỉ dựa trên trạng thái kết nối.
+
+\paragraph*{Mô hình hóa thực thể cảm biến:}
+Hệ thống không chỉ quản lý định danh thiết bị (MAC address, Device ID), mà quản lý \textbf{hồ sơ hành vi (Behavior Profile)} của từng cảm biến. Mỗi cảm biến được định nghĩa bởi các đặc trưng dữ liệu quan trọng:
+
 \begin{itemize}
-    \item \textbf{Bước 1:} Admin khởi động phiên làm việc bằng cách truy cập module Analytics thông qua menu điều hướng. Hệ thống thực hiện kiểm tra quyền truy cập (Authorization Check) để đảm bảo Admin có quyền xem dữ liệu thống kê.
-    \item \textbf{Bước 2:} Hệ thống tải dữ liệu tổng hợp từ cơ sở dữ liệu (PostgreSQL và TimescaleDB) theo quy tắc mặc định \textbf{BR-02}: hiển thị dữ liệu 7 ngày gần nhất của toàn hệ thống. Quá trình này bao gồm truy vấn dữ liệu từ nhiều nguồn (sensor data, farm metrics, device status) và tính toán các chỉ số KPI.
-    \item \textbf{Bước 3:} Hệ thống hiển thị Overview Dashboard với ba nhóm thông tin chính:
-    \begin{itemize}
-        \item \textit{Dashboard Metrics:} Doanh thu, sản lượng, nhiệt độ trung bình, độ ẩm đất
-        \item \textit{Farm Performance Rankings:} Xếp hạng nông trại dựa trên chỉ số KPI (theo \textbf{BR-04})
-        \item \textit{Device Statistics:} Biểu đồ trạng thái thiết bị Online/Offline, biểu đồ phân bố theo khu vực
-    \end{itemize}
-    \item \textbf{Bước 4:} Hệ thống tự động thiết lập kết nối WebSocket để cập nhật dữ liệu thời gian thực (Real-time Updates) theo quy tắc \textbf{BR-01}: độ trễ tối đa 30 giây.
+    \item \textbf{Tần suất gửi tin (Transmission Frequency):} Mô hình học và theo dõi chu kỳ gửi dữ liệu thực tế của cảm biến. Nếu cảm biến đột ngột thay đổi tần suất (ví dụ: từ 5 giây/lần thành 30 giây/lần), hệ thống nhận diện đây có thể là dấu hiệu lỗi hoặc suy giảm hiệu năng.
+    
+    \item \textbf{Dải giá trị cho phép (Value Range):} Mỗi loại cảm biến có một dải giá trị hợp lý dựa trên đặc tính vật lý và điều kiện môi trường. Ví dụ, cảm biến nhiệt độ trong nhà kính thường dao động trong khoảng 15-40°C. Hệ thống lưu trữ và cập nhật các ngưỡng này dựa trên dữ liệu lịch sử.
+    
+    \item \textbf{Độ ổn định tín hiệu (Signal Variance):} Hệ thống tính toán và theo dõi độ lệch chuẩn (standard deviation) của dữ liệu cảm biến trong cửa sổ thời gian nhất định. Một cảm biến khỏe mạnh sẽ có độ lệch chuẩn ổn định, trong khi cảm biến bị suy giảm sẽ có độ lệch chuẩn tăng dần theo thời gian.
+    
+    \item \textbf{Pattern theo thời gian (Temporal Pattern):} Hệ thống học và lưu trữ các pattern bình thường của cảm biến theo chu kỳ (ví dụ: nhiệt độ tăng vào ban ngày, giảm vào ban đêm). Các giá trị vi phạm pattern này (ví dụ: nhiệt độ tăng vào ban đêm) có thể là dấu hiệu lỗi.
 \end{itemize}
 
-\paragraph*{Giai đoạn tương tác và xử lý các tác vụ:}
-Sau khi Dashboard được hiển thị, Admin có thể thực hiện một trong bốn tác vụ chính thông qua decision node ``Select Action'':
+\paragraph*{Giám sát chất lượng dữ liệu (Data Quality Monitoring - DQM):}
+Module CS tiếp nhận dòng dữ liệu từ CE và thực hiện phân tích để phát hiện các bất thường sơ cấp ngay trong quá trình ingestion:
+
+\begin{itemize}
+    \item \textbf{Phát hiện dữ liệu bị thiếu (Missing Data Detection):} Hệ thống theo dõi timestamp của các gói tin nhận được. Nếu khoảng cách giữa hai gói tin liên tiếp vượt quá ngưỡng cho phép (ví dụ: 3 lần chu kỳ gửi bình thường), hệ thống đánh dấu cảm biến có vấn đề về kết nối.
+    
+    \item \textbf{Phát hiện trôi dạt (Drift Detection):} Thuật toán theo dõi xu hướng dài hạn của dữ liệu. Nếu giá trị cảm biến tăng/giảm một cách từ từ và liên tục (ví dụ: nhiệt độ tăng 0.1°C mỗi ngày trong 10 ngày), đây có thể là dấu hiệu cảm biến bị trôi (sensor drift) do lão hóa hoặc ảnh hưởng môi trường.
+    
+    \item \textbf{Phát hiện giá trị bị kẹt (Stuck-at Detection):} Hệ thống phát hiện khi cảm biến báo cùng một giá trị trong thời gian dài (ví dụ: độ ẩm luôn là 75.2\% trong 1 giờ). Đây là dấu hiệu cảm biến bị "đóng băng" (frozen) hoặc mất kết nối với cảm biến vật lý.
+    
+    \item \textbf{Phân biệt nhiễu và biến động thực tế:} Một thách thức quan trọng là phân biệt giữa biến động môi trường thật và lỗi thiết bị. Ví dụ:
+    \begin{itemize}
+        \item \textit{Biến động thật:} Khi trời mưa, độ ẩm không khí tăng vọt từ 60\% lên 95\%. Đây là biến động hợp lý và hệ thống không nên cảnh báo.
+        \item \textit{Lỗi thiết bị:} Trời nắng, nhiệt độ cao (35°C) nhưng độ ẩm đột ngột tăng vọt lên 95\%. Điều này không hợp lý và hệ thống nên cảnh báo có thể cảm biến độ ẩm bị lỗi.
+    \end{itemize}
+    
+    Để giải quyết, hệ thống sử dụng cơ chế \textbf{Cross-correlation} giữa các cảm biến: nếu chỉ một cảm biến báo giá trị bất thường trong khi các cảm biến khác cùng khu vực báo giá trị bình thường, khả năng cao đây là lỗi thiết bị.
+\end{itemize}
+
+\subsubsubsection{Pipeline phát hiện và phân loại lỗi cảm biến (Sensor Fault Detection Pipeline)}
+
+Đây là thành phần cốt lõi của hệ thống CS, tập trung vào việc tự động hóa quá trình phát hiện và phân loại lỗi cảm biến dựa trên phân tích dữ liệu.
+
+\paragraph*{Luồng xử lý (Processing Pipeline):}
+Pipeline được thiết kế theo mô hình ba giai đoạn: \textbf{Ingest → Clean → Analyze → Label}
 
 \begin{enumerate}
-    \item \textbf{Filter (Lọc dữ liệu) - Luồng E-01:}
+    \item \textbf{Ingest (Tiếp nhận dữ liệu):} Module tiếp nhận nhận dòng dữ liệu thô (Raw Telemetry Stream) từ CE thông qua Message Queue (RabbitMQ). Việc sử dụng hàng đợi bản tin giúp đảm bảo không mất mát dữ liệu telemetry khi lưu lượng tăng đột biến, và cho phép hệ thống xử lý bất đồng bộ với khả năng mở rộng độc lập.
+    
+    \item \textbf{Clean (Làm sạch dữ liệu):} Dữ liệu được kiểm tra tính hợp lệ cơ bản:
     \begin{itemize}
-        \item Admin chọn khoảng thời gian (Date Range) hoặc khu vực địa lý từ bộ lọc.
-        \item Hệ thống xác thực tham số lọc (kiểm tra định dạng ngày, phạm vi hợp lệ).
-        \item Hệ thống truy vấn lại dữ liệu từ database với điều kiện lọc mới.
-        \item Hệ thống cập nhật tất cả các biểu đồ và bảng thống kê (Update Charts) theo dữ liệu đã lọc.
-        \item Admin có thể tiếp tục lọc hoặc chuyển sang tác vụ khác.
+        \item Xác thực schema JSON (kiểm tra các trường bắt buộc: device\_id, timestamp, data)
+        \item Kiểm tra timestamp hợp lệ (không quá khứ xa hoặc tương lai)
+        \item Loại bỏ các giá trị ngoại lai rõ ràng (outliers) dựa trên range checking
     \end{itemize}
     
-    \item \textbf{Export (Xuất báo cáo) - Luồng E-02:}
+    \item \textbf{Analyze (Phân tích):} Áp dụng thuật toán trích xuất đặc trưng (RFE - Robust Feature Extractor) kết hợp với mô hình phân lớp (Random Forest/XGBoost) để phân tích pattern và phát hiện bất thường.
+    
+    \item \textbf{Label (Gán nhãn trạng thái):} Dựa trên kết quả phân tích, hệ thống gán nhãn trạng thái sức khỏe cảm biến:
     \begin{itemize}
-        \item Admin nhấn nút ``Export Report'' và chọn định dạng (PDF hoặc CSV/Excel).
-        \item Hệ thống kiểm tra quy tắc \textbf{BR-09}: hỗ trợ cả hai định dạng PDF (cho in ấn) và CSV (cho phân tích).
-        \item Hệ thống tạo báo cáo động dựa trên dữ liệu hiện tại trên Dashboard (bao gồm các biểu đồ, bảng xếp hạng).
-        \item Hệ thống thực hiện Generate \& Download Report, tự động tải file về thiết bị của Admin.
-        \item Hệ thống ghi log hoạt động xuất báo cáo để theo dõi audit trail.
+        \item \textbf{Normal:} Cảm biến hoạt động bình thường, dữ liệu trong phạm vi hợp lệ
+        \item \textbf{Suspect:} Có dấu hiệu bất thường nhưng chưa rõ ràng, cần theo dõi thêm
+        \item \textbf{Faulty:} Cảm biến có lỗi rõ ràng (drift, stuck-at, hardware failure)
     \end{itemize}
     
-    \item \textbf{Compare (So sánh nông trại):}
-    \begin{itemize}
-        \item Admin chọn hai hoặc nhiều nông trại từ danh sách để so sánh hiệu suất.
-        \item Hệ thống xác thực số lượng nông trại được chọn (tối thiểu 2, tối đa 5 để đảm bảo hiển thị rõ ràng).
-        \item Hệ thống truy vấn dữ liệu so sánh từ database, tính toán các chỉ số tương đối.
-        \item Hệ thống hiển thị Comparison Table với các metrics song song: doanh thu, năng suất, hiệu quả sử dụng năng lượng, tỷ lệ thiết bị hoạt động.
-        \item Admin có thể thay đổi bộ nông trại so sánh hoặc quay lại Dashboard chính.
-    \end{itemize}
-    
-    \item \textbf{Configure (Cấu hình cảnh báo) - Luồng E-03:}
-    \begin{itemize}
-        \item Hệ thống kiểm tra quy tắc \textbf{BR-03}: chỉ hiển thị chức năng này nếu Admin có quyền ``Manage''.
-        \item Admin cấu hình các ngưỡng cảnh báo (Alert Thresholds) như: nhiệt độ tối đa, độ ẩm đất tối thiểu, mức tiêu thụ năng lượng bất thường.
-        \item Hệ thống xác thực giá trị ngưỡng (kiểm tra giá trị hợp lệ, logic nghiệp vụ).
-        \item Hệ thống lưu cấu hình mới vào database và áp dụng ngay lập tức cho hệ thống giám sát.
-        \item Hệ thống gửi xác nhận (Confirmation) về việc lưu thành công và hiển thị thời điểm áp dụng.
-    \end{itemize}
+    \textbf{Lưu ý quan trọng:} Output của pipeline là \textbf{trạng thái sức khỏe cảm biến}, không phải dự báo thời tiết hay phân tích môi trường. Mục tiêu là trả lời câu hỏi: "Cảm biến này có đang hoạt động đúng không?" thay vì "Nhiệt độ sẽ là bao nhiêu ngày mai?"
 \end{enumerate}
 
-\paragraph*{Giai đoạn kết thúc phiên:}
+\paragraph*{Cơ chế xác thực đa nguồn (Multi-modal Cross-validation):}
+Để tăng độ tin cậy của phát hiện lỗi, hệ thống sử dụng nhiều nguồn dữ liệu để xác thực chéo:
+
 \begin{itemize}
-    \item Admin có thể chọn ``Exit'' hoặc ``Logout'' từ decision node ``Select Action'' bất cứ lúc nào.
-    \item Hệ thống đóng kết nối WebSocket, giải phóng tài nguyên.
-    \item Hệ thống lưu trạng thái phiên làm việc (session state) nếu cần để Admin có thể tiếp tục sau.
-    \item Luồng kết thúc tại End node.
+    \item \textbf{Tương quan chéo (Cross-correlation):} So sánh dữ liệu giữa các cảm biến lân cận trong cùng một khu vực canh tác. Nếu một cảm biến báo nhiệt độ 40°C, nhưng ba cảm biến xung quanh đều báo 30°C, hệ thống nghi ngờ cảm biến đó có vấn đề và đánh dấu trạng thái "Suspect" hoặc "Faulty".
+    
+    \item \textbf{Tham chiếu hình ảnh (Visual Verification):} Sử dụng dữ liệu từ Camera Stream như một kênh tham chiếu phụ (Ground Truth) để giảm tỷ lệ báo động giả (False Positive). 
+    \begin{itemize}
+        \item Ví dụ: Cảm biến độ ẩm đất báo giá trị "0" (khô hạn - lỗi Stuck-at-0), nhưng camera phân tích hình ảnh thấy đất sẫm màu (dấu hiệu ướt). Hệ thống kết luận: Cảm biến độ ẩm đất có thể bị hỏng hoặc mất tiếp xúc với đất.
+    \end{itemize}
+    
+    \item \textbf{Kiểm tra tính nhất quán theo thời gian (Temporal Consistency):} Hệ thống so sánh giá trị hiện tại với giá trị trung bình trong cửa sổ thời gian gần đây (ví dụ: 1 giờ). Nếu giá trị hiện tại khác biệt quá lớn so với xu hướng (ví dụ: $\pm 3\sigma$), hệ thống đánh dấu "Suspect".
 \end{itemize}
 
-\paragraph*{Tính năng nổi bật của Activity Diagram:}
+\paragraph*{Thuật toán RFE và cải tiến:}
+Nhóm nghiên cứu đề xuất sử dụng thuật toán \textbf{Robust Feature Extractor (RFE)} kết hợp với mô hình phân lớp để phát hiện lỗi cảm biến. Điểm đổi mới là mở rộng vector đặc trưng bằng cách bổ sung thông tin tương quan không gian (Spatial Correlation) ngoài phân tích theo thời gian (Temporal Analysis).
+
+Vector đặc trưng đầu ra $F_t$ có dạng:
+$$F_t = [\underbrace{x_t, v_t, \sigma_t, EWMA_t, Lags}_{\text{Temporal Features}}, \underbrace{S_t}_{\text{Spatial Deviation}}]$$
+
+Trong đó $S_t$ là chỉ số độ lệch không gian, được tính toán dựa trên so sánh với các cảm biến lân cận:
+$$S_t = |x_t - \text{median}(N_t)|$$
+
+Việc sử dụng median thay vì mean giúp tăng khả năng kháng nhiễu, đảm bảo thuật toán không bị ảnh hưởng bởi các giá trị ngoại lai từ cảm biến khác.
+
+\subsubsubsection{Quản lý vòng đời thiết bị dựa trên dữ liệu (Data-driven Lifecycle Management)}
+
+Thành phần này thể hiện tính ứng dụng lâu dài của hệ thống, không chỉ phát hiện lỗi mà còn hỗ trợ quản lý và bảo trì thiết bị một cách chủ động.
+
+\paragraph*{Theo dõi xu hướng suy giảm (Degradation Tracking):}
+Hệ thống lưu trữ và phân tích lịch sử hoạt động của cảm biến để vẽ biểu đồ "sức khỏe" theo thời gian:
+
 \begin{itemize}
-    \item \textbf{Tính tương tác liên tục:} Admin có thể thực hiện nhiều tác vụ (Lọc, Xuất, So sánh, Cấu hình) và quay lại màn hình chính mà không bị ngắt quãng phiên làm việc, thông qua vòng lặp quay lại decision node ``Select Action''.
-    \item \textbf{Xử lý lỗi tiềm ẩn:} Mỗi tác vụ đều có bước xác thực (validation) để đảm bảo dữ liệu hợp lệ trước khi xử lý. Nếu validation thất bại, hệ thống sẽ hiển thị thông báo lỗi và quay lại trạng thái trước đó.
-    \item \textbf{Cập nhật thời gian thực:} WebSocket connection đảm bảo Dashboard tự động cập nhật dữ liệu mới mà không cần Admin làm mới trang (refresh), tuân thủ quy tắc \textbf{BR-01} về độ trễ dữ liệu.
-    \item \textbf{Phân quyền rõ ràng:} Chức năng cấu hình chỉ xuất hiện cho Admin có quyền ``Manage'', thể hiện nguyên tắc bảo mật theo quy tắc \textbf{BR-03}.
+    \item \textbf{Chỉ số sức khỏe cảm biến (Sensor Health Index):} Được tính toán dựa trên nhiều yếu tố:
+    \begin{itemize}
+        \item Tỷ lệ dữ liệu hợp lệ so với tổng số gói tin nhận được
+        \item Độ lệch chuẩn của dữ liệu (tăng dần cho thấy cảm biến đang suy giảm)
+        \item Tần suất cảnh báo lỗi (số lần cảm biến được đánh dấu "Suspect" hoặc "Faulty")
+        \item Độ chính xác so với cảm biến tham chiếu (cross-correlation)
+    \end{itemize}
+    
+    \item \textbf{Dự đoán suy giảm (Degradation Prediction):} Dựa trên xu hướng lịch sử, hệ thống có thể dự đoán khi nào cảm biến sẽ cần hiệu chuẩn hoặc thay thế. Ví dụ: Nếu độ lệch chuẩn tăng dần từ 0.5°C lên 2.0°C trong 6 tháng, hệ thống cảnh báo cảm biến có thể cần hiệu chuẩn sớm.
 \end{itemize}
 
+\paragraph*{Hỗ trợ ra quyết định bảo trì (Maintenance Decision Support):}
+Thay vì đợi cảm biến hỏng hẳn mới thay thế (reactive maintenance), hệ thống hỗ trợ bảo trì chủ động (predictive maintenance):
+
+\begin{itemize}
+    \item \textbf{Cảnh báo sớm (Early Warning):} Khi độ lệch chuẩn tăng dần theo thời gian, hệ thống gửi cảnh báo "Cảm biến đang có dấu hiệu suy giảm" thay vì chờ đến khi cảm biến hoàn toàn hỏng.
+    
+    \item \textbf{Đề xuất hành động (Action Recommendation):} Dựa trên mức độ suy giảm, hệ thống đề xuất:
+    \begin{itemize}
+        \item \textit{Hiệu chuẩn (Calibrate):} Nếu cảm biến chỉ bị lệch nhẹ, có thể hiệu chuẩn lại
+        \item \textit{Thay thế (Replace):} Nếu cảm biến đã suy giảm nghiêm trọng hoặc có nhiều lỗi, nên thay thế
+        \item \textit{Kiểm tra vật lý (Physical Inspection):} Nếu có dấu hiệu lỗi hardware, cần kiểm tra kết nối vật lý
+    \end{itemize}
+    
+    \item \textbf{Lịch sử bảo trì (Maintenance History):} Hệ thống lưu trữ lịch sử các lần hiệu chuẩn và thay thế, giúp phân tích hiệu quả bảo trì và dự đoán chi phí bảo trì trong tương lai.
+\end{itemize}
+
+\subsubsubsection{Kiến trúc hệ thống và Giao diện quản trị (System Architecture \& Administration Interface)}
+
+\paragraph*{Pipeline dữ liệu (Logical Data Pipeline):}
+Kiến trúc hệ thống được thiết kế theo mô hình pipeline xử lý dữ liệu logic, mô tả luồng đi của dữ liệu từ thiết bị đến người dùng:
+
+\begin{itemize}
+    \item \textbf{Ingest (Nhận dữ liệu MQTT):} Hệ thống tiếp nhận dữ liệu từ thiết bị IoT thông qua Message Broker (RabbitMQ). Việc sử dụng hàng đợi bản tin đảm bảo không mất mát dữ liệu telemetry khi lưu lượng tăng đột biến và cho phép xử lý bất đồng bộ.
+    
+    \item \textbf{Clean (Lọc nhiễu thô):} Dữ liệu được làm sạch và xác thực schema ngay khi tiếp nhận, loại bỏ các gói tin không hợp lệ trước khi đưa vào pipeline xử lý.
+    
+    \item \textbf{Analyze (Chạy RFE Model):} Worker service chạy thuật toán RFE và mô hình ML để phân tích và phát hiện lỗi. Service này có thể scale độc lập dựa trên số lượng thiết bị.
+    
+    \item \textbf{Label (Gán nhãn trạng thái):} Kết quả phân tích được gán nhãn (Normal/Suspect/Faulty) và lưu trữ vào database cùng với dữ liệu gốc.
+    
+    \item \textbf{Store (Lưu trữ):} Dữ liệu được lưu trữ vào Time-series Database (TimescaleDB) để hỗ trợ truy vấn hiệu quả dữ liệu lịch sử.
+    
+    \item \textbf{Present (Trình bày):} Dữ liệu được trình bày lên Dashboard thông qua WebSocket để cập nhật real-time, hoặc qua REST API để truy vấn lịch sử.
+\end{itemize}
+
+\paragraph*{Tính tổng quát hóa (Generalization \& Hardware Agnostic):}
+Hệ thống CS được thiết kế với nguyên tắc \textbf{hardware agnostic} (không phụ thuộc phần cứng cụ thể):
+
+\begin{itemize}
+    \item \textbf{API theo chuẩn mở:} Hệ thống định nghĩa cấu trúc gói tin JSON chuẩn cho tất cả loại cảm biến. Bất kỳ thiết bị nào (hãng A, hãng B, hoặc tự chế) chỉ cần tuân thủ cấu trúc này đều có thể tích hợp vào hệ thống.
+    
+    \item \textbf{Schema Registry:} Hệ thống sử dụng Schema Registry để quản lý các phiên bản schema khác nhau. Khi firmware được cập nhật và thêm cảm biến mới (ví dụ: thêm cảm biến độ pH), hệ thống chỉ cần đăng ký schema mới mà không cần thay đổi code xử lý.
+    
+    \item \textbf{Versioning và Backward Compatibility:} Hệ thống hỗ trợ nhiều phiên bản schema đồng thời. Thiết bị cũ (v1.0) và thiết bị mới (v1.1) có thể hoạt động song song mà không ảnh hưởng lẫn nhau.
+\end{itemize}
+
+\paragraph*{Dashboard quản trị với chỉ số tin cậy (Administration Dashboard with Confidence Scores):}
+Giao diện quản trị không chỉ hiển thị số đo (25°C, 80\%), mà còn hiển thị \textbf{Chỉ số tin cậy (Confidence Score)} của từng giá trị:
+
+\begin{itemize}
+    \item \textbf{Ví dụ hiển thị Normal:}
+    \begin{itemize}
+        \item Nhiệt độ: 30°C (\textit{Độ tin cậy: 98\% - Normal})
+        \item Độ ẩm: 75\% (\textit{Độ tin cậy: 95\% - Normal})
+    \end{itemize}
+    
+    \item \textbf{Ví dụ hiển thị Suspect:}
+    \begin{itemize}
+        \item Độ ẩm đất: 10\% (\textit{Độ tin cậy: 20\% - Suspect/Drift Error})
+        \item Nhiệt độ: 45°C (\textit{Độ tin cậy: 15\% - Suspect/Cross-correlation failed})
+    \end{itemize}
+    
+    \item \textbf{Các thông tin bổ sung:}
+    \begin{itemize}
+        \item \textbf{Health Trend:} Biểu đồ xu hướng sức khỏe cảm biến theo thời gian (tăng/giảm/ổn định)
+        \item \textbf{Last Calibration:} Ngày hiệu chuẩn gần nhất
+        \item \textbf{Maintenance Recommendation:} Đề xuất hành động (nếu có)
+        \item \textbf{Alert History:} Lịch sử cảnh báo và cách xử lý
+    \end{itemize}
+\end{itemize}
+
+\paragraph*{Các thành phần kỹ thuật phục vụ quản lý cảm biến:}
+Mỗi thành phần công nghệ được lựa chọn và thiết kế với mục đích cụ thể phục vụ quản lý cảm biến:
+
+\begin{itemize}
+    \item \textbf{Message Queue (RabbitMQ):} Sử dụng hàng đợi bản tin để đảm bảo không mất mát dữ liệu telemetry khi lưu lượng tăng đột biến, và cho phép xử lý bất đồng bộ với khả năng mở rộng độc lập module phân tích.
+    
+    \item \textbf{Time-series Database (TimescaleDB):} Lưu trữ dữ liệu cảm biến với tối ưu hóa cho truy vấn theo thời gian, hỗ trợ hiệu quả việc phân tích xu hướng và phát hiện drift.
+    
+    \item \textbf{In-memory Cache:} Sử dụng bộ nhớ đệm để đảm bảo truy xuất trạng thái cảm biến thời gian thực với độ trễ thấp, phục vụ hiển thị Dashboard real-time.
+    
+    \item \textbf{WebSocket Server:} Cung cấp kênh truyền tải hai chiều để push cập nhật trạng thái cảm biến và cảnh báo lỗi lên Dashboard ngay lập tức, không cần client phải polling liên tục.
+\end{itemize}
