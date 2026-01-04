@@ -458,6 +458,18 @@ INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr12.tfm
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
+INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
+INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt10.tfm
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr5.tfm
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnbx5.tfm
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr7.tfm
+INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt8.tfm
 OUTPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.toc
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
 INPUT d:\DACN\Git\DACN_Tex\DACN__Copy_\out\main.lof
@@ -475,14 +487,6 @@ INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
 INPUT .\img\hcmut.png
-INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
-INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
-INPUT D:\LaTeX\tex\latex\vntex\t5cmtt.fd
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt10.tfm
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr5.tfm
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnbx5.tfm
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vnr7.tfm
-INPUT D:\LaTeX\fonts\tfm\vntex\vnr\vntt8.tfm
 INPUT .\section\abstract.tex
 INPUT .\section\abstract.tex
 INPUT section\abstract.tex
@@ -538,6 +542,10 @@ INPUT .\img\Firmware\Fault Detection Process Mermain img.png
 INPUT .\img\Firmware\Fault Detection Process Mermain img.png
 INPUT .\img\Firmware\Fault Detection Process Mermain img.png
 INPUT .\img\Firmware\Fault Detection Process Mermain img.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
+INPUT .\img\hcmut.png
 INPUT .\section\3.tex
 INPUT .\section\3.tex
 INPUT .\section\3.tex

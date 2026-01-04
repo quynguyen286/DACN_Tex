@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex out/main"] 1767507682.98143 "out/main.aux" "out/main.bbl" "out/main" 1767507706.68766 0
+["bibtex out/main"] 1767514282.47061 "out/main.aux" "out/main.bbl" "out/main" 1767514310.11839 0
   "./section/references.bib" 1766902145 3998 049e8f34de049b15fb7bbc0b64acef5e ""
   "D:/LaTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "out/main.aux" 1767507705 25727 c5395584e9e7507e1ebbe8572bfeb38b "pdflatex"
+  "out/main.aux" 1767514308 26431 95c5fa685f2e25ed58689d4ae7e57d64 "pdflatex"
   (generated)
   "out/main.bbl"
   "out/main.blg"
   (rewritten before read)
-["pdflatex"] 1767507683.31435 "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" "out/main.pdf" "main" 1767507706.6884 0
+["pdflatex"] 1767514282.7769 "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" "out/main.pdf" "main" 1767514310.11968 0
   "C:/Users/QUÝ/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1766490897 90743 50802c16d91daf99d49a1a63721c47e3 ""
   "C:/Users/QUÝ/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm0900.pk" 1765777521 10472 f55946eeb677e60dcee6df3ade5b89d7 ""
   "C:/Users/QUÝ/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1765687941 11548 fdf2a06a6ed088bb70bf6764728a941b ""
@@ -280,7 +280,7 @@
   "D:/LaTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "D:/LaTeX/tex/latex/zref/zref-abspage.sty" 1750428951 2269 2de6c7a5fd634dfef00a960544463a38 ""
   "D:/LaTeX/tex/latex/zref/zref-base.sty" 1750428951 20785 198a9cb2e04238d92c320d0d9edbd76a ""
-  "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" 1767505261 10795 f382f0fdf6c71180b63fff56dfe595c8 ""
+  "d:/DACN/Git/DACN_Tex/DACN__Copy_/main.tex" 1767511557 10912 818d5afbf92d58c1614efd8e54f70b2a ""
   "img/Device.png" 1765791117 72134 4c0f9fb43b32ff6f82b0147551ad5c0f ""
   "img/Farm.png" 1765791117 60806 3e9d962a32ff5bad8f34b492ce8a5b9d ""
   "img/Firmware/Activity_Diagram.drawio.png" 1765619837 89132 70d987b4748342e66f600ca40ef8305b ""
@@ -305,16 +305,16 @@
   "img/postgres - public - rentals.png" 1766298330 133614 1d5d6f141ff09a3052e9cb7b9354f093 ""
   "img/postgres - public3.png" 1767505409 656437 ba3a97bcb3f4e495e716fb2ffa8529b9 ""
   "img/reports.png" 1765619836 108385 5a14cc73a98338924a5e0da3a69ee37b ""
-  "main.tex" 1767505261 10795 f382f0fdf6c71180b63fff56dfe595c8 ""
-  "out/main.aux" 1767507705 25727 c5395584e9e7507e1ebbe8572bfeb38b "pdflatex"
-  "out/main.bbl" 1767507683 3350 37cac794e5ea312b51a5d3c43105eec1 "bibtex out/main"
-  "out/main.lof" 1767507705 3013 0fb2a27ffd75113b2d9e86566c369e35 "pdflatex"
-  "out/main.lot" 1767507705 1511 fae5810fbbed98c253710608edfb43a2 "pdflatex"
-  "out/main.out" 1767507705 24141 0e99ddbe22ebdc16d44011198b52eb17 "pdflatex"
-  "out/main.toc" 1767507705 11059 7159ce69c0208c90a8dfc8d070966d96 "pdflatex"
+  "main.tex" 1767511557 10912 818d5afbf92d58c1614efd8e54f70b2a ""
+  "out/main.aux" 1767514308 26431 95c5fa685f2e25ed58689d4ae7e57d64 "pdflatex"
+  "out/main.bbl" 1767514282 3350 37cac794e5ea312b51a5d3c43105eec1 "bibtex out/main"
+  "out/main.lof" 1767514308 3013 df79dfa0e296a9c5aabc0df2ca8528aa "pdflatex"
+  "out/main.lot" 1767514308 1511 6d1457f54795ab07f2575708b4873b25 "pdflatex"
+  "out/main.out" 1767514308 25154 857e5a21e7784626029aef3e2e4f4f1c "pdflatex"
+  "out/main.toc" 1767514308 11558 31c8059ba958d718ccca037c9fe640b5 "pdflatex"
   "section/1.tex" 1767505534 7296 59ef36a16b7bf1a1fb1c49a3ef38a479 ""
   "section/2.tex" 1766298645 8130 054c7090b64f3207806545146e6e2d24 ""
-  "section/2_quy.tex" 1766911893 13766 b4cd6208906d5d07336c9453d171e76d ""
+  "section/2_quy.tex" 1767514236 18190 dd8dc659461428e7d2d6e627a28b327f ""
   "section/3.tex" 1765619836 282 8d3095b93bb7ab3f3756dc1c3296280c ""
   "section/4.tex" 1766902145 9294 52bc6034cff5045fbbfe575175300aea ""
   "section/4_duc.tex" 1766902145 20221 fd6a2ad9bacb34c053357840021838f6 ""

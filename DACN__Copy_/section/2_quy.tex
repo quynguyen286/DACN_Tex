@@ -60,13 +60,13 @@ Kiến trúc này đảm bảo tính linh hoạt cao với khả năng mở rộ
     \item \textbf{Giám sát hệ thống (Monitoring):} Sử dụng bộ công cụ Grafana và Prometheus để theo dõi hiệu năng server, tài nguyên hệ thống (CPU, RAM, Disk) và trạng thái các dịch vụ theo thời gian thực.
 \end{itemize}
 
-\subsubsection{Phần cứng IoT và Giao thức truyền thông}
-\indent Hệ thống phần cứng được thiết kế để hoạt động bền bỉ trong môi trường nông nghiệp:
-\begin{itemize}
-    \item \textbf{Datalogger:} được đặt trong một hộp điện được chế tạo riêng, được thiết kế để sử dụng ngoài trời trong nông nghiệp.
-    \item \textbf{Cảm biến:} Hỗ trợ đa dạng các loại cảm biến từ cơ bản (DHT11, cảm biến mưa, ánh sáng) cho mô hình hộ gia đình đến các cảm biến chuyên dụng công nghiệp (pH, EC) cho trang trại lớn.
-    \item \textbf{Giao thức:} Sử dụng giao chuẩn RS485 cho việc kết nối cảm biến nhằm giảm thiểu nhiễu và đảm bảo truyền tin ổn định trên khoảng cách xa trong trang trại.
-\end{itemize}
+\subsection{Giao thức công nghiệp}
+% \indent Hệ thống phần cứng được thiết kế để hoạt động bền bỉ trong môi trường nông nghiệp:
+% \begin{itemize}
+%     \item \textbf{Datalogger:} được đặt trong một hộp điện được chế tạo riêng, được thiết kế để sử dụng ngoài trời trong nông nghiệp.
+%     \item \textbf{Cảm biến:} Hỗ trợ đa dạng các loại cảm biến từ cơ bản (DHT11, cảm biến mưa, ánh sáng) cho mô hình hộ gia đình đến các cảm biến chuyên dụng công nghiệp (pH, EC) cho trang trại lớn.
+%     \item \textbf{Giao thức:} Sử dụng giao chuẩn RS485 cho việc kết nối cảm biến nhằm giảm thiểu nhiễu và đảm bảo truyền tin ổn định trên khoảng cách xa trong trang trại.
+% \end{itemize}
 
 \subsection{Bài toán phát hiện lỗi cảm biến trong hệ thống IoT}
 \subsubsection{Tổng quan về lỗi cảm biến trong môi trường IoT}
@@ -113,3 +113,41 @@ tài nguyên hạn chế (Low-power IoT devices):
     \includegraphics[width=0.65\textwidth]{img/Firmware/Fault Detection Process Mermain img.png}
     \caption{Sơ đồ luồng xử lý phát hiện lỗi cảm biến với RFE}
 \end{figure}
+
+\subsection{Lý thuyết về chất lượng dữ liệu cảm biến}
+\indent Trong các hệ thống IoT và mạng cảm biến không dây (WSN), dữ liệu thu thập được thường chịu ảnh hưởng bởi các yếu tố môi trường, phần cứng xuống cấp hoặc nhiễu đường truyền. Chất lượng dữ liệu kém sẽ ảnh hưởng trực tiếp đến hiệu suất của các thuật toán học máy, đặc biệt là quá trình chọn lọc đặc trưng (Feature Selection).
+\indent Để đảm bảo tính chính xác cho thuật toán Robust Feature Extraction (RFE), việc nhận diện và xử lý các lỗi cảm biến phổ biến là bước tiền xử lý bắt buộc. Dưới đây là định nghĩa và đặc điểm của ba loại lỗi thường gặp nhất: Drift, Stuck-at, và Spike.
+
+\subsubsection{Lỗi trôi (Drift Fault)}
+\indent \textbf{Định nghĩa:} Lỗi trôi (Drift) xảy ra khi giá trị đo được của cảm biến lệch dần khỏi giá trị thực theo thời gian một cách tuyến tính hoặc phi tuyến tính, mặc dù hiện tượng vật lý đang đo không thay đổi theo xu hướng đó.
+\indent \textbf{Đặc điểm nhận diện:}
+\begin{itemize}
+    \item Độ lệch (offset) tăng dần theo thời gian.
+    \item Thường xuất hiện do sự xuống cấp của linh kiện cảm biến (aging) hoặc thay đổi chậm của môi trường (nhiệt độ, độ ẩm ảnh hưởng đến hiệu chuẩn).
+\end{itemize}
+\indent Mô hình toán học: Nếu $x(t)$ là giá trị thực và $y(t)$ là giá trị đo được tại thời điểm $t$, lỗi trôi có thể được mô tả:
+$$y(t) = x(t) + \delta(t)$$ Trong đó $\delta(t)$ là hàm lỗi tăng đơn điệu theo thời gian.
+\indent \textbf{Tác động đến thuật toán RFE:} Lỗi Drift làm thay đổi phân phối dữ liệu. Điều này khiến RFE có thể đánh giá sai tầm quan trọng của đặc trưng (feature importance), vì mô hình có thể "học" nhầm xu hướng trôi này là một quy luật của dữ liệu thay vì loại bỏ nó.
+
+\subsubsection{Lỗi Kẹt giá trị (Stuck-at Fault)}
+\indent \textbf{Định nghĩa:} Lỗi kẹt (Stuck-at) là hiện tượng giá trị đầu ra của cảm biến giữ nguyên tại một hằng số bất chấp sự thay đổi của hiện tượng vật lý môi trường.
+\indent \textbf{Đặc điểm nhận diện:}
+\begin{itemize}
+    \item Stuck-at-Zero: Giá trị kẹt tại 0.
+    \item Stuck-at-Constant: Giá trị kẹt tại một số thực $C$ bất kỳ (ví dụ: giá trị max hoặc min của thang đo).
+    \item Phương sai (Variance) của chuỗi dữ liệu trong khoảng thời gian lỗi bằng 0.
+\end{itemize}
+\indent \textbf{Tác động đến thuật toán RFE:} Lỗi Stuck-at làm mất đi tính đa dạng của dữ liệu trong khoảng thời gian lỗi, dẫn đến việc RFE không thể trích xuất các đặc trưng động học (dynamic features) như tốc độ thay đổi hay độ biến động cục
+bộ, từ đó ảnh hưởng đến khả năng phân biệt giữa trạng thái bình thường và lỗi.
+
+\subsubsection{Lỗi Gai nhiễu (Spike Fault)}
+\indent \textbf{Định nghĩa:} Lỗi gai (Spike) là những biến động đột ngột, có biên độ lớn bất thường xuất hiện trong một khoảng thời gian rất ngắn, sau đó giá trị trở về mức bình thường.
+\indent \textbf{Đặc điểm nhận diện:}
+\begin{itemize}
+    \item Tốc độ thay đổi (rate of change) giữa hai điểm dữ liệu liên tiếp vượt quá giới hạn vật lý mà cảm biến có thể đo đạc.
+    \item Xuất hiện ngẫu nhiên và rời rạc.
+\end{itemize}
+\indent \textbf{Tác động đến thuật toán RFE:} Spike làm tăng phương sai ảo của dữ liệu và làm lệch các tham số thống kê (như giá trị trung bình, độ lệch chuẩn). Trong RFE, điều này có thể dẫn đến việc xếp hạng sai (mis-ranking) các đặc trưng, vì một số thuật toán đánh giá cao các đặc trưng có phương sai lớn (dù phương sai đó đến từ nhiễu).
+
+
+\subsection{Edge Computing}
