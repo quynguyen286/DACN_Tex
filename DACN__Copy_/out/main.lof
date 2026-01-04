@@ -1,24 +1,23 @@
 \babel@toc {vietnamese}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Sơ đồ luồng xử lý sơ cấp ở Edge Node}}{12}{figure.caption.7}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Sơ đồ luồng xử lý phát hiện lỗi với RFE ở Backend Server}}{13}{figure.caption.8}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Sơ đồ quản lý farm}}{18}{figure.caption.19}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Sơ đồ luồng quản lý và tạo báo cáo}}{25}{figure.caption.33}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Sơ đồ luồng quản lý và tạo báo cáo}}{27}{figure.caption.35}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Quản lý Nông trại}}{31}{figure.caption.37}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ IoT và Thu thập dữ liệu}}{32}{figure.caption.38}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Người dùng và Phân quyền}}{33}{figure.caption.39}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Kinh doanh}}{34}{figure.caption.40}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Sơ đồ Kiến trúc Phân lớp của Hệ thống}}{35}{figure.caption.41}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Deployment Diagram}}{37}{figure.caption.42}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Activity Diagram mô tả luồng giám sát và tương tác trên Dashboard}}{43}{figure.caption.44}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Activity Diagram mô tả luồng quản lý farm}}{46}{figure.caption.49}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Activity Diagram mô tả luồng quản lý thiệt bị}}{48}{figure.caption.53}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Activity Diagram}}{50}{figure.caption.57}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Sequence Diagram}}{51}{figure.caption.58}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Timing Diagram for sensor processing and control tasks}}{53}{figure.caption.59}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Timing Diagram for camera task}}{54}{figure.caption.60}%
-\contentsline {figure}{\numberline {20}{\ignorespaces State Machine Diagram}}{56}{figure.caption.61}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Biểu đồ Gantt thể hiện tiến độ thực hiện đề tài}}{62}{figure.caption.65}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Sơ đồ thực thể quan hệ chi tiết (Physical Data Model)}}{65}{figure.caption.67}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Đặc tả API Module Quản lý Nông trại (Farms Endpoint) [Nguồn: Swagger UI Hệ thống]}}{66}{figure.caption.68}%
-\contentsline {figure}{\numberline {24}{\ignorespaces Đặc tả API Module Quản lý Thiết bị (Devices Endpoint) [Nguồn: Swagger UI Hệ thống]}}{66}{figure.caption.69}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Sơ đồ luồng xử lý sơ cấp ở Edge Node}}{19}{figure.caption.11}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Sơ đồ luồng xử lý phát hiện lỗi với RFE ở Backend Server}}{20}{figure.caption.12}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Sơ đồ quản lý farm}}{25}{figure.caption.23}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Sơ đồ luồng quản lý và tạo báo cáo}}{32}{figure.caption.37}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Sơ đồ luồng quản lý và tạo báo cáo}}{34}{figure.caption.39}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Quản lý Nông trại}}{38}{figure.caption.41}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ IoT và Thu thập dữ liệu}}{39}{figure.caption.42}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Người dùng và Phân quyền}}{40}{figure.caption.43}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Sơ đồ thực thể quan hệ của phân hệ Kinh doanh}}{41}{figure.caption.44}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Sơ đồ Kiến trúc Phân lớp của Hệ thống}}{42}{figure.caption.45}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Deployment Diagram}}{44}{figure.caption.46}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Activity Diagram mô tả luồng quản lý farm}}{54}{figure.caption.60}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Activity Diagram mô tả luồng quản lý thiệt bị}}{56}{figure.caption.64}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Activity Diagram}}{58}{figure.caption.68}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Sequence Diagram}}{59}{figure.caption.69}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Timing Diagram for sensor processing and control tasks}}{61}{figure.caption.70}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Timing Diagram for camera task}}{62}{figure.caption.71}%
+\contentsline {figure}{\numberline {19}{\ignorespaces State Machine Diagram}}{64}{figure.caption.72}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Biểu đồ Gantt thể hiện tiến độ thực hiện đề tài}}{70}{figure.caption.76}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Sơ đồ thực thể quan hệ chi tiết (Physical Data Model)}}{73}{figure.caption.78}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Đặc tả API Module Quản lý Nông trại (Farms Endpoint) [Nguồn: Swagger UI Hệ thống]}}{74}{figure.caption.79}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Đặc tả API Module Quản lý Thiết bị (Devices Endpoint) [Nguồn: Swagger UI Hệ thống]}}{74}{figure.caption.80}%
